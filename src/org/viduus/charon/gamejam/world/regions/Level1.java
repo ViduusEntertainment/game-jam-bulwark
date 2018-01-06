@@ -58,16 +58,16 @@ public class Level1 extends SideScrollingRegion {
 	 */
 	@Override
 	public void load() {
-		addBackgroundSet(-8, 20, new Animation<?>[] {
-			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.back_1"),
-			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.back_2"),
-			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.back_3"),
-		});
-		addBackgroundSet(70, 30, new Animation<?>[] {
-			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_1"),
-			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_2"),
-			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_3"),
-		});
+//		addBackgroundSet(-8, 20, new Animation<?>[] {
+//			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.back_1"),
+//			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.back_2"),
+//			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.back_3"),
+//		});
+//		addBackgroundSet(70, 30, new Animation<?>[] {
+//			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_1"),
+//			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_2"),
+//			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_3"),
+//		});
 		
 		TestEnemy test_enemy_1 = new TestEnemy(world_engine, "TestEnemy1", new Vector2(200, 200));
 		world_engine.insert(test_enemy_1);

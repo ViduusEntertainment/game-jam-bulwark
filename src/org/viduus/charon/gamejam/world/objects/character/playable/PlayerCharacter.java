@@ -34,7 +34,7 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	private static final float
 		DEFAULT_HEALTH = 100f,
 		DEFAULT_MANA = 100f,
-		DEFAULT_SPEED = 100.0f,
+		DEFAULT_SPEED = 3.0f,
 		SPRINT_CONSTANT = 1.5f,
 		STAMINA_SPRINT_CONSTANT = 20, // stam/sec
 		ROLL_CONSTANT = 3.0f,
@@ -51,7 +51,7 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	private boolean controller_binded = false;
 	private Controller default_controller;
 	
-	private float WEAPON_COOL_DOWN = 2; // seconds
+	private float WEAPON_COOL_DOWN = .3f; // seconds
 	private float usage_countdown = 0;
 	
 	/**
