@@ -12,12 +12,17 @@ import org.viduus.charon.global.AbstractGameSystems.PauseType;
 import org.viduus.charon.global.GameConstants;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.event.events.TickEvent;
+import org.viduus.charon.global.event.events.WeaponUseEvent;
 import org.viduus.charon.global.input.InputEngine;
 import org.viduus.charon.global.input.controller.Controller;
 import org.viduus.charon.global.input.player.PlayerControlsState;
 import org.viduus.charon.global.util.logging.ErrorHandler;
 import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.objects.twodimensional.character.playable.PlayableCharacter2D;
+import org.viduus.charon.global.world.objects.twodimensional.weapon.Weapon2D;
+import org.viduus.charon.global.world.objects.twodimensional.weapon.range.RangeWeapon2D;
+import org.viduus.charon.global.world.objects.twodimensional.weapon.range.bullets.Bullet2D;
+import org.viduus.charon.global.world.regions.BaseRegion;
 
 /**
  * 
@@ -29,7 +34,7 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	private static final float
 		DEFAULT_HEALTH = 100f,
 		DEFAULT_MANA = 100f,
-		DEFAULT_SPEED = 3.0f,
+		DEFAULT_SPEED = 100.0f,
 		SPRINT_CONSTANT = 1.5f,
 		STAMINA_SPRINT_CONSTANT = 20, // stam/sec
 		ROLL_CONSTANT = 3.0f,
@@ -38,13 +43,16 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		STAMINA_REGEN_CONSTANT = 20,
 		STAMINA_ATTACK_CONSTANT = 8; // stam/attack
 	private static final String
-		DEFAULT_SPRITE_FILE = "vid:animation:test_sprite_map",
-		DEFAULT_SPRITE_ID = "person";
+		DEFAULT_SPRITE_FILE = "vid:animation:eday_robot",
+		DEFAULT_SPRITE_ID = "robot";
 	
 	private final GameSystems game_systems;
 	private Vector2 last_trans = new Vector2();
 	private boolean controller_binded = false;
 	private Controller default_controller;
+	
+	private float WEAPON_COOL_DOWN = 2; // seconds
+	private float usage_countdown = 0;
 	
 	/**
 	 * @param world_engine
@@ -72,6 +80,8 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	protected void performTick(PlayerControlsState controls_state, TickEvent tick_event) {
 		float time_elapsed = tick_event.time_elapsed;
 		
+		usage_countdown -= time_elapsed;
+		
 		// Player hit Interaction key/button. Set this object to be in an interacting state
 		this.<Boolean>set(Property.IS_INTERACTING, controls_state.isSelect());
 		
@@ -92,14 +102,13 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		float velocity_mod = 1;
 		
 		// Check if the player is attacking
-//		if(controls_state.getAttack()){
-//			Weapon2D main_weapon = getWeapons().get(0);
-//			if( main_weapon.canUse() && curr_mana >= STAMINA_ATTACK_CONSTANT ){
-//				curr_mana -= STAMINA_ATTACK_CONSTANT;
-//				using_energy = true;
-//				main_weapon.useWeapon(this, this.<BaseRegion>get(Constants.CURRENT_REGION));
-//			}
-//		}
+		if(controls_state.getAttack()){
+			if (!usingWeapon())
+			{
+				world_engine.queueEvent(this, new WeaponUseEvent(getWeapons().get(0)), WeaponUseEvent.class);
+				usage_countdown = WEAPON_COOL_DOWN;
+			}
+		}
 		
 		// Check if sprinting
 		if( controls_state.getSprint() > 0 ){
@@ -185,6 +194,32 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		}else{
 			ErrorHandler.println("Tried to remove MainCharacter listener after it was already removed!");
 		}
+	}
+	
+	/**
+	 * <b>Do not call during tick event callback.</b>
+	 * 
+	 * @return
+	 */
+	protected float getTimeSinceWeaponUse() {
+		return Math.max(-usage_countdown, 0);
+	}
+	
+	/**
+	 * <b>Do not call during tick event callback.</b>
+	 * 
+	 * @return
+	 */
+	protected boolean usingWeapon() {
+		return usage_countdown > 0;
+	}
+
+	@Override
+	public void onWeaponUse(WeaponUseEvent weapon_use_event) {
+		RangeWeapon2D weapon = (RangeWeapon2D)weapon_use_event.weapon;
+		Bullet2D bullet = weapon.createBullet();
+		world_engine.insert(bullet);
+		this.<BaseRegion>get(Property.CURRENT_REGION).addEntity(bullet);
 	}
 
 }

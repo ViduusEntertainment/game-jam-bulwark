@@ -52,6 +52,22 @@ public class WorldEngine extends AbstractWorldEngine {
 	protected String getCharacterResolverClassPath() {
 		return "org.viduus.charon.gamejam.world.objects.character.playable";
 	}
+	
+	/* (non-Javadoc)
+	 * @see org.viduus.charon.global.world.WorldEngine#getWeaponResolverClassPath()
+	 */
+	@Override
+	protected String getWeaponResolverClassPath() {
+		return "org.viduus.charon.gamejam.world.objects.weapons";
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.viduus.charon.global.world.WorldEngine#getBulletResolverClassPath()
+	 */
+	@Override
+	protected String getBulletResolverClassPath() {
+		return "org.viduus.charon.gamejam.world.objects.weapons.bullets";
+	}
 
 	/* (non-Javadoc)
 	 * @see org.viduus.charon.global.GameEngine#onLoadGame(org.viduus.charon.global.GameInfo)

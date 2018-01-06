@@ -46,7 +46,7 @@ public class PlayerControls extends PlayerController {
 		curr_state.setZoom(0);
 		curr_state.setSprint(0);
 		curr_state.setRoll(0);
-
+		
 		/*
 		 * Action keys
 		 */
