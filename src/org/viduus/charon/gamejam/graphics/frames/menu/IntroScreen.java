@@ -11,6 +11,7 @@ import org.viduus.charon.global.audio.AudioCategory;
 import org.viduus.charon.global.audio.Sound;
 import org.viduus.charon.global.graphics.GameFrame;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
+import org.viduus.charon.global.graphics.opengl.OpenGLFrame;
 import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
 import org.viduus.charon.global.graphics.screens.AbstractGameScreen;
 import org.viduus.charon.global.graphics.util.IntDimension;
@@ -27,10 +28,10 @@ public class IntroScreen extends AbstractGameScreen {
 	private Sound intro_sound;
 
 	/**
-	 * @param game_frame
+	 * @param graphics_frame
 	 */
-	public IntroScreen(GameFrame game_frame) {
-		super(game_frame);
+	public IntroScreen(OpenGLFrame graphics_frame) {
+		super(graphics_frame);
 		// TODO Auto-generated constructor stub
 	}
 	

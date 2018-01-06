@@ -14,6 +14,7 @@ import org.viduus.charon.global.audio.AudioCategory;
 import org.viduus.charon.global.audio.Sound;
 import org.viduus.charon.global.graphics.AbstractGraphicsEngine;
 import org.viduus.charon.global.graphics.GameFrame;
+import org.viduus.charon.global.graphics.opengl.OpenGLFrame;
 import org.viduus.charon.global.graphics.opengl.components.OpenGLButton;
 import org.viduus.charon.global.graphics.screens.AbstractGameScreen;
 import org.viduus.charon.global.input.controller.ControllerState;
@@ -31,12 +32,12 @@ public class MenuScreen extends AbstractGameScreen {
 	private Sound menu_sound;
 
 	/**
-	 * @param game_frame
+	 * @param graphics_frame
 	 */
-	public MenuScreen(GameFrame game_frame) {
-		super(game_frame);
+	public MenuScreen(OpenGLFrame graphics_frame) {
+		super(graphics_frame);
 		
-		game_frame.setDesiredFPS(30);
+		graphics_frame.setDesiredFPS(30);
 		
 		start_button = new OpenGLButton("Start Game");
 		start_button.setBackgroundColor(182, 182, 182);

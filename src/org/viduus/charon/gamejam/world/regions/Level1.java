@@ -5,6 +5,9 @@
  */
 package org.viduus.charon.gamejam.world.regions;
 
+import org.dyn4j.geometry.AABB;
+import org.viduus.charon.global.graphics.animation.sprite.Animation;
+import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
 import org.viduus.charon.global.graphics.util.Size;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;
@@ -15,14 +18,14 @@ import org.viduus.charon.global.world.regions.BaseRegion;
  *
  * @author Ethan Toney
  */
-public class Level1 extends BaseRegion {
-
+public class Level1 extends SideScrollingRegion {
+	
 	/**
 	 * @param world_engine
 	 * @param name
 	 */
 	public Level1(AbstractWorldEngine world_engine) {
-		super(world_engine, "level_1", new Size(5000, 288));
+		super(world_engine, "level_1", new Size(5000, 384));
 		// TODO Auto-generated constructor stub
 	}
 
@@ -49,8 +52,9 @@ public class Level1 extends BaseRegion {
 	 */
 	@Override
 	public void load() {
-		// TODO Auto-generated method stub
-		
+		setBackgrounds(new Animation<?>[] {
+			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_1.static")
+		});
 	}
 
 	/* (non-Javadoc)

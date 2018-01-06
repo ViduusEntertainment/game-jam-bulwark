@@ -9,6 +9,7 @@ import org.viduus.charon.gamejam.GameSystems;
 import org.viduus.charon.gamejam.graphics.frames.menu.IntroScreen;
 import org.viduus.charon.gamejam.graphics.frames.menu.MenuScreen;
 import org.viduus.charon.global.graphics.GameFrame;
+import org.viduus.charon.global.graphics.opengl.OpenGLFrame;
 import org.viduus.charon.global.graphics.screens.AbstractScreenManager;
 
 /**
@@ -25,9 +26,9 @@ public class ScreenManager extends AbstractScreenManager {
 	 * TODO
 	 * @param game_systems
 	 */
-	public ScreenManager(GameSystems game_systems, GameFrame game_frame) {
-		super(new IntroScreen(game_frame));
-		registerGameScreen(MENU_SCREEN, new MenuScreen(game_frame));
+	public ScreenManager(GameSystems game_systems, OpenGLFrame graphics_frame) {
+		super(new IntroScreen(graphics_frame));
+		registerGameScreen(MENU_SCREEN, new MenuScreen(graphics_frame));
 	}
 
 }

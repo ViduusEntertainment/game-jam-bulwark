@@ -11,6 +11,7 @@ import org.viduus.charon.global.AbstractGameSystems;
 import org.viduus.charon.global.AbstractGameSystems.PauseType;
 import org.viduus.charon.global.GameInfo;
 import org.viduus.charon.global.graphics.AbstractGraphicsEngine;
+import org.viduus.charon.global.graphics.opengl.OpenGLFrame;
 import org.viduus.charon.global.graphics.screens.AbstractScreenManager;
 import org.viduus.charon.global.graphics.screens.PauseMenu;
 import org.viduus.charon.global.util.logging.OutputHandler;
@@ -73,6 +74,14 @@ public class GraphicsEngine extends AbstractGraphicsEngine {
 		OutputHandler.startTimedPrint("Assigning default game screen");
 		showFrame(DEFAULT_SCREEN);
 		OutputHandler.endTimedPrint("Finished assigning default game screen");
+	}
+
+	/* (non-Javadoc)
+	 * @see org.viduus.charon.global.graphics.AbstractGraphicsEngine#createInitialGameFrame()
+	 */
+	@Override
+	protected OpenGLFrame createInitialGameFrame() {
+		return new GameFrame();
 	}
 
 }
