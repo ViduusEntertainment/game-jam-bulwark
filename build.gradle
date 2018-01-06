@@ -139,6 +139,12 @@ jar {
 	version =  '0.0.1'
 }
 
+task('runDebug', dependsOn: 'classes', type: JavaExec, group: 'application') {
+	main = mainClassName
+	classpath = sourceSets.main.runtimeClasspath
+	jvmArgs = ["-XstartOnFirstThread", "-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5006"]
+}
+
 task('setupRepo', type:Exec) {
 	commandLine scriptLoc + 'setup_bash.sh'
 }

@@ -58,6 +58,9 @@ public class WorldEngine extends AbstractWorldEngine {
 	 */
 	@Override
 	protected void onLoadGame(GameInfo game_info) {
+		super.onLoadGame(game_info);
+		
+		// Create the first level
 		Level1 level_1 = new Level1(this);
 		insert(level_1);
 		ErrorHandler.tryRun(() -> {

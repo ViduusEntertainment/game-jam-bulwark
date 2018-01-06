@@ -5,9 +5,7 @@
  */
 package org.viduus.charon.gamejam.world.regions;
 
-import java.io.IOException;
-
-import org.json.simple.parser.ParseException;
+import org.viduus.charon.global.graphics.util.Size;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;
 import org.viduus.charon.global.world.regions.BaseRegion;
@@ -24,7 +22,7 @@ public class Level1 extends BaseRegion {
 	 * @param name
 	 */
 	public Level1(AbstractWorldEngine world_engine) {
-		super(world_engine, "level_1");
+		super(world_engine, "level_1", new Size(5000, 288));
 		// TODO Auto-generated constructor stub
 	}
 
@@ -50,7 +48,7 @@ public class Level1 extends BaseRegion {
 	 * @see org.viduus.charon.global.world.regions.BaseRegion#load()
 	 */
 	@Override
-	public void load() throws IOException, ParseException {
+	public void load() {
 		// TODO Auto-generated method stub
 		
 	}

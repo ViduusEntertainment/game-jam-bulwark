@@ -6,8 +6,10 @@
 package org.viduus.charon.gamejam.graphics;
 
 import org.viduus.charon.gamejam.GameSystems;
+import org.viduus.charon.gamejam.graphics.ui.CharacterHUD;
 import org.viduus.charon.global.AbstractGameSystems;
 import org.viduus.charon.global.AbstractGameSystems.PauseType;
+import org.viduus.charon.global.GameInfo;
 import org.viduus.charon.global.graphics.AbstractGraphicsEngine;
 import org.viduus.charon.global.graphics.screens.AbstractScreenManager;
 import org.viduus.charon.global.graphics.screens.PauseMenu;
@@ -46,6 +48,16 @@ public class GraphicsEngine extends AbstractGraphicsEngine {
 	protected PauseMenu getPauseMenu(PauseType pause_type) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.viduus.charon.global.GameEngine#onLoadGame(org.viduus.charon.global.GameInfo)
+	 */
+	@Override
+	protected void onLoadGame(GameInfo game_info) {
+		super.onLoadGame(game_info);
+		
+		setHeadsUpDisplay(new CharacterHUD());
 	}
 	
 	@Override
