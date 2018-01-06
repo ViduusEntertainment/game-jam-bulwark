@@ -6,11 +6,17 @@
 package org.viduus.charon.gamejam.world.regions;
 
 import org.dyn4j.geometry.AABB;
+import org.dyn4j.geometry.Vector2;
+import org.viduus.charon.gamejam.world.objects.character.nonplayable.TestEnemy;
+import org.viduus.charon.gamejam.world.objects.weapons.DefaultWeapon;
+import org.viduus.charon.gamejam.world.objects.weapons.bullets.DefaultBullet;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
 import org.viduus.charon.global.graphics.util.Size;
+import org.viduus.charon.global.util.identification.Uid;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;
+import org.viduus.charon.global.world.objects.twodimensional.weapon.Weapon2D;
 import org.viduus.charon.global.world.regions.BaseRegion;
 
 /**
@@ -62,6 +68,18 @@ public class Level1 extends SideScrollingRegion {
 			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_2"),
 			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_3"),
 		});
+		
+		TestEnemy test_enemy_1 = new TestEnemy(world_engine, "TestEnemy1", new Vector2(200, 200));
+		world_engine.insert(test_enemy_1);
+		addEntity(test_enemy_1);
+//		
+//		TestEnemy test_enemy_2 = new TestEnemy(world_engine, "TestEnemy2", new Vector2(250, 150));
+//		world_engine.insert(test_enemy_2);
+//		addEntity(test_enemy_2);
+//		
+//		TestEnemy test_enemy_3 = new TestEnemy(world_engine, "TestEnemy2", new Vector2(250, 250));
+//		world_engine.insert(test_enemy_3);
+//		addEntity(test_enemy_3);
 	}
 
 	/* (non-Javadoc)

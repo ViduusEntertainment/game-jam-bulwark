@@ -8,6 +8,7 @@ package org.viduus.charon.gamejam.graphics.frames.menu;
 import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.GameSystems;
 import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
+import org.viduus.charon.gamejam.world.objects.weapons.DefaultWeapon;
 import org.viduus.charon.global.AbstractGameSystems;
 import org.viduus.charon.global.GameInfo;
 import org.viduus.charon.global.audio.AudioCategory;
@@ -61,6 +62,9 @@ public class MenuScreen extends AbstractGameScreen {
 				// add player to party
 				PlayerCharacter character_1 = new PlayerCharacter((GameSystems) game_systems, "Sauran", new Vector2(100, 100));
 				game_systems.world_engine.insert(character_1);
+				DefaultWeapon weapon = new DefaultWeapon(game_systems.world_engine, "DefaultWeapon", character_1);
+				game_systems.world_engine.insert(weapon);
+				character_1.equipWeapon(weapon);
 				party.add(character_1);
 				
 				// start the game
