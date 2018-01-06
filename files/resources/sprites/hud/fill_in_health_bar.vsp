@@ -1,0 +1,276 @@
+{
+  "sprite_map": "resources/img/sprites/atlas.png",
+  "size": {
+    "width": 2000,
+    "height": 1000
+  },
+  "hands": {
+    "left": [],
+    "right": []
+  },
+  "layouts": {
+    "static": [
+      {
+        "name": "vid:animation:hud/fill_in_health_bar.outside_left",
+        "sustain": false,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 1472,
+                  "y": 64
+                },
+                {
+                  "x": 1504,
+                  "y": 64
+                },
+                {
+                  "x": 1504,
+                  "y": 80
+                },
+                {
+                  "x": 1472,
+                  "y": 80
+                }
+              ],
+              "center": {
+                "x": 1472,
+                "y": 64
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "vid:animation:hud/fill_in_health_bar.outside_middle",
+        "sustain": false,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 1504,
+                  "y": 64
+                },
+                {
+                  "x": 1536,
+                  "y": 64
+                },
+                {
+                  "x": 1536,
+                  "y": 80
+                },
+                {
+                  "x": 1504,
+                  "y": 80
+                }
+              ],
+              "center": {
+                "x": 1504,
+                "y": 64
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "vid:animation:hud/fill_in_health_bar.outside_right",
+        "sustain": false,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 1536,
+                  "y": 64
+                },
+                {
+                  "x": 1568,
+                  "y": 64
+                },
+                {
+                  "x": 1568,
+                  "y": 80
+                },
+                {
+                  "x": 1536,
+                  "y": 80
+                }
+              ],
+              "center": {
+                "x": 1536,
+                "y": 64
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "vid:animation:hud/fill_in_health_bar.inside_left",
+        "sustain": false,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 1568,
+                  "y": 64
+                },
+                {
+                  "x": 1569,
+                  "y": 64
+                },
+                {
+                  "x": 1569,
+                  "y": 80
+                },
+                {
+                  "x": 1568,
+                  "y": 80
+                }
+              ],
+              "center": {
+                "x": 1568,
+                "y": 64
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "vid:animation:hud/fill_in_health_bar.inside_middle_repeat_1",
+        "sustain": false,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 1569,
+                  "y": 64
+                },
+                {
+                  "x": 1570,
+                  "y": 64
+                },
+                {
+                  "x": 1570,
+                  "y": 80
+                },
+                {
+                  "x": 1569,
+                  "y": 80
+                }
+              ],
+              "center": {
+                "x": 1569,
+                "y": 64
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "vid:animation:hud/fill_in_health_bar.inside_middle_repeat_2",
+        "sustain": false,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 1570,
+                  "y": 64
+                },
+                {
+                  "x": 1571,
+                  "y": 64
+                },
+                {
+                  "x": 1571,
+                  "y": 80
+                },
+                {
+                  "x": 1570,
+                  "y": 80
+                }
+              ],
+              "center": {
+                "x": 1570,
+                "y": 64
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "vid:animation:hud/fill_in_health_bar.inside_right",
+        "sustain": false,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 1571,
+                  "y": 64
+                },
+                {
+                  "x": 1573,
+                  "y": 64
+                },
+                {
+                  "x": 1573,
+                  "y": 80
+                },
+                {
+                  "x": 1571,
+                  "y": 80
+                }
+              ],
+              "center": {
+                "x": 1571,
+                "y": 64
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "tiled": [],
+    "free": []
+  }
+}

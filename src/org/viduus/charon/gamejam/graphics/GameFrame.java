@@ -31,7 +31,7 @@ public class GameFrame extends OpenGLFrame {
 		
 		setLocationRelativeTo(null);
 		setVisible(true);
-		setFPSVisible(true);
+		setFPSVisible(false);
 		setDefaultCloseOperation(OpenGLFrame.KILL_ON_CLOSE);
 	}
 	

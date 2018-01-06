@@ -30,6 +30,7 @@ public class MenuScreen extends AbstractGameScreen {
 	private OpenGLButton start_button;
 	private OpenGLButton exit_button;
 	private Sound menu_sound;
+	private OpenGLButton credits_button;
 
 	/**
 	 * @param graphics_frame
@@ -44,6 +45,11 @@ public class MenuScreen extends AbstractGameScreen {
 		start_button.setHoverColor(83, 119, 215);
 		add(start_button);
 		
+		credits_button = new OpenGLButton("Credits");
+		credits_button.setBackgroundColor(182, 182, 182);
+		credits_button.setHoverColor(83, 119, 215);
+		add(credits_button);
+		
 		exit_button = new OpenGLButton("Exit");
 		exit_button.setBackgroundColor(182, 182, 182);
 		exit_button.setHoverColor(83, 119, 215);
@@ -55,7 +61,7 @@ public class MenuScreen extends AbstractGameScreen {
 		super.onControllerState(e);
 		
 		if(e.getKeyState(ControllerState.SELECT_KEY) == ControllerState.PRESSED_STATE) {
-			if(start_button.hasFocus()) {
+			if (start_button.hasFocus()) {
 				PlayerParty party = new PlayerParty();
 				
 				// add player to party
@@ -68,8 +74,11 @@ public class MenuScreen extends AbstractGameScreen {
 				game_systems.startGame(game_info);
 				game_systems.graphics_engine.showFrame(AbstractGraphicsEngine.GAME_SCREEN);
 			}
-			else if(this.exit_button.hasFocus()) {
+			else if (this.exit_button.hasFocus()) {
 				game_systems.closeApplication();
+			}
+			else if (credits_button.hasFocus()) {
+				
 			}
 		}
 	}
@@ -79,7 +88,7 @@ public class MenuScreen extends AbstractGameScreen {
 	 */
 	@Override
 	protected void onActivate(AbstractGameSystems game_systems) {
-		menu_sound = game_systems.audio_engine.createSound(AudioCategory.MUSIC, "resources/audio/music/menu/start_menu.ogg", true);
+		menu_sound = game_systems.audio_engine.createSound(AudioCategory.MUSIC, "resources/audio/music/menu/main_menu.ogg", true);
 		menu_sound.setToLoop(true);
 		game_systems.audio_engine.playSound(menu_sound);
 	}
@@ -99,6 +108,7 @@ public class MenuScreen extends AbstractGameScreen {
 	protected void updateLayout(int width, int height) {
 		start_button.setBounds((width-200)/2, height/2, 200, 20);
 		exit_button.setBounds((width-200)/2, height/2 + 35, 200, 20);
+		credits_button.setBounds(width-100, height-30, 90, 20);
 	}
 
 }

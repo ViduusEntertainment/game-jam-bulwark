@@ -1,0 +1,91 @@
+{
+  "sprite_map": "resources/img/sprites/atlas.png",
+  "size": {
+    "width": 2000,
+    "height": 1000
+  },
+  "hands": {
+    "left": [],
+    "right": []
+  },
+  "layouts": {
+    "static": [
+      {
+        "name": "vid:animation:hud/icon_health_bar.full",
+        "sustain": false,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 1634,
+                  "y": 64
+                },
+                {
+                  "x": 1666,
+                  "y": 64
+                },
+                {
+                  "x": 1666,
+                  "y": 96
+                },
+                {
+                  "x": 1634,
+                  "y": 96
+                }
+              ],
+              "center": {
+                "x": 1634,
+                "y": 64
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "vid:animation:hud/icon_health_bar.empty",
+        "sustain": false,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 1666,
+                  "y": 64
+                },
+                {
+                  "x": 1698,
+                  "y": 64
+                },
+                {
+                  "x": 1698,
+                  "y": 96
+                },
+                {
+                  "x": 1666,
+                  "y": 96
+                }
+              ],
+              "center": {
+                "x": 1666,
+                "y": 64
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "tiled": [],
+    "free": []
+  }
+}

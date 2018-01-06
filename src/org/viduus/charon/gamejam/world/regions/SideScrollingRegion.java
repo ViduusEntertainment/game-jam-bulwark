@@ -114,6 +114,7 @@ public abstract class SideScrollingRegion extends BaseRegion {
 				while (next_index == background_set.last_index) {
 					next_index = RN_JESUS.nextInt(background_set.base_set.length);
 				}
+				background_set.last_index = next_index;
 				Animation<?> bg = background_set.base_set[next_index];
 				background_set.render_set.add(bg);
 				bg.renderAnimation(graphics, d_sec, (int) (consumed_width-background_set.dx), (int) background_set.offset, 1);

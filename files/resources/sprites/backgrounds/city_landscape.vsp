@@ -9,7 +9,7 @@
       "image": []
     }
   },
-  "sprite_map": "resources/img/backgrounds/city_landscapes.png",
+  "sprite_map": "resources/img/sprites/atlas.png",
   "size": {
     "width": 2000,
     "height": 1000
