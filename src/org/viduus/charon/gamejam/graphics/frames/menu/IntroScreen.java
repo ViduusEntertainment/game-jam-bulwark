@@ -7,11 +7,14 @@ package org.viduus.charon.gamejam.graphics.frames.menu;
 
 import org.viduus.charon.gamejam.graphics.ScreenManager;
 import org.viduus.charon.global.AbstractGameSystems;
+import org.viduus.charon.global.audio.AudioCategory;
+import org.viduus.charon.global.audio.Sound;
 import org.viduus.charon.global.graphics.GameFrame;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
 import org.viduus.charon.global.graphics.screens.AbstractGameScreen;
 import org.viduus.charon.global.graphics.util.IntDimension;
+import org.viduus.charon.global.input.controller.ControllerState;
 
 /**
  * 
@@ -21,6 +24,7 @@ import org.viduus.charon.global.graphics.util.IntDimension;
 public class IntroScreen extends AbstractGameScreen {
 
 	private Animation<?> logo;
+	private Sound intro_sound;
 
 	/**
 	 * @param game_frame
@@ -42,6 +46,15 @@ public class IntroScreen extends AbstractGameScreen {
 		IntDimension canvas_dimension = graphics.getCanvasDimension();
 		logo.renderAnimation(graphics, d_sec, canvas_dimension.width/2, canvas_dimension.height/2, 4);
 	}
+	
+	@Override
+	public void onControllerState(ControllerState e) {
+		super.onControllerState(e);
+		
+		if(e.getKeyState(ControllerState.SELECT_KEY) == ControllerState.PRESSED_STATE) {
+			game_systems.graphics_engine.showFrame( ScreenManager.MENU_SCREEN );
+		}
+	}
 
 	/* (non-Javadoc)
 	 * @see org.viduus.charon.global.graphics.screens.AbstractGameScreen#onActivate(org.viduus.charon.global.AbstractGameSystems)
@@ -52,6 +65,9 @@ public class IntroScreen extends AbstractGameScreen {
 		game_frame.setLocationRelativeTo(null);
 		game_frame.setDesiredFPS(30);
 		
+		intro_sound = game_systems.audio_engine.createSound(AudioCategory.MUSIC, "resources/audio/sfx/intro/viduus.ogg", true);
+		game_systems.audio_engine.playSound(intro_sound);
+		
 		logo = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:viduus_logo.anim_0");
 	}
 
@@ -60,8 +76,7 @@ public class IntroScreen extends AbstractGameScreen {
 	 */
 	@Override
 	protected void onDeactivate(AbstractGameSystems game_systems) {
-		// TODO Auto-generated method stub
-		
+		game_systems.audio_engine.stopSound(intro_sound);
 	}
 
 	/* (non-Javadoc)
