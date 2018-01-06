@@ -59,6 +59,7 @@ public class GraphicsEngine extends AbstractGraphicsEngine {
 		super.onLoadGame(game_info);
 		
 		setHeadsUpDisplay(new CharacterHUD());
+		graphics_frame.setDesiredFPS(55);
 	}
 	
 	@Override

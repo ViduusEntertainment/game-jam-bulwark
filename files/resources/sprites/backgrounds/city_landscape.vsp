@@ -1,0 +1,297 @@
+{
+  "metadata": {
+    "original": {
+      "collision": [],
+      "image": []
+    },
+    "convex": {
+      "collision": [],
+      "image": []
+    }
+  },
+  "sprite_map": "resources/img/backgrounds/city_landscapes.png",
+  "size": {
+    "width": 2000,
+    "height": 1000
+  },
+  "hands": {
+    "left": [],
+    "right": []
+  },
+  "layouts": {
+    "static": [
+      {
+        "name": "vid:animation:backgrounds/city_layouts.front_1",
+        "sustain": false,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "metadata": {}
+                },
+                {
+                  "x": 416,
+                  "y": 0,
+                  "metadata": {}
+                },
+                {
+                  "x": 416,
+                  "y": 416,
+                  "metadata": {}
+                },
+                {
+                  "x": 0,
+                  "y": 416,
+                  "metadata": {}
+                }
+              ],
+              "center": {
+                "x": 0,
+                "y": 0,
+                "metadata": {}
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            },
+            "metadata": {
+              "name": "Variant (0)"
+            }
+          }
+        ]
+      },
+      {
+        "name": "vid:animation:backgrounds/city_layouts.front_2",
+        "sustain": false,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 448,
+                  "y": 0,
+                  "metadata": {}
+                },
+                {
+                  "x": 864,
+                  "y": 0,
+                  "metadata": {}
+                },
+                {
+                  "x": 864,
+                  "y": 416,
+                  "metadata": {}
+                },
+                {
+                  "x": 448,
+                  "y": 416,
+                  "metadata": {}
+                }
+              ],
+              "center": {
+                "x": 448,
+                "y": 0,
+                "metadata": {}
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            },
+            "metadata": {
+              "name": "Variant (0)"
+            }
+          }
+        ]
+      },
+      {
+        "name": "vid:animation:backgrounds/city_layouts.front_3",
+        "sustain": false,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 896,
+                  "y": 0,
+                  "metadata": {}
+                },
+                {
+                  "x": 1312,
+                  "y": 0,
+                  "metadata": {}
+                },
+                {
+                  "x": 1312,
+                  "y": 416,
+                  "metadata": {}
+                },
+                {
+                  "x": 896,
+                  "y": 416,
+                  "metadata": {}
+                }
+              ],
+              "center": {
+                "x": 896,
+                "y": 0,
+                "metadata": {}
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            },
+            "metadata": {
+              "name": "Variant (0)"
+            }
+          }
+        ]
+      },
+      {
+        "name": "vid:animation:backgrounds/city_layouts.back_1",
+        "sustain": false,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 0,
+                  "y": 448,
+                  "metadata": {}
+                },
+                {
+                  "x": 416,
+                  "y": 448,
+                  "metadata": {}
+                },
+                {
+                  "x": 416,
+                  "y": 864,
+                  "metadata": {}
+                },
+                {
+                  "x": 0,
+                  "y": 864,
+                  "metadata": {}
+                }
+              ],
+              "center": {
+                "x": 0,
+                "y": 448,
+                "metadata": {}
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            },
+            "metadata": {
+              "name": "Variant (0)"
+            }
+          }
+        ]
+      },
+      {
+        "name": "vid:animation:backgrounds/city_layouts.back_2",
+        "sustain": false,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 448,
+                  "y": 448,
+                  "metadata": {}
+                },
+                {
+                  "x": 864,
+                  "y": 448,
+                  "metadata": {}
+                },
+                {
+                  "x": 864,
+                  "y": 864,
+                  "metadata": {}
+                },
+                {
+                  "x": 448,
+                  "y": 864,
+                  "metadata": {}
+                }
+              ],
+              "center": {
+                "x": 448,
+                "y": 448,
+                "metadata": {}
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            },
+            "metadata": {
+              "name": "Variant (0)"
+            }
+          }
+        ]
+      },
+      {
+        "name": "vid:animation:backgrounds/city_layouts.back_3",
+        "sustain": false,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 896,
+                  "y": 448,
+                  "metadata": {}
+                },
+                {
+                  "x": 1312,
+                  "y": 448,
+                  "metadata": {}
+                },
+                {
+                  "x": 1312,
+                  "y": 864,
+                  "metadata": {}
+                },
+                {
+                  "x": 896,
+                  "y": 864,
+                  "metadata": {}
+                }
+              ],
+              "center": {
+                "x": 896,
+                "y": 448,
+                "metadata": {}
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            },
+            "metadata": {
+              "name": "Variant (0)"
+            }
+          }
+        ]
+      }
+    ],
+    "tiled": [],
+    "free": []
+  }
+}

@@ -52,8 +52,15 @@ public class Level1 extends SideScrollingRegion {
 	 */
 	@Override
 	public void load() {
-		setBackgrounds(new Animation<?>[] {
-			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_1.static")
+		addBackgroundSet(-8, 20, new Animation<?>[] {
+			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.back_1"),
+			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.back_2"),
+			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.back_3"),
+		});
+		addBackgroundSet(70, 30, new Animation<?>[] {
+			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_1"),
+			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_2"),
+			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_3"),
 		});
 	}
 
