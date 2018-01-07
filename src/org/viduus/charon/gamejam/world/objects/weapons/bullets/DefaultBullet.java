@@ -18,7 +18,7 @@ public class DefaultBullet extends Bullet2D{
 	 * @param sprite_map
 	 */
 	public DefaultBullet(AbstractWorldEngine world_engine, Uid uid, String name, Weapon2D owner, Vector2 location, Vector2 velocity) {
-		super(world_engine, uid, name, owner, location, velocity, "vid:animation:eday_robot", "robot");
+		super(world_engine, uid, name, owner, location, velocity, "vid:animation:objects/bullets", "player_normal");
 	}
 
 	@Override

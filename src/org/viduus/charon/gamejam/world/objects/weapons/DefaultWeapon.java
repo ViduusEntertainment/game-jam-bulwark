@@ -14,7 +14,7 @@ import org.viduus.charon.global.world.objects.twodimensional.weapon.range.bullet
 public class DefaultWeapon extends RangeWeapon2D {
 
 	public DefaultWeapon(AbstractWorldEngine world_engine, String name, Character2D owner) {
-		super(world_engine, name, owner, owner.getLocation().copy().add(new Vector2(20, 0)), "vid:animation:eday_robot", "robot");
+		super(world_engine, name, owner, owner.getLocation().copy().add(new Vector2(20, 0)), "vid:animation:objects/bullets", "player_normal");
 	}
 
 	@Override
