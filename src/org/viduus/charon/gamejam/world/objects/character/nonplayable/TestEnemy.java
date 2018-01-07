@@ -15,6 +15,12 @@ public class TestEnemy extends NonPlayableCharacter2D{
 		super(world_engine, name, location, SPEED, 100, 0, 100, 0, "vid:animation:eday_robot", "robot");
 		// TODO Auto-generated constructor stub
 	}
+	
+	@Override
+	protected void setPhysicsProperties() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void onWeaponUse(WeaponUseEvent use_event) {

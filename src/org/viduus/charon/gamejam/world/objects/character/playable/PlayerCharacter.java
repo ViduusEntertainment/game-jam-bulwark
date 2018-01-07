@@ -77,6 +77,11 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		this.game_systems = game_systems;
 		this.<Boolean>set(Property.IS_MOVABLE, true);
 	}
+	
+	@Override
+	protected void setPhysicsProperties() {
+		// TODO Auto-generated method stub
+	}
 
 	/* (non-Javadoc)
 	 * @see org.viduus.charon.global.world.objects.twodimensional.character.playable.PlayableCharacter2D#performTick(org.viduus.charon.global.input.player.PlayerControlsState, org.viduus.charon.global.event.events.TickEvent)
@@ -222,5 +227,4 @@ public class PlayerCharacter extends PlayableCharacter2D {
 			immunity_timer.reset();
 		}
 	}
-
 }
