@@ -6,7 +6,6 @@
 package org.viduus.charon.gamejam.graphics.ui;
 
 import org.viduus.charon.global.AbstractGameSystems;
-import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
 import org.viduus.charon.global.graphics.ui.HeadsUpDisplay;
 import org.viduus.charon.global.player.PlayerParty;

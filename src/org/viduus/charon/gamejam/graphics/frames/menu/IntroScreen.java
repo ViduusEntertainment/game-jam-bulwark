@@ -9,7 +9,6 @@ import org.viduus.charon.gamejam.graphics.ScreenManager;
 import org.viduus.charon.global.AbstractGameSystems;
 import org.viduus.charon.global.audio.AudioCategory;
 import org.viduus.charon.global.audio.Sound;
-import org.viduus.charon.global.graphics.GameFrame;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.opengl.OpenGLFrame;
 import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
