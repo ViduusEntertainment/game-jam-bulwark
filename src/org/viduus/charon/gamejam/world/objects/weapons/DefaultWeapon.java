@@ -17,22 +17,16 @@ public class DefaultWeapon extends RangeWeapon2D {
 
 	public DefaultWeapon(AbstractWorldEngine world_engine, String name, Character2D owner) {
 		super(world_engine, name, owner, owner.getLocation().copy().add(new Vector2(20, 0)), "vid:animation:eday_robot", "robot");
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public Bullet2D createBullet() {
-		OutputHandler.println(this.getOwner().getLocation().copy().toString());
-		Vector2 yep = this.getOwner().getLocation().copy().add(50, 0);
-		OutputHandler.println(yep.toString());
-		return new DefaultBullet(world_engine, Uid.generateUid("vid:bullet", "DefaultBullet"), "DefaultBullet", this, yep, new Vector2(100, 0));
+		return new DefaultBullet(world_engine, Uid.generateUid("vid:bullet", "DefaultBullet"), "DefaultBullet", this, getLocation().copy().add(30, 0), new Vector2(3, 0));
 	}
 
 	@Override
 	protected Joint getJoint(Object2D owner) {
-		AABB owner_aabb =  owner.getBody().createAABB();
-		Vector2 anchor = new Vector2(owner_aabb.getMaxX(), (owner_aabb.getMaxY() - owner_aabb.getMinY()) / 2);
-		WeldJoint weld_joint = new WeldJoint(owner.getBody(), this.getBody(), anchor);
+		WeldJoint weld_joint = new WeldJoint(owner.getBody(), this.getBody(), owner.getBody().getWorldCenter().copy().add(30, 0));
 		weld_joint.setCollisionAllowed(false);
 		
 		return weld_joint;
