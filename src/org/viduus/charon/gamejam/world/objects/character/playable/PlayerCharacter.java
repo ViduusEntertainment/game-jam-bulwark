@@ -11,6 +11,8 @@ import org.viduus.charon.gamejam.input.PlayerControls;
 import org.viduus.charon.global.AbstractGameSystems.PauseType;
 import org.viduus.charon.global.GameConstants;
 import org.viduus.charon.global.GameConstants.Property;
+import org.viduus.charon.global.event.events.CollisionEvent;
+import org.viduus.charon.global.event.events.HitByWeaponEvent;
 import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.global.event.events.WeaponUseEvent;
 import org.viduus.charon.global.input.InputEngine;
@@ -23,6 +25,7 @@ import org.viduus.charon.global.world.objects.twodimensional.weapon.Weapon2D;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.range.RangeWeapon2D;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.range.bullets.Bullet2D;
 import org.viduus.charon.global.world.regions.BaseRegion;
+import org.viduus.charon.global.world.util.CooldownTimer;
 
 /**
  * 
@@ -32,9 +35,9 @@ import org.viduus.charon.global.world.regions.BaseRegion;
 public class PlayerCharacter extends PlayableCharacter2D {
 
 	private static final float
-		DEFAULT_HEALTH = 100f,
+		DEFAULT_HEALTH = 5,
 		DEFAULT_MANA = 100f,
-		DEFAULT_SPEED = 3.0f,
+		DEFAULT_SPEED = 10.0f,
 		SPRINT_CONSTANT = 1.5f,
 		STAMINA_SPRINT_CONSTANT = 20, // stam/sec
 		ROLL_CONSTANT = 3.0f,
@@ -51,8 +54,11 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	private boolean controller_binded = false;
 	private Controller default_controller;
 	
-	private float WEAPON_COOL_DOWN = .3f; // seconds
-	private float usage_countdown = 0;
+	/*
+	 * Cool downs
+	 */
+	private final CooldownTimer weapon_use_timer = new CooldownTimer(.3f);
+	private final CooldownTimer immunity_timer = new CooldownTimer(1f);
 	
 	/**
 	 * @param world_engine
@@ -80,7 +86,8 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	protected void performTick(PlayerControlsState controls_state, TickEvent tick_event) {
 		float time_elapsed = tick_event.time_elapsed;
 		
-		usage_countdown -= time_elapsed;
+		weapon_use_timer.update(time_elapsed);
+		immunity_timer.update(time_elapsed);
 		
 		// Player hit Interaction key/button. Set this object to be in an interacting state
 		this.<Boolean>set(Property.IS_INTERACTING, controls_state.isSelect());
@@ -103,10 +110,10 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		
 		// Check if the player is attacking
 		if(controls_state.getAttack()){
-			if (!usingWeapon())
+			if (!weapon_use_timer.isCooling())
 			{
 				world_engine.queueEvent(this, new WeaponUseEvent(getWeapons().get(0)), WeaponUseEvent.class);
-				usage_countdown = WEAPON_COOL_DOWN;
+				weapon_use_timer.reset();
 			}
 		}
 		
@@ -195,24 +202,6 @@ public class PlayerCharacter extends PlayableCharacter2D {
 			ErrorHandler.println("Tried to remove MainCharacter listener after it was already removed!");
 		}
 	}
-	
-	/**
-	 * <b>Do not call during tick event callback.</b>
-	 * 
-	 * @return
-	 */
-	protected float getTimeSinceWeaponUse() {
-		return Math.max(-usage_countdown, 0);
-	}
-	
-	/**
-	 * <b>Do not call during tick event callback.</b>
-	 * 
-	 * @return
-	 */
-	protected boolean usingWeapon() {
-		return usage_countdown > 0;
-	}
 
 	@Override
 	public void onWeaponUse(WeaponUseEvent weapon_use_event) {
@@ -220,6 +209,19 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		Bullet2D bullet = weapon.createBullet();
 		world_engine.insert(bullet);
 		this.<BaseRegion>get(Property.CURRENT_REGION).addEntity(bullet);
+	}
+
+	@Override
+	protected void onHitByWeapon(HitByWeaponEvent hit_by_weapon_event) {
+		// TODO Weapon strength detection?
+	}
+
+	@Override
+	protected void onCollision(CollisionEvent collision_event) {
+		if (!immunity_timer.isCooling()) {		
+			set(Property.HEALTH, getFloat(Property.HEALTH) - 1);
+			immunity_timer.reset();
+		}
 	}
 
 }

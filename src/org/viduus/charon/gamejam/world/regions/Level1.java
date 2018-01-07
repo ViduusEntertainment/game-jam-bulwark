@@ -66,14 +66,14 @@ public class Level1 extends SideScrollingRegion {
 		test_enemy_1.setLinearVelocity(new Vector2(20, 0));
 		world_engine.insert(test_enemy_1);
 		addEntity(test_enemy_1);
-//		
-//		TestEnemy test_enemy_2 = new TestEnemy(world_engine, "TestEnemy2", new Vector2(250, 150));
-//		world_engine.insert(test_enemy_2);
-//		addEntity(test_enemy_2);
-//		
-//		TestEnemy test_enemy_3 = new TestEnemy(world_engine, "TestEnemy2", new Vector2(250, 250));
-//		world_engine.insert(test_enemy_3);
-//		addEntity(test_enemy_3);
+		
+		TestEnemy test_enemy_2 = new TestEnemy(world_engine, "TestEnemy2", new Vector2(250, 150));
+		world_engine.insert(test_enemy_2);
+		addEntity(test_enemy_2);
+		
+		TestEnemy test_enemy_3 = new TestEnemy(world_engine, "TestEnemy2", new Vector2(250, 250));
+		world_engine.insert(test_enemy_3);
+		addEntity(test_enemy_3);
 	}
 
 	/* (non-Javadoc)

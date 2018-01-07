@@ -4,6 +4,7 @@ import org.dyn4j.dynamics.joint.Joint;
 import org.dyn4j.dynamics.joint.WeldJoint;
 import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.world.objects.weapons.bullets.DefaultBullet;
+import org.viduus.charon.global.event.events.HitByWeaponEvent;
 import org.viduus.charon.global.util.identification.Uid;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;
@@ -19,7 +20,7 @@ public class DefaultWeapon extends RangeWeapon2D {
 
 	@Override
 	public Bullet2D createBullet() {
-		return new DefaultBullet(world_engine, Uid.generateUid("vid:bullet", "DefaultBullet"), "DefaultBullet", this, getLocation().copy().add(30, 0), new Vector2(3, 0));
+		return new DefaultBullet(world_engine, Uid.generateUid("vid:bullet", "DefaultBullet"), "DefaultBullet", this, getLocation().copy().add(30, 0), new Vector2(800, 0));
 	}
 
 	@Override
@@ -28,6 +29,12 @@ public class DefaultWeapon extends RangeWeapon2D {
 		weld_joint.setCollisionAllowed(false);
 		
 		return weld_joint;
+	}
+
+	@Override
+	protected void onHitByWeapon(HitByWeaponEvent hit_by_weapon_event) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
