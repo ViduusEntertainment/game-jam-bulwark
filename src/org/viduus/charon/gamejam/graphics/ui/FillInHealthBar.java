@@ -19,7 +19,7 @@ import org.viduus.charon.global.world.objects.twodimensional.character.playable.
  */
 public class FillInHealthBar {
 
-	private static final int WIDTH = 96;
+	private static final int WIDTH = 180;
 	private static final int BORDER_SIZE = 3;
 	
 	private final Animation<?>
@@ -29,7 +29,8 @@ public class FillInHealthBar {
 		inside_left,
 		inside_middle_repeat_1,
 		inside_middle_repeat_2,
-		inside_right;
+		inside_right,
+		inside_back;
 	
 	public FillInHealthBar(AbstractGameSystems game_systems) {
 		outside_left = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/fill_in_health_bar.outside_left");
@@ -39,10 +40,13 @@ public class FillInHealthBar {
 		inside_middle_repeat_1 = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/fill_in_health_bar.inside_middle_repeat_1");
 		inside_middle_repeat_2 = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/fill_in_health_bar.inside_middle_repeat_2");
 		inside_right = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/fill_in_health_bar.inside_right");
+		inside_back = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/fill_in_health_bar.inside_back");
 	}
 	
-	public void render(OpenGLGraphics graphics, float d_sec, PlayerParty players) {
+	public void render(OpenGLGraphics graphics, int x, int y, float d_sec, PlayerParty players) {
 		PlayableCharacter2D character = players.get(0);
+		
+		x -= WIDTH/2;
 		
 		/*
 		 * Draw the inside of the health bar
@@ -50,28 +54,35 @@ public class FillInHealthBar {
 		
 		float percent_health = character.getFloat(Property.PERCENT_HEALTH);
 		
-		int pixels = (int) Math.floor(percent_health * (WIDTH - 2*BORDER_SIZE));
+		int max_pixels = WIDTH - 2*BORDER_SIZE;
+		int pixels = (int) Math.floor(percent_health * max_pixels);
 		int count = 0;
 		
 		// draw left side
 		if (pixels >= 1) {
-			inside_left.renderAnimation(graphics, d_sec, BORDER_SIZE+count, 0, 1);
+			inside_left.renderAnimation(graphics, d_sec, x + BORDER_SIZE+count, y, 1);
 			count++;
 		}
 		
 		// draw middle
-		while (pixels-count > 2) {
+		while (pixels-count > 1) {
 			if (count % 2 == 0) {
-				inside_middle_repeat_1.renderAnimation(graphics, d_sec, BORDER_SIZE+count, 0, 1);
+				inside_middle_repeat_1.renderAnimation(graphics, d_sec, x + BORDER_SIZE+count, y, 1);
 			} else {
-				inside_middle_repeat_2.renderAnimation(graphics, d_sec, BORDER_SIZE+count, 0, 1);
+				inside_middle_repeat_2.renderAnimation(graphics, d_sec, x + BORDER_SIZE+count, y, 1);
 			}
 			count++;
 		}
 		
 		// draw right
-		if (pixels-count == 2) {
-			inside_right.renderAnimation(graphics, d_sec, BORDER_SIZE+count, 0, 1);
+		if (pixels-count == 1) {
+			inside_right.renderAnimation(graphics, d_sec, x + BORDER_SIZE+count, y, 1);
+		}
+		
+		// draw back
+		while (pixels < max_pixels) {
+			inside_back.renderAnimation(graphics, d_sec, x + BORDER_SIZE+pixels, y, 1);
+			pixels++;
 		}
 		
 		/*
@@ -81,17 +92,17 @@ public class FillInHealthBar {
 		count = 0;
 		
 		// draw left side
-		outside_left.renderAnimation(graphics, d_sec, 0+count, 0, 1);
+		outside_left.renderAnimation(graphics, d_sec, x + count, y, 1);
 		count += 32;
 		
 		// draw middle
 		while (WIDTH - count > 32) {
-			outside_middle.renderAnimation(graphics, d_sec, 0+count, 0, 1);
+			outside_middle.renderAnimation(graphics, d_sec, x + count, y, 1);
 			count += 32;
 		}
 		
 		// draw right
-		outside_right.renderAnimation(graphics, d_sec, WIDTH-32, 0, 1);
+		outside_right.renderAnimation(graphics, d_sec, x + WIDTH-32, y, 1);
 	}
 	
 }

@@ -5,19 +5,12 @@
  */
 package org.viduus.charon.gamejam.world.regions;
 
-import org.dyn4j.geometry.AABB;
 import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.world.objects.character.nonplayable.TestEnemy;
-import org.viduus.charon.gamejam.world.objects.weapons.DefaultWeapon;
-import org.viduus.charon.gamejam.world.objects.weapons.bullets.DefaultBullet;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
-import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
 import org.viduus.charon.global.graphics.util.Size;
-import org.viduus.charon.global.util.identification.Uid;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;
-import org.viduus.charon.global.world.objects.twodimensional.weapon.Weapon2D;
-import org.viduus.charon.global.world.regions.BaseRegion;
 
 /**
  * 
@@ -58,16 +51,16 @@ public class Level1 extends SideScrollingRegion {
 	 */
 	@Override
 	public void load() {
-//		addBackgroundSet(-8, 20, new Animation<?>[] {
-//			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.back_1"),
-//			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.back_2"),
-//			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.back_3"),
-//		});
-//		addBackgroundSet(70, 30, new Animation<?>[] {
-//			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_1"),
-//			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_2"),
-//			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_3"),
-//		});
+		addBackgroundSet(-8, 20, new Animation<?>[] {
+			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.back_1"),
+			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.back_2"),
+			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.back_3"),
+		});
+		addBackgroundSet(70, 30, new Animation<?>[] {
+			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_1"),
+			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_2"),
+			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_3"),
+		});
 		
 		TestEnemy test_enemy_1 = new TestEnemy(world_engine, "TestEnemy1", new Vector2(200, 200));
 		world_engine.insert(test_enemy_1);

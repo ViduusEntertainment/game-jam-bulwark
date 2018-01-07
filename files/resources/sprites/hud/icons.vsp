@@ -11,7 +11,7 @@
   "layouts": {
     "static": [
       {
-        "name": "vid:animation:hud/fill_in_health_bar.outside_left",
+        "name": "vid:animation:hud/icons.money",
         "sustain": false,
         "variants": [
           {
@@ -19,24 +19,24 @@
             "frames": {
               "vertices": [
                 {
-                  "x": 1472,
+                  "x": 1600,
                   "y": 64
                 },
                 {
-                  "x": 1504,
+                  "x": 1616,
                   "y": 64
                 },
                 {
-                  "x": 1504,
+                  "x": 1616,
                   "y": 80
                 },
                 {
-                  "x": 1472,
+                  "x": 1600,
                   "y": 80
                 }
               ],
               "center": {
-                "x": 1472,
+                "x": 1600,
                 "y": 64
               },
               "masks": {
@@ -48,7 +48,7 @@
         ]
       },
       {
-        "name": "vid:animation:hud/fill_in_health_bar.outside_middle",
+        "name": "vid:animation:hud/icons.missile",
         "sustain": false,
         "variants": [
           {
@@ -56,24 +56,24 @@
             "frames": {
               "vertices": [
                 {
-                  "x": 1504,
+                  "x": 1664,
                   "y": 64
                 },
                 {
-                  "x": 1536,
+                  "x": 1680,
                   "y": 64
                 },
                 {
-                  "x": 1536,
+                  "x": 1680,
                   "y": 80
                 },
                 {
-                  "x": 1504,
+                  "x": 1664,
                   "y": 80
                 }
               ],
               "center": {
-                "x": 1504,
+                "x": 1664,
                 "y": 64
               },
               "masks": {
@@ -85,44 +85,7 @@
         ]
       },
       {
-        "name": "vid:animation:hud/fill_in_health_bar.outside_right",
-        "sustain": false,
-        "variants": [
-          {
-            "probability": 1,
-            "frames": {
-              "vertices": [
-                {
-                  "x": 1536,
-                  "y": 64
-                },
-                {
-                  "x": 1568,
-                  "y": 64
-                },
-                {
-                  "x": 1568,
-                  "y": 80
-                },
-                {
-                  "x": 1536,
-                  "y": 80
-                }
-              ],
-              "center": {
-                "x": 1536,
-                "y": 64
-              },
-              "masks": {
-                "collision": [],
-                "image": []
-              }
-            }
-          }
-        ]
-      },
-      {
-        "name": "vid:animation:hud/fill_in_health_bar.inside_left",
+        "name": "vid:animation:hud/icons.shield_cooldown_active",
         "sustain": false,
         "variants": [
           {
@@ -131,24 +94,24 @@
               "vertices": [
                 {
                   "x": 1568,
-                  "y": 64
+                  "y": 224
                 },
                 {
-                  "x": 1569,
-                  "y": 64
+                  "x": 1584,
+                  "y": 224
                 },
                 {
-                  "x": 1569,
-                  "y": 80
+                  "x": 1584,
+                  "y": 240
                 },
                 {
                   "x": 1568,
-                  "y": 80
+                  "y": 240
                 }
               ],
               "center": {
                 "x": 1568,
-                "y": 64
+                "y": 224
               },
               "masks": {
                 "collision": [],
@@ -159,7 +122,7 @@
         ]
       },
       {
-        "name": "vid:animation:hud/fill_in_health_bar.inside_middle_repeat_1",
+        "name": "vid:animation:hud/icons.shield_cooldown_inactive",
         "sustain": false,
         "variants": [
           {
@@ -167,25 +130,25 @@
             "frames": {
               "vertices": [
                 {
-                  "x": 1569,
-                  "y": 64
+                  "x": 1584,
+                  "y": 224
                 },
                 {
-                  "x": 1570,
-                  "y": 64
+                  "x": 1600,
+                  "y": 224
                 },
                 {
-                  "x": 1570,
-                  "y": 80
+                  "x": 1600,
+                  "y": 240
                 },
                 {
-                  "x": 1569,
-                  "y": 80
+                  "x": 1584,
+                  "y": 240
                 }
               ],
               "center": {
-                "x": 1569,
-                "y": 64
+                "x": 1584,
+                "y": 224
               },
               "masks": {
                 "collision": [],
@@ -196,7 +159,7 @@
         ]
       },
       {
-        "name": "vid:animation:hud/fill_in_health_bar.inside_middle_repeat_2",
+        "name": "vid:animation:hud/icons.missile_cooldown_active",
         "sustain": false,
         "variants": [
           {
@@ -204,25 +167,25 @@
             "frames": {
               "vertices": [
                 {
-                  "x": 1570,
-                  "y": 64
+                  "x": 1568,
+                  "y": 240
                 },
                 {
-                  "x": 1571,
-                  "y": 64
+                  "x": 1584,
+                  "y": 240
                 },
                 {
-                  "x": 1571,
-                  "y": 80
+                  "x": 1584,
+                  "y": 256
                 },
                 {
-                  "x": 1570,
-                  "y": 80
+                  "x": 1568,
+                  "y": 256
                 }
               ],
               "center": {
-                "x": 1570,
-                "y": 64
+                "x": 1568,
+                "y": 240
               },
               "masks": {
                 "collision": [],
@@ -233,7 +196,7 @@
         ]
       },
       {
-        "name": "vid:animation:hud/fill_in_health_bar.inside_right",
+        "name": "vid:animation:hud/icons.missile_cooldown_inactive",
         "sustain": false,
         "variants": [
           {
@@ -241,62 +204,25 @@
             "frames": {
               "vertices": [
                 {
-                  "x": 1571,
-                  "y": 64
+                  "x": 1584,
+                  "y": 240
                 },
                 {
-                  "x": 1572,
-                  "y": 64
+                  "x": 1600,
+                  "y": 240
                 },
                 {
-                  "x": 1572,
-                  "y": 80
+                  "x": 1600,
+                  "y": 256
                 },
                 {
-                  "x": 1571,
-                  "y": 80
+                  "x": 1584,
+                  "y": 256
                 }
               ],
               "center": {
-                "x": 1571,
-                "y": 64
-              },
-              "masks": {
-                "collision": [],
-                "image": []
-              }
-            }
-          }
-        ]
-      },
-      {
-        "name": "vid:animation:hud/fill_in_health_bar.inside_back",
-        "sustain": false,
-        "variants": [
-          {
-            "probability": 1,
-            "frames": {
-              "vertices": [
-                {
-                  "x": 1572,
-                  "y": 64
-                },
-                {
-                  "x": 1573,
-                  "y": 64
-                },
-                {
-                  "x": 1573,
-                  "y": 80
-                },
-                {
-                  "x": 1572,
-                  "y": 80
-                }
-              ],
-              "center": {
-                "x": 1572,
-                "y": 64
+                "x": 1584,
+                "y": 240
               },
               "masks": {
                 "collision": [],
