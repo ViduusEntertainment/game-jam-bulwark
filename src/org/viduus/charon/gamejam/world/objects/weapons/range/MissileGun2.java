@@ -10,7 +10,7 @@ import org.viduus.charon.global.world.objects.twodimensional.weapon.range.bullet
 public class MissileGun2 extends Gun {
 
 	public MissileGun2(AbstractWorldEngine world_engine, String name, Character2D owner) {
-		super(world_engine, name, owner, "vid:animation:objects/bullets", "player_missile_2");
+		super(world_engine, name, owner, 1);
 	}
 
 	@Override

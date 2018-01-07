@@ -1,0 +1,99 @@
+{
+  "metadata": {
+    "original": {
+      "collision": [
+        
+      ],
+      "image": [
+        
+      ]
+    },
+    "convex": {
+      "collision": [
+        
+      ],
+      "image": [
+        
+      ]
+    }
+  },
+  "sprite_map": "resources/img/sprites/atlas.png",
+  "size": {
+    "width": 2000,
+    "height": 1000
+  },
+  "hands": {
+    "left": [
+      
+    ],
+    "right": [
+      
+    ]
+  },
+  "layouts": {
+    "static": [
+      
+    ],
+    "tiled": [
+      {
+        "metadata": {
+          "rows": 1,
+          "columns": 1,
+          "name": "blank"
+        },
+        "row_offset": 1000,
+        "location": {
+          "x": 0,
+          "y": 0,
+          "metadata": {
+            
+          }
+        },
+        "center": {
+          "x": 0,
+          "y": 0,
+          "metadata": {
+            
+          }
+        },
+        "size": {
+          "width": 16,
+          "height": 16
+        },
+        "masks": {
+          "0": {
+            "collision": [
+              
+            ],
+            "image": [
+              
+            ]
+          }
+        },
+        "animations": [
+          {
+            "name": "vid:animations:object/bullets.blank-idle",
+            "sustain": true,
+            "variants": [
+              {
+                "frames": [
+                  {
+                    "id": 0,
+                    "duration": 250
+                  }
+                ],
+                "probability": 1.0,
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "free": [
+      
+    ]
+  }
+}

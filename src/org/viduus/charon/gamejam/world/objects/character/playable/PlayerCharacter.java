@@ -56,8 +56,15 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	/*
 	 * Cool downs
 	 */
-	private final CooldownTimer weapon_use_timer = new CooldownTimer(.3f);
-	private final CooldownTimer immunity_timer = new CooldownTimer(1f);
+	private CooldownTimer primary_weapon_timer;
+	private CooldownTimer secondary_weapon_timer;
+	private CooldownTimer immunity_timer = new CooldownTimer(1f);
+	
+	/*
+	 * Weapons
+	 */
+	private RangeWeapon2D primary_weapon;
+	private RangeWeapon2D secondary_weapon;
 	
 	/**
 	 * @param world_engine
@@ -90,14 +97,15 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	protected void performTick(PlayerControlsState controls_state, TickEvent tick_event) {
 		float time_elapsed = tick_event.time_elapsed;
 		
-		weapon_use_timer.update(time_elapsed);
+		if (primary_weapon_timer != null) primary_weapon_timer.update(time_elapsed);
+		if (secondary_weapon_timer != null) secondary_weapon_timer.update(time_elapsed);
 		immunity_timer.update(time_elapsed);
 		
 		// Player hit Interaction key/button. Set this object to be in an interacting state
 		this.<Boolean>set(Property.IS_INTERACTING, controls_state.isSelect());
 		
 		// Set whether or not the player is attacking
-		this.set(Property.IS_ATTACKING, controls_state.getAttack());
+		this.set(Property.IS_ATTACKING, controls_state.getPrimaryAttack() || controls_state.getSecondaryAttack());
 		
 		// Player selected Start key/button. Quick pause the game
 		if (controls_state.getStart()) {
@@ -112,12 +120,21 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		float max_mana = getFloat(Property.MAX_MANA);
 		float velocity_mod = 1;
 		
-		// Check if the player is attacking
-		if(controls_state.getAttack()){
-			if (!weapon_use_timer.isCooling())
+		// Check if the player is attacking with primary
+		if(controls_state.getPrimaryAttack()){
+			if (!primary_weapon_timer.isCooling())
 			{
-				world_engine.queueEvent(this, new WeaponUseEvent(getWeapons().get(0)), WeaponUseEvent.class);
-				weapon_use_timer.reset();
+				world_engine.queueEvent(this, new WeaponUseEvent(primary_weapon), WeaponUseEvent.class);
+				primary_weapon_timer.reset();
+			}
+		}
+		
+		// Check if the player is attacking with secondary
+		if(controls_state.getSecondaryAttack()){
+			if (!secondary_weapon_timer.isCooling())
+			{
+				world_engine.queueEvent(this, new WeaponUseEvent(secondary_weapon), WeaponUseEvent.class);
+				secondary_weapon_timer.reset();
 			}
 		}
 		
@@ -177,6 +194,20 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		setLinearVelocity(new Vector2(dx * GameConstants.PIXELS_PER_METER, dy * GameConstants.PIXELS_PER_METER));
 	}
 
+	public void equipPrimaryWeapon(RangeWeapon2D weapon) {
+		if (primary_weapon != null) unequipWeapon(primary_weapon);
+		primary_weapon = weapon;
+		primary_weapon_timer = new CooldownTimer(weapon.getCooldown());
+		equipWeapon(weapon);
+	}
+	
+	public void equipSecondaryWeapon(RangeWeapon2D weapon) {
+		if (secondary_weapon != null) unequipWeapon(secondary_weapon);
+		secondary_weapon = weapon;
+		secondary_weapon_timer = new CooldownTimer(weapon.getCooldown());
+		equipWeapon(weapon);
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.viduus.charon.global.world.objects.twodimensional.character.playable.PlayableCharacter2D#bindInputEngine(org.viduus.charon.global.input.InputEngine)
 	 */

@@ -9,6 +9,7 @@ import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.GameSystems;
 import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
 import org.viduus.charon.gamejam.world.objects.weapons.range.DefaultGun;
+import org.viduus.charon.gamejam.world.objects.weapons.range.MissileGun1;
 import org.viduus.charon.global.AbstractGameSystems;
 import org.viduus.charon.global.GameInfo;
 import org.viduus.charon.global.audio.AudioCategory;
@@ -66,10 +67,13 @@ public class MenuScreen extends AbstractGameScreen {
 				
 				// add player to party
 				PlayerCharacter character_1 = new PlayerCharacter((GameSystems) game_systems, "Sauran", new Vector2(100, 100));
-				DefaultGun character_1_weapon = new DefaultGun(game_systems.world_engine, "fuck", character_1);
-				game_systems.world_engine.insert(character_1_weapon);
+				DefaultGun character_1_primary = new DefaultGun(game_systems.world_engine, "Primary Weapon", character_1);
+				MissileGun1 character_1_secondary = new MissileGun1(game_systems.world_engine, "Secondary Weapon", character_1);
+				game_systems.world_engine.insert(character_1_primary);
+				game_systems.world_engine.insert(character_1_secondary);
 				game_systems.world_engine.insert(character_1);
-				character_1.equipWeapon(character_1_weapon);
+				character_1.equipPrimaryWeapon(character_1_primary);
+				character_1.equipSecondaryWeapon(character_1_secondary);
 				party.add(character_1);
 				
 				// start the game

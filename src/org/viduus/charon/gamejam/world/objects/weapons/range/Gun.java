@@ -12,10 +12,9 @@ import org.viduus.charon.global.world.objects.twodimensional.character.Character
 import org.viduus.charon.global.world.objects.twodimensional.weapon.range.RangeWeapon2D;
 
 public abstract class Gun extends RangeWeapon2D{
-
-	public Gun(AbstractWorldEngine world_engine, String name, Character2D owner,
-			String animation_file, String sprite_id) {
-		super(world_engine, name, owner, new Vector2(), animation_file, sprite_id);
+	
+	public Gun(AbstractWorldEngine world_engine, String name, Character2D owner, float cooldown) {
+		super(world_engine, name, owner, new Vector2(), "vid:animation:objects/blank", "blank", cooldown);
 	}
 	
 	@Override

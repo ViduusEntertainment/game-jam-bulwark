@@ -12,7 +12,7 @@ public abstract class Bullet extends Bullet2D {
 
 	public Bullet(AbstractWorldEngine world_engine, Uid uid, String name, Weapon2D owner, Vector2 location,
 			Vector2 linear_velocity, String animation_file, String sprite_id) {
-		super(world_engine, uid, name, owner, location, linear_velocity, animation_file, sprite_id);
+		super(world_engine, uid, name, owner, location, linear_velocity, animation_file, sprite_id, 0);
 	}
 
 	@Override

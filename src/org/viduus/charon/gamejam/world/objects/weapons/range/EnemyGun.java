@@ -10,7 +10,7 @@ import org.viduus.charon.global.world.objects.twodimensional.weapon.range.bullet
 public class EnemyGun extends Gun {
 
 	public EnemyGun(AbstractWorldEngine world_engine, String name, Character2D owner) {
-		super(world_engine, name, owner, "vid:animation:objects/bullets", "enemy_bullet");
+		super(world_engine, name, owner, 1f);
 	}
 
 	@Override
