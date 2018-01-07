@@ -15,6 +15,7 @@ import org.viduus.charon.global.event.events.CollisionEvent;
 import org.viduus.charon.global.event.events.HitByWeaponEvent;
 import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.global.event.events.WeaponUseEvent;
+import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.input.InputEngine;
 import org.viduus.charon.global.input.controller.Controller;
 import org.viduus.charon.global.input.player.PlayerControlsState;
@@ -54,6 +55,13 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	private Controller default_controller;
 	
 	/*
+	 * Animation
+	 */
+	private Animation<?>[] vertical_animations = null;
+	private int last_animation_index = -1;
+	private int animaiton_index = 3;
+	
+	/*
 	 * Cool downs
 	 */
 	private CooldownTimer primary_weapon_timer;
@@ -88,6 +96,66 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	@Override
 	protected void setPhysicsProperties() {
 		// TODO Auto-generated method stub
+	}
+	
+	@Override
+	public void determineActiveAnimation() {
+		// load animations
+		if (vertical_animations == null) {
+			vertical_animations = new Animation<?>[] {
+				(Animation<?>) world_engine.resolve("vid:animation:player/player_ship.red_ship-walk_d_start_4"),
+				(Animation<?>) world_engine.resolve("vid:animation:player/player_ship.red_ship-walk_d_start_3"),
+				(Animation<?>) world_engine.resolve("vid:animation:player/player_ship.red_ship-walk_d_start_2"),
+				(Animation<?>) world_engine.resolve("vid:animation:player/player_ship.red_ship-walk_d_start_1"),
+				(Animation<?>) world_engine.resolve("vid:animation:player/player_ship.red_ship-walk_u_start_2"),
+				(Animation<?>) world_engine.resolve("vid:animation:player/player_ship.red_ship-walk_u_start_3"),
+				(Animation<?>) world_engine.resolve("vid:animation:player/player_ship.red_ship-walk_u_start_4")
+			};
+		}
+		
+		Animation<?> curr_animation = get(Property.CURRENT_ANIMATION);
+		if (curr_animation != null) {
+			// determine what the next animation is
+			if (curr_animation.animationIsFinished() || animaiton_index == 3) {
+				// if not moving
+				if (getLinearVelocity().isZero()) {
+					if (animaiton_index > 3) {
+						animaiton_index--;
+					} else if (animaiton_index < 3) {
+						animaiton_index++;
+					}
+					
+				// if moving
+				} else {
+					switch (getInteger(Property.DIRECTION_FACING)) {
+					case (LEFT):
+					case (RIGHT):
+						animaiton_index = 3;
+						break;
+					case (UP):
+						animaiton_index++;
+						break;
+					case (DOWN):
+						animaiton_index--;
+						break;
+					}
+				}
+			}
+			if (animaiton_index >= vertical_animations.length)
+				animaiton_index = vertical_animations.length-1;
+			if (animaiton_index < 0)
+				animaiton_index = 0;
+
+			// skip setting the animation if already set
+			if (animaiton_index == last_animation_index)
+				return;
+			last_animation_index = animaiton_index;
+		}
+		
+		setAnimation(vertical_animations[animaiton_index]);
+		set(Property.CURRENT_ANIMATION, vertical_animations[animaiton_index]);
+		
+		last_animation_index = animaiton_index;
 	}
 
 	/* (non-Javadoc)

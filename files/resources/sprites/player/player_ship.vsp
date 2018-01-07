@@ -1777,7 +1777,7 @@
         "animations": [
           {
             "name": "vid:animation:player/player_ship.red_ship-stand_d",
-            "sustain": false,
+            "sustain": true,
             "variants": [
               {
                 "probability": 1,
@@ -1792,7 +1792,7 @@
           },
           {
             "name": "vid:animation:player/player_ship.red_ship-stand_u",
-            "sustain": false,
+            "sustain": true,
             "variants": [
               {
                 "probability": 1,
@@ -1807,7 +1807,7 @@
           },
           {
             "name": "vid:animation:player/player_ship.red_ship-stand_l",
-            "sustain": false,
+            "sustain": true,
             "variants": [
               {
                 "probability": 1,
@@ -1822,7 +1822,7 @@
           },
           {
             "name": "vid:animation:player/player_ship.red_ship-stand_r",
-            "sustain": false,
+            "sustain": true,
             "variants": [
               {
                 "probability": 1,
@@ -1837,7 +1837,7 @@
           },
           {
             "name": "vid:animation:player/player_ship.red_ship-walk_r",
-            "sustain": false,
+            "sustain": true,
             "variants": [
               {
                 "probability": 1,
@@ -1852,7 +1852,7 @@
           },
           {
             "name": "vid:animation:player/player_ship.red_ship-walk_l",
-            "sustain": false,
+            "sustain": true,
             "variants": [
               {
                 "probability": 1,
@@ -1866,7 +1866,7 @@
             ]
           },
           {
-            "name": "vid:animation:player/player_ship.red_ship-walk_u",
+            "name": "vid:animation:player/player_ship.red_ship-walk_d_start_1",
             "sustain": true,
             "variants": [
               {
@@ -1874,78 +1874,241 @@
                 "frames": [
                   {
                     "id": 0,
-                    "duration": 250
-                  },
-                  {
-                    "id": 1,
-                    "duration": 250
-                  },
-                  {
-                    "id": 2,
-                    "duration": 250
-                  },
-                  {
-                    "id": 3,
-                    "duration": 250
-                  },
-                  {
-                    "id": 4,
-                    "duration": 250
-                  },
-                  {
-                    "id": 5,
-                    "duration": 250
-                  },
-                  {
-                    "id": 6,
-                    "duration": 250
-                  },
-                  {
-                    "id": 7,
-                    "duration": 250
+                    "duration": 100
                   }
                 ]
               }
             ]
           },
           {
-            "name": "vid:animation:player/player_ship.red_ship-walk_d",
-            "sustain": false,
+            "name": "vid:animation:player/player_ship.red_ship-walk_d_start_2",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
+                  {
+                    "id": 1,
+                    "duration": 100
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:player/player_ship.red_ship-walk_d_start_3",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
+                  {
+                    "id": 2,
+                    "duration": 100
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:player/player_ship.red_ship-walk_d_start_4",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
+                  {
+                    "id": 3,
+                    "duration": 100
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:player/player_ship.red_ship-walk_d_end_1",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
+                  {
+                    "id": 4,
+                    "duration": 100
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:player/player_ship.red_ship-walk_d_end_2",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
+                  {
+                    "id": 5,
+                    "duration": 100
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:player/player_ship.red_ship-walk_d_end_3",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
+                  {
+                    "id": 6,
+                    "duration": 100
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:player/player_ship.red_ship-walk_d_end_4",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
+                  {
+                    "id": 7,
+                    "duration": 100
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:player/player_ship.red_ship-walk_u_start_1",
+            "sustain": true,
             "variants": [
               {
                 "probability": 1,
                 "frames": [
                   {
                     "id": 1000,
-                    "duration": 250
-                  },
+                    "duration": 100
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:player/player_ship.red_ship-walk_u_start_2",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
                   {
                     "id": 1001,
-                    "duration": 250
-                  },
+                    "duration": 100
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:player/player_ship.red_ship-walk_u_start_3",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
                   {
                     "id": 1002,
-                    "duration": 250
-                  },
+                    "duration": 100
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:player/player_ship.red_ship-walk_u_start_4",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
                   {
                     "id": 1003,
-                    "duration": 250
-                  },
+                    "duration": 100
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:player/player_ship.red_ship-walk_u_end_1",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
                   {
                     "id": 1004,
-                    "duration": 250
-                  },
+                    "duration": 100
+                  }
+                ],
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:player/player_ship.red_ship-walk_u_end_2",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
                   {
                     "id": 1005,
-                    "duration": 250
-                  },
+                    "duration": 100
+                  }
+                ],
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:player/player_ship.red_ship-walk_u_end_3",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
                   {
                     "id": 1006,
-                    "duration": 250
-                  },
+                    "duration": 100
+                  }
+                ],
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:player/player_ship.red_ship-walk_u_end_4",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
                   {
                     "id": 1007,
-                    "duration": 250
+                    "duration": 100
                   }
                 ],
                 "metadata": {
