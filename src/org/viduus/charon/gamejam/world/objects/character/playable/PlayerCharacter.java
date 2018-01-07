@@ -45,8 +45,8 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		STAMINA_REGEN_CONSTANT = 20,
 		STAMINA_ATTACK_CONSTANT = 8; // stam/attack
 	private static final String
-		DEFAULT_SPRITE_FILE = "vid:animation:eday_robot",
-		DEFAULT_SPRITE_ID = "robot";
+		DEFAULT_SPRITE_FILE = "vid:animation:player/player_ship",
+		DEFAULT_SPRITE_ID = "red_ship";
 	
 	private final GameSystems game_systems;
 	private Vector2 last_trans = new Vector2();

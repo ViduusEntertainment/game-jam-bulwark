@@ -1183,8 +1183,8 @@
   },
   "sprite_map": "resources/img/sprites/projectiles.png",
   "size": {
-    "width": 512,
-    "height": 256
+    "width": 176,
+    "height": 112
   },
   "hands": {
     "left": [],
@@ -1195,9 +1195,9 @@
     "tiled": [
       {
         "metadata": {
-          "rows": 5,
-          "columns": 4,
-          "name": "bullets"
+          "rows": 7,
+          "columns": 11,
+          "name": "projectiles"
         },
         "row_offset": 1000,
         "location": {
@@ -1335,6 +1335,34 @@
             ],
             "image": []
           },
+          "4": {
+            "collision": [],
+            "image": []
+          },
+          "5": {
+            "collision": [],
+            "image": []
+          },
+          "6": {
+            "collision": [],
+            "image": []
+          },
+          "7": {
+            "collision": [],
+            "image": []
+          },
+          "8": {
+            "collision": [],
+            "image": []
+          },
+          "9": {
+            "collision": [],
+            "image": []
+          },
+          "10": {
+            "collision": [],
+            "image": []
+          },
           "1000": {
             "collision": [
               {
@@ -1403,6 +1431,34 @@
             "collision": [],
             "image": []
           },
+          "1004": {
+            "collision": [],
+            "image": []
+          },
+          "1005": {
+            "collision": [],
+            "image": []
+          },
+          "1006": {
+            "collision": [],
+            "image": []
+          },
+          "1007": {
+            "collision": [],
+            "image": []
+          },
+          "1008": {
+            "collision": [],
+            "image": []
+          },
+          "1009": {
+            "collision": [],
+            "image": []
+          },
+          "1010": {
+            "collision": [],
+            "image": []
+          },
           "2000": {
             "collision": [
               {
@@ -1468,6 +1524,34 @@
             "image": []
           },
           "2003": {
+            "collision": [],
+            "image": []
+          },
+          "2004": {
+            "collision": [],
+            "image": []
+          },
+          "2005": {
+            "collision": [],
+            "image": []
+          },
+          "2006": {
+            "collision": [],
+            "image": []
+          },
+          "2007": {
+            "collision": [],
+            "image": []
+          },
+          "2008": {
+            "collision": [],
+            "image": []
+          },
+          "2009": {
+            "collision": [],
+            "image": []
+          },
+          "2010": {
             "collision": [],
             "image": []
           },
@@ -1591,6 +1675,34 @@
             ],
             "image": []
           },
+          "3004": {
+            "collision": [],
+            "image": []
+          },
+          "3005": {
+            "collision": [],
+            "image": []
+          },
+          "3006": {
+            "collision": [],
+            "image": []
+          },
+          "3007": {
+            "collision": [],
+            "image": []
+          },
+          "3008": {
+            "collision": [],
+            "image": []
+          },
+          "3009": {
+            "collision": [],
+            "image": []
+          },
+          "3010": {
+            "collision": [],
+            "image": []
+          },
           "4000": {
             "collision": [
               {
@@ -1683,6 +1795,538 @@
           },
           "4003": {
             "collision": [],
+            "image": []
+          },
+          "4004": {
+            "collision": [],
+            "image": []
+          },
+          "4005": {
+            "collision": [],
+            "image": []
+          },
+          "4006": {
+            "collision": [],
+            "image": []
+          },
+          "4007": {
+            "collision": [],
+            "image": []
+          },
+          "4008": {
+            "collision": [],
+            "image": []
+          },
+          "4009": {
+            "collision": [],
+            "image": []
+          },
+          "4010": {
+            "collision": [],
+            "image": []
+          },
+          "5000": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 14,
+                    "y": 94,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 0,
+                    "y": 94,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 0,
+                    "y": 80,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 14,
+                    "y": 80,
+                    "metadata": {}
+                  }
+                ],
+                "metadata": {}
+              }
+            ],
+            "image": []
+          },
+          "5001": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 30,
+                    "y": 94,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 16,
+                    "y": 94,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 16,
+                    "y": 80,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 30,
+                    "y": 80,
+                    "metadata": {}
+                  }
+                ],
+                "metadata": {}
+              }
+            ],
+            "image": []
+          },
+          "5002": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 48,
+                    "y": 90,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 33,
+                    "y": 90,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 33,
+                    "y": 84,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 48,
+                    "y": 84,
+                    "metadata": {}
+                  }
+                ],
+                "metadata": {}
+              }
+            ],
+            "image": []
+          },
+          "5003": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 64,
+                    "y": 90,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 48,
+                    "y": 90,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 48,
+                    "y": 84,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 64,
+                    "y": 84,
+                    "metadata": {}
+                  }
+                ],
+                "metadata": {}
+              }
+            ],
+            "image": []
+          },
+          "5004": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 80,
+                    "y": 90,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 64,
+                    "y": 90,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 64,
+                    "y": 84,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 80,
+                    "y": 84,
+                    "metadata": {}
+                  }
+                ],
+                "metadata": {}
+              }
+            ],
+            "image": []
+          },
+          "5005": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 96,
+                    "y": 90,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 80,
+                    "y": 90,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 80,
+                    "y": 84,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 96,
+                    "y": 84,
+                    "metadata": {}
+                  }
+                ],
+                "metadata": {}
+              }
+            ],
+            "image": []
+          },
+          "5006": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 112,
+                    "y": 90,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 96,
+                    "y": 90,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 96,
+                    "y": 84,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 112,
+                    "y": 84,
+                    "metadata": {}
+                  }
+                ],
+                "metadata": {}
+              }
+            ],
+            "image": []
+          },
+          "5007": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 126,
+                    "y": 90,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 112,
+                    "y": 90,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 112,
+                    "y": 84,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 126,
+                    "y": 84,
+                    "metadata": {}
+                  }
+                ],
+                "metadata": {}
+              }
+            ],
+            "image": []
+          },
+          "5008": {
+            "collision": [],
+            "image": []
+          },
+          "5009": {
+            "collision": [],
+            "image": []
+          },
+          "5010": {
+            "collision": [],
+            "image": []
+          },
+          "6000": {
+            "collision": [],
+            "image": []
+          },
+          "6001": {
+            "collision": [],
+            "image": []
+          },
+          "6002": {
+            "collision": [],
+            "image": []
+          },
+          "6003": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 64,
+                    "y": 105,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 63,
+                    "y": 105,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 63,
+                    "y": 101,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 64,
+                    "y": 101,
+                    "metadata": {}
+                  }
+                ],
+                "metadata": {}
+              }
+            ],
+            "image": []
+          },
+          "6004": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 80,
+                    "y": 105,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 64,
+                    "y": 105,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 64,
+                    "y": 101,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 80,
+                    "y": 101,
+                    "metadata": {}
+                  }
+                ],
+                "metadata": {}
+              }
+            ],
+            "image": []
+          },
+          "6005": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 96,
+                    "y": 105,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 80,
+                    "y": 105,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 80,
+                    "y": 101,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 96,
+                    "y": 101,
+                    "metadata": {}
+                  }
+                ],
+                "metadata": {}
+              }
+            ],
+            "image": []
+          },
+          "6006": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 112,
+                    "y": 105,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 96,
+                    "y": 105,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 96,
+                    "y": 101,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 112,
+                    "y": 101,
+                    "metadata": {}
+                  }
+                ],
+                "metadata": {}
+              }
+            ],
+            "image": []
+          },
+          "6007": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 128,
+                    "y": 105,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 112,
+                    "y": 105,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 112,
+                    "y": 101,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 128,
+                    "y": 101,
+                    "metadata": {}
+                  }
+                ],
+                "metadata": {}
+              }
+            ],
+            "image": []
+          },
+          "6008": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 144,
+                    "y": 105,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 128,
+                    "y": 105,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 128,
+                    "y": 101,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 144,
+                    "y": 101,
+                    "metadata": {}
+                  }
+                ],
+                "metadata": {}
+              }
+            ],
+            "image": []
+          },
+          "6009": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 160,
+                    "y": 105,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 144,
+                    "y": 105,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 144,
+                    "y": 101,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 160,
+                    "y": 101,
+                    "metadata": {}
+                  }
+                ],
+                "metadata": {}
+              }
+            ],
+            "image": []
+          },
+          "6010": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 175,
+                    "y": 105,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 160,
+                    "y": 105,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 160,
+                    "y": 101,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 175,
+                    "y": 101,
+                    "metadata": {}
+                  }
+                ],
+                "metadata": {}
+              }
+            ],
             "image": []
           }
         },
@@ -1821,6 +2465,230 @@
                   },
                   {
                     "id": 4002,
+                    "duration": 250
+                  }
+                ],
+                "probability": 1,
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:objects/bullets.bomb-idle",
+            "sustain": false,
+            "variants": [
+              {
+                "frames": [
+                  {
+                    "id": 5000,
+                    "duration": 250
+                  },
+                  {
+                    "id": 5001,
+                    "duration": 250
+                  }
+                ],
+                "probability": 1,
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:objects/bullets.laser_charge-idle",
+            "sustain": false,
+            "variants": [
+              {
+                "frames": [
+                  {
+                    "id": 6000,
+                    "duration": 250
+                  },
+                  {
+                    "id": 6001,
+                    "duration": 250
+                  },
+                  {
+                    "id": 6002,
+                    "duration": 250
+                  },
+                  {
+                    "id": 6003,
+                    "duration": 250
+                  }
+                ],
+                "probability": 1,
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:objects/bullets.laser_beam-idle",
+            "sustain": false,
+            "variants": [
+              {
+                "frames": [
+                  {
+                    "id": 6004,
+                    "duration": 250
+                  },
+                  {
+                    "id": 6005,
+                    "duration": 250
+                  },
+                  {
+                    "id": 6007,
+                    "duration": 250
+                  },
+                  {
+                    "id": 6009,
+                    "duration": 250
+                  }
+                ],
+                "probability": 1,
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "rows": 1,
+          "columns": 3,
+          "name": "lightning"
+        },
+        "row_offset": 1000,
+        "location": {
+          "x": 32,
+          "y": 80,
+          "metadata": {}
+        },
+        "center": {
+          "x": 16,
+          "y": 8,
+          "metadata": {}
+        },
+        "size": {
+          "width": 32,
+          "height": 16
+        },
+        "masks": {
+          "0": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 64,
+                    "y": 90,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 33,
+                    "y": 90,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 33,
+                    "y": 84,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 64,
+                    "y": 84,
+                    "metadata": {}
+                  }
+                ],
+                "metadata": {}
+              }
+            ],
+            "image": []
+          },
+          "1": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 96,
+                    "y": 90,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 64,
+                    "y": 90,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 64,
+                    "y": 84,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 96,
+                    "y": 84,
+                    "metadata": {}
+                  }
+                ],
+                "metadata": {}
+              }
+            ],
+            "image": []
+          },
+          "2": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 126,
+                    "y": 90,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 96,
+                    "y": 90,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 96,
+                    "y": 84,
+                    "metadata": {}
+                  },
+                  {
+                    "x": 126,
+                    "y": 84,
+                    "metadata": {}
+                  }
+                ],
+                "metadata": {}
+              }
+            ],
+            "image": []
+          }
+        },
+        "animations": [
+          {
+            "name": "vid:animation:objects/bullets.chain_lightning-idle",
+            "sustain": false,
+            "variants": [
+              {
+                "frames": [
+                  {
+                    "id": 0,
+                    "duration": 250
+                  },
+                  {
+                    "id": 1,
+                    "duration": 250
+                  },
+                  {
+                    "id": 2,
                     "duration": 250
                   }
                 ],

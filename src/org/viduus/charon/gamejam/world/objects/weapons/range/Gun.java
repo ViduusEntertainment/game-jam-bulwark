@@ -5,6 +5,7 @@ import org.dyn4j.dynamics.joint.WeldJoint;
 import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.graphics.util.Size;
+import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;
 import org.viduus.charon.global.world.objects.twodimensional.character.Character2D;
