@@ -12,7 +12,7 @@ public class TestEnemy extends NonPlayableCharacter2D{
 	private static final float SPEED = 5.0f;
 	
 	public TestEnemy(AbstractWorldEngine world_engine, String name, Vector2 location) {
-		super(world_engine, name, location, SPEED, 100, 0, 100, 0, "vid:animation:enemies/enemies", "normal");
+		super(world_engine, name, location, SPEED, 100, 0, 100, 0, "vid:animation:enemies/enemies", "normal", "walk_l");
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -38,11 +38,6 @@ public class TestEnemy extends NonPlayableCharacter2D{
 	protected void onHitByWeapon(HitByWeaponEvent hit_by_weapon_event) {
 		// TODO Auto-generated method stub
 		
-	}
-	
-	@Override
-	public void determineActiveAnimation() {
-		setTemporaryAnimation("walk_l");
 	}
 
 }
