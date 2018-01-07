@@ -8,7 +8,6 @@ package org.viduus.charon.gamejam.graphics;
 import org.viduus.charon.gamejam.GameSystems;
 import org.viduus.charon.gamejam.graphics.frames.menu.IntroScreen;
 import org.viduus.charon.gamejam.graphics.frames.menu.MenuScreen;
-import org.viduus.charon.global.graphics.GameFrame;
 import org.viduus.charon.global.graphics.opengl.OpenGLFrame;
 import org.viduus.charon.global.graphics.screens.AbstractScreenManager;
 

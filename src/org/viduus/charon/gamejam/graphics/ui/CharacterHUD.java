@@ -10,7 +10,6 @@ import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
 import org.viduus.charon.global.graphics.ui.HeadsUpDisplay;
 import org.viduus.charon.global.player.PlayerParty;
 import org.viduus.charon.global.util.identification.Uid;
-import org.viduus.charon.global.world.objects.twodimensional.character.playable.PlayableCharacter2D;
 
 /**
  * 
@@ -47,14 +46,8 @@ public class CharacterHUD extends HeadsUpDisplay {
 	 */
 	@Override
 	public void render(OpenGLGraphics graphics, float d_sec, PlayerParty players) {
-		PlayableCharacter2D player = players.get(0); // Only one
-		
-		
-		
 		int screen_width = graphics.getCanvasDimension().width;
 		int screen_height = graphics.getCanvasDimension().height;
-		
-//		players.get(0).set(Property.HEALTH, players.get(0).getFloat(Property.HEALTH)*0.999f);
 		
 		enemy_health_bar.render(graphics, screen_width/2, 2, d_sec, players);
 		player_health_bar.render(graphics, 0, 0, d_sec, players);
