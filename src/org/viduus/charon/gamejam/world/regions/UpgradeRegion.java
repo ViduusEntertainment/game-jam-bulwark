@@ -6,6 +6,7 @@
 package org.viduus.charon.gamejam.world.regions;
 
 import org.viduus.charon.gamejam.world.WorldEngine;
+import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.util.Size;
 import org.viduus.charon.global.player.PlayerParty;
@@ -70,6 +71,12 @@ public class UpgradeRegion extends AutoSideScrollingRegion {
 	 */
 	@Override
 	public void reset() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void onTick(TickEvent tick_event) {
 		// TODO Auto-generated method stub
 		
 	}

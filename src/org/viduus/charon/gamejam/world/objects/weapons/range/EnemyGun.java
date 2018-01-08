@@ -30,7 +30,7 @@ public class EnemyGun extends Gun {
 	@Override 
 	protected void setPhysicsProperties() {
 		Object2D owner = getOwner();
-		Vector2 location = owner.getVector2(Property.LOCATION).copy().add(5, 10);
+		Vector2 location = owner.getVector2(Property.LOCATION).copy().add(-20, 10);
 		set(Property.LOCATION, location);
 	}
 }

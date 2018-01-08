@@ -22,12 +22,6 @@ public class KamikazeEnemy extends Enemy{
 	}
 
 	@Override
-	public void onWeaponUse(WeaponUseEvent use_event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	protected void onCollision(CollisionEvent collision_event) {
 		// TODO Auto-generated method stub
 		

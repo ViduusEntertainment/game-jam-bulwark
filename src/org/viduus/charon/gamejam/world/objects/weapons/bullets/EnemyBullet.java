@@ -15,7 +15,8 @@ public class EnemyBullet extends Bullet {
 	 * @param sprite_map
 	 */
 	public EnemyBullet(AbstractWorldEngine world_engine, Uid uid, String name, Weapon2D owner, Vector2 location) {
-		super(world_engine, uid, name, owner, location, new Vector2(800, 0), "vid:animation:objects/bullets", "enemy_bullet", 0f);
+		super(world_engine, uid, name, owner, location, new Vector2(-200, 0), "vid:animation:objects/bullets", "enemy_bullet", 0f);
+		setIsBullet(false);
 	}
 
 	@Override

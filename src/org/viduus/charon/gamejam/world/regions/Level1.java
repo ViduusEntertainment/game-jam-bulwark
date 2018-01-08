@@ -5,14 +5,23 @@
  */
 package org.viduus.charon.gamejam.world.regions;
 
-import org.dyn4j.geometry.Vector2;
+import java.util.LinkedList;
+import java.util.Queue;
+
 import org.viduus.charon.gamejam.world.objects.character.nonplayable.Enemy;
-import org.viduus.charon.gamejam.world.objects.character.nonplayable.StandardEnemy;
 import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
+import org.viduus.charon.gamejam.world.wave.EnemyWave;
+import org.viduus.charon.gamejam.world.wave.LeftDiagonalWave;
+import org.viduus.charon.gamejam.world.wave.RightDiagonalWave;
+import org.viduus.charon.gamejam.world.wave.SpearheadWave;
+import org.viduus.charon.gamejam.world.wave.WallWave;
 import org.viduus.charon.global.event.events.DeathEvent;
+import org.viduus.charon.global.event.events.ObjectRemovalEvent;
+import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.util.Size;
 import org.viduus.charon.global.player.PlayerParty;
+import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;
 
@@ -24,6 +33,8 @@ import org.viduus.charon.global.world.objects.twodimensional.Object2D;
 public class Level1 extends AutoSideScrollingRegion {
 	
 	private PlayerParty party;
+	private Queue<EnemyWave> enemy_waves = new LinkedList<EnemyWave>();
+	private EnemyWave active_enemy_wave;
 	
 	/**
 	 * @param world_engine
@@ -68,19 +79,11 @@ public class Level1 extends AutoSideScrollingRegion {
 			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_3"),
 		});
 		
-		for (int i = 0; i < 10; i++) {
-			StandardEnemy enemy = new StandardEnemy(world_engine, "TestEnemy1", new Vector2(300 + i * 30, 100 + i * 30));
-			world_engine.insert(enemy);
-			queueEntityForAddition(enemy);
-		}
-		
-//		TestEnemy test_enemy_2 = new TestEnemy(world_engine, "TestEnemy2", new Vector2(250, 150));
-//		world_engine.insert(test_enemy_2);
-//		addEntity(test_enemy_2);
-//		
-//		TestEnemy test_enemy_3 = new TestEnemy(world_engine, "TestEnemy2", new Vector2(250, 250));
-//		world_engine.insert(test_enemy_3);
-//		addEntity(test_enemy_3);
+		enemy_waves.add(new WallWave(world_engine, this));
+		enemy_waves.add(new SpearheadWave(world_engine, this));
+		enemy_waves.add(new RightDiagonalWave(world_engine, this));
+		enemy_waves.add(new LeftDiagonalWave(world_engine, this));
+		enemy_waves.add(new RightDiagonalWave(world_engine, this));
 	}
 
 	/* (non-Javadoc)
@@ -100,6 +103,26 @@ public class Level1 extends AutoSideScrollingRegion {
 			Enemy enemy = (Enemy)death_event.object_that_died;
 			PlayerCharacter player = (PlayerCharacter) party.get(0);
 			player.giveMoney(enemy.getReward());
+		}
+		
+		if (active_enemy_wave != null) {
+			active_enemy_wave.tryRemoveEnemy(death_event.object_that_died);
+		}
+	}
+	
+	@Override
+	protected void onObjectRemoval(ObjectRemovalEvent object_removal_event) {
+		super.onObjectRemoval(object_removal_event);
+		if (active_enemy_wave != null) {
+			active_enemy_wave.tryRemoveEnemy(object_removal_event.object_to_remove);
+		}
+	}
+
+	@Override
+	protected void onTick(TickEvent tick_event) {
+		if ((active_enemy_wave == null || active_enemy_wave.isFinished()) && enemy_waves.size() > 0) {
+			active_enemy_wave = enemy_waves.poll();
+			active_enemy_wave.launchThemFuckers();
 		}
 	}
 }
