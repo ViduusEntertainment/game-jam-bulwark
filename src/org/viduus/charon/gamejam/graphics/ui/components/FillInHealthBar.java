@@ -3,7 +3,7 @@
  * 
  * Created on Jan 6, 2018 by Ethan Toney
  */
-package org.viduus.charon.gamejam.graphics.ui;
+package org.viduus.charon.gamejam.graphics.ui.components;
 
 import org.viduus.charon.global.AbstractGameSystems;
 import org.viduus.charon.global.GameConstants.Property;

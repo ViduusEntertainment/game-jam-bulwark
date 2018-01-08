@@ -1,15 +1,11 @@
 /**
  * Copyright 2017, Viduus Entertainment LLC, All rights reserved.
  * 
- * Created on Jan 6, 2018 by Ethan Toney
+ * Created on Jan 7, 2018 by Ethan Toney
  */
 package org.viduus.charon.gamejam.world.regions;
 
-import org.dyn4j.geometry.Vector2;
-import org.viduus.charon.gamejam.world.objects.character.nonplayable.Enemy;
-import org.viduus.charon.gamejam.world.objects.character.nonplayable.StandardEnemy;
-import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
-import org.viduus.charon.global.event.events.DeathEvent;
+import org.viduus.charon.gamejam.world.WorldEngine;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.util.Size;
 import org.viduus.charon.global.player.PlayerParty;
@@ -21,17 +17,16 @@ import org.viduus.charon.global.world.objects.twodimensional.Object2D;
  *
  * @author Ethan Toney
  */
-public class Level1 extends AutoSideScrollingRegion {
-	
-	private PlayerParty party;
-	
+public class UpgradeRegion extends AutoSideScrollingRegion {
+
 	/**
 	 * @param world_engine
 	 * @param name
+	 * @param size
 	 */
-	public Level1(AbstractWorldEngine world_engine, PlayerParty party) {
-		super(world_engine, "level_1", new Size(5000, 384));
-		this.party = party;
+	public UpgradeRegion(WorldEngine world_engine, PlayerParty party) {
+		super(world_engine, "upgrade_region", new Size(384, 384));
+		
 	}
 
 	/* (non-Javadoc)
@@ -68,19 +63,6 @@ public class Level1 extends AutoSideScrollingRegion {
 			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_3"),
 		});
 		
-		for (int i = 0; i < 10; i++) {
-			StandardEnemy enemy = new StandardEnemy(world_engine, "TestEnemy1", new Vector2(300 + i * 30, 100 + i * 30));
-			world_engine.insert(enemy);
-			queueEntityForAddition(enemy);
-		}
-		
-//		TestEnemy test_enemy_2 = new TestEnemy(world_engine, "TestEnemy2", new Vector2(250, 150));
-//		world_engine.insert(test_enemy_2);
-//		addEntity(test_enemy_2);
-//		
-//		TestEnemy test_enemy_3 = new TestEnemy(world_engine, "TestEnemy2", new Vector2(250, 250));
-//		world_engine.insert(test_enemy_3);
-//		addEntity(test_enemy_3);
 	}
 
 	/* (non-Javadoc)
@@ -92,14 +74,4 @@ public class Level1 extends AutoSideScrollingRegion {
 		
 	}
 
-	@Override 
-	protected void onObjectDeath(DeathEvent death_event) {
-		super.onObjectDeath(death_event);
-		
-		if (death_event.object_that_died instanceof Enemy) {
-			Enemy enemy = (Enemy)death_event.object_that_died;
-			PlayerCharacter player = (PlayerCharacter) party.get(0);
-			player.giveMoney(enemy.getReward());
-		}
-	}
 }

@@ -5,11 +5,14 @@
  */
 package org.viduus.charon.gamejam.world;
 
+import java.util.Arrays;
+
 import org.dyn4j.collision.AxisAlignedBounds;
 import org.dyn4j.dynamics.Settings;
 import org.dyn4j.dynamics.World;
 import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.world.regions.Level1;
+import org.viduus.charon.gamejam.world.regions.UpgradeRegion;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.physics.twodimensional.listeners.CollisionListener;
 import org.viduus.charon.global.GameInfo;
@@ -81,11 +84,16 @@ public class WorldEngine extends AbstractWorldEngine {
 	protected void onLoadGame(GameInfo game_info) {
 		super.onLoadGame(game_info);
 		
-		// Create the first level
-		Level1 level_1 = new Level1(this, game_info.party);
-		insert(level_1);
-		ErrorHandler.tryRun(() -> {
-			level_1.load();
+		game_systems.graphics_engine.getScreenSize();
+		
+		// Create all the regions
+		BaseRegion[] regions = new BaseRegion[] {
+			new Level1(this, game_info.party),
+			new UpgradeRegion(this, game_info.party)
+		};
+		Arrays.stream(regions).forEach(region -> {
+			insert(region);
+			region.load();
 		});
 		
 		// Load in demo Main Character information

@@ -6,7 +6,7 @@
 package org.viduus.charon.gamejam.graphics;
 
 import org.viduus.charon.gamejam.GameSystems;
-import org.viduus.charon.gamejam.graphics.ui.CharacterHUD;
+import org.viduus.charon.gamejam.graphics.ui.hud.CharacterHUD;
 import org.viduus.charon.global.AbstractGameSystems;
 import org.viduus.charon.global.AbstractGameSystems.PauseType;
 import org.viduus.charon.global.GameInfo;

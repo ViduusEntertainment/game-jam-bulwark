@@ -27,7 +27,7 @@ import org.viduus.charon.global.world.regions.BaseRegion;
  *
  * @author Ethan Toney
  */
-public abstract class SideScrollingRegion extends BaseRegion {
+public abstract class AutoSideScrollingRegion extends BaseRegion {
 
 	private static final Random RN_JESUS = new Random();
 	
@@ -57,7 +57,7 @@ public abstract class SideScrollingRegion extends BaseRegion {
 	 * @param name
 	 * @param size
 	 */
-	public SideScrollingRegion(AbstractWorldEngine world_engine, String name, Size size) {
+	public AutoSideScrollingRegion(AbstractWorldEngine world_engine, String name, Size size) {
 		super(world_engine, name, size);
 		// TODO Auto-generated constructor stub
 	}
