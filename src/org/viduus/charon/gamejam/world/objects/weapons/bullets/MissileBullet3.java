@@ -15,7 +15,7 @@ public class MissileBullet3 extends Bullet {
 	 * @param sprite_map
 	 */
 	public MissileBullet3(AbstractWorldEngine world_engine, Uid uid, String name, Weapon2D owner, Vector2 location) {
-		super(world_engine, uid, name, owner, location, new Vector2(800, 0), "vid:animation:objects/bullets", "player_missile_3");
+		super(world_engine, uid, name, owner, location, new Vector2(800, 0), "vid:animation:objects/bullets", "player_missile_3", 600f);
 	}
 
 	@Override

@@ -29,13 +29,11 @@ public class IconCountdown {
 		inactive_icon = (Animation<?>) game_systems.graphics_engine.resolve(inactive_icon_uid);
 	}
 	
-	public void setCount(int count) {
+	public void setCount(float count) {
 		this.count = count;
 	}
 	
 	public void render(OpenGLGraphics graphics, int x, int y, float d_sec) {
-		count -= d_sec;
-		
 		if (count > 0) {
 			inactive_icon.renderAnimation(graphics, d_sec, x, y, 2);
 			

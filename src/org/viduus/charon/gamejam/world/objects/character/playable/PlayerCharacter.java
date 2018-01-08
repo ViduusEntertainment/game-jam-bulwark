@@ -20,7 +20,6 @@ import org.viduus.charon.global.input.InputEngine;
 import org.viduus.charon.global.input.controller.Controller;
 import org.viduus.charon.global.input.player.PlayerControlsState;
 import org.viduus.charon.global.util.logging.ErrorHandler;
-import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.objects.twodimensional.character.playable.PlayableCharacter2D;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.range.RangeWeapon2D;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.range.bullets.Bullet2D;
@@ -73,6 +72,8 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	 */
 	private RangeWeapon2D primary_weapon;
 	private RangeWeapon2D secondary_weapon;
+	
+	private int money = 0;
 	
 	/**
 	 * @param world_engine
@@ -199,7 +200,7 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		
 		// Check if the player is attacking with secondary
 		if(controls_state.getSecondaryAttack()){
-			if (!secondary_weapon_timer.isCooling())
+			if (!secondary_weapon_timer.isCooling() && secondary_weapon.getInteger(Property.PROJECTILE_COUNT) > 0)
 			{
 				world_engine.queueEvent(this, new WeaponUseEvent(secondary_weapon), WeaponUseEvent.class);
 				secondary_weapon_timer.reset();
@@ -261,6 +262,18 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		
 		setLinearVelocity(new Vector2(dx * GameConstants.PIXELS_PER_METER, dy * GameConstants.PIXELS_PER_METER));
 	}
+	
+	public int getMoney() {
+		return money;
+	}
+	
+	public void giveMoney(int amount) {
+		money += amount;
+	}
+	
+	public void takeMoney(int amount) {
+		money -= amount;
+	}
 
 	public void equipPrimaryWeapon(RangeWeapon2D weapon) {
 		if (primary_weapon != null) unequipWeapon(primary_weapon);
@@ -276,6 +289,23 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		equipWeapon(weapon);
 	}
 	
+	public CooldownTimer getPrimaryWeaponCooldownTimer() {
+		return primary_weapon_timer;
+	}
+	
+	public CooldownTimer getSecondaryWeaponCooldownTimer() {
+		return secondary_weapon_timer;
+	}
+	
+	
+	public RangeWeapon2D getPrimaryWeapon() {
+		return primary_weapon;
+	}
+	
+	public RangeWeapon2D getSecondaryWeapon() {
+		return secondary_weapon;
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.viduus.charon.global.world.objects.twodimensional.character.playable.PlayableCharacter2D#bindInputEngine(org.viduus.charon.global.input.InputEngine)
 	 */
@@ -283,7 +313,6 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	public void bindInputEngine(InputEngine input_engine) {
 		if( !controller_binded ){
 			controller_binded = true;
-			OutputHandler.println("Binding listener");
 			default_controller = this.game_systems.input_engine.getDefaultController();
 			setController(new PlayerControls());
 			game_systems.input_engine.registerListener(0, "main-player-default-controls", getController());
@@ -299,7 +328,6 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	public void unbindInputEngine(InputEngine input_engine) {
 		if( controller_binded ){
 			controller_binded = false;
-			OutputHandler.println("Unbinding listener");
 			game_systems.input_engine.removeListener(0, "main-player-default-controls");
 		}else{
 			ErrorHandler.println("Tried to remove MainCharacter listener after it was already removed!");
@@ -309,9 +337,9 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	@Override
 	public void onWeaponUse(WeaponUseEvent weapon_use_event) {
 		RangeWeapon2D weapon = (RangeWeapon2D)weapon_use_event.weapon;
-		Bullet2D bullet = weapon.createBullet();
+		Bullet2D bullet = weapon.getBullet();
 		world_engine.insert(bullet);
-		this.<BaseRegion>get(Property.CURRENT_REGION).addEntity(bullet);
+		this.<BaseRegion>get(Property.CURRENT_REGION).queueEntityForAddition(bullet);
 	}
 
 	@Override

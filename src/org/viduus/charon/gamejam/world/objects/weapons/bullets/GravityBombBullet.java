@@ -15,7 +15,7 @@ public class GravityBombBullet extends Bullet {
 	 * @param sprite_map
 	 */
 	public GravityBombBullet(AbstractWorldEngine world_engine, Uid uid, String name, Weapon2D owner, Vector2 location) {
-		super(world_engine, uid, name, owner, location, new Vector2(800, 0), "vid:animation:objects/bullets", "gravity_bomb");
+		super(world_engine, uid, name, owner, location, new Vector2(800, 0), "vid:animation:objects/bullets", "gravity_bomb", 40f);
 	}
 	
 	@Override

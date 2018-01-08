@@ -5,7 +5,9 @@
  */
 package org.viduus.charon.gamejam.graphics.ui;
 
+import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
 import org.viduus.charon.global.AbstractGameSystems;
+import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
 import org.viduus.charon.global.graphics.ui.HeadsUpDisplay;
 import org.viduus.charon.global.player.PlayerParty;
@@ -36,9 +38,9 @@ public class CharacterHUD extends HeadsUpDisplay {
 		enemy_health_bar = new FillInHealthBar(game_systems);
 		player_health_bar = new IconHealthBar(5, game_systems);
 		missile_stock_counter = new IconCounter(game_systems, new Uid("vid:animation:hud/icons.missile"), 10);
-		currency_counter = new IconCounter(game_systems, new Uid("vid:animation:hud/icons.money"), 1000);
-		missile_cooldown_counter = new IconCountdown(game_systems, new Uid("vid:animation:hud/icons.missile_cooldown_active"), new Uid("vid:animation:hud/icons.missile_cooldown_inactive"), 15);
-		shield_cooldown_counter = new IconCountdown(game_systems, new Uid("vid:animation:hud/icons.shield_cooldown_active"), new Uid("vid:animation:hud/icons.shield_cooldown_inactive"), 5);
+		currency_counter = new IconCounter(game_systems, new Uid("vid:animation:hud/icons.money"), 0);
+		missile_cooldown_counter = new IconCountdown(game_systems, new Uid("vid:animation:hud/icons.missile_cooldown_active"), new Uid("vid:animation:hud/icons.missile_cooldown_inactive"), 0);
+		shield_cooldown_counter = new IconCountdown(game_systems, new Uid("vid:animation:hud/icons.shield_cooldown_active"), new Uid("vid:animation:hud/icons.shield_cooldown_inactive"), 0);
 	}
 
 	/* (non-Javadoc)
@@ -48,6 +50,11 @@ public class CharacterHUD extends HeadsUpDisplay {
 	public void render(OpenGLGraphics graphics, float d_sec, PlayerParty players) {
 		int screen_width = graphics.getCanvasDimension().width;
 		int screen_height = graphics.getCanvasDimension().height;
+		
+		PlayerCharacter main_player = (PlayerCharacter)players.get(0);
+		missile_stock_counter.setCount(main_player.getSecondaryWeapon().getInteger(Property.PROJECTILE_COUNT));
+		currency_counter.setCount(main_player.getMoney());
+		missile_cooldown_counter.setCount(main_player.getSecondaryWeaponCooldownTimer().currentCoolTime());
 		
 		enemy_health_bar.render(graphics, screen_width/2, 2, d_sec, players);
 		player_health_bar.render(graphics, 0, 0, d_sec, players);

@@ -97,6 +97,7 @@ public class MenuScreen extends AbstractGameScreen {
 	protected void onActivate(AbstractGameSystems game_systems) {
 		menu_sound = game_systems.audio_engine.createSound(AudioCategory.MUSIC, "resources/audio/music/menu/main_menu.ogg", true);
 		menu_sound.setToLoop(true);
+		menu_sound.setVolume(0);
 		game_systems.audio_engine.playSound(menu_sound);
 	}
 

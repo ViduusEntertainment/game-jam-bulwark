@@ -5,8 +5,13 @@
  */
 package org.viduus.charon.gamejam.world;
 
+import org.dyn4j.collision.AxisAlignedBounds;
+import org.dyn4j.dynamics.Settings;
+import org.dyn4j.dynamics.World;
+import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.world.regions.Level1;
 import org.viduus.charon.global.GameConstants.Property;
+import org.viduus.charon.global.physics.twodimensional.listeners.CollisionListener;
 import org.viduus.charon.global.GameInfo;
 import org.viduus.charon.global.util.identification.Uid;
 import org.viduus.charon.global.util.logging.ErrorHandler;
@@ -77,7 +82,7 @@ public class WorldEngine extends AbstractWorldEngine {
 		super.onLoadGame(game_info);
 		
 		// Create the first level
-		Level1 level_1 = new Level1(this);
+		Level1 level_1 = new Level1(this, game_info.party);
 		insert(level_1);
 		ErrorHandler.tryRun(() -> {
 			level_1.load();
@@ -90,7 +95,7 @@ public class WorldEngine extends AbstractWorldEngine {
 		// Load demo region and put player in region
 		BaseRegion character_region = (BaseRegion) resolve((Uid) main_character.get(Property.CURRENT_REGION_ID));
 		for (PlayableCharacter2D party_member : game_info.party) {
-			character_region.addEntity(party_member);
+			character_region.queueEntityForAddition(party_member);
 		}
 	}
 
@@ -101,6 +106,21 @@ public class WorldEngine extends AbstractWorldEngine {
 	protected void onSaveAndDisposeEngine() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	protected World createWorld() {
+		World world = new World();
+		world.setGravity(new Vector2(0, 0));
+		world.addListener(new CollisionListener(this));
+		
+		Settings settings = new Settings();
+		settings.setAutoSleepingEnabled(false);
+		settings.setMaximumTranslation(Double.MAX_VALUE);
+		
+		world.setSettings(settings);
+		
+		return world;
 	}
 
 }

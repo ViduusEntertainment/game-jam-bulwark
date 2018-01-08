@@ -6,9 +6,13 @@
 package org.viduus.charon.gamejam.world.regions;
 
 import org.dyn4j.geometry.Vector2;
-import org.viduus.charon.gamejam.world.objects.character.nonplayable.TestEnemy;
+import org.viduus.charon.gamejam.world.objects.character.nonplayable.Enemy;
+import org.viduus.charon.gamejam.world.objects.character.nonplayable.StandardEnemy;
+import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
+import org.viduus.charon.global.event.events.DeathEvent;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.util.Size;
+import org.viduus.charon.global.player.PlayerParty;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;
 
@@ -19,13 +23,15 @@ import org.viduus.charon.global.world.objects.twodimensional.Object2D;
  */
 public class Level1 extends SideScrollingRegion {
 	
+	private PlayerParty party;
+	
 	/**
 	 * @param world_engine
 	 * @param name
 	 */
-	public Level1(AbstractWorldEngine world_engine) {
+	public Level1(AbstractWorldEngine world_engine, PlayerParty party) {
 		super(world_engine, "level_1", new Size(5000, 384));
-		// TODO Auto-generated constructor stub
+		this.party = party;
 	}
 
 	/* (non-Javadoc)
@@ -62,10 +68,11 @@ public class Level1 extends SideScrollingRegion {
 			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_3"),
 		});
 		
-		TestEnemy test_enemy_1 = new TestEnemy(world_engine, "TestEnemy1", new Vector2(300, 100));
-		test_enemy_1.setLinearVelocity(new Vector2(20, 0));
-		world_engine.insert(test_enemy_1);
-		addEntity(test_enemy_1);
+		for (int i = 0; i < 10; i++) {
+			StandardEnemy enemy = new StandardEnemy(world_engine, "TestEnemy1", new Vector2(300 + i * 30, 100 + i * 30));
+			world_engine.insert(enemy);
+			queueEntityForAddition(enemy);
+		}
 		
 //		TestEnemy test_enemy_2 = new TestEnemy(world_engine, "TestEnemy2", new Vector2(250, 150));
 //		world_engine.insert(test_enemy_2);
@@ -85,4 +92,14 @@ public class Level1 extends SideScrollingRegion {
 		
 	}
 
+	@Override 
+	protected void onObjectDeath(DeathEvent death_event) {
+		super.onObjectDeath(death_event);
+		
+		if (death_event.object_that_died instanceof Enemy) {
+			Enemy enemy = (Enemy)death_event.object_that_died;
+			PlayerCharacter player = (PlayerCharacter) party.get(0);
+			player.giveMoney(enemy.getReward());
+		}
+	}
 }
