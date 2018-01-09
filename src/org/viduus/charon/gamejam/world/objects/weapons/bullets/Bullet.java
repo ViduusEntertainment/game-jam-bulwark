@@ -2,7 +2,7 @@ package org.viduus.charon.gamejam.world.objects.weapons.bullets;
 
 import org.dyn4j.dynamics.joint.Joint;
 import org.dyn4j.geometry.Vector2;
-import org.viduus.charon.gamejam.physics.twodimensional.filters.BulletFilter;
+import org.viduus.charon.gamejam.physics.twodimensional.filters.EnemyBulletFilter;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.event.events.ObjectRemovalEvent;
 import org.viduus.charon.global.event.events.TickEvent;
@@ -20,7 +20,6 @@ public abstract class Bullet extends Bullet2D {
 	public Bullet(AbstractWorldEngine world_engine, Uid uid, String name, Weapon2D owner, Vector2 location,
 			Vector2 linear_velocity, String animation_file, String sprite_id, float damage) {
 		super(world_engine, uid, name, owner, location, linear_velocity, animation_file, sprite_id, 0, damage);
-		setCollisionFilter(new BulletFilter(this));
 	}
 	
 	@Override

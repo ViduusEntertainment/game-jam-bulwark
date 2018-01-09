@@ -4,19 +4,16 @@ import java.util.HashSet;
 
 import org.apache.commons.lang3.time.StopWatch;
 import org.dyn4j.geometry.Vector2;
-import org.viduus.charon.gamejam.world.WorldEngine;
-import org.viduus.charon.gamejam.world.objects.character.nonplayable.StandardEnemy;
-import org.viduus.charon.gamejam.world.objects.weapons.range.EnemyGun;
-import org.viduus.charon.global.util.logging.OutputHandler;
+import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.character.nonplayable.NonPlayableCharacter2D;
 import org.viduus.charon.global.world.regions.BaseRegion;
 
-public class WallWave extends EnemyWave {
+public class TankWallWave extends EnemyWave {
 
 	private StopWatch timer;
 	
-	public WallWave(AbstractWorldEngine world_engine, BaseRegion region) {
+	public TankWallWave(AbstractWorldEngine world_engine, BaseRegion region) {
 		super(world_engine, region);
 	}
 
@@ -27,17 +24,19 @@ public class WallWave extends EnemyWave {
 		}
 	}
 	
-	@Override 
-	public void launchThemFuckers() {
-		super.launchThemFuckers();
-		timer = new StopWatch();
-		timer.start();
+	@Override
+	public void onTick(TickEvent tick_event) {
+		if (!launched) {
+			timer = new StopWatch();
+			timer.start();
+		}
+		
+		super.onTick(tick_event);
 	}
 
 	@Override
 	public boolean isFinished() {
 		timer.split();
-		OutputHandler.println("" + timer.getSplitTime());
 		if (timer.getSplitTime() > 2000) {
 			return true;
 		} 

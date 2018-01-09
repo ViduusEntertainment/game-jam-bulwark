@@ -1,29 +1,29 @@
 package org.viduus.charon.gamejam.world.objects.character.nonplayable;
 
 import org.dyn4j.geometry.Vector2;
-import org.viduus.charon.global.event.events.CollisionEvent;
-import org.viduus.charon.global.event.events.WeaponUseEvent;
+import org.viduus.charon.global.GameConstants.Property;
+import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.global.world.AbstractWorldEngine;
+import org.viduus.charon.global.world.objects.twodimensional.Object2D;
 
 public class KamikazeEnemy extends Enemy{
 
-	private static final float SPEED = 5.0f;
-	private static final float HEALTH = 100;
+	private static final float SPEED = 200.0f;
+	private static final float HEALTH = 100.0f;
+	private static final float STOP_DISTANCE = 9000.0f; // this is squared
 	
-	public KamikazeEnemy(AbstractWorldEngine world_engine, String name, Vector2 location) {
+	public KamikazeEnemy(AbstractWorldEngine world_engine, String name, Vector2 location, Object2D followee) {
 		super(world_engine, name, location, SPEED, HEALTH, 0, HEALTH, 0, "vid:animation:enemies/enemies", "kamikaze", "walk_l", 50);
-		// TODO Auto-generated constructor stub
+		set(Property.MOVEMENT_TYPE, NPC_MOVEMENT.OBJECT_FOLLOWING);
+		setFollowee(followee, 0.0f);
 	}
 	
 	@Override
-	protected void setPhysicsProperties() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void onCollision(CollisionEvent collision_event) {
-		// TODO Auto-generated method stub
-		
+	public void onTick(TickEvent tick_event) {
+		Object2D followee = this.<Object2D>get(Property.FOLLOWEE);
+		if (followee.getLocation().distanceSquared(getLocation()) < STOP_DISTANCE) {
+			set(Property.MOVEMENT_TYPE, NPC_MOVEMENT.MANUAL);
+		}
+		super.onTick(tick_event);
 	}
 }

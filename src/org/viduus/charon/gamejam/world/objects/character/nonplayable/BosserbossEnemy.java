@@ -2,7 +2,6 @@ package org.viduus.charon.gamejam.world.objects.character.nonplayable;
 
 import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.global.event.events.CollisionEvent;
-import org.viduus.charon.global.event.events.WeaponUseEvent;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 
 public class BosserbossEnemy extends Enemy {

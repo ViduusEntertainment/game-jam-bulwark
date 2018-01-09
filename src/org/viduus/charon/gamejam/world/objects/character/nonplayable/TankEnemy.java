@@ -2,7 +2,6 @@ package org.viduus.charon.gamejam.world.objects.character.nonplayable;
 
 import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.global.event.events.CollisionEvent;
-import org.viduus.charon.global.event.events.WeaponUseEvent;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 
 public class TankEnemy extends Enemy{
@@ -13,11 +12,5 @@ public class TankEnemy extends Enemy{
 	public TankEnemy(AbstractWorldEngine world_engine, String name, Vector2 location) {
 		super(world_engine, name, location, SPEED, HEALTH, 0, HEALTH, 0, "vid:animation:enemies/enemies", "tank", "walk_l", 200);
 		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	protected void onCollision(CollisionEvent collision_event) {
-		// TODO Auto-generated method stub
-		
 	}
 }

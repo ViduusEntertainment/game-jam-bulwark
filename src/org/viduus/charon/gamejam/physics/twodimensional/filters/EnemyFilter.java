@@ -1,13 +1,19 @@
 package org.viduus.charon.gamejam.physics.twodimensional.filters;
 
 import org.dyn4j.collision.Filter;
+import org.viduus.charon.gamejam.world.objects.character.nonplayable.Enemy;
+import org.viduus.charon.global.physics.twodimensional.filters.Character2DFilter;
 
-public class EnemyFilter implements Filter {
+public class EnemyFilter extends Character2DFilter<Enemy> implements Filter {
+
+	public EnemyFilter(Enemy object) {
+		super(object);
+	}
 
 	@Override
-	public boolean isAllowed(Filter filter) {
-		if (filter instanceof WorldFilter || filter instanceof BulletFilter) 
+	protected boolean collisionAllowed(Filter filter) {
+		if (filter instanceof WorldFilter || filter instanceof EnemyBulletFilter) 
 			return false;
-		return true;
+		return super.collisionAllowed(filter);
 	}
 }

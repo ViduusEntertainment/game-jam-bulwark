@@ -5,8 +5,7 @@
  */
 package org.viduus.charon.gamejam.world.regions;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.Random;
 
 import org.viduus.charon.gamejam.world.objects.character.nonplayable.Enemy;
 import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
@@ -14,14 +13,15 @@ import org.viduus.charon.gamejam.world.wave.EnemyWave;
 import org.viduus.charon.gamejam.world.wave.LeftDiagonalWave;
 import org.viduus.charon.gamejam.world.wave.RightDiagonalWave;
 import org.viduus.charon.gamejam.world.wave.SpearheadWave;
-import org.viduus.charon.gamejam.world.wave.WallWave;
+import org.viduus.charon.gamejam.world.wave.TankWallWave;
+import org.viduus.charon.gamejam.world.wave.Wavey1Wave;
+import org.viduus.charon.gamejam.world.wave.Wavey2Wave;
 import org.viduus.charon.global.event.events.DeathEvent;
 import org.viduus.charon.global.event.events.ObjectRemovalEvent;
 import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.util.Size;
 import org.viduus.charon.global.player.PlayerParty;
-import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;
 
@@ -33,8 +33,8 @@ import org.viduus.charon.global.world.objects.twodimensional.Object2D;
 public class Level1 extends AutoSideScrollingRegion {
 	
 	private PlayerParty party;
-	private Queue<EnemyWave> enemy_waves = new LinkedList<EnemyWave>();
 	private EnemyWave active_enemy_wave;
+	private static Random RN_CODY = new Random();
 	
 	/**
 	 * @param world_engine
@@ -43,6 +43,10 @@ public class Level1 extends AutoSideScrollingRegion {
 	public Level1(AbstractWorldEngine world_engine, PlayerParty party) {
 		super(world_engine, "level_1", new Size(5000, 384));
 		this.party = party;
+	}
+	
+	public PlayerParty getParty() {
+		return party;
 	}
 
 	/* (non-Javadoc)
@@ -78,12 +82,6 @@ public class Level1 extends AutoSideScrollingRegion {
 			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_2"),
 			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_3"),
 		});
-		
-		enemy_waves.add(new WallWave(world_engine, this));
-		enemy_waves.add(new SpearheadWave(world_engine, this));
-		enemy_waves.add(new RightDiagonalWave(world_engine, this));
-		enemy_waves.add(new LeftDiagonalWave(world_engine, this));
-		enemy_waves.add(new RightDiagonalWave(world_engine, this));
 	}
 
 	/* (non-Javadoc)
@@ -120,9 +118,26 @@ public class Level1 extends AutoSideScrollingRegion {
 
 	@Override
 	protected void onTick(TickEvent tick_event) {
-		if ((active_enemy_wave == null || active_enemy_wave.isFinished()) && enemy_waves.size() > 0) {
-			active_enemy_wave = enemy_waves.poll();
-			active_enemy_wave.launchThemFuckers();
+		if (active_enemy_wave != null)
+			active_enemy_wave.onTick(tick_event);
+		if (active_enemy_wave == null || active_enemy_wave.isFinished()) {
+			active_enemy_wave = createRandomWave();
 		}
+	}
+	
+	private EnemyWave createRandomWave() {
+		int num = RN_CODY.nextInt(120);
+		if (num < 20)
+			return new LeftDiagonalWave(world_engine, this);
+		else if (num < 40)
+			return new RightDiagonalWave(world_engine, this);
+		else if (num < 60)
+			return new SpearheadWave(world_engine, this);
+		else if (num < 80)
+			return new TankWallWave(world_engine, this);
+		else if (num < 100)
+			return new Wavey1Wave(world_engine, this);
+		else
+			return new Wavey2Wave(world_engine, this);
 	}
 }
