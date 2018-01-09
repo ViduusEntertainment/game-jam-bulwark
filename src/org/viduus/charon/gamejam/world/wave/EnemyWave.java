@@ -14,7 +14,6 @@ import org.viduus.charon.gamejam.world.objects.weapons.range.EnemyGun;
 import org.viduus.charon.gamejam.world.regions.Level1;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.event.events.TickEvent;
-import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.DynamicObject2D.NPC_MOVEMENT;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;

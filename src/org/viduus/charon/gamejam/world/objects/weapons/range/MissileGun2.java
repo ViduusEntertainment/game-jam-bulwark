@@ -20,17 +20,17 @@ public class MissileGun2 extends Gun {
 	protected Bullet2D createBullet() {
 		return new MissileBullet2(world_engine, Uid.generateUid("vid:bullet", "MissileBullet2"), "MissileBullet2", this, getLocation().copy());
 	}
-	
-	@Override
-	protected void onHitByWeapon(HitByWeaponEvent hit_by_weapon_event) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override 
 	protected void setPhysicsProperties() {
 		Object2D owner = getOwner();		
 		Vector2 location = owner.getVector2(Property.LOCATION).copy().add(5, 10);
 		set(Property.LOCATION, location);
+	}
+
+	@Override
+	protected void onHitByWeapon(HitByWeaponEvent hit_by_weapon_event) {
+		// TODO Auto-generated method stub
+		
 	}
 }
