@@ -7,15 +7,16 @@ package org.viduus.charon.gamejam.graphics.frames.menu;
 
 import java.util.Random;
 
+import org.viduus.charon.gamejam.graphics.GraphicsEngine;
 import org.viduus.charon.gamejam.graphics.ui.HorizontalUpgradeBox;
 import org.viduus.charon.gamejam.graphics.ui.ShipSelectionBox;
+import org.viduus.charon.gamejam.graphics.ui.ShipTakeoffBox;
 import org.viduus.charon.gamejam.graphics.ui.UIElement;
 import org.viduus.charon.gamejam.graphics.ui.VerticalUpgradeBox;
 import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
 import org.viduus.charon.global.AbstractGameSystems;
-import org.viduus.charon.global.GameConstants.EngineFlags;
+import org.viduus.charon.global.GameConstants.GlobalEngineFlags;
 import org.viduus.charon.global.GameConstants.Property;
-import org.viduus.charon.global.graphics.AbstractGraphicsEngine;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.opengl.OpenGLFrame;
 import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
@@ -37,14 +38,14 @@ public class UpgradeScreen extends AbstractJamScreen {
 	
 	private Animation<?> upgrade_menu;
 	private String[] demotivational_messages = {
-		"You pilots aren’t worth the Currency we pay you.",
+		"You pilots aren't worth the Currency we pay you.",
 		"Every crashed drone comes out of your pay.",
-		"Upgrades aren’t free.  We have to save them for the good pilots.",
+		"Upgrades aren't free.  We have to save them for the good pilots.",
 		"We probably should’ve listened to those space scientists.",
 		"You are the last that humanity has to offer.",
 		"There is absolutely no more room for failure.",
 		"The only good alien is a dead alien.",
-		"We aren’t paying you to fail.",
+		"We aren't paying you to fail.",
 		"Perhaps you should consider improving.",
 		"The more time you waste the more people die."
 	};
@@ -71,6 +72,10 @@ public class UpgradeScreen extends AbstractJamScreen {
 		shield_upgrade_option,
 		armor_upgrade_option;
 
+	private ShipTakeoffBox deploy_ship_button;
+
+	private PlayableCharacter2D main_character;
+
 	/**
 	 * @param graphics_frame
 	 */
@@ -82,29 +87,35 @@ public class UpgradeScreen extends AbstractJamScreen {
 		/*
 		 * Ship stuff
 		 */
-		mark_1_ship_button = new ShipSelectionBox("MK 1", "The standard ship", 3, 5, 1);
+		mark_1_ship_button = new ShipSelectionBox("MK 1", "The standard ship", 3, 5, 1, 0);
 		add(mark_1_ship_button);
 		
-		mark_2_ship_button = new ShipSelectionBox("MK 2", "New and improved", 4, 5, 1);
+		mark_2_ship_button = new ShipSelectionBox("MK 2", "New and improved", 4, 5, 1, 40000);
 		add(mark_2_ship_button);
 		
-		heavy_variant_button = new ShipSelectionBox("MK 2 - heavy", "Take a hit or two!", 3, 5, 3);
+		heavy_variant_button = new ShipSelectionBox("MK 2 - heavy", "Take a hit or two!", 3, 5, 3, 40000);
 		add(heavy_variant_button);
 		
-		fast_variant_button = new ShipSelectionBox("MK 2 - fast", "Move quick!", 3, 6, 0);
+		fast_variant_button = new ShipSelectionBox("MK 2 - fast", "Move quick!", 3, 6, 0, 40000);
 		add(fast_variant_button);
 
 		/*
 		 * Ship upgrade stuff
 		 */
-		thruster_upgrade_option = new VerticalUpgradeBox("vid:animation:hud/icons.thrusters", "Thruster");
+		thruster_upgrade_option = new VerticalUpgradeBox("vid:animation:hud/icons.thrusters", "Thruster", new int[] {2000, 4000, 6000, 8000, 10000});
 		add(thruster_upgrade_option);
 
-		shield_upgrade_option = new VerticalUpgradeBox("vid:animation:hud/icons.shield", "Shield");
+		shield_upgrade_option = new VerticalUpgradeBox("vid:animation:hud/icons.shield", "Shield", new int[] {1000});
 		add(shield_upgrade_option);
 		
-		armor_upgrade_option = new VerticalUpgradeBox("vid:animation:hud/icons.armor", "Armor");
+		armor_upgrade_option = new VerticalUpgradeBox("vid:animation:hud/icons.armor", "Armor", new int[] {1000, 2000, 3000, 4000, 5000});
 		add(armor_upgrade_option);
+		
+		/*
+		 * Start fighting stuff
+		 */
+		deploy_ship_button = new ShipTakeoffBox();
+		add(deploy_ship_button);
 		
 		/*
 		 * Primary weapon stuff
@@ -156,7 +167,12 @@ public class UpgradeScreen extends AbstractJamScreen {
 		
 		int side_bar_width = (screen_width-menu_width)/2;
 		
-		UIElement.renderColoredSquare(graphics, menu_x, menu_y, menu_width, menu_height, 0.1882352941f, 0.3764705882f, 0.5098039216f, 0.2f);
+		// render ui background shadow
+		UIElement.renderColoredSquare(graphics, menu_x + 186, menu_y, menu_width - 186, 143, 0.1882352941f, 0.3764705882f, 0.5098039216f, 0.2f);
+		UIElement.renderColoredSquare(graphics, menu_x, menu_y, 186, menu_height, 0.1882352941f, 0.3764705882f, 0.5098039216f, 0.2f);
+		UIElement.renderColoredSquare(graphics, menu_x + 186, menu_y + 240, menu_width - 186, 160, 0.1882352941f, 0.3764705882f, 0.5098039216f, 0.2f);
+		
+		// render left and right borders
 		UIElement.renderColoredSquare(graphics, 0, 0, side_bar_width, menu_height, 0, 0, 0, 0.2f);
 		UIElement.renderColoredSquare(graphics, menu_x+menu_width, 0, side_bar_width, menu_height, 0, 0, 0, 0.2f);
 		
@@ -173,18 +189,17 @@ public class UpgradeScreen extends AbstractJamScreen {
 			int c1_left = left;
 			int c2_left = left + 100;
 			
-			PlayableCharacter2D character = game_systems.party.get(0);
-			Weapon2D p_wep = character.<Weapon2D>getList(Property.EQUIPPED_WEAPONS).get(0);
-			Weapon2D s_wep = character.<Weapon2D>getList(Property.EQUIPPED_WEAPONS).get(1);
+			Weapon2D p_wep = main_character.<Weapon2D>getList(Property.EQUIPPED_WEAPONS).get(0);
+			Weapon2D s_wep = main_character.<Weapon2D>getList(Property.EQUIPPED_WEAPONS).get(1);
 			
 			OpenGLFont.drawString2D(graphics, "Player Stats", (int) (c1_left + (180 - OpenGLFont.getStringWidth("Player Stats"))/2), top);
-			OpenGLFont.drawString2D(graphics, "Hearts: " + character.getFloat(Property.MAX_HEALTH), c1_left, top + dr);
-			OpenGLFont.drawString2D(graphics, "Currency: " + ((PlayerCharacter)character).getMoney(), c1_left, top + 2*dr);
+			OpenGLFont.drawString2D(graphics, "Hearts: " + main_character.getFloat(Property.MAX_HEALTH), c1_left, top + dr);
+			OpenGLFont.drawString2D(graphics, "Currency: " + ((PlayerCharacter)main_character).getMoney(), c1_left, top + 2*dr);
 			OpenGLFont.drawString2D(graphics, "P. DMG: " + p_wep.getFloat(Property.DAMAGE), c1_left, top + 3*dr);
 			OpenGLFont.drawString2D(graphics, "S. DMG: " + s_wep.getFloat(Property.DAMAGE), c1_left, top + 4*dr);
 
 			OpenGLFont.drawString2D(graphics, "Stock: " + s_wep.getInteger(Property.PROJECTILE_COUNT), c2_left, top + dr);
-			OpenGLFont.drawString2D(graphics, "Speed: " + character.getFloat(Property.SPEED), c2_left, top + 2*dr);
+			OpenGLFont.drawString2D(graphics, "Speed: " + main_character.getFloat(Property.SPEED), c2_left, top + 2*dr);
 		}
 		
 		/*
@@ -237,16 +252,8 @@ public class UpgradeScreen extends AbstractJamScreen {
 			else if (armor_upgrade_option.hasFocus()) {
 				OutputHandler.println("armor upgrade");
 			}
-			else if (false) {
-				// fix player state
-				game_systems.party.get(0).bindInputEngine(game_systems.input_engine);
-				
-				// fix engine state
-				game_systems.graphics_engine.enable(EngineFlags.RENDER_PLAYER_HUD);
-				game_systems.world_engine.enable(EngineFlags.TICK_WORLD);
-				
-				// lfg
-				game_systems.graphics_engine.showFrame(AbstractGraphicsEngine.GAME_SCREEN);
+			else if (deploy_ship_button.hasFocus()) {
+				game_systems.graphics_engine.showFrame(GraphicsEngine.START_GAME_SCREEN);
 			}
 		}
 	}
@@ -257,11 +264,12 @@ public class UpgradeScreen extends AbstractJamScreen {
 	@Override
 	protected void onActivate(AbstractGameSystems game_systems) {
 		// pause engine state
-		game_systems.graphics_engine.disable(EngineFlags.RENDER_PLAYER_HUD);
-		game_systems.world_engine.disable(EngineFlags.TICK_WORLD);
+		game_systems.graphics_engine.disable(GlobalEngineFlags.RENDER_PLAYER_HUD);
+		game_systems.world_engine.disable(GlobalEngineFlags.TICK_WORLD);
 		
 		// pause player state
-		game_systems.party.get(0).unbindInputEngine(game_systems.input_engine);
+		main_character = game_systems.party.get(0);
+		main_character.unbindInputEngine(game_systems.input_engine);
 		
 		// load stuff
 		upgrade_menu = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/upgrade_menu.menu");
@@ -279,6 +287,9 @@ public class UpgradeScreen extends AbstractJamScreen {
 	@Override
 	protected void onDeactivate(AbstractGameSystems game_systems) {
 		super.onDeactivate(game_systems);
+		
+		// fix engine state
+		game_systems.graphics_engine.enable(GlobalEngineFlags.RENDER_PLAYER_HUD);
 	}
 
 	/* (non-Javadoc)
@@ -319,6 +330,13 @@ public class UpgradeScreen extends AbstractJamScreen {
 			thruster_upgrade_option.setLocation(thruster_loc, bottom_location);
 			shield_upgrade_option.setLocation(shield_loc, bottom_location);
 			armor_upgrade_option.setLocation(armor_loc, bottom_location);
+		}
+		
+		/*
+		 * Ship deployment stuff
+		 */
+		{
+			deploy_ship_button.setLocation(dx + 186, 143);
 		}
 		
 		/*

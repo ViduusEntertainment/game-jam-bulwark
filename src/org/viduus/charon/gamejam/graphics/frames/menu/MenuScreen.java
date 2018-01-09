@@ -7,10 +7,9 @@ package org.viduus.charon.gamejam.graphics.frames.menu;
 
 import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.GameSystems;
-import org.viduus.charon.gamejam.graphics.ScreenManager;
+import org.viduus.charon.gamejam.graphics.GraphicsEngine;
 import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
 import org.viduus.charon.gamejam.world.objects.weapons.range.DefaultGun;
-import org.viduus.charon.gamejam.world.objects.weapons.range.MissileGun1;
 import org.viduus.charon.gamejam.world.objects.weapons.range.MissileGun2;
 import org.viduus.charon.global.AbstractGameSystems;
 import org.viduus.charon.global.GameInfo;
@@ -18,7 +17,6 @@ import org.viduus.charon.global.audio.AudioCategory;
 import org.viduus.charon.global.audio.Sound;
 import org.viduus.charon.global.graphics.opengl.OpenGLFrame;
 import org.viduus.charon.global.graphics.opengl.components.OpenGLButton;
-import org.viduus.charon.global.graphics.screens.AbstractGameScreen;
 import org.viduus.charon.global.graphics.util.Size;
 import org.viduus.charon.global.input.controller.ControllerState;
 import org.viduus.charon.global.player.PlayerParty;
@@ -82,7 +80,7 @@ public class MenuScreen extends AbstractJamScreen {
 				// start the game
 				GameInfo game_info = new GameInfo(GameSystems.GAME, party);
 				game_systems.startGame(game_info);
-				game_systems.graphics_engine.showFrame(ScreenManager.UPGRADE_SCREEN);
+				game_systems.graphics_engine.showFrame(GraphicsEngine.UPGRADE_SCREEN);
 			}
 			else if (this.exit_button.hasFocus()) {
 				game_systems.closeApplication();

@@ -23,7 +23,8 @@ public class HorizontalUpgradeBox extends UIElement {
 	private boolean is_purchased = false;
 	private Animation<?>
 		animation_on,
-		animation_off;
+		animation_off,
+		money;
 	private int
 		level = 0,
 		purchase_cost;
@@ -56,13 +57,13 @@ public class HorizontalUpgradeBox extends UIElement {
 		OpenGLFont.drawString2D(graphics, upgrade_text, getX()+4, getY()+OpenGLFont.getLineHeight()-1);
 		
 		if (hasFocus()) {
-			renderColoredSquare(graphics, getX()+1, getY()+1, getWidth()-1, getHeight()-1, 0.1333333333f, 0.1254901961f, 0.2039215686f, 0.2f);
+			renderColoredSquare(graphics, getX()+1, getY()+1, getWidth()-1, getHeight()-1, 0.1333333333f, 0.1254901961f, 0.2039215686f, 0.7f);
 			renderSelect(graphics, d_sec, getX(), getY(), getWidth(), getHeight());
 			
 			if (!is_purchased) {
-				OpenGLFont.drawString2D(graphics, "Purchase", getX()+4, getY()+OpenGLFont.getLineHeight()-1);
+				renderTextAndAnimationScreen(graphics, d_sec, x, y, width, height, "Unlock", "x", purchase_cost, money);
 			} else {
-				OpenGLFont.drawString2D(graphics, "Upgrade", getX()+4, getY()+OpenGLFont.getLineHeight()-1);
+				renderTextAndAnimationScreen(graphics, d_sec, x, y, width, height, "Upgrade", "x", upgrade_cost[level], money);
 			}
 		}
 	}
@@ -74,6 +75,7 @@ public class HorizontalUpgradeBox extends UIElement {
 	public void onActivate(AbstractGameSystems game_systems) {
 		animation_on = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/icons.select_on");
 		animation_off = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/icons.select_off");
+		money = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/icons.money");
 		updateSize();
 	}
 
@@ -84,6 +86,7 @@ public class HorizontalUpgradeBox extends UIElement {
 	public void onDeactivate(AbstractGameSystems game_systems) {
 		game_systems.graphics_engine.release(animation_on);
 		game_systems.graphics_engine.release(animation_off);
+		game_systems.graphics_engine.release(money);
 	}
 
 	/* (non-Javadoc)

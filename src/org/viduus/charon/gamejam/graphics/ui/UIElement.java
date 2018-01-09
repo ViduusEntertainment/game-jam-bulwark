@@ -9,6 +9,7 @@ import org.viduus.charon.global.AbstractGameSystems;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
 import org.viduus.charon.global.graphics.opengl.components.OpenGLButton;
+import org.viduus.charon.global.graphics.opengl.font.OpenGLFont;
 import org.viduus.charon.global.graphics.opengl.shaders.ShaderProgram;
 import org.viduus.charon.global.graphics.opengl.shaders.exceptions.ShaderException;
 import org.viduus.charon.global.graphics.opengl.shaders.variables.ShaderAttribute;
@@ -31,10 +32,11 @@ public abstract class UIElement extends OpenGLButton {
 		border_rb,
 		border_b,
 		border_lb,
-		border_l;
+		border_l,
+		money;
 
 	public UIElement() {
-		setAlphaComponent(0.3f);
+		setAlphaComponent(0.0f);
 	}
 	
 	public abstract void render(OpenGLGraphics graphics, float d_sec);
@@ -50,6 +52,7 @@ public abstract class UIElement extends OpenGLButton {
 			border_b = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/ui_boxes.select_b");
 			border_lb = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/ui_boxes.select_lb");
 			border_l = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/ui_boxes.select_l");
+			money = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/icons.money");
 		}
 		
 		onActivate(game_systems);
@@ -68,6 +71,7 @@ public abstract class UIElement extends OpenGLButton {
 			game_systems.graphics_engine.release(border_b);
 			game_systems.graphics_engine.release(border_lb);
 			game_systems.graphics_engine.release(border_l);
+			game_systems.graphics_engine.release(money);
 		}
 		
 		onDeactivate(game_systems);
@@ -95,6 +99,20 @@ public abstract class UIElement extends OpenGLButton {
 			border_l.renderAnimation(graphics, d_sec, x, y+ty, 1);
 			border_r.renderAnimation(graphics, d_sec, x+width-1, y+ty, 1);
 		}
+	}
+	
+	protected static void renderTextAndAnimationScreen(OpenGLGraphics graphics, float d_sec, int x, int y, int width, int height, String text1, String text2, int number, Animation<?> icon) {
+		int dr = 14;
+		int ds = OpenGLFont.getLineHeight();
+		int top = y + (height - (OpenGLFont.getLineHeight()+17))/2;
+		
+		OpenGLFont.drawString2D(graphics, text1, (int) (x + (width - OpenGLFont.getStringWidth(text1))/2), top+ds-1);
+		
+		String disp_str = text2+number;
+		int line_2_width = (int) (OpenGLFont.getStringWidth(disp_str) + 17);
+		int left = x + (width - line_2_width) / 2;
+		icon.renderAnimation(graphics, d_sec, left, top+dr, 1);
+		OpenGLFont.drawString2D(graphics, disp_str, left+17, top+dr+ds-1);
 	}
 
 	/**

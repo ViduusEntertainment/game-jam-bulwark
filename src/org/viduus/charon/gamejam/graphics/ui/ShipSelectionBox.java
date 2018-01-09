@@ -17,24 +17,28 @@ import org.viduus.charon.global.graphics.opengl.font.OpenGLFont;
  */
 public class ShipSelectionBox extends UIElement {
 
+	private boolean is_purchased = false;
 	private String
 		description,
 		name;
 	private int
 		hearts,
 		speed,
-		armor_slots;
+		armor_slots,
+		price;
 	private Animation<?>
 		heart_animation,
 		speed_animation,
-		armor_animation;
+		armor_animation,
+		money;
 
-	public ShipSelectionBox(String name, String description, int hearts, int speed, int armor_slots) {
+	public ShipSelectionBox(String name, String description, int hearts, int speed, int armor_slots, int price) {
 		this.name = name;
 		this.description = description;
 		this.hearts = hearts;
 		this.speed = speed;
 		this.armor_slots = armor_slots;
+		this.price = price;
 	}
 
 	/* (non-Javadoc)
@@ -64,8 +68,12 @@ public class ShipSelectionBox extends UIElement {
 		updateSize();
 		
 		if (hasFocus()) {
-			renderColoredSquare(graphics, getX()+1, getY()+1, getWidth()-1, getHeight()-1, 0.1333333333f, 0.1254901961f, 0.2039215686f, 0.2f);
+			renderColoredSquare(graphics, getX()+1, getY()+1, getWidth()-1, getHeight()-1, 0.1333333333f, 0.1254901961f, 0.2039215686f, 0.7f);
 			renderSelect(graphics, d_sec, getX(), getY(), getWidth(), getHeight());
+
+			if (!is_purchased) {
+				renderTextAndAnimationScreen(graphics, d_sec, x, y, width, height, "Unlock", "x", price, money);
+			}
 		}
 	}
 
@@ -77,6 +85,7 @@ public class ShipSelectionBox extends UIElement {
 		heart_animation = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/icons.heart_full");
 		speed_animation = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/icons.thrusters_on");
 		armor_animation = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/icons.armor_on");
+		money = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/icons.money");
 		updateSize();
 	}
 
@@ -88,6 +97,7 @@ public class ShipSelectionBox extends UIElement {
 		game_systems.graphics_engine.release(heart_animation);
 		game_systems.graphics_engine.release(speed_animation);
 		game_systems.graphics_engine.release(armor_animation);
+		game_systems.graphics_engine.release(money);
 	}
 
 	/* (non-Javadoc)

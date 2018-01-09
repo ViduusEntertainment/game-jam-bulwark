@@ -51,6 +51,7 @@ public abstract class AutoSideScrollingRegion extends BaseRegion {
 		
 	}
 	
+	private float bg_speed_mod = 1;
 	private List<BackgroundSet> background_sets = new ArrayList<>();
 
 	/**
@@ -65,6 +66,10 @@ public abstract class AutoSideScrollingRegion extends BaseRegion {
 	
 	protected void addBackgroundSet(float dy, int speed, Animation<?>[] animations) {
 		background_sets.add(new BackgroundSet(dy, speed, animations));
+	}
+	
+	public void setBackgroundSpeedMod(float mod) {
+		bg_speed_mod = mod;
 	}
 
 	@Override
@@ -93,7 +98,7 @@ public abstract class AutoSideScrollingRegion extends BaseRegion {
 		
 		// For each background set
 		for (BackgroundSet background_set : background_sets) {
-			background_set.dx += background_set.speed * d_sec;
+			background_set.dx += bg_speed_mod * background_set.speed * d_sec;
 			float consumed_width = 0;
 			
 			// Render current backgrounds

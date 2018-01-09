@@ -5,14 +5,13 @@
  */
 package org.viduus.charon.gamejam.graphics.frames.menu;
 
-import org.viduus.charon.gamejam.graphics.ScreenManager;
+import org.viduus.charon.gamejam.graphics.GraphicsEngine;
 import org.viduus.charon.global.AbstractGameSystems;
 import org.viduus.charon.global.audio.AudioCategory;
 import org.viduus.charon.global.audio.Sound;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.opengl.OpenGLFrame;
 import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
-import org.viduus.charon.global.graphics.screens.AbstractGameScreen;
 import org.viduus.charon.global.graphics.util.IntDimension;
 import org.viduus.charon.global.input.controller.ControllerState;
 
@@ -39,7 +38,7 @@ public class IntroScreen extends AbstractJamScreen {
 		super.render(graphics, d_sec);
 
 		if( logo.animationIsFinished() ){
-			game_systems.graphics_engine.showFrame( ScreenManager.MENU_SCREEN );
+			game_systems.graphics_engine.showFrame(GraphicsEngine.MENU_SCREEN);
 			return;
 		}
 
@@ -52,7 +51,7 @@ public class IntroScreen extends AbstractJamScreen {
 		super.onControllerState(e);
 		
 		if(e.getKeyState(ControllerState.SELECT_KEY) == ControllerState.PRESSED_STATE) {
-			game_systems.graphics_engine.showFrame( ScreenManager.MENU_SCREEN );
+			game_systems.graphics_engine.showFrame(GraphicsEngine.MENU_SCREEN);
 		}
 	}
 

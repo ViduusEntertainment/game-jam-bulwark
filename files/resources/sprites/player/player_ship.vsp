@@ -1772,6 +1772,18 @@
               }
             ],
             "image": []
+          },
+          "2000": {
+            "collision": [],
+            "image": []
+          },
+          "2001": {
+            "collision": [],
+            "image": []
+          },
+          "2002": {
+            "collision": [],
+            "image": []
           }
         },
         "animations": [
@@ -2108,6 +2120,46 @@
                 "frames": [
                   {
                     "id": 1007,
+                    "duration": 100
+                  }
+                ],
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:player/player_ship.red_ship-accelerate",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
+                  {
+                    "id": 2002,
+                    "duration": 100
+                  }
+                ],
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:player/player_ship.red_ship-zoomin",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
+                  {
+                    "id": 2000,
+                    "duration": 100
+                  },
+                  {
+                    "id": 2001,
                     "duration": 100
                   }
                 ],

@@ -44,7 +44,7 @@ public abstract class AbstractJamScreen extends AbstractGameScreen {
 	
 	@Override
 	protected void onDeactivate(AbstractGameSystems game_systems) {
-		ui_elements.stream().forEach(element -> element.deactivate(game_systems));
+//		ui_elements.stream().forEach(element -> element.deactivate(game_systems));
 	}
 	
 	public void addUi(UIElement element) {

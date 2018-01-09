@@ -20,6 +20,7 @@ import org.viduus.charon.global.input.InputEngine;
 import org.viduus.charon.global.input.controller.Controller;
 import org.viduus.charon.global.input.player.PlayerControlsState;
 import org.viduus.charon.global.util.logging.ErrorHandler;
+import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.objects.twodimensional.character.playable.PlayableCharacter2D;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.range.RangeWeapon2D;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.range.bullets.Bullet2D;
@@ -36,7 +37,7 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	private static final float
 		DEFAULT_HEALTH = 5,
 		DEFAULT_MANA = 100f,
-		DEFAULT_SPEED = 10.0f,
+		DEFAULT_SPEED = 320.0f,
 		SPRINT_CONSTANT = 1.5f,
 		STAMINA_SPRINT_CONSTANT = 20, // stam/sec
 		ROLL_CONSTANT = 3.0f,
@@ -58,7 +59,7 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	 */
 	private Animation<?>[] vertical_animations = null;
 	private int last_animation_index = -1;
-	private int animaiton_index = 3;
+	private int animaiton_index;
 	
 	/*
 	 * Cool downs
@@ -103,6 +104,7 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	public void determineActiveAnimation() {
 		// load animations
 		if (vertical_animations == null) {
+			animaiton_index = 3;
 			vertical_animations = new Animation<?>[] {
 				(Animation<?>) world_engine.resolve("vid:animation:player/player_ship.red_ship-walk_d_start_4"),
 				(Animation<?>) world_engine.resolve("vid:animation:player/player_ship.red_ship-walk_d_start_3"),
@@ -113,7 +115,7 @@ public class PlayerCharacter extends PlayableCharacter2D {
 				(Animation<?>) world_engine.resolve("vid:animation:player/player_ship.red_ship-walk_u_start_4")
 			};
 		}
-		
+
 		Animation<?> curr_animation = get(Property.CURRENT_ANIMATION);
 		if (curr_animation != null) {
 			// determine what the next animation is
@@ -260,7 +262,7 @@ public class PlayerCharacter extends PlayableCharacter2D {
 			dy *= org.viduus.charon.global.util.math.Constants.SQRT2OVER2;
 		}
 		
-		setLinearVelocity(new Vector2(dx * GameConstants.PIXELS_PER_METER, dy * GameConstants.PIXELS_PER_METER));
+		setLinearVelocity(new Vector2(dx, dy));
 	}
 	
 	public int getMoney() {

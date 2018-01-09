@@ -6,6 +6,8 @@
 package org.viduus.charon.gamejam.graphics;
 
 import org.viduus.charon.gamejam.GameSystems;
+import org.viduus.charon.gamejam.graphics.frames.menu.GameOverScreen;
+import org.viduus.charon.gamejam.graphics.frames.menu.GameStartScreen;
 import org.viduus.charon.gamejam.graphics.frames.menu.IntroScreen;
 import org.viduus.charon.gamejam.graphics.frames.menu.MenuScreen;
 import org.viduus.charon.gamejam.graphics.frames.menu.UpgradeScreen;
@@ -19,18 +21,16 @@ import org.viduus.charon.global.graphics.screens.AbstractScreenManager;
  */
 public class ScreenManager extends AbstractScreenManager {
 
-	public static final int INTRO_SCREEN = 100;
-	public static final int MENU_SCREEN = 200;
-	public static final int UPGRADE_SCREEN = 300;
-
 	/**
 	 * TODO
 	 * @param game_systems
 	 */
 	public ScreenManager(GameSystems game_systems, OpenGLFrame graphics_frame) {
 		super(new IntroScreen(graphics_frame));
-		registerGameScreen(MENU_SCREEN, new MenuScreen(graphics_frame));
-		registerGameScreen(UPGRADE_SCREEN, new UpgradeScreen(graphics_frame));
+		registerGameScreen(GraphicsEngine.MENU_SCREEN, new MenuScreen(graphics_frame));
+		registerGameScreen(GraphicsEngine.UPGRADE_SCREEN, new UpgradeScreen(graphics_frame));
+		registerGameScreen(GraphicsEngine.START_GAME_SCREEN, new GameStartScreen(graphics_frame));
+		registerGameScreen(GraphicsEngine.PLAYER_DEATH_SCREEN, new GameOverScreen(graphics_frame));
 	}
 
 }

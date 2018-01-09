@@ -23,6 +23,14 @@ import org.viduus.charon.global.util.logging.OutputHandler;
  */
 public class GraphicsEngine extends AbstractGraphicsEngine {
 
+	public static final int
+		INTRO_SCREEN = 100,
+		MENU_SCREEN = 200,
+		UPGRADE_SCREEN = 300,
+		START_GAME_SCREEN = 400,
+		PLAYER_DEATH_SCREEN = 401,
+		PLAYER_VICTORY_SCREEN = 402;
+	
 	private ScreenManager screen_manager;
 	
 	/* (non-Javadoc)

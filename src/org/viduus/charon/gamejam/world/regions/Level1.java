@@ -8,6 +8,7 @@ package org.viduus.charon.gamejam.world.regions;
 import java.util.Random;
 
 import org.dyn4j.geometry.Vector2;
+import org.viduus.charon.gamejam.GameConstants.EngineFlags;
 import org.viduus.charon.gamejam.world.objects.character.nonplayable.Enemy;
 import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
 import org.viduus.charon.gamejam.world.wave.EnemyWave;
@@ -119,10 +120,12 @@ public class Level1 extends AutoSideScrollingRegion {
 
 	@Override
 	protected void onTick(TickEvent tick_event) {
-		if (active_enemy_wave != null)
-			active_enemy_wave.onTick(tick_event);
-		if (active_enemy_wave == null || active_enemy_wave.isFinished()) {
-			active_enemy_wave = createRandomWave();
+		if (world_engine.enabled(EngineFlags.SPAWN_WAVES)) {
+			if (active_enemy_wave != null)
+				active_enemy_wave.onTick(tick_event);
+			if (active_enemy_wave == null || active_enemy_wave.isFinished()) {
+				active_enemy_wave = createRandomWave();
+			}
 		}
 	}
 	
