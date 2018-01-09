@@ -5,12 +5,12 @@
  */
 package org.viduus.charon.gamejam.world.regions;
 
+import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.world.WorldEngine;
 import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.util.Size;
 import org.viduus.charon.global.player.PlayerParty;
-import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;
 
 /**
@@ -26,7 +26,7 @@ public class UpgradeRegion extends AutoSideScrollingRegion {
 	 * @param size
 	 */
 	public UpgradeRegion(WorldEngine world_engine, PlayerParty party) {
-		super(world_engine, "upgrade_region", new Size(384, 384));
+		super(world_engine, "upgrade_region", new Size(384, 384), new Vector2(0,0));
 		
 	}
 

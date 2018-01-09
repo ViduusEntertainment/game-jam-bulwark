@@ -19,11 +19,10 @@ import org.viduus.charon.gamejam.physics.twodimensional.WorldBounds;
 import org.viduus.charon.gamejam.physics.twodimensional.filters.WorldFilter;
 import org.viduus.charon.gamejam.physics.twodimensional.listeners.BoundsListener;
 import org.viduus.charon.gamejam.world.regions.Level1;
-import org.viduus.charon.gamejam.world.regions.UpgradeRegion;
 import org.viduus.charon.global.GameConstants.Property;
-import org.viduus.charon.global.physics.twodimensional.listeners.CollisionListener;
 import org.viduus.charon.global.GameInfo;
 import org.viduus.charon.global.graphics.util.Size;
+import org.viduus.charon.global.physics.twodimensional.listeners.CollisionListener;
 import org.viduus.charon.global.util.identification.Uid;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.character.playable.PlayableCharacter2D;
@@ -95,8 +94,7 @@ public class WorldEngine extends AbstractWorldEngine {
 		
 		// Create all the regions
 		BaseRegion[] regions = new BaseRegion[] {
-			new Level1(this, game_info.party),
-			new UpgradeRegion(this, game_info.party)
+			new Level1(this, game_info.party)
 		};
 		Arrays.stream(regions).forEach(region -> {
 			insert(region);

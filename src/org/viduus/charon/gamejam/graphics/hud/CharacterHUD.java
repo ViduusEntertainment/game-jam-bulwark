@@ -3,12 +3,12 @@
  * 
  * Created on Jan 6, 2018 by Ethan Toney
  */
-package org.viduus.charon.gamejam.graphics.ui.hud;
+package org.viduus.charon.gamejam.graphics.hud;
 
-import org.viduus.charon.gamejam.graphics.ui.components.FillInHealthBar;
-import org.viduus.charon.gamejam.graphics.ui.components.IconCountdown;
-import org.viduus.charon.gamejam.graphics.ui.components.IconCounter;
-import org.viduus.charon.gamejam.graphics.ui.components.IconHealthBar;
+import org.viduus.charon.gamejam.graphics.hud.components.FillInHealthBar;
+import org.viduus.charon.gamejam.graphics.hud.components.IconCountdown;
+import org.viduus.charon.gamejam.graphics.hud.components.IconCounter;
+import org.viduus.charon.gamejam.graphics.hud.components.IconHealthBar;
 import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
 import org.viduus.charon.global.AbstractGameSystems;
 import org.viduus.charon.global.GameConstants.Property;

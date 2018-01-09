@@ -231,9 +231,295 @@
             }
           }
         ]
+      },
+      {
+        "name": "vid:animation:hud/icons.ship_outline",
+        "sustain": false,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 1760,
+                  "y": 192
+                },
+                {
+                  "x": 1828,
+                  "y": 192
+                },
+                {
+                  "x": 1828,
+                  "y": 214
+                },
+                {
+                  "x": 1760,
+                  "y": 214
+                }
+              ],
+              "center": {
+                "x": 1760,
+                "y": 192
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "vid:animation:hud/icons.heart_full",
+        "sustain": false,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 1632,
+                  "y": 64
+                },
+                {
+                  "x": 1648,
+                  "y": 64
+                },
+                {
+                  "x": 1648,
+                  "y": 80
+                },
+                {
+                  "x": 1632,
+                  "y": 80
+                }
+              ],
+              "center": {
+                "x": 1632,
+                "y": 64
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            }
+          }
+        ]
       }
     ],
-    "tiled": [],
+    "tiled": [
+      {
+        "row_offset": 1000,
+        "location": {
+          "x": 1760,
+          "y": 224
+        },
+        "center": {
+          "x": 8,
+          "y": 8
+        },
+        "size": {
+          "width": 16,
+          "height": 16
+        },
+        "masks": {
+          "0": {
+            "collision": [],
+            "image": []
+          },
+          "1": {
+            "collision": [],
+            "image": []
+          },
+          "2": {
+            "collision": [],
+            "image": []
+          },
+          "3": {
+            "collision": [],
+            "image": []
+          },
+          "1000": {
+            "collision": [],
+            "image": []
+          },
+          "1001": {
+            "collision": [],
+            "image": []
+          },
+          "1002": {
+            "collision": [],
+            "image": []
+          },
+          "1003": {
+            "collision": [],
+            "image": []
+          },
+          "2000": {
+            "collision": [],
+            "image": []
+          },
+          "2001": {
+            "collision": [],
+            "image": []
+          },
+          "2002": {
+            "collision": [],
+            "image": []
+          },
+          "2003": {
+            "collision": [],
+            "image": []
+          }
+        },
+        "animations": [
+          {
+            "name": "vid:animation:hud/icons.select_off",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
+                  {
+                    "id": 2,
+                    "duration": 250
+                  }
+                ],
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:hud/icons.select_on",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
+                  {
+                    "id": 3,
+                    "duration": 250
+                  }
+                ],
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:hud/icons.shield_on",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
+                  {
+                    "id": 1000,
+                    "duration": 250
+                  }
+                ],
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:hud/icons.shield_off",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
+                  {
+                    "id": 2000,
+                    "duration": 250
+                  }
+                ],
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:hud/icons.armor_on",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
+                  {
+                    "id": 1001,
+                    "duration": 250
+                  }
+                ],
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:hud/icons.armor_off",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
+                  {
+                    "id": 2001,
+                    "duration": 250
+                  }
+                ],
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:hud/icons.thrusters_on",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
+                  {
+                    "id": 1002,
+                    "duration": 250
+                  }
+                ],
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:hud/icons.thrusters_off",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
+                  {
+                    "id": 2002,
+                    "duration": 250
+                  }
+                ],
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "free": []
   }
 }

@@ -21,7 +21,7 @@ import org.viduus.charon.global.input.controller.ControllerState;
  *
  * @author Ethan Toney
  */
-public class IntroScreen extends AbstractGameScreen {
+public class IntroScreen extends AbstractJamScreen {
 
 	private Animation<?> logo;
 	private Sound intro_sound;

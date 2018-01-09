@@ -1,0 +1,313 @@
+{
+  "sprite_map": "resources/img/sprites/atlas.png",
+  "size": {
+    "width": 2000,
+    "height": 1000
+  },
+  "hands": {
+    "left": [],
+    "right": []
+  },
+  "layouts": {
+    "static": [
+      {
+        "name": "vid:animation:hud/ui_boxes.select_lt",
+        "sustain": true,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 1760,
+                  "y": 224
+                },
+                {
+                  "x": 1762,
+                  "y": 224
+                },
+                {
+                  "x": 1762,
+                  "y": 226
+                },
+                {
+                  "x": 1760,
+                  "y": 226
+                }
+              ],
+              "center": {
+                "x": 1760,
+                "y": 224
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "vid:animation:hud/ui_boxes.select_t",
+        "sustain": true,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 1762,
+                  "y": 224
+                },
+                {
+                  "x": 1763,
+                  "y": 224
+                },
+                {
+                  "x": 1763,
+                  "y": 226
+                },
+                {
+                  "x": 1762,
+                  "y": 226
+                }
+              ],
+              "center": {
+                "x": 1762,
+                "y": 224
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "vid:animation:hud/ui_boxes.select_rt",
+        "sustain": true,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 1763,
+                  "y": 224
+                },
+                {
+                  "x": 1765,
+                  "y": 224
+                },
+                {
+                  "x": 1765,
+                  "y": 226
+                },
+                {
+                  "x": 1763,
+                  "y": 226
+                }
+              ],
+              "center": {
+                "x": 1763,
+                "y": 224
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "vid:animation:hud/ui_boxes.select_r",
+        "sustain": true,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 1763,
+                  "y": 226
+                },
+                {
+                  "x": 1765,
+                  "y": 226
+                },
+                {
+                  "x": 1765,
+                  "y": 227
+                },
+                {
+                  "x": 1763,
+                  "y": 227
+                }
+              ],
+              "center": {
+                "x": 1763,
+                "y": 226
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "vid:animation:hud/ui_boxes.select_rb",
+        "sustain": true,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 1763,
+                  "y": 227
+                },
+                {
+                  "x": 1765,
+                  "y": 227
+                },
+                {
+                  "x": 1765,
+                  "y": 229
+                },
+                {
+                  "x": 1763,
+                  "y": 229
+                }
+              ],
+              "center": {
+                "x": 1763,
+                "y": 227
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "vid:animation:hud/ui_boxes.select_b",
+        "sustain": true,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 1762,
+                  "y": 227
+                },
+                {
+                  "x": 1763,
+                  "y": 227
+                },
+                {
+                  "x": 1763,
+                  "y": 229
+                },
+                {
+                  "x": 1762,
+                  "y": 229
+                }
+              ],
+              "center": {
+                "x": 1762,
+                "y": 227
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "vid:animation:hud/ui_boxes.select_lb",
+        "sustain": true,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 1760,
+                  "y": 227
+                },
+                {
+                  "x": 1762,
+                  "y": 227
+                },
+                {
+                  "x": 1762,
+                  "y": 229
+                },
+                {
+                  "x": 1760,
+                  "y": 229
+                }
+              ],
+              "center": {
+                "x": 1760,
+                "y": 227
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "vid:animation:hud/ui_boxes.select_l",
+        "sustain": true,
+        "variants": [
+          {
+            "probability": 1,
+            "frames": {
+              "vertices": [
+                {
+                  "x": 1760,
+                  "y": 226
+                },
+                {
+                  "x": 1762,
+                  "y": 226
+                },
+                {
+                  "x": 1762,
+                  "y": 227
+                },
+                {
+                  "x": 1760,
+                  "y": 227
+                }
+              ],
+              "center": {
+                "x": 1760,
+                "y": 226
+              },
+              "masks": {
+                "collision": [],
+                "image": []
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "tiled": [],
+    "free": []
+  }
+}

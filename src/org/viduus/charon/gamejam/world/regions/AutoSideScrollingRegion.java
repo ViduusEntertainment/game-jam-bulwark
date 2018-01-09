@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.dyn4j.geometry.AABB;
+import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
 import org.viduus.charon.global.graphics.opengl.shaders.ShaderProgram;
@@ -57,8 +58,8 @@ public abstract class AutoSideScrollingRegion extends BaseRegion {
 	 * @param name
 	 * @param size
 	 */
-	public AutoSideScrollingRegion(AbstractWorldEngine world_engine, String name, Size size) {
-		super(world_engine, name, size);
+	public AutoSideScrollingRegion(AbstractWorldEngine world_engine, String name, Size size, Vector2 location) {
+		super(world_engine, name, size, location);
 		// TODO Auto-generated constructor stub
 	}
 	

@@ -7,6 +7,7 @@ package org.viduus.charon.gamejam.graphics.frames.menu;
 
 import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.GameSystems;
+import org.viduus.charon.gamejam.graphics.ScreenManager;
 import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
 import org.viduus.charon.gamejam.world.objects.weapons.range.DefaultGun;
 import org.viduus.charon.gamejam.world.objects.weapons.range.MissileGun1;
@@ -15,10 +16,10 @@ import org.viduus.charon.global.AbstractGameSystems;
 import org.viduus.charon.global.GameInfo;
 import org.viduus.charon.global.audio.AudioCategory;
 import org.viduus.charon.global.audio.Sound;
-import org.viduus.charon.global.graphics.AbstractGraphicsEngine;
 import org.viduus.charon.global.graphics.opengl.OpenGLFrame;
 import org.viduus.charon.global.graphics.opengl.components.OpenGLButton;
 import org.viduus.charon.global.graphics.screens.AbstractGameScreen;
+import org.viduus.charon.global.graphics.util.Size;
 import org.viduus.charon.global.input.controller.ControllerState;
 import org.viduus.charon.global.player.PlayerParty;
 
@@ -27,12 +28,13 @@ import org.viduus.charon.global.player.PlayerParty;
  *
  * @author Ethan Toney
  */
-public class MenuScreen extends AbstractGameScreen {
+public class MenuScreen extends AbstractJamScreen {
 
 	private OpenGLButton start_button;
 	private OpenGLButton exit_button;
 	private Sound menu_sound;
 	private OpenGLButton credits_button;
+	private Size screen_size;
 
 	/**
 	 * @param graphics_frame
@@ -67,7 +69,7 @@ public class MenuScreen extends AbstractGameScreen {
 				PlayerParty party = new PlayerParty();
 				
 				// add player to party
-				PlayerCharacter character_1 = new PlayerCharacter((GameSystems) game_systems, "Sauran", new Vector2(100, 100));
+				PlayerCharacter character_1 = new PlayerCharacter((GameSystems) game_systems, "Sauran", new Vector2(screen_size.width/2+100, 200));
 				DefaultGun character_1_primary = new DefaultGun(game_systems.world_engine, "Primary Weapon", character_1);
 				MissileGun2 character_1_secondary = new MissileGun2(game_systems.world_engine, "Secondary Weapon", character_1);
 				game_systems.world_engine.insert(character_1_primary);
@@ -80,7 +82,7 @@ public class MenuScreen extends AbstractGameScreen {
 				// start the game
 				GameInfo game_info = new GameInfo(GameSystems.GAME, party);
 				game_systems.startGame(game_info);
-				game_systems.graphics_engine.showFrame(AbstractGraphicsEngine.GAME_SCREEN);
+				game_systems.graphics_engine.showFrame(ScreenManager.UPGRADE_SCREEN);
 			}
 			else if (this.exit_button.hasFocus()) {
 				game_systems.closeApplication();
@@ -96,6 +98,7 @@ public class MenuScreen extends AbstractGameScreen {
 	 */
 	@Override
 	protected void onActivate(AbstractGameSystems game_systems) {
+		screen_size = game_systems.graphics_engine.getScreenSize();
 		menu_sound = game_systems.audio_engine.createSound(AudioCategory.MUSIC, "resources/audio/music/menu/main_menu.ogg", true);
 		menu_sound.setToLoop(true);
 		menu_sound.setVolume(0);

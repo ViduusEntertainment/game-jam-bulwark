@@ -7,6 +7,7 @@ package org.viduus.charon.gamejam.world.regions;
 
 import java.util.Random;
 
+import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.world.objects.character.nonplayable.Enemy;
 import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
 import org.viduus.charon.gamejam.world.wave.EnemyWave;
@@ -41,7 +42,7 @@ public class Level1 extends AutoSideScrollingRegion {
 	 * @param name
 	 */
 	public Level1(AbstractWorldEngine world_engine, PlayerParty party) {
-		super(world_engine, "level_1", new Size(5000, 384));
+		super(world_engine, "level_1", new Size(5000, 384), new Vector2(0, 0));
 		this.party = party;
 	}
 	
