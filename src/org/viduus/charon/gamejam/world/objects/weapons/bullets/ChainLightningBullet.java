@@ -5,6 +5,7 @@ import org.viduus.charon.global.event.events.HitByWeaponEvent;
 import org.viduus.charon.global.util.identification.Uid;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.Weapon2D;
+import org.viduus.charon.global.world.regions.BaseRegion;
 
 public class ChainLightningBullet extends Bullet{
 	
@@ -14,8 +15,8 @@ public class ChainLightningBullet extends Bullet{
 	 * @param location
 	 * @param sprite_map
 	 */
-	public ChainLightningBullet(AbstractWorldEngine world_engine, Uid uid, String name, Weapon2D owner, Vector2 location) {
-		super(world_engine, uid, name, owner, location, new Vector2(800, 0), "vid:animation:objects/bullets", "chain_lightning", 60f);
+	public ChainLightningBullet(AbstractWorldEngine world_engine, Uid uid, String name, Weapon2D owner, Vector2 location, float damage) {
+		super(world_engine, uid, name, owner, location, new Vector2(800, 0), "vid:animation:objects/bullets", "chain_lightning", damage);
 	}
 
 	@Override
@@ -24,4 +25,6 @@ public class ChainLightningBullet extends Bullet{
 		
 	}
 
+	@Override
+	public void onObjectAdded(BaseRegion region) {}
 }

@@ -1,6 +1,7 @@
 package org.viduus.charon.gamejam.world.objects.weapons.range;
 
-import org.viduus.charon.gamejam.world.objects.weapons.bullets.MissileBullet3;
+import org.dyn4j.geometry.Vector2;
+import org.viduus.charon.gamejam.world.objects.weapons.bullets.LaserBeam;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.event.events.HitByWeaponEvent;
 import org.viduus.charon.global.util.identification.Uid;
@@ -9,15 +10,15 @@ import org.viduus.charon.global.world.objects.twodimensional.Object2D;
 import org.viduus.charon.global.world.objects.twodimensional.character.Character2D;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.range.bullets.Bullet2D;
 
-public class MissileGun3 extends Gun {
+public class LaserGun extends Gun {
 
-	public MissileGun3(AbstractWorldEngine world_engine, String name, Character2D owner) {
-		super(world_engine, name, owner, 0f, Integer.MAX_VALUE);
+	public LaserGun(AbstractWorldEngine world_engine, String name, Character2D owner, float damage) {
+		super(world_engine, name, owner, .3f, damage, Integer.MAX_VALUE);
 	}
 
 	@Override
 	protected Bullet2D createBullet() {
-		return new MissileBullet3(world_engine, Uid.generateUid("vid:bullet", "MissileBullet3"), "MissileBullet3", this, getLocation().copy());
+		return new LaserBeam(world_engine, Uid.generateUid("vid:bullet", "LaserBeam"), "LaserBeam", this, getLocation().copy(), get(Property.DAMAGE));
 	}
 
 	@Override
@@ -29,6 +30,7 @@ public class MissileGun3 extends Gun {
 	@Override 
 	protected void setPhysicsProperties() {
 		Object2D owner = getOwner();
-		set(Property.LOCATION, owner.getVector2(Property.LOCATION).copy());
+		Vector2 location = owner.getVector2(Property.LOCATION).copy().add(40, 8);
+		set(Property.LOCATION, location);
 	}
 }

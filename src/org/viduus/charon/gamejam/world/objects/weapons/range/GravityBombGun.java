@@ -12,8 +12,8 @@ import org.viduus.charon.global.world.objects.twodimensional.weapon.range.bullet
 
 public class GravityBombGun extends Gun {
 
-	public GravityBombGun(AbstractWorldEngine world_engine, String name, Character2D owner) {
-		super(world_engine, name, owner, 15f, Integer.MAX_VALUE);
+	public GravityBombGun(AbstractWorldEngine world_engine, String name, Character2D owner, float damage) {
+		super(world_engine, name, owner, 15f, damage, Integer.MAX_VALUE);
 	}
 
 	@Override

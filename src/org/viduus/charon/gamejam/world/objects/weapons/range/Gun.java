@@ -7,11 +7,12 @@ import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;
 import org.viduus.charon.global.world.objects.twodimensional.character.Character2D;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.range.RangeWeapon2D;
+import org.viduus.charon.global.world.regions.BaseRegion;
 
 public abstract class Gun extends RangeWeapon2D{
 	
-	public Gun(AbstractWorldEngine world_engine, String name, Character2D owner, float cooldown, int projectile_count) {
-		super(world_engine, name, owner, new Vector2(), "vid:animation:objects/blank", "blank", cooldown, projectile_count);
+	public Gun(AbstractWorldEngine world_engine, String name, Character2D owner, float cooldown, float damage, int projectile_count) {
+		super(world_engine, name, owner, new Vector2(), "vid:animation:objects/blank", "blank", cooldown, damage,  projectile_count);
 	}
 	
 	@Override
@@ -21,4 +22,7 @@ public abstract class Gun extends RangeWeapon2D{
 		
 		return weld_joint;
 	}
+	
+	@Override
+	public void onObjectAdded(BaseRegion region) {}
 }

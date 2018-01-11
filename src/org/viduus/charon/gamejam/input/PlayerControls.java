@@ -62,7 +62,7 @@ public class PlayerControls extends PlayerController {
 		}
 		// Sprint
 		if( e.getKeyState(ControllerState.ACTION3) <= ControllerState.HELD_STATE ){
-			curr_state.setRoll(1);
+			curr_state.setShield(true);
 			state_changed = true;
 		}
 		// Rolling

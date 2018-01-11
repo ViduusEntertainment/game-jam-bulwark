@@ -42,9 +42,21 @@ public class VerticalUpgradeBox extends UIElement {
 		this.level = level;
 	}
 	
+	public void setMaxLevel(int level) {
+		this.max_level = level;
+	}
+	
+	public int getMaxLevel() {
+		return max_level;
+	}
+	
 	private Animation<?> getActiveAnimation() {
 //		return hasFocus() ? active_animation_on : active_animation_off;r
 		return active_animation_on;
+	}
+	
+	public int getNextPrice() {
+		return upgrade_cost[level];
 	}
 
 	/* (non-Javadoc)
@@ -56,7 +68,7 @@ public class VerticalUpgradeBox extends UIElement {
 		
 		int dr = 14;
 		int i=0;
-		for (; i<level ; i++) {
+		for (; i<level && i < max_level ; i++) {
 			animation_on.renderAnimation(graphics, d_sec, getX()+9, getY() - 16 - i*dr + 9, 1);
 		}
 		for (; i<max_level ; i++) {
@@ -76,7 +88,9 @@ public class VerticalUpgradeBox extends UIElement {
 			renderColoredSquare(graphics, left+1, top+1, width-1, height-1, 0.1333333333f, 0.1254901961f, 0.2039215686f, 0.7f);
 			renderSelect(graphics, d_sec, left, top, width, height);
 
-			renderTextAndAnimationScreen(graphics, d_sec, left, top, width, height, "Upgrade", "x", upgrade_cost[level], money);
+			if (level < max_level) {
+				renderTextAndAnimationScreen(graphics, d_sec, left, top, width, height, "Upgrade", "x", upgrade_cost[level], money);
+			}
 		}
 	}
 

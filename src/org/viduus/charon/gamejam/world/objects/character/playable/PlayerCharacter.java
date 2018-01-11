@@ -5,11 +5,24 @@
  */
 package org.viduus.charon.gamejam.world.objects.character.playable;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.GameSystems;
 import org.viduus.charon.gamejam.input.PlayerControls;
+import org.viduus.charon.gamejam.world.objects.effects.Shield;
+import org.viduus.charon.gamejam.world.objects.weapons.range.ChainGun;
+import org.viduus.charon.gamejam.world.objects.weapons.range.DefaultGun;
+import org.viduus.charon.gamejam.world.objects.weapons.range.MissileGun1;
+import org.viduus.charon.gamejam.world.objects.weapons.range.MissileGun2;
+import org.viduus.charon.gamejam.world.objects.weapons.range.ScatterGun;
+import org.viduus.charon.gamejam.world.ships.Fast;
+import org.viduus.charon.gamejam.world.ships.Heavy;
+import org.viduus.charon.gamejam.world.ships.Mk1;
+import org.viduus.charon.gamejam.world.ships.Mk2;
+import org.viduus.charon.gamejam.world.ships.Ship;
 import org.viduus.charon.global.AbstractGameSystems.PauseType;
-import org.viduus.charon.global.GameConstants;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.event.events.CollisionEvent;
 import org.viduus.charon.global.event.events.HitByWeaponEvent;
@@ -19,6 +32,7 @@ import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.input.InputEngine;
 import org.viduus.charon.global.input.controller.Controller;
 import org.viduus.charon.global.input.player.PlayerControlsState;
+import org.viduus.charon.global.util.identification.Uid;
 import org.viduus.charon.global.util.logging.ErrorHandler;
 import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.objects.twodimensional.character.playable.PlayableCharacter2D;
@@ -35,9 +49,9 @@ import org.viduus.charon.global.world.util.CooldownTimer;
 public class PlayerCharacter extends PlayableCharacter2D {
 
 	private static final float
-		DEFAULT_HEALTH = 5,
+		DEFAULT_HEALTH = 3,
 		DEFAULT_MANA = 100f,
-		DEFAULT_SPEED = 320.0f,
+		DEFAULT_SPEED = 500.0f,
 		SPRINT_CONSTANT = 1.5f,
 		STAMINA_SPRINT_CONSTANT = 20, // stam/sec
 		ROLL_CONSTANT = 3.0f,
@@ -66,15 +80,27 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	 */
 	private CooldownTimer primary_weapon_timer;
 	private CooldownTimer secondary_weapon_timer;
-	private CooldownTimer immunity_timer = new CooldownTimer(1f);
+	private CooldownTimer shield_timer = new CooldownTimer(15f);
+	private CooldownTimer immunity_timer = new CooldownTimer(0.5f);
 	
 	/*
 	 * Weapons
 	 */
 	private RangeWeapon2D primary_weapon;
 	private RangeWeapon2D secondary_weapon;
+	private HashSet<String> purchased_ships = new HashSet<>();
+	private Ship ship;
 	
-	private int money = 0;
+	private int money = 1000000;
+	
+	private float total_enemy_health = 10000.0f;
+	private float enemy_health = 10000.0f;
+	
+	private int thruster_upgrades = 0;
+	private int armor_upgrades = 0;
+	private int shield_upgrades = 0;
+	
+	private HashMap<String, Integer> upgrades = new HashMap<>();
 	
 	/**
 	 * @param world_engine
@@ -92,7 +118,11 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		super(game_systems.world_engine, name, location, DEFAULT_SPEED, DEFAULT_HEALTH, DEFAULT_MANA, DEFAULT_HEALTH, DEFAULT_MANA, DEFAULT_SPRITE_FILE, DEFAULT_SPRITE_ID);
 		
 		this.game_systems = game_systems;
-		this.<Boolean>set(Property.IS_MOVABLE, true);
+		this.<Boolean>set(Property.IS_MOVABLE, true);	
+		setShip(new Mk1());
+		purchased_ships.add("Mk1");
+		upgrades.put("Basic", 0);
+		upgrades.put("Missile1", 0);
 	}
 	
 	@Override
@@ -170,6 +200,7 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		
 		if (primary_weapon_timer != null) primary_weapon_timer.update(time_elapsed);
 		if (secondary_weapon_timer != null) secondary_weapon_timer.update(time_elapsed);
+		shield_timer.update(time_elapsed);
 		immunity_timer.update(time_elapsed);
 		
 		// Player hit Interaction key/button. Set this object to be in an interacting state
@@ -206,6 +237,13 @@ public class PlayerCharacter extends PlayableCharacter2D {
 			{
 				world_engine.queueEvent(this, new WeaponUseEvent(secondary_weapon), WeaponUseEvent.class);
 				secondary_weapon_timer.reset();
+			}
+		}
+		
+		if (controls_state.getShield()) {
+			if (!shield_timer.isCooling()) {
+				world_engine.queueEvent(this, new WeaponUseEvent(new Shield(world_engine, Uid.generateUid("vid:effect", "Shield"), "Shield", this, 15f - 15f * 0.05f * shield_upgrades)), WeaponUseEvent.class);
+				shield_timer.reset();
 			}
 		}
 		
@@ -299,6 +337,9 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		return secondary_weapon_timer;
 	}
 	
+	public CooldownTimer getShieldCooldownTimer() {
+		return shield_timer;
+	}
 	
 	public RangeWeapon2D getPrimaryWeapon() {
 		return primary_weapon;
@@ -306,6 +347,196 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	
 	public RangeWeapon2D getSecondaryWeapon() {
 		return secondary_weapon;
+	}
+	
+	public void setTotalEnemyHealth(float total_enemy_health) {
+		this.total_enemy_health = total_enemy_health;
+	}
+	
+	public float getPercentEnemyHealth() {
+		return enemy_health / total_enemy_health;
+	}
+	
+	
+	public float getEnemyHealth() {
+		return enemy_health;
+	}
+	
+	public void setEnemyHealth(float enemy_health) {
+		if (enemy_health < 0) enemy_health = 0;
+		this.enemy_health = enemy_health;
+	}
+	
+	private void setShip(Ship ship) {
+		this.ship = ship;
+		this.ship.setArmorUpgrade(armor_upgrades);
+		this.ship.setThrusterUpgrade(thruster_upgrades);
+		set(Property.HEALTH, ship.getHearts());
+		set(Property.SPEED, ship.getSpeed());
+	}
+
+	public boolean tryPurchaseShip(String name, int price) {
+		Ship ship = null;
+		switch (name) {
+		case "Mk1":
+			ship = new Mk1();
+			break;
+		case "Mk2":
+			ship = new Mk2();
+			break;
+		case "Heavy":
+			ship = new Heavy();
+			break;
+		case "Fast":
+			ship = new Fast();
+			break;
+		}
+		
+		if (purchased_ships.contains(name)) {
+			setShip(ship);
+			return true;
+		} else if (money >= price) {
+			takeMoney(price);
+			setShip(ship);
+			purchased_ships.add(name);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean tryPurchasePrimaryWeapon(String name, int price) {
+		RangeWeapon2D weapon = null;
+		switch (name) {
+		case "Basic":
+			weapon = new DefaultGun(world_engine, "Primary Weapon", this, calculateWeaponDamage(name, 100));
+			break;
+		case "Chain":
+			weapon = new ChainGun(world_engine, "Primary Weapon", this, calculateWeaponDamage(name, 60));
+			break;
+		case "Scatter":
+			weapon = new ScatterGun(world_engine, "Primary Weapon", this, calculateWeaponDamage(name, 100));
+			break;
+		case "Arc":
+			break;
+		case "ChargeLaser":
+			break;
+		}
+		
+		if (upgrades.containsKey(name)) {
+			world_engine.insert(weapon);
+			equipPrimaryWeapon(weapon);
+			return true;
+		} else if (money >= price) {
+			world_engine.insert(weapon);
+			takeMoney(price);
+			equipPrimaryWeapon(weapon);
+			upgrades.put(name, 0);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean tryPurchaseSecondaryWeapon(String name, int price) {
+		RangeWeapon2D weapon = null;
+		switch (name) {
+		case "BasicMissile":
+			weapon = new MissileGun1(world_engine, "Secondary Weapon", this, calculateWeaponDamage(name, 800));
+			break;
+		case "ScatterMissile":
+			weapon = new MissileGun2(world_engine, "Secondary Weapon", this, calculateWeaponDamage(name, 1000));
+			break;
+		case "Bomb":
+			break;
+		case "Emp":
+			break;
+		case "GravityOrb":
+			break;
+		}
+		
+		if (upgrades.containsKey(name)) {
+			world_engine.insert(weapon);
+			equipSecondaryWeapon(weapon);
+			return true;
+		} else if (money >= price) {
+			world_engine.insert(weapon);
+			takeMoney(price);
+			equipSecondaryWeapon(weapon);
+			upgrades.put(name, 0);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean tryUpgradeWeapon(String name, int price) {
+		int upgrade = upgrades.get(name);
+		if (money >= price && upgrade < 5) {
+			takeMoney(price);
+			upgrades.put(name, ++upgrade);
+			return true;
+		}
+		return false;
+	}
+	
+	public int getUpgradeLevel(String name) {
+		return upgrades.get(name);
+	}
+	
+	private float calculateWeaponDamage(String name, float base_damage) { 
+		float new_damage = base_damage;
+		
+		if (upgrades.containsKey(name)) {
+			for (int i = 0; i < upgrades.get(name); i++) {
+				new_damage += new_damage * 0.3f;
+			}
+		}
+		
+		return new_damage;
+	}
+	
+	public boolean upgradeArmor(int price) {
+		if (money >= price && armor_upgrades < 3) {
+			takeMoney(price);
+			armor_upgrades++;
+			setShip(ship);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean upgradeShield(int price) {
+		if (money >= price && shield_upgrades < 5) {
+			takeMoney(price);
+			shield_upgrades++;
+			shield_timer.setCooldown(15f - 15f * 0.05f * shield_upgrades);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean upgradeThruster(int price) {
+		if (money >= price && thruster_upgrades < 5) {
+			takeMoney(price);
+			thruster_upgrades++;
+			setShip(ship);
+			return true;
+		}
+		return false;
+	}
+	
+	public int getArmorUpgrades() {
+		return armor_upgrades;
+	}
+	
+	public int getThrusterUpgrades() {
+		return thruster_upgrades;
+	}
+	
+	public int getShieldUpgrades() {
+		return shield_upgrades;
+	}
+	
+	public Ship getShip() {
+		return ship;
 	}
 	
 	/* (non-Javadoc)
@@ -338,10 +569,34 @@ public class PlayerCharacter extends PlayableCharacter2D {
 
 	@Override
 	public void onWeaponUse(WeaponUseEvent weapon_use_event) {
-		RangeWeapon2D weapon = (RangeWeapon2D)weapon_use_event.weapon;
-		Bullet2D bullet = weapon.getBullet();
-		world_engine.insert(bullet);
-		this.<BaseRegion>get(Property.CURRENT_REGION).queueEntityForAddition(bullet);
+		if (weapon_use_event.weapon instanceof Shield) {
+			world_engine.insert(weapon_use_event.weapon);
+			this.<BaseRegion>get(Property.CURRENT_REGION).queueEntityForAddition(weapon_use_event.weapon);
+		}
+		else if (weapon_use_event.weapon instanceof RangeWeapon2D) {
+			RangeWeapon2D weapon = (RangeWeapon2D)weapon_use_event.weapon;
+			if (weapon instanceof ScatterGun) {
+				Bullet2D bullet1 = weapon.getBullet();
+				bullet1.setLinearVelocity(new Vector2(800, -100));
+				world_engine.insert(bullet1);
+				this.<BaseRegion>get(Property.CURRENT_REGION).queueEntityForAddition(bullet1);
+				
+				Bullet2D bullet2 = weapon.getBullet();
+				bullet2.setLinearVelocity(new Vector2(800, 0));
+				world_engine.insert(bullet2);
+				this.<BaseRegion>get(Property.CURRENT_REGION).queueEntityForAddition(bullet2);
+				
+				Bullet2D bullet3 = weapon.getBullet();
+				bullet3.setLinearVelocity(new Vector2(800, 100));
+				world_engine.insert(bullet3);
+				this.<BaseRegion>get(Property.CURRENT_REGION).queueEntityForAddition(bullet3);
+			}
+			else {
+				Bullet2D bullet = weapon.getBullet();
+				world_engine.insert(bullet);
+				this.<BaseRegion>get(Property.CURRENT_REGION).queueEntityForAddition(bullet);
+			}
+		}
 	}
 
 	@Override
@@ -355,5 +610,10 @@ public class PlayerCharacter extends PlayableCharacter2D {
 			set(Property.HEALTH, getFloat(Property.HEALTH) - 1);
 			immunity_timer.reset();
 		}
+	}
+	
+	@Override
+	public void onObjectAdded(BaseRegion region) {
+		
 	}
 }

@@ -29,7 +29,7 @@ public class Wavey1Wave extends EnemyWave {
 		waypoints[8] = new Vector2(world_width - step * 8, 350);
 		waypoints[9] = new Vector2(world_width - step * 9, 370);
 		waypoints[10] = new Vector2(world_width - step * 10, 390);
-		waypoints[11] = new Vector2(-1000, 400);
+		waypoints[11] = new Vector2(-1000, 600);
 		
 		for (int i = 0; i < 13; i++) {
 			enemies.add(createRandomEnemy((new Vector2(world_engine.getWorldSize().width + (11 - i) * 50, 20)), waypoints));

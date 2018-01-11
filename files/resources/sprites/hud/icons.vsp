@@ -339,6 +339,14 @@
             "collision": [],
             "image": []
           },
+		  "4": {
+            "collision": [],
+            "image": []
+          },
+		  "5": {
+            "collision": [],
+            "image": []
+          },
           "1000": {
             "collision": [],
             "image": []
@@ -355,6 +363,14 @@
             "collision": [],
             "image": []
           },
+		  "1004": {
+            "collision": [],
+            "image": []
+          },
+		  "1005": {
+            "collision": [],
+            "image": []
+          },
           "2000": {
             "collision": [],
             "image": []
@@ -368,6 +384,14 @@
             "image": []
           },
           "2003": {
+            "collision": [],
+            "image": []
+          },
+		  "2004": {
+            "collision": [],
+            "image": []
+          },
+		  "2005": {
             "collision": [],
             "image": []
           }
@@ -508,6 +532,42 @@
                 "frames": [
                   {
                     "id": 2002,
+                    "duration": 250
+                  }
+                ],
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          },
+		  {
+            "name": "vid:animation:hud/icons.check_on",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
+                  {
+                    "id": 4,
+                    "duration": 250
+                  }
+                ],
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          },
+          {
+            "name": "vid:animation:hud/icons.check_off",
+            "sustain": true,
+            "variants": [
+              {
+                "probability": 1,
+                "frames": [
+                  {
+                    "id": 5,
                     "duration": 250
                   }
                 ],

@@ -6,6 +6,7 @@ import org.viduus.charon.global.physics.twodimensional.filters.Bullet2DFilter;
 import org.viduus.charon.global.util.identification.Uid;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.Weapon2D;
+import org.viduus.charon.global.world.regions.BaseRegion;
 
 public class MissileBullet3 extends Bullet {
 
@@ -15,8 +16,8 @@ public class MissileBullet3 extends Bullet {
 	 * @param location
 	 * @param sprite_map
 	 */
-	public MissileBullet3(AbstractWorldEngine world_engine, Uid uid, String name, Weapon2D owner, Vector2 location) {
-		super(world_engine, uid, name, owner, location, new Vector2(800, 0), "vid:animation:objects/bullets", "player_missile_3", 600f);
+	public MissileBullet3(AbstractWorldEngine world_engine, Uid uid, String name, Weapon2D owner, Vector2 location, float damage) {
+		super(world_engine, uid, name, owner, location, new Vector2(800, 0), "vid:animation:objects/bullets", "player_missile_3", damage);
 		setCollisionFilter(new Bullet2DFilter(this));
 	}
 
@@ -26,4 +27,6 @@ public class MissileBullet3 extends Bullet {
 		
 	}
 
+	@Override
+	public void onObjectAdded(BaseRegion region) {}
 }

@@ -1,0 +1,779 @@
+{
+  "metadata": {
+    "original": {
+      "collision": [
+        {
+          "vertices": [
+            {
+              "x": 48,
+              "y": 47,
+              "metadata": {
+                "normalizedX": 0.07628676,
+                "normalizedY": 0.186206892
+              }
+            },
+            {
+              "x": 77,
+              "y": 47,
+              "metadata": {
+                "normalizedX": 0.120404415,
+                "normalizedY": 0.186206892
+              }
+            },
+            {
+              "x": 77,
+              "y": 78,
+              "metadata": {
+                "normalizedX": 0.120404415,
+                "normalizedY": 0.305747122
+              }
+            },
+            {
+              "x": 48,
+              "y": 78,
+              "metadata": {
+                "normalizedX": 0.07628676,
+                "normalizedY": 0.305747122
+              }
+            }
+          ],
+          "metadata": {
+            "name": "Collision Mask (0)"
+          }
+        },
+        {
+          "vertices": [
+            {
+              "x": 164,
+              "y": 36,
+              "metadata": {
+                "normalizedX": 0.257352948,
+                "normalizedY": 0.142528743
+              }
+            },
+            {
+              "x": 219,
+              "y": 36,
+              "metadata": {
+                "normalizedX": 0.3428309,
+                "normalizedY": 0.142528743
+              }
+            },
+            {
+              "x": 219,
+              "y": 89,
+              "metadata": {
+                "normalizedX": 0.3428309,
+                "normalizedY": 0.3494253
+              }
+            },
+            {
+              "x": 164,
+              "y": 89,
+              "metadata": {
+                "normalizedX": 0.257352948,
+                "normalizedY": 0.3494253
+              }
+            }
+          ],
+          "metadata": {
+            "name": "Collision Mask (1)"
+          }
+        },
+        {
+          "vertices": [
+            {
+              "x": 280,
+              "y": 22,
+              "metadata": {
+                "normalizedX": 0.4375,
+                "normalizedY": 0.08735632
+              }
+            },
+            {
+              "x": 360,
+              "y": 22,
+              "metadata": {
+                "normalizedX": 0.5625,
+                "normalizedY": 0.08735632
+              }
+            },
+            {
+              "x": 360,
+              "y": 104,
+              "metadata": {
+                "normalizedX": 0.5625,
+                "normalizedY": 0.4091954
+              }
+            },
+            {
+              "x": 280,
+              "y": 104,
+              "metadata": {
+                "normalizedX": 0.4375,
+                "normalizedY": 0.4091954
+              }
+            }
+          ],
+          "metadata": {
+            "name": "Collision Mask (2)"
+          }
+        },
+        {
+          "vertices": [
+            {
+              "x": 404,
+              "y": 15,
+              "metadata": {
+                "normalizedX": 0.632352948,
+                "normalizedY": 0.0597701147
+              }
+            },
+            {
+              "x": 495,
+              "y": 15,
+              "metadata": {
+                "normalizedX": 0.773897052,
+                "normalizedY": 0.0597701147
+              }
+            },
+            {
+              "x": 495,
+              "y": 112,
+              "metadata": {
+                "normalizedX": 0.773897052,
+                "normalizedY": 0.439080447
+              }
+            },
+            {
+              "x": 404,
+              "y": 112,
+              "metadata": {
+                "normalizedX": 0.632352948,
+                "normalizedY": 0.439080447
+              }
+            }
+          ],
+          "metadata": {
+            "name": "Collision Mask (3)"
+          }
+        },
+        {
+          "vertices": [
+            {
+              "x": 518,
+              "y": 7,
+              "metadata": {
+                "normalizedX": 0.8106618,
+                "normalizedY": 0.0275862068
+              }
+            },
+            {
+              "x": 629,
+              "y": 7,
+              "metadata": {
+                "normalizedX": 0.9834559,
+                "normalizedY": 0.0275862068
+              }
+            },
+            {
+              "x": 629,
+              "y": 114,
+              "metadata": {
+                "normalizedX": 0.9834559,
+                "normalizedY": 0.445977
+              }
+            },
+            {
+              "x": 518,
+              "y": 114,
+              "metadata": {
+                "normalizedX": 0.8106618,
+                "normalizedY": 0.445977
+              }
+            }
+          ],
+          "metadata": {
+            "name": "Collision Mask (4)"
+          }
+        }
+      ],
+      "image": [
+        
+      ]
+    },
+    "convex": {
+      "collision": [
+        {
+          "vertices": [
+            {
+              "x": 48,
+              "y": 47,
+              "metadata": {
+                "normalizedX": 0.07628676,
+                "normalizedY": 0.186206892
+              }
+            },
+            {
+              "x": 77,
+              "y": 47,
+              "metadata": {
+                "normalizedX": 0.120404415,
+                "normalizedY": 0.186206892
+              }
+            },
+            {
+              "x": 77,
+              "y": 78,
+              "metadata": {
+                "normalizedX": 0.120404415,
+                "normalizedY": 0.305747122
+              }
+            },
+            {
+              "x": 48,
+              "y": 78,
+              "metadata": {
+                "normalizedX": 0.07628676,
+                "normalizedY": 0.305747122
+              }
+            }
+          ],
+          "metadata": {
+            "name": "Collision Mask (0)"
+          }
+        },
+        {
+          "vertices": [
+            {
+              "x": 164,
+              "y": 36,
+              "metadata": {
+                "normalizedX": 0.257352948,
+                "normalizedY": 0.142528743
+              }
+            },
+            {
+              "x": 219,
+              "y": 36,
+              "metadata": {
+                "normalizedX": 0.3428309,
+                "normalizedY": 0.142528743
+              }
+            },
+            {
+              "x": 219,
+              "y": 89,
+              "metadata": {
+                "normalizedX": 0.3428309,
+                "normalizedY": 0.3494253
+              }
+            },
+            {
+              "x": 164,
+              "y": 89,
+              "metadata": {
+                "normalizedX": 0.257352948,
+                "normalizedY": 0.3494253
+              }
+            }
+          ],
+          "metadata": {
+            "name": "Collision Mask (1)"
+          }
+        },
+        {
+          "vertices": [
+            {
+              "x": 280,
+              "y": 22,
+              "metadata": {
+                "normalizedX": 0.4375,
+                "normalizedY": 0.08735632
+              }
+            },
+            {
+              "x": 360,
+              "y": 22,
+              "metadata": {
+                "normalizedX": 0.5625,
+                "normalizedY": 0.08735632
+              }
+            },
+            {
+              "x": 360,
+              "y": 104,
+              "metadata": {
+                "normalizedX": 0.5625,
+                "normalizedY": 0.4091954
+              }
+            },
+            {
+              "x": 280,
+              "y": 104,
+              "metadata": {
+                "normalizedX": 0.4375,
+                "normalizedY": 0.4091954
+              }
+            }
+          ],
+          "metadata": {
+            "name": "Collision Mask (2)"
+          }
+        },
+        {
+          "vertices": [
+            {
+              "x": 404,
+              "y": 15,
+              "metadata": {
+                "normalizedX": 0.632352948,
+                "normalizedY": 0.0597701147
+              }
+            },
+            {
+              "x": 495,
+              "y": 15,
+              "metadata": {
+                "normalizedX": 0.773897052,
+                "normalizedY": 0.0597701147
+              }
+            },
+            {
+              "x": 495,
+              "y": 112,
+              "metadata": {
+                "normalizedX": 0.773897052,
+                "normalizedY": 0.439080447
+              }
+            },
+            {
+              "x": 404,
+              "y": 112,
+              "metadata": {
+                "normalizedX": 0.632352948,
+                "normalizedY": 0.439080447
+              }
+            }
+          ],
+          "metadata": {
+            "name": "Collision Mask (3)"
+          }
+        },
+        {
+          "vertices": [
+            {
+              "x": 518,
+              "y": 7,
+              "metadata": {
+                "normalizedX": 0.8106618,
+                "normalizedY": 0.0275862068
+              }
+            },
+            {
+              "x": 629,
+              "y": 7,
+              "metadata": {
+                "normalizedX": 0.9834559,
+                "normalizedY": 0.0275862068
+              }
+            },
+            {
+              "x": 629,
+              "y": 114,
+              "metadata": {
+                "normalizedX": 0.9834559,
+                "normalizedY": 0.445977
+              }
+            },
+            {
+              "x": 518,
+              "y": 114,
+              "metadata": {
+                "normalizedX": 0.8106618,
+                "normalizedY": 0.445977
+              }
+            }
+          ],
+          "metadata": {
+            "name": "Collision Mask (4)"
+          }
+        }
+      ],
+      "image": [
+        
+      ]
+    }
+  },
+  "sprite_map": "resources/img/sprites/effects.png",
+  "size": {
+    "width": 640,
+    "height": 256
+  },
+  "hands": {
+    "left": [
+      
+    ],
+    "right": [
+      
+    ]
+  },
+  "layouts": {
+    "static": [
+      
+    ],
+    "tiled": [
+      {
+        "metadata": {
+          "rows": 2,
+          "columns": 5,
+          "name": "effects"
+        },
+        "row_offset": 1000,
+        "location": {
+          "x": 0,
+          "y": 0,
+          "metadata": {
+            
+          }
+        },
+        "center": {
+          "x": 64,
+          "y": 64,
+          "metadata": {
+            
+          }
+        },
+        "size": {
+          "width": 128,
+          "height": 128
+        },
+        "masks": {
+          "0": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 106,
+                    "y": 104,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 22,
+                    "y": 104,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 22,
+                    "y": 18,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 106,
+                    "y": 18,
+                    "metadata": {
+                      
+                    }
+                  }
+                ],
+                "metadata": {
+                  
+                }
+              }
+            ],
+            "image": [
+              
+            ]
+          },
+          "1": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 233,
+                    "y": 105,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 150,
+                    "y": 105,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 150,
+                    "y": 18,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 233,
+                    "y": 18,
+                    "metadata": {
+                      
+                    }
+                  }
+                ],
+                "metadata": {
+                  
+                }
+              }
+            ],
+            "image": [
+              
+            ]
+          },
+          "2": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 362,
+                    "y": 104,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 279,
+                    "y": 104,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 279,
+                    "y": 20,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 362,
+                    "y": 20,
+                    "metadata": {
+                      
+                    }
+                  }
+                ],
+                "metadata": {
+                  
+                }
+              }
+            ],
+            "image": [
+              
+            ]
+          },
+          "3": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 488,
+                    "y": 110,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 398,
+                    "y": 110,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 398,
+                    "y": 21,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 488,
+                    "y": 21,
+                    "metadata": {
+                      
+                    }
+                  }
+                ],
+                "metadata": {
+                  
+                }
+              }
+            ],
+            "image": [
+              
+            ]
+          },
+          "4": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 620,
+                    "y": 110,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 530,
+                    "y": 110,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 530,
+                    "y": 20,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 620,
+                    "y": 20,
+                    "metadata": {
+                      
+                    }
+                  }
+                ],
+                "metadata": {
+                  
+                }
+              }
+            ],
+            "image": [
+              
+            ]
+          },
+          "1000": {
+            "collision": [
+              
+            ],
+            "image": [
+              
+            ]
+          },
+          "1001": {
+            "collision": [
+              
+            ],
+            "image": [
+              
+            ]
+          },
+          "1002": {
+            "collision": [
+              
+            ],
+            "image": [
+              
+            ]
+          },
+          "1003": {
+            "collision": [
+              
+            ],
+            "image": [
+              
+            ]
+          },
+          "1004": {
+            "collision": [
+              
+            ],
+            "image": [
+              
+            ]
+          }
+        },
+        "animations": [
+          {
+            "name": "vid:animations:object/effects.shield-idle",
+            "sustain": true,
+            "variants": [
+              {
+                "frames": [
+                  {
+                    "id": 0,
+                    "duration": 250
+                  },
+                  {
+                    "id": 1,
+                    "duration": 250
+                  },
+                  {
+                    "id": 2,
+                    "duration": 250
+                  },
+                  {
+                    "id": 3,
+                    "duration": 250
+                  },
+                  {
+                    "id": 4,
+                    "duration": 250
+                  }
+                ],
+                "probability": 1.0,
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          },
+          {
+            "name": "vid:animations:object/effects.explosion-idle",
+            "sustain": true,
+            "variants": [
+              {
+                "frames": [
+                  {
+                    "id": 1000,
+                    "duration": 250
+                  },
+                  {
+                    "id": 1001,
+                    "duration": 250
+                  },
+                  {
+                    "id": 1002,
+                    "duration": 250
+                  },
+                  {
+                    "id": 1003,
+                    "duration": 250
+                  },
+                  {
+                    "id": 1004,
+                    "duration": 250
+                  }
+                ],
+                "probability": 1.0,
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "free": [
+      
+    ]
+  }
+}

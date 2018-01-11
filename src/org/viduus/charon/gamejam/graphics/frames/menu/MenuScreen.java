@@ -8,18 +8,24 @@ package org.viduus.charon.gamejam.graphics.frames.menu;
 import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.GameSystems;
 import org.viduus.charon.gamejam.graphics.GraphicsEngine;
+import org.viduus.charon.gamejam.graphics.SideScrollingBackground;
 import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
 import org.viduus.charon.gamejam.world.objects.weapons.range.DefaultGun;
-import org.viduus.charon.gamejam.world.objects.weapons.range.MissileGun2;
+import org.viduus.charon.gamejam.world.objects.weapons.range.MissileGun1;
 import org.viduus.charon.global.AbstractGameSystems;
 import org.viduus.charon.global.GameInfo;
-import org.viduus.charon.global.audio.AudioCategory;
-import org.viduus.charon.global.audio.Sound;
+import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.opengl.OpenGLFrame;
+import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
 import org.viduus.charon.global.graphics.opengl.components.OpenGLButton;
 import org.viduus.charon.global.graphics.util.Size;
 import org.viduus.charon.global.input.controller.ControllerState;
 import org.viduus.charon.global.player.PlayerParty;
+import org.viduus.charon.global.util.ResourceLoader;
+import org.viduus.charon.global.util.logging.ErrorHandler;
+
+import kuusisto.tinysound.Sound;
+import kuusisto.tinysound.TinySound;
 
 /**
  * 
@@ -33,6 +39,7 @@ public class MenuScreen extends AbstractJamScreen {
 	private Sound menu_sound;
 	private OpenGLButton credits_button;
 	private Size screen_size;
+	private SideScrollingBackground background;
 
 	/**
 	 * @param graphics_frame
@@ -56,6 +63,16 @@ public class MenuScreen extends AbstractJamScreen {
 		exit_button.setBackgroundColor(182, 182, 182);
 		exit_button.setHoverColor(83, 119, 215);
 		add(exit_button);
+		
+		background = new SideScrollingBackground();
+		
+		setOpaqueBackground(false);
+	}
+	
+	@Override
+	public void render(OpenGLGraphics graphics, float d_sec) {
+		background.render(graphics, d_sec);
+		super.render(graphics, d_sec);
 	}
 	
 	@Override
@@ -68,8 +85,8 @@ public class MenuScreen extends AbstractJamScreen {
 				
 				// add player to party
 				PlayerCharacter character_1 = new PlayerCharacter((GameSystems) game_systems, "Sauran", new Vector2(screen_size.width/2+100, 200));
-				DefaultGun character_1_primary = new DefaultGun(game_systems.world_engine, "Primary Weapon", character_1);
-				MissileGun2 character_1_secondary = new MissileGun2(game_systems.world_engine, "Secondary Weapon", character_1);
+				DefaultGun character_1_primary = new DefaultGun(game_systems.world_engine, "Primary Weapon", character_1, 100);
+				MissileGun1 character_1_secondary = new MissileGun1(game_systems.world_engine, "Secondary Weapon", character_1, 800);
 				game_systems.world_engine.insert(character_1_primary);
 				game_systems.world_engine.insert(character_1_secondary);
 				game_systems.world_engine.insert(character_1);
@@ -96,11 +113,20 @@ public class MenuScreen extends AbstractJamScreen {
 	 */
 	@Override
 	protected void onActivate(AbstractGameSystems game_systems) {
+		background.addBackgroundSet(-8, 20, new Animation<?>[] {
+			(Animation<?>) game_systems.graphics_engine.resolve("vid:animation:backgrounds/city_landscape.back_1"),
+			(Animation<?>) game_systems.graphics_engine.resolve("vid:animation:backgrounds/city_landscape.back_2"),
+			(Animation<?>) game_systems.graphics_engine.resolve("vid:animation:backgrounds/city_landscape.back_3"),
+		});
+		background.addBackgroundSet(70, 30, new Animation<?>[] {
+			(Animation<?>) game_systems.graphics_engine.resolve("vid:animation:backgrounds/city_landscape.front_1"),
+			(Animation<?>) game_systems.graphics_engine.resolve("vid:animation:backgrounds/city_landscape.front_2"),
+			(Animation<?>) game_systems.graphics_engine.resolve("vid:animation:backgrounds/city_landscape.front_3"),
+		});
+		
 		screen_size = game_systems.graphics_engine.getScreenSize();
-		menu_sound = game_systems.audio_engine.createSound(AudioCategory.MUSIC, "resources/audio/music/menu/main_menu.ogg", true);
-		menu_sound.setToLoop(true);
-		menu_sound.setVolume(0);
-		game_systems.audio_engine.playSound(menu_sound);
+		menu_sound = ErrorHandler.tryRun(() -> TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/music/menu/main_menu.ogg")));
+		menu_sound.play();
 	}
 
 	/* (non-Javadoc)
@@ -108,7 +134,7 @@ public class MenuScreen extends AbstractJamScreen {
 	 */
 	@Override
 	protected void onDeactivate(AbstractGameSystems game_systems) {
-		game_systems.audio_engine.stopSound(menu_sound);
+		menu_sound.unload();
 	}
 
 	/* (non-Javadoc)

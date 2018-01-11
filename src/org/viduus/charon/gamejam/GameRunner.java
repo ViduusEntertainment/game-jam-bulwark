@@ -5,12 +5,12 @@
  */
 package org.viduus.charon.gamejam;
 
+import org.viduus.charon.gamejam.audio.AudioEngine;
 import org.viduus.charon.gamejam.event.EventEngine;
 import org.viduus.charon.gamejam.graphics.GraphicsEngine;
 import org.viduus.charon.gamejam.item.ItemEngine;
 import org.viduus.charon.gamejam.quest.QuestEngine;
 import org.viduus.charon.gamejam.world.WorldEngine;
-import org.viduus.charon.global.audio.AudioEngine;
 import org.viduus.charon.global.input.InputEngine;
 import org.viduus.charon.global.input.controller.ControllerInputListener;
 import org.viduus.charon.global.input.controller.ControllerState;

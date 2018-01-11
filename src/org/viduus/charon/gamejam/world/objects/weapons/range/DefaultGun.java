@@ -12,13 +12,13 @@ import org.viduus.charon.global.world.objects.twodimensional.weapon.range.bullet
 
 public class DefaultGun extends Gun {
 
-	public DefaultGun(AbstractWorldEngine world_engine, String name, Character2D owner) {
-		super(world_engine, name, owner, .3f, Integer.MAX_VALUE);
+	public DefaultGun(AbstractWorldEngine world_engine, String name, Character2D owner, float damage) {
+		super(world_engine, name, owner, .3f, damage, Integer.MAX_VALUE);
 	}
 
 	@Override
 	protected Bullet2D createBullet() {
-		return new DefaultBullet(world_engine, Uid.generateUid("vid:bullet", "DefaultBullet"), "DefaultBullet", this, getLocation().copy());
+		return new DefaultBullet(world_engine, Uid.generateUid("vid:bullet", "DefaultBullet"), "DefaultBullet", this, getLocation().copy(), get(Property.DAMAGE));
 	}
 
 	@Override

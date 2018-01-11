@@ -108,4 +108,7 @@ public class ShipSelectionBox extends UIElement {
 		setSize(87, 43);
 	}
 	
+	public void setPurchased() {
+		is_purchased = true;
+	}
 }

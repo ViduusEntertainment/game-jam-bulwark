@@ -6,6 +6,7 @@ import org.viduus.charon.global.physics.twodimensional.filters.Bullet2DFilter;
 import org.viduus.charon.global.util.identification.Uid;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.Weapon2D;
+import org.viduus.charon.global.world.regions.BaseRegion;
 
 public class GravityBombBullet extends Bullet {
 
@@ -26,4 +27,6 @@ public class GravityBombBullet extends Bullet {
 		
 	}
 
+	@Override
+	public void onObjectAdded(BaseRegion region) {}
 }

@@ -40,6 +40,18 @@ public class HorizontalUpgradeBox extends UIElement {
 		this.level = level;
 	}
 	
+	public void setPurchased() {
+		is_purchased = true;
+	}
+	
+	public boolean getPurchased() {
+		return is_purchased;
+	}
+	
+	public int getNextPrice() {
+		return upgrade_cost[level];
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.viduus.charon.gamejam.graphics.ui.UIElement#render(org.viduus.charon.global.graphics.opengl.OpenGLGraphics, float)
 	 */
@@ -60,10 +72,12 @@ public class HorizontalUpgradeBox extends UIElement {
 			renderColoredSquare(graphics, getX()+1, getY()+1, getWidth()-1, getHeight()-1, 0.1333333333f, 0.1254901961f, 0.2039215686f, 0.7f);
 			renderSelect(graphics, d_sec, getX(), getY(), getWidth(), getHeight());
 			
-			if (!is_purchased) {
-				renderTextAndAnimationScreen(graphics, d_sec, x, y, width, height, "Unlock", "x", purchase_cost, money);
-			} else {
-				renderTextAndAnimationScreen(graphics, d_sec, x, y, width, height, "Upgrade", "x", upgrade_cost[level], money);
+			if (level < 5) {
+				if (!is_purchased) {
+					renderTextAndAnimationScreen(graphics, d_sec, x, y, width, height, "Unlock", "x", purchase_cost, money);
+				} else {
+					renderTextAndAnimationScreen(graphics, d_sec, x, y, width, height, "Upgrade", "x", upgrade_cost[level], money);
+				}
 			}
 		}
 	}

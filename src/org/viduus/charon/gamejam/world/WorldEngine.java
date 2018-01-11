@@ -21,12 +21,15 @@ import org.viduus.charon.gamejam.physics.twodimensional.listeners.BoundsListener
 import org.viduus.charon.gamejam.world.regions.Level1;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.GameInfo;
+import org.viduus.charon.global.audio.AudioCategory;
+import org.viduus.charon.global.audio.Sound;
 import org.viduus.charon.global.graphics.util.Size;
 import org.viduus.charon.global.physics.twodimensional.listeners.CollisionListener;
 import org.viduus.charon.global.util.identification.Uid;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.character.playable.PlayableCharacter2D;
 import org.viduus.charon.global.world.regions.BaseRegion;
+import org.viduus.charon.global.world.util.CooldownTimer;
 
 /**
  * 
@@ -42,7 +45,6 @@ public class WorldEngine extends AbstractWorldEngine {
 	 */
 	public WorldEngine(int fps) {
 		super(fps);
-		// TODO Auto-generated constructor stub
 	}
 
 	/* (non-Javadoc)
@@ -85,6 +87,11 @@ public class WorldEngine extends AbstractWorldEngine {
 		return "org.viduus.charon.gamejam.world.objects.weapons.bullets";
 	}
 
+	@Override
+	protected String getEffectResolverClassPath() {
+		return "org.viduus.charon.gamejam.world.objects.effects";
+	}
+
 	/* (non-Javadoc)
 	 * @see org.viduus.charon.global.GameEngine#onLoadGame(org.viduus.charon.global.GameInfo)
 	 */
@@ -94,7 +101,7 @@ public class WorldEngine extends AbstractWorldEngine {
 		
 		// Create all the regions
 		BaseRegion[] regions = new BaseRegion[] {
-			new Level1(this, game_info.party)
+			new Level1(this, game_systems.graphics_engine, game_info.party)
 		};
 		Arrays.stream(regions).forEach(region -> {
 			insert(region);
@@ -123,7 +130,7 @@ public class WorldEngine extends AbstractWorldEngine {
 
 	@Override
 	protected World createWorld() {
-		World world = new World(new WorldBounds(new AABB(-50, -2000, 2000, 2000)));
+		World world = new World(new WorldBounds(new AABB(-50, -50, 2000, 466)));
 		world.setGravity(new Vector2(0, 0));
 		world.addListener(new CollisionListener(this));
 		world.addListener(new BoundsListener(this));
@@ -139,38 +146,38 @@ public class WorldEngine extends AbstractWorldEngine {
 		
 		world_size = new Size(world_width, world_height + 100);
 		
-		Body left = new Body(1);
-		BodyFixture left_fixture = left.addFixture(Geometry.createPolygon(
-				new Vector2(-50, 0),
+		Body body = new Body(1);
+		BodyFixture left_fixture = body.addFixture(Geometry.createPolygon(
+				new Vector2(-10, 0),
 				new Vector2(0, 0),
 				new Vector2(0, world_height),
-				new Vector2(-50, world_height)
+				new Vector2(-10, world_height)
 		));
 		left_fixture.setFilter(new WorldFilter());
-		BodyFixture up_fixture = left.addFixture(Geometry.createPolygon(
-				new Vector2(0, -50),
-				new Vector2(world_width, -50),
+		BodyFixture up_fixture = body.addFixture(Geometry.createPolygon(
+				new Vector2(0, -10),
+				new Vector2(world_width, -10),
 				new Vector2(world_width, 0),
 				new Vector2(0, 0)
 		));
 		up_fixture.setFilter(new WorldFilter());
-		BodyFixture down_fixture = left.addFixture(Geometry.createPolygon(
-				new Vector2(0, 400),
+		BodyFixture down_fixture = body.addFixture(Geometry.createPolygon(
+				new Vector2(0, world_height),
 				new Vector2(world_width, world_height),
-				new Vector2(world_width, world_height + 50),
-				new Vector2(0, world_height + 50)
+				new Vector2(world_width, world_height + 10),
+				new Vector2(0, world_height + 10)
 		));
 		down_fixture.setFilter(new WorldFilter());
-		BodyFixture right_fixture = left.addFixture(Geometry.createPolygon(
+		BodyFixture right_fixture = body.addFixture(Geometry.createPolygon(
 				new Vector2(world_width, 0),
-				new Vector2(world_width + 50, 0),
-				new Vector2(world_width + 50, 400),
-				new Vector2(world_width, 400)
+				new Vector2(world_width + 10, 0),
+				new Vector2(world_width + 10, world_height),
+				new Vector2(world_width, world_height)
 		));
 		right_fixture.setFilter(new WorldFilter());
-		left.setMass(MassType.INFINITE);
+		body.setMass(MassType.INFINITE);
 		
-		world.addBody(left);
+		world.addBody(body);
 		
 		return world;
 	}

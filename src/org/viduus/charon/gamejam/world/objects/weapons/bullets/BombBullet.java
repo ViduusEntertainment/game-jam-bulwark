@@ -5,6 +5,7 @@ import org.viduus.charon.global.event.events.HitByWeaponEvent;
 import org.viduus.charon.global.util.identification.Uid;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.Weapon2D;
+import org.viduus.charon.global.world.regions.BaseRegion;
 
 public class BombBullet extends Bullet{
 	
@@ -14,8 +15,8 @@ public class BombBullet extends Bullet{
 	 * @param location
 	 * @param sprite_map
 	 */
-	public BombBullet(AbstractWorldEngine world_engine, Uid uid, String name, Weapon2D owner, Vector2 location) {
-		super(world_engine, uid, name, owner, location, new Vector2(800, 0), "vid:animation:objects/bullets", "bomb", 1200f);
+	public BombBullet(AbstractWorldEngine world_engine, Uid uid, String name, Weapon2D owner, Vector2 location, float damage) {
+		super(world_engine, uid, name, owner, location, new Vector2(800, 0), "vid:animation:objects/bullets", "bomb", damage);
 	}
 
 	@Override
@@ -24,4 +25,6 @@ public class BombBullet extends Bullet{
 		
 	}
 
+	@Override
+	public void onObjectAdded(BaseRegion region) {}
 }

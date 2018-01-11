@@ -1344,11 +1344,83 @@
             "image": []
           },
           "6": {
-            "collision": [],
+            "collision": [
+			  {
+				"vertices": [
+                  {
+                    "x": 110,
+                    "y": 13,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 97,
+                    "y": 13,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 97,
+                    "y": 1,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 110,
+                    "y": 1,
+                    "metadata": {
+                      
+                    }
+                  }
+                ],
+                "metadata": {
+                  
+                }
+			  }
+			],
             "image": []
           },
           "7": {
-            "collision": [],
+            "collision": [
+			  {
+				"vertices": [
+                  {
+                    "x": 124,
+                    "y": 12,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 114,
+                    "y": 12,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 114,
+                    "y": 2,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 124,
+                    "y": 2,
+                    "metadata": {
+                      
+                    }
+                  }
+                ],
+                "metadata": {
+                  
+                }
+			  }
+			],
             "image": []
           },
           "8": {
@@ -1424,7 +1496,43 @@
             "image": []
           },
           "1002": {
-            "collision": [],
+            "collision": [
+			  {
+				"vertices": [
+                  {
+                    "x": 43,
+                    "y": 25,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 35,
+                    "y": 25,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 35,
+                    "y": 20,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 43,
+                    "y": 20,
+                    "metadata": {
+                      
+                    }
+                  }
+                ],
+                "metadata": {
+                  
+                }
+			  }
+			],
             "image": []
           },
           "1003": {
@@ -2331,6 +2439,46 @@
           }
         },
         "animations": [
+		  {
+            "name": "vid:animations:object/bullets.scatter-idle",
+            "sustain": false,
+            "variants": [
+              {
+                "frames": [
+                  {
+                    "id": 6,
+                    "duration": 250
+                  },
+                  {
+                    "id": 7,
+                    "duration": 250
+                  }
+                ],
+                "probability": 1.0,
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          },
+          {
+            "name": "vid:animations:object/bullets.chain-idle",
+            "sustain": false,
+            "variants": [
+              {
+                "frames": [
+                  {
+                    "id": 1002,
+                    "duration": 250
+                  }
+                ],
+                "probability": 1.0,
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          },
           {
             "name": "vid:animations:object/bullets.player_normal-idle",
             "sustain": false,
