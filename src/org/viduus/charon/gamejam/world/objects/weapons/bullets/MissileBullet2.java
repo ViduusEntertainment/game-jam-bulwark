@@ -7,8 +7,8 @@ import org.viduus.charon.global.event.events.HitByWeaponEvent;
 import org.viduus.charon.global.event.events.ObjectRemovalEvent;
 import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.global.physics.twodimensional.filters.Bullet2DFilter;
+import org.viduus.charon.global.util.identification.IdentifiedResource;
 import org.viduus.charon.global.util.identification.Uid;
-import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.Weapon2D;
 import org.viduus.charon.global.world.regions.BaseRegion;
@@ -60,7 +60,7 @@ public class MissileBullet2 extends Bullet {
 	}
 
 	@Override
-	public void onObjectAdded(BaseRegion region) {
+	public void onAttached(IdentifiedResource owner) {
 		Level1.MISSILE_SOUND.play(Level1.SFX);
 	}
 }

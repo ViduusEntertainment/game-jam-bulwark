@@ -13,7 +13,10 @@ import org.viduus.charon.gamejam.GameSystems;
 import org.viduus.charon.gamejam.input.PlayerControls;
 import org.viduus.charon.gamejam.world.objects.effects.Shield;
 import org.viduus.charon.gamejam.world.objects.weapons.range.ChainGun;
+import org.viduus.charon.gamejam.world.objects.weapons.range.ChainLightningGun;
 import org.viduus.charon.gamejam.world.objects.weapons.range.DefaultGun;
+import org.viduus.charon.gamejam.world.objects.weapons.range.LaserCharge;
+import org.viduus.charon.gamejam.world.objects.weapons.range.LaserGun;
 import org.viduus.charon.gamejam.world.objects.weapons.range.MissileGun1;
 import org.viduus.charon.gamejam.world.objects.weapons.range.MissileGun2;
 import org.viduus.charon.gamejam.world.objects.weapons.range.ScatterGun;
@@ -32,10 +35,11 @@ import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.input.InputEngine;
 import org.viduus.charon.global.input.controller.Controller;
 import org.viduus.charon.global.input.player.PlayerControlsState;
+import org.viduus.charon.global.util.identification.IdentifiedResource;
 import org.viduus.charon.global.util.identification.Uid;
 import org.viduus.charon.global.util.logging.ErrorHandler;
-import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.objects.twodimensional.character.playable.PlayableCharacter2D;
+import org.viduus.charon.global.world.objects.twodimensional.weapon.Weapon2D;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.range.RangeWeapon2D;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.range.bullets.Bullet2D;
 import org.viduus.charon.global.world.regions.BaseRegion;
@@ -54,11 +58,7 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		DEFAULT_SPEED = 500.0f,
 		SPRINT_CONSTANT = 1.5f,
 		STAMINA_SPRINT_CONSTANT = 20, // stam/sec
-		ROLL_CONSTANT = 3.0f,
-		ROLL_DURATION = 0.5f,
-		STAMINA_ROLL_CONSTANT = 30, // stam/sec
-		STAMINA_REGEN_CONSTANT = 20,
-		STAMINA_ATTACK_CONSTANT = 8; // stam/attack
+		STAMINA_REGEN_CONSTANT = 20; // stam/attack
 	private static final String
 		DEFAULT_SPRITE_FILE = "vid:animation:player/player_ship",
 		DEFAULT_SPRITE_ID = "red_ship";
@@ -417,8 +417,10 @@ public class PlayerCharacter extends PlayableCharacter2D {
 			weapon = new ScatterGun(world_engine, "Primary Weapon", this, calculateWeaponDamage(name, 100));
 			break;
 		case "Arc":
+			weapon = new ChainLightningGun(world_engine, "Primary Weapon", this, calculateWeaponDamage(name, 60));
 			break;
 		case "ChargeLaser":
+			weapon = new LaserGun(world_engine, "Primary Weapon", this, calculateWeaponDamage(name, 250));
 			break;
 		}
 		
@@ -591,6 +593,11 @@ public class PlayerCharacter extends PlayableCharacter2D {
 				world_engine.insert(bullet3);
 				this.<BaseRegion>get(Property.CURRENT_REGION).queueEntityForAddition(bullet3);
 			}
+			else if (weapon instanceof LaserGun) {
+				Weapon2D laser_charge = new LaserCharge(world_engine, "Laser Charge", this, weapon.getFloat(Property.DAMAGE));
+				world_engine.insert(laser_charge);
+				this.<BaseRegion>get(Property.CURRENT_REGION).queueEntityForAddition(laser_charge);
+			}
 			else {
 				Bullet2D bullet = weapon.getBullet();
 				world_engine.insert(bullet);
@@ -612,8 +619,13 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		}
 	}
 	
+	
 	@Override
-	public void onObjectAdded(BaseRegion region) {
-		
-	}
+	public void onReleased() {}
+	
+	@Override
+	public void onAttached(IdentifiedResource owner) {}
+	
+	@Override
+	public void onDetached(IdentifiedResource owner) {}
 }

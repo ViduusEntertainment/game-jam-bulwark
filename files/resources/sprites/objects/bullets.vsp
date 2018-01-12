@@ -1184,7 +1184,7 @@
   "sprite_map": "resources/img/sprites/projectiles.png",
   "size": {
     "width": 176,
-    "height": 112
+    "height": 128
   },
   "hands": {
     "left": [],
@@ -2644,66 +2644,6 @@
                 }
               }
             ]
-          },
-          {
-            "name": "vid:animation:objects/bullets.laser_charge-idle",
-            "sustain": false,
-            "variants": [
-              {
-                "frames": [
-                  {
-                    "id": 6000,
-                    "duration": 250
-                  },
-                  {
-                    "id": 6001,
-                    "duration": 250
-                  },
-                  {
-                    "id": 6002,
-                    "duration": 250
-                  },
-                  {
-                    "id": 6003,
-                    "duration": 250
-                  }
-                ],
-                "probability": 1,
-                "metadata": {
-                  "name": "Variant (0)"
-                }
-              }
-            ]
-          },
-          {
-            "name": "vid:animation:objects/bullets.laser_beam-idle",
-            "sustain": false,
-            "variants": [
-              {
-                "frames": [
-                  {
-                    "id": 6004,
-                    "duration": 250
-                  },
-                  {
-                    "id": 6005,
-                    "duration": 250
-                  },
-                  {
-                    "id": 6007,
-                    "duration": 250
-                  },
-                  {
-                    "id": 6009,
-                    "duration": 250
-                  }
-                ],
-                "probability": 1,
-                "metadata": {
-                  "name": "Variant (0)"
-                }
-              }
-            ]
           }
         ]
       },
@@ -2848,8 +2788,262 @@
             ]
           }
         ]
+      },
+      {
+        "metadata": {
+          "rows": 1,
+          "columns": 4,
+          "name": "laser_charge"
+        },
+        "row_offset": 1000,
+        "location": {
+          "x": 0,
+          "y": 96,
+          "metadata": {}
+        },
+        "center": {
+          "x": 8,
+          "y": 8,
+          "metadata": {}
+        },
+        "size": {
+          "width": 16,
+          "height": 16
+        },
+        "masks": {
+          "0": {
+            "collision": [],
+            "image": []
+          },
+          "1": {
+            "collision": [],
+            "image": []
+          },
+          "2": {
+            "collision": [],
+            "image": []
+          },
+		  "3": {
+            "collision": [],
+            "image": []
+          }
+        },
+        "animations": [
+          {
+            "name": "vid:animation:objects/bullets.laser_charge-idle",
+            "sustain": true,
+            "variants": [
+              {
+                "frames": [
+                  {
+                    "id": 0,
+                    "duration": 150
+                  },
+                  {
+                    "id": 1,
+                    "duration": 150
+                  },
+                  {
+                    "id": 2,
+                    "duration": 150
+                  },
+                  {
+                    "id": 3,
+                    "duration": 150
+                  }
+                ],
+                "probability": 1,
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          }
+        ]
+      },
+	  {
+        "metadata": {
+          "rows": 1,
+          "columns": 3,
+          "name": "laser_beam"
+        },
+        "row_offset": 1000,
+        "location": {
+          "x": 80,
+          "y": 96,
+          "metadata": {
+            
+          }
+        },
+        "center": {
+          "x": 16,
+          "y": 8,
+          "metadata": {
+            
+          }
+        },
+        "size": {
+          "width": 32,
+          "height": 16
+        },
+        "masks": {
+          "0": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 112,
+                    "y": 107,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 80,
+                    "y": 107,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 80,
+                    "y": 100,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 112,
+                    "y": 100,
+                    "metadata": {
+                      
+                    }
+                  }
+                ],
+                "metadata": {
+                  
+                }
+              }
+            ],
+            "image": [
+              
+            ]
+          },
+          "1": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 144,
+                    "y": 107,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 112,
+                    "y": 107,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 112,
+                    "y": 100,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 144,
+                    "y": 100,
+                    "metadata": {
+                      
+                    }
+                  }
+                ],
+                "metadata": {
+                  
+                }
+              }
+            ],
+            "image": [
+              
+            ]
+          },
+          "2": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 175,
+                    "y": 107,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 144,
+                    "y": 107,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 144,
+                    "y": 100,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 175,
+                    "y": 100,
+                    "metadata": {
+                      
+                    }
+                  }
+                ],
+                "metadata": {
+                  
+                }
+              }
+            ],
+            "image": [
+              
+            ]
+          }
+        },
+        "animations": [
+          {
+            "name": "vid:animation:objects/bullets.laser_beam-idle",
+            "sustain": true,
+            "variants": [
+              {
+                "frames": [
+                  {
+                    "id": 0,
+                    "duration": 250
+                  },
+                  {
+                    "id": 1,
+                    "duration": 250
+                  },
+                  {
+                    "id": 2,
+                    "duration": 250
+                  }
+                ],
+                "probability": 1.0,
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          }
+        ]
       }
-    ],
+	],
     "free": []
   }
 }

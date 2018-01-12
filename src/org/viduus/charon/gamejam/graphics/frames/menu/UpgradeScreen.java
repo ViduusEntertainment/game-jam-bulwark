@@ -7,6 +7,7 @@ package org.viduus.charon.gamejam.graphics.frames.menu;
 
 import java.util.Random;
 
+import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.graphics.GraphicsEngine;
 import org.viduus.charon.gamejam.graphics.ui.CheckBox;
 import org.viduus.charon.gamejam.graphics.ui.HorizontalUpgradeBox;
@@ -23,6 +24,7 @@ import org.viduus.charon.global.graphics.opengl.OpenGLFrame;
 import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
 import org.viduus.charon.global.graphics.opengl.font.OpenGLFont;
 import org.viduus.charon.global.graphics.util.IntDimension;
+import org.viduus.charon.global.graphics.util.Size;
 import org.viduus.charon.global.input.controller.ControllerState;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.Weapon2D;
 

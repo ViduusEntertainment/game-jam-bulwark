@@ -3,11 +3,13 @@ package org.viduus.charon.gamejam.world.objects.effects;
 import org.dyn4j.dynamics.joint.Joint;
 import org.dyn4j.dynamics.joint.WeldJoint;
 import org.dyn4j.geometry.Vector2;
+import org.viduus.charon.gamejam.world.regions.Level1;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.event.events.HitByWeaponEvent;
 import org.viduus.charon.global.event.events.ObjectRemovalEvent;
 import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
+import org.viduus.charon.global.util.identification.IdentifiedResource;
 import org.viduus.charon.global.util.identification.Uid;
 import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.AbstractWorldEngine;
@@ -51,5 +53,11 @@ public class Shield extends Weapon2D {
 	}
 
 	@Override
-	public void onObjectAdded(BaseRegion region) {}
+	public void onReleased() {}
+	
+	@Override
+	public void onAttached(IdentifiedResource owner) {}
+	
+	@Override
+	public void onDetached(IdentifiedResource owner) {}
 }

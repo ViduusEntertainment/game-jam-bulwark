@@ -5,6 +5,7 @@ import org.viduus.charon.gamejam.world.objects.weapons.bullets.ScatterBullet;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.event.events.HitByWeaponEvent;
 import org.viduus.charon.global.util.identification.Uid;
+import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;
 import org.viduus.charon.global.world.objects.twodimensional.character.Character2D;
@@ -14,6 +15,7 @@ public class ScatterGun extends Gun {
 
 	public ScatterGun(AbstractWorldEngine world_engine, String name, Character2D owner, float damage) {
 		super(world_engine, name, owner, .5f, damage, Integer.MAX_VALUE);
+		OutputHandler.println("" + damage);
 	}
 
 	@Override

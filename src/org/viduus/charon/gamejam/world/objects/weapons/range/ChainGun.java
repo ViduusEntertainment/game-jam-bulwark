@@ -9,7 +9,6 @@ import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;
 import org.viduus.charon.global.world.objects.twodimensional.character.Character2D;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.range.bullets.Bullet2D;
-import org.viduus.charon.global.world.regions.BaseRegion;
 
 public class ChainGun extends Gun {
 
@@ -33,10 +32,5 @@ public class ChainGun extends Gun {
 		Object2D owner = getOwner();
 		Vector2 location = owner.getVector2(Property.LOCATION).copy().add(40, 8);
 		set(Property.LOCATION, location);
-	}
-	
-	@Override
-	public void onObjectAdded(BaseRegion region) {
-		
 	}
 }

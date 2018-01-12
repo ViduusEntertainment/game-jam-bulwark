@@ -8,6 +8,7 @@ import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.gamejam.world.regions.Level1;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
+import org.viduus.charon.global.util.identification.IdentifiedResource;
 import org.viduus.charon.global.util.identification.Uid;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.StaticObject2D;
@@ -25,7 +26,7 @@ public class Explosion extends StaticObject2D {
 		Animation<?> current_animation = get(Property.CURRENT_ANIMATION);
 		if (current_animation != null && current_animation.animationIsFinished()) {
 			set(Property.CURRENT_ANIMATION, null);
-			world_engine.queueEvent(this, new ObjectRemovalEvent(this), ObjectRemovalEvent.class);
+			this.<BaseRegion>get(Property.CURRENT_REGION).queueEntityForRemoval(this);
 		}
 	}
 
@@ -40,9 +41,15 @@ public class Explosion extends StaticObject2D {
 
 	@Override
 	protected void registerEvents() {}
-
+	
 	@Override
-	public void onObjectAdded(BaseRegion region) {
+	public void onReleased() {}
+	
+	@Override
+	public void onAttached(IdentifiedResource owner) {
 		Level1.EXPLOSION_SOUND.play(Level1.SFX);
 	}
+	
+	@Override
+	public void onDetached(IdentifiedResource owner) {}
 }

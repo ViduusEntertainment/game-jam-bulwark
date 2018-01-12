@@ -10,6 +10,7 @@ import org.viduus.charon.global.event.events.HitByWeaponEvent;
 import org.viduus.charon.global.event.events.ObjectRemovalEvent;
 import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.global.event.events.WeaponUseEvent;
+import org.viduus.charon.global.util.identification.IdentifiedResource;
 import org.viduus.charon.global.util.identification.Uid;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.character.nonplayable.NonPlayableCharacter2D;
@@ -79,5 +80,11 @@ public abstract class Enemy extends NonPlayableCharacter2D{
 	}
 	
 	@Override
-	public void onObjectAdded(BaseRegion region) {}
+	public void onReleased() {}
+	
+	@Override
+	public void onAttached(IdentifiedResource owner) {}
+	
+	@Override
+	public void onDetached(IdentifiedResource owner) {}
 }

@@ -144,9 +144,9 @@ public class WorldEngine extends AbstractWorldEngine {
 		float world_height = game_systems.graphics_engine.getScreenSize().height;
 		float world_width = game_systems.graphics_engine.getScreenSize().width;
 		
-		world_size = new Size(world_width, world_height + 100);
+		world_size = new Size(world_width, world_height);
 		
-		Body body = new Body(1);
+		Body body = new Body(4);
 		BodyFixture left_fixture = body.addFixture(Geometry.createPolygon(
 				new Vector2(-10, 0),
 				new Vector2(0, 0),

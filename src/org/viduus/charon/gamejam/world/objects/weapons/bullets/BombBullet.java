@@ -5,7 +5,6 @@ import org.viduus.charon.global.event.events.HitByWeaponEvent;
 import org.viduus.charon.global.util.identification.Uid;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.Weapon2D;
-import org.viduus.charon.global.world.regions.BaseRegion;
 
 public class BombBullet extends Bullet{
 	
@@ -24,7 +23,4 @@ public class BombBullet extends Bullet{
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void onObjectAdded(BaseRegion region) {}
 }

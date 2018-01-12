@@ -5,6 +5,7 @@ import java.util.Random;
 
 import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.world.WorldEngine;
+import org.viduus.charon.gamejam.world.objects.character.nonplayable.BosserbossEnemy;
 import org.viduus.charon.gamejam.world.objects.character.nonplayable.Enemy;
 import org.viduus.charon.gamejam.world.objects.character.nonplayable.KamikazeEnemy;
 import org.viduus.charon.gamejam.world.objects.character.nonplayable.StandardEnemy;
@@ -14,11 +15,13 @@ import org.viduus.charon.gamejam.world.objects.weapons.range.EnemyGun;
 import org.viduus.charon.gamejam.world.regions.Level1;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.event.events.TickEvent;
+import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.DynamicObject2D.NPC_MOVEMENT;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;
 import org.viduus.charon.global.world.objects.twodimensional.character.nonplayable.NonPlayableCharacter2D;
 import org.viduus.charon.global.world.regions.BaseRegion;
+import org.viduus.charon.global.world.util.CooldownTimer;
 
 public abstract class EnemyWave {
 	
@@ -28,6 +31,7 @@ public abstract class EnemyWave {
 	protected boolean launched = false;
 	private static Random RN_CODY = new Random();
 	private PlayerCharacter character;
+	private CooldownTimer backup_finished = new CooldownTimer(15f);
 	
 	public EnemyWave(AbstractWorldEngine world_engine, BaseRegion region) {
 		this.world_engine = (WorldEngine)world_engine;
@@ -44,7 +48,7 @@ public abstract class EnemyWave {
 	}
 	
 	public boolean isFinished() {
-		return enemies.size() == 0;
+		return enemies.size() == 0 || !backup_finished.isCooling();
 	}
 	
 	public void onTick(TickEvent tick_event) {
@@ -53,6 +57,11 @@ public abstract class EnemyWave {
 				region.queueEntityForAddition(enemy);
 			}
 			launched = true;
+			backup_finished.reset();
+		}
+		
+		if (launched) {
+			backup_finished.update(tick_event.time_elapsed);
 		}
 	}
 	
@@ -86,6 +95,12 @@ public abstract class EnemyWave {
 
 	protected KamikazeEnemy createKamikazeEnemy(Vector2 location) {
 		KamikazeEnemy enemy = new KamikazeEnemy(world_engine, "KamikazeEnemy", location, character);
+		world_engine.insert(enemy);
+		return enemy;
+	}
+	
+	protected BosserbossEnemy createBossEnemy(Vector2 location) {
+		BosserbossEnemy enemy = new BosserbossEnemy(world_engine, "BosserbossEnemy", location);
 		world_engine.insert(enemy);
 		return enemy;
 	}
