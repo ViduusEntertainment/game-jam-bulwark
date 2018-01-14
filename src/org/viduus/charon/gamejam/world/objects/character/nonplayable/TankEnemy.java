@@ -10,6 +10,6 @@ public class TankEnemy extends Enemy{
 	
 	public TankEnemy(AbstractWorldEngine world_engine, String name, Vector2 location) {
 		super(world_engine, name, location, SPEED, HEALTH, 0, HEALTH, 0, "vid:animation:enemies/enemies", "tank", "walk_l", 200);
-		// TODO Auto-generated constructor stub
+		setLinearVelocity(new Vector2(-100, 0));
 	}
 }

@@ -31,7 +31,7 @@ public class Explosion extends StaticObject2D {
 	}
 
 	@Override
-	protected void setPhysicsProperties() {}
+	protected void beforeBodyCreation() {}
 
 	@Override
 	protected void onCollision(CollisionEvent collision_event) {}

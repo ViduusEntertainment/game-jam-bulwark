@@ -1,5 +1,8 @@
 package org.viduus.charon.gamejam.world.objects.weapons.range;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.world.objects.weapons.bullets.LaserBeam;
 import org.viduus.charon.gamejam.world.regions.Level1;
@@ -29,10 +32,21 @@ public class LaserCharge extends Gun {
 			set(Property.CURRENT_ANIMATION, null);
 			this.<BaseRegion>get(Property.CURRENT_REGION).queueEntityForRemoval(this);
 			
-			Bullet2D beam = createBullet();
-			world_engine.insert(beam);
-			this.<BaseRegion>get(Property.CURRENT_REGION).queueEntityForAddition(beam);
+			List<Bullet2D> bullets = new ArrayList<>();
+			
+			for (int i = 0; i < 10; i++) {
+				bullets.add(createBullet(new Vector2(getLocation().x + i * 32, getLocation().y)));
+			}
+			
+			for (int i = 0; i < bullets.size(); i++) {
+				world_engine.insert(bullets.get(i));
+				this.<BaseRegion>get(Property.CURRENT_REGION).queueEntityForAddition(bullets.get(i));
+			}
 		}
+	}
+	
+	protected Bullet2D createBullet(Vector2 location) {
+		return new LaserBeam(world_engine, Uid.generateUid("vid:bullet", "LaserBeam"), "LaserBeam", this, location, get(Property.DAMAGE));
 	}
 
 	@Override
@@ -47,7 +61,7 @@ public class LaserCharge extends Gun {
 	}
 
 	@Override 
-	protected void setPhysicsProperties() {
+	protected void beforeBodyCreation() {
 		Object2D owner = getOwner();
 		Vector2 location = owner.getVector2(Property.LOCATION).copy().add(40, 8);
 		set(Property.LOCATION, location);

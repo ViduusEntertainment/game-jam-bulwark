@@ -2133,25 +2133,25 @@
           },
           {
             "name": "vid:animation:enemies/enemies.normal-shooting",
-            "sustain": false,
+            "sustain": true,
             "variants": [
               {
                 "frames": [
                   {
                     "id": 1000,
-                    "duration": 250
+                    "duration": 400
                   },
                   {
                     "id": 1001,
-                    "duration": 250
+                    "duration": 400
                   },
                   {
                     "id": 1002,
-                    "duration": 250
+                    "duration": 400
                   },
                   {
                     "id": 1003,
-                    "duration": 250
+                    "duration": 400
                   }
                 ],
                 "probability": 1,

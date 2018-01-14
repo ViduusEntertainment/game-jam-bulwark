@@ -12,9 +12,11 @@ import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.GameSystems;
 import org.viduus.charon.gamejam.input.PlayerControls;
 import org.viduus.charon.gamejam.world.objects.effects.Shield;
+import org.viduus.charon.gamejam.world.objects.weapons.range.BombDropper;
 import org.viduus.charon.gamejam.world.objects.weapons.range.ChainGun;
 import org.viduus.charon.gamejam.world.objects.weapons.range.ChainLightningGun;
 import org.viduus.charon.gamejam.world.objects.weapons.range.DefaultGun;
+import org.viduus.charon.gamejam.world.objects.weapons.range.GravityBombGun;
 import org.viduus.charon.gamejam.world.objects.weapons.range.LaserCharge;
 import org.viduus.charon.gamejam.world.objects.weapons.range.LaserGun;
 import org.viduus.charon.gamejam.world.objects.weapons.range.MissileGun1;
@@ -73,7 +75,7 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	 */
 	private Animation<?>[] vertical_animations = null;
 	private int last_animation_index = -1;
-	private int animaiton_index;
+	private int animation_index;
 	
 	/*
 	 * Cool downs
@@ -126,7 +128,7 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	}
 	
 	@Override
-	protected void setPhysicsProperties() {
+	protected void beforeBodyCreation() {
 		// TODO Auto-generated method stub
 	}
 	
@@ -134,7 +136,7 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	public void determineActiveAnimation() {
 		// load animations
 		if (vertical_animations == null) {
-			animaiton_index = 3;
+			animation_index = 3;
 			vertical_animations = new Animation<?>[] {
 				(Animation<?>) world_engine.resolve("vid:animation:player/player_ship.red_ship-walk_d_start_4"),
 				(Animation<?>) world_engine.resolve("vid:animation:player/player_ship.red_ship-walk_d_start_3"),
@@ -149,13 +151,13 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		Animation<?> curr_animation = get(Property.CURRENT_ANIMATION);
 		if (curr_animation != null) {
 			// determine what the next animation is
-			if (curr_animation.animationIsFinished() || animaiton_index == 3) {
+			if (curr_animation.animationIsFinished() || animation_index == 3) {
 				// if not moving
 				if (getLinearVelocity().isZero()) {
-					if (animaiton_index > 3) {
-						animaiton_index--;
-					} else if (animaiton_index < 3) {
-						animaiton_index++;
+					if (animation_index > 3) {
+						animation_index--;
+					} else if (animation_index < 3) {
+						animation_index++;
 					}
 					
 				// if moving
@@ -163,32 +165,32 @@ public class PlayerCharacter extends PlayableCharacter2D {
 					switch (getInteger(Property.DIRECTION_FACING)) {
 					case (LEFT):
 					case (RIGHT):
-						animaiton_index = 3;
+						animation_index = 3;
 						break;
 					case (UP):
-						animaiton_index++;
+						animation_index++;
 						break;
 					case (DOWN):
-						animaiton_index--;
+						animation_index--;
 						break;
 					}
 				}
 			}
-			if (animaiton_index >= vertical_animations.length)
-				animaiton_index = vertical_animations.length-1;
-			if (animaiton_index < 0)
-				animaiton_index = 0;
+			if (animation_index >= vertical_animations.length)
+				animation_index = vertical_animations.length-1;
+			if (animation_index < 0)
+				animation_index = 0;
 
 			// skip setting the animation if already set
-			if (animaiton_index == last_animation_index)
+			if (animation_index == last_animation_index)
 				return;
-			last_animation_index = animaiton_index;
+			last_animation_index = animation_index;
 		}
 		
-		setAnimation(vertical_animations[animaiton_index]);
-		set(Property.CURRENT_ANIMATION, vertical_animations[animaiton_index]);
+		setAnimation(vertical_animations[animation_index]);
+		set(Property.CURRENT_ANIMATION, vertical_animations[animation_index]);
 		
-		last_animation_index = animaiton_index;
+		last_animation_index = animation_index;
 	}
 
 	/* (non-Javadoc)
@@ -414,7 +416,7 @@ public class PlayerCharacter extends PlayableCharacter2D {
 			weapon = new ChainGun(world_engine, "Primary Weapon", this, calculateWeaponDamage(name, 60));
 			break;
 		case "Scatter":
-			weapon = new ScatterGun(world_engine, "Primary Weapon", this, calculateWeaponDamage(name, 100));
+			weapon = new ScatterGun(world_engine, "Primary Weapon", this, calculateWeaponDamage(name, 40));
 			break;
 		case "Arc":
 			weapon = new ChainLightningGun(world_engine, "Primary Weapon", this, calculateWeaponDamage(name, 60));
@@ -448,10 +450,12 @@ public class PlayerCharacter extends PlayableCharacter2D {
 			weapon = new MissileGun2(world_engine, "Secondary Weapon", this, calculateWeaponDamage(name, 1000));
 			break;
 		case "Bomb":
+			weapon = new BombDropper(world_engine, "Secondary Weapon", this, calculateWeaponDamage(name, 1200));
 			break;
 		case "Emp":
 			break;
 		case "GravityOrb":
+			weapon = new GravityBombGun(world_engine, "Secondary Weapon", this, calculateWeaponDamage(name, 60));
 			break;
 		}
 		

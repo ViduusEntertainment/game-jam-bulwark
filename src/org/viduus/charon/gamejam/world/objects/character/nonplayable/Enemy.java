@@ -32,7 +32,7 @@ public abstract class Enemy extends NonPlayableCharacter2D{
 	}
 	
 	@Override
-	protected void setPhysicsProperties() {
+	protected void beforeBodyCreation() {
 		set(Property.MASS, Double.MAX_VALUE);
 		set(Property.LINEAR_DAMPING, 0.0);
 	}

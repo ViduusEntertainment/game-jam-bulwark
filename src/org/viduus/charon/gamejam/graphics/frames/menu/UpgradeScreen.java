@@ -345,7 +345,7 @@ public class UpgradeScreen extends AbstractJamScreen {
 				}
 			}
 			else if (basic_missiles_button.hasFocus()) {
-				if (!basic_missiles_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("BasicMissile", 0))
+				if (!basic_missiles_button.getPurchased() && main_character.tryPurchaseSecondaryWeapon("BasicMissile", 0))
 					basic_missiles_button.setPurchased();
 				else if (5 > main_character.getUpgradeLevel("BasicMissile")) {
 					if(main_character.tryUpgradeWeapon("BasicMissile", basic_missiles_button.getNextPrice()))
@@ -353,7 +353,7 @@ public class UpgradeScreen extends AbstractJamScreen {
 				}
 			}
 			else if (scatter_missiles_button.hasFocus()) {
-				if (!scatter_missiles_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("ScatterMissile", 15000))
+				if (!scatter_missiles_button.getPurchased() && main_character.tryPurchaseSecondaryWeapon("ScatterMissile", 15000))
 					scatter_missiles_button.setPurchased();
 				else if (5 > main_character.getUpgradeLevel("ScatterMissile")) {
 					if(main_character.tryUpgradeWeapon("ScatterMissile", scatter_missiles_button.getNextPrice()))
@@ -361,7 +361,7 @@ public class UpgradeScreen extends AbstractJamScreen {
 				}
 			}
 			else if (bomb_button.hasFocus()) {
-				if (!bomb_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("Bomb", 10000))
+				if (!bomb_button.getPurchased() && main_character.tryPurchaseSecondaryWeapon("Bomb", 10000))
 					bomb_button.setPurchased();
 				else if (5 > main_character.getUpgradeLevel("Bomb")) {
 					if(main_character.tryUpgradeWeapon("Bomb", bomb_button.getNextPrice()))
@@ -369,7 +369,7 @@ public class UpgradeScreen extends AbstractJamScreen {
 				}
 			}
 			else if (emp_button.hasFocus()) {
-				if (!emp_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("Emp", 25000))
+				if (!emp_button.getPurchased() && main_character.tryPurchaseSecondaryWeapon("Emp", 25000))
 					emp_button.setPurchased();
 				else if (5 > main_character.getUpgradeLevel("Emp")) {
 					if(main_character.tryUpgradeWeapon("Emp", emp_button.getNextPrice()))
@@ -377,7 +377,7 @@ public class UpgradeScreen extends AbstractJamScreen {
 				}
 			}
 			else if (gravity_orb_button.hasFocus()) {
-				if (!gravity_orb_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("GravityOrb", 20000))
+				if (!gravity_orb_button.getPurchased() && main_character.tryPurchaseSecondaryWeapon("GravityOrb", 20000))
 					gravity_orb_button.setPurchased();
 				else if (5 > main_character.getUpgradeLevel("GravityOrb")) {
 					if(main_character.tryUpgradeWeapon("GravityOrb", gravity_orb_button.getNextPrice()))

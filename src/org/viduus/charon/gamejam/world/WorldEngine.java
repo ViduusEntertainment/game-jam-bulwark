@@ -15,6 +15,7 @@ import org.dyn4j.geometry.AABB;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.MassType;
 import org.dyn4j.geometry.Vector2;
+import org.viduus.charon.gamejam.GameConstants;
 import org.viduus.charon.gamejam.physics.twodimensional.WorldBounds;
 import org.viduus.charon.gamejam.physics.twodimensional.filters.WorldFilter;
 import org.viduus.charon.gamejam.physics.twodimensional.listeners.BoundsListener;
@@ -130,8 +131,11 @@ public class WorldEngine extends AbstractWorldEngine {
 
 	@Override
 	protected World createWorld() {
-		World world = new World(new WorldBounds(new AABB(-50, -50, 2000, 466)));
-		world.setGravity(new Vector2(0, 0));
+		float world_height = game_systems.graphics_engine.getScreenSize().height;
+		float world_width = game_systems.graphics_engine.getScreenSize().width;
+		
+		World world = new World(new WorldBounds(new AABB(0, 0, 2000, world_height)));
+		world.setGravity(new Vector2(0, org.viduus.charon.global.GameConstants.PIXELS_PER_METER * 9.8));
 		world.addListener(new CollisionListener(this));
 		world.addListener(new BoundsListener(this));
 		
@@ -140,9 +144,6 @@ public class WorldEngine extends AbstractWorldEngine {
 		settings.setMaximumTranslation(Double.MAX_VALUE);
 		
 		world.setSettings(settings);
-		
-		float world_height = game_systems.graphics_engine.getScreenSize().height;
-		float world_width = game_systems.graphics_engine.getScreenSize().width;
 		
 		world_size = new Size(world_width, world_height);
 		

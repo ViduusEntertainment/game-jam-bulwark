@@ -58,8 +58,8 @@ public class CharacterHUD extends HeadsUpDisplay {
 		PlayerCharacter main_player = (PlayerCharacter)players.get(0);
 		missile_stock_counter.setCount(main_player.getSecondaryWeapon().getInteger(Property.PROJECTILE_COUNT));
 		currency_counter.setCount(main_player.getMoney());
-		missile_cooldown_counter.setCount(main_player.getSecondaryWeaponCooldownTimer().currentCoolTime());
-		shield_cooldown_counter.setCount(main_player.getShieldCooldownTimer().currentCoolTime());
+		missile_cooldown_counter.setCount(main_player.getSecondaryWeaponCooldownTimer().coolTimeLeft());
+		shield_cooldown_counter.setCount(main_player.getShieldCooldownTimer().coolTimeLeft());
 		
 		enemy_health_bar.render(graphics, screen_width/2, 2, d_sec, players);
 		player_health_bar.render(graphics, 0, 0, d_sec, players);

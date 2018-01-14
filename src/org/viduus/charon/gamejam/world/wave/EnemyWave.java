@@ -88,7 +88,6 @@ public abstract class EnemyWave {
 	
 	protected TankEnemy createTankEnemy(Vector2 location) {
 		TankEnemy enemy = new TankEnemy(world_engine, "TankEnemy", location);
-		enemy.setLinearVelocity(new Vector2(-100, 0));
 		world_engine.insert(enemy);
 		return enemy;
 	}

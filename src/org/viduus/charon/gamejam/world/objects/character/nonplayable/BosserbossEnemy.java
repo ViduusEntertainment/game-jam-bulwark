@@ -16,7 +16,7 @@ public class BosserbossEnemy extends Enemy {
 	}
 	
 	@Override
-	protected void setPhysicsProperties() {
+	protected void beforeBodyCreation() {
 		// TODO Auto-generated method stub
 		
 	}

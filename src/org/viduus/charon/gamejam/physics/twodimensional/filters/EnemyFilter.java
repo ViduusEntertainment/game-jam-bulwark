@@ -12,7 +12,7 @@ public class EnemyFilter extends Character2DFilter<Enemy> implements Filter {
 
 	@Override
 	protected boolean collisionAllowed(Filter filter) {
-		if (filter instanceof WorldFilter || filter instanceof EnemyBulletFilter) 
+		if (filter instanceof WorldFilter || filter instanceof EnemyBulletFilter || filter instanceof GravityOrbFilter) 
 			return false;
 		return super.collisionAllowed(filter);
 	}

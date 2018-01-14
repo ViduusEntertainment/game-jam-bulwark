@@ -34,9 +34,8 @@ public abstract class Bullet extends Bullet2D {
 	}
 
 	@Override
-	protected void setPhysicsProperties() {
-		// TODO Auto-generated method stub
-		
+	protected void beforeBodyCreation() {
+		set(Property.LINEAR_DAMPING, 0.0);
 	}
 	
 	@Override
