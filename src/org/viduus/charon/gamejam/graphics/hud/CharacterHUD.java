@@ -40,7 +40,7 @@ public class CharacterHUD extends HeadsUpDisplay {
 		super(game_systems);
 		
 		enemy_health_bar = new FillInHealthBar(game_systems);
-		player_health_bar = new IconHealthBar(5, game_systems);
+		player_health_bar = new IconHealthBar(3, game_systems);
 		missile_stock_counter = new IconCounter(game_systems, new Uid("vid:animation:hud/icons.missile"), 10);
 		currency_counter = new IconCounter(game_systems, new Uid("vid:animation:hud/icons.money"), 0);
 		missile_cooldown_counter = new IconCountdown(game_systems, new Uid("vid:animation:hud/icons.missile_cooldown_active"), new Uid("vid:animation:hud/icons.missile_cooldown_inactive"), 0);
@@ -60,6 +60,7 @@ public class CharacterHUD extends HeadsUpDisplay {
 		currency_counter.setCount(main_player.getMoney());
 		missile_cooldown_counter.setCount(main_player.getSecondaryWeaponCooldownTimer().coolTimeLeft());
 		shield_cooldown_counter.setCount(main_player.getShieldCooldownTimer().coolTimeLeft());
+		player_health_bar.setNumIcons(Math.round(main_player.getShip().getHearts()));
 		
 		enemy_health_bar.render(graphics, screen_width/2, 2, d_sec, players);
 		player_health_bar.render(graphics, 0, 0, d_sec, players);

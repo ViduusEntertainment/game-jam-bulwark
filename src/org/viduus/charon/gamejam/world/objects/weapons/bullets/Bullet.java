@@ -7,6 +7,7 @@ import org.viduus.charon.global.event.events.ObjectRemovalEvent;
 import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.global.util.identification.IdentifiedResource;
 import org.viduus.charon.global.util.identification.Uid;
+import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.Weapon2D;
@@ -24,8 +25,9 @@ public abstract class Bullet extends Bullet2D {
 	@Override
 	public void onTick(TickEvent tick_event) {
 		super.onTick(tick_event);
-		if (getVector2(Property.LOCATION).distanceSquared(getVector2(Property.INITIAL_LOCATION)) > MAX_DISTANCE * MAX_DISTANCE)
+		if (getVector2(Property.LOCATION).distanceSquared(getVector2(Property.INITIAL_LOCATION)) > MAX_DISTANCE * MAX_DISTANCE) {
 			world_engine.queueEvent(this, new ObjectRemovalEvent(this), ObjectRemovalEvent.class);
+		}
 	}
 
 	@Override

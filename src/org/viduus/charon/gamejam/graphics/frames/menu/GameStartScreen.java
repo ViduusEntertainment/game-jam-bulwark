@@ -13,8 +13,6 @@ import org.viduus.charon.gamejam.world.regions.AutoSideScrollingRegion;
 import org.viduus.charon.global.AbstractGameSystems;
 import org.viduus.charon.global.GameConstants.GlobalEngineFlags;
 import org.viduus.charon.global.GameConstants.Property;
-import org.viduus.charon.global.audio.AudioCategory;
-import org.viduus.charon.global.audio.Sound;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.opengl.OpenGLFrame;
 import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
@@ -99,7 +97,7 @@ public class GameStartScreen extends AbstractJamScreen {
 	}
 	
 	@Override
-	protected void onActivate(AbstractGameSystems game_systems) {
+	protected void onActivate(int previous_screen_id, AbstractGameSystems game_systems) {
 		// load animations
 		player_accelerate = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:player/player_ship.red_ship-accelerate");
 		player_zoomin = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:player/player_ship.red_ship-zoomin");

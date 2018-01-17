@@ -2139,19 +2139,15 @@
                 "frames": [
                   {
                     "id": 1000,
-                    "duration": 400
+                    "duration": 250
                   },
                   {
                     "id": 1001,
-                    "duration": 400
+                    "duration": 250
                   },
                   {
                     "id": 1002,
-                    "duration": 400
-                  },
-                  {
-                    "id": 1003,
-                    "duration": 400
+                    "duration": 250
                   }
                 ],
                 "probability": 1,

@@ -34,7 +34,6 @@ import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;
 
-import kuusisto.tinysound.Music;
 import kuusisto.tinysound.Sound;
 import kuusisto.tinysound.TinySound;
 
@@ -61,8 +60,7 @@ public class Level1 extends AutoSideScrollingRegion {
 	public static Sound SCATTERSHOT_SOUND;
 	public static Sound LASER_CHARGE_SOUND; 
 	public static Sound BOSS_SCREECH_SOUND; 
-	
-	private Music level1_music;
+	public static Sound EMP_SOUND;
 	
 	private final AbstractGraphicsEngine graphics_engine;
 	private boolean played_boss_screech = false;
@@ -76,8 +74,6 @@ public class Level1 extends AutoSideScrollingRegion {
 		this.party = party;
 		active_enemy_wave = createRandomWave();
 		this.graphics_engine = graphics_engine;
-		
-		level1_music = TinySound.loadMusic(ErrorHandler.tryRun(() -> ResourceLoader.loadResourceWithError("resources/audio/music/game/gamejam_level1_theme.ogg")));
 
 		new Thread(new Runnable() {
 			public void run() {
@@ -89,6 +85,7 @@ public class Level1 extends AutoSideScrollingRegion {
 					SCATTERSHOT_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/scattershot.ogg"));
 					LASER_CHARGE_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/charge_laser.ogg"));
 					BOSS_SCREECH_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/boss_screech.ogg"));
+					EMP_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/EMP.ogg"));
 				});
 			}
 		}).start();
@@ -131,8 +128,6 @@ public class Level1 extends AutoSideScrollingRegion {
 			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_2"),
 			(Animation<?>) world_engine.resolve("vid:animation:backgrounds/city_landscape.front_3"),
 		});
-		
-		level1_music.play(true);
 	}
 
 	/* (non-Javadoc)
@@ -223,7 +218,10 @@ public class Level1 extends AutoSideScrollingRegion {
 		EXPLOSION_SOUND.unload();
 		BASIC_BULLET_SOUND.unload();
 		MISSILE_SOUND.unload();
-		level1_music.unload();
+		SCATTERSHOT_SOUND.unload();
+		LASER_CHARGE_SOUND.unload();
+		BOSS_SCREECH_SOUND.unload();
+		EMP_SOUND.unload();
 	}
 
 	@Override

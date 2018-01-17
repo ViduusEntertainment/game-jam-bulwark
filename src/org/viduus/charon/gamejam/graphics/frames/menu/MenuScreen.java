@@ -7,6 +7,7 @@ package org.viduus.charon.gamejam.graphics.frames.menu;
 
 import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.GameSystems;
+import org.viduus.charon.gamejam.audio.AudioEngine;
 import org.viduus.charon.gamejam.graphics.GraphicsEngine;
 import org.viduus.charon.gamejam.graphics.SideScrollingBackground;
 import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
@@ -21,11 +22,6 @@ import org.viduus.charon.global.graphics.opengl.components.OpenGLButton;
 import org.viduus.charon.global.graphics.util.Size;
 import org.viduus.charon.global.input.controller.ControllerState;
 import org.viduus.charon.global.player.PlayerParty;
-import org.viduus.charon.global.util.ResourceLoader;
-import org.viduus.charon.global.util.logging.ErrorHandler;
-
-import kuusisto.tinysound.Sound;
-import kuusisto.tinysound.TinySound;
 
 /**
  * 
@@ -36,7 +32,6 @@ public class MenuScreen extends AbstractJamScreen {
 
 	private OpenGLButton start_button;
 	private OpenGLButton exit_button;
-	private Sound menu_sound;
 	private OpenGLButton credits_button;
 	private Size screen_size;
 	private SideScrollingBackground background;
@@ -112,7 +107,7 @@ public class MenuScreen extends AbstractJamScreen {
 	 * @see org.viduus.charon.global.graphics.screens.AbstractGameScreen#onActivate(org.viduus.charon.global.AbstractGameSystems)
 	 */
 	@Override
-	protected void onActivate(AbstractGameSystems game_systems) {
+	protected void onActivate(int previous_screen_id, AbstractGameSystems game_systems) {
 		background.addBackgroundSet(-8, 20, new Animation<?>[] {
 			(Animation<?>) game_systems.graphics_engine.resolve("vid:animation:backgrounds/city_landscape.back_1"),
 			(Animation<?>) game_systems.graphics_engine.resolve("vid:animation:backgrounds/city_landscape.back_2"),
@@ -125,8 +120,8 @@ public class MenuScreen extends AbstractJamScreen {
 		});
 		
 		screen_size = game_systems.graphics_engine.getScreenSize();
-		menu_sound = ErrorHandler.tryRun(() -> TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/music/menu/main_menu.ogg")));
-		menu_sound.play();
+		
+		AudioEngine.MENU_MUSIC.play(true);
 	}
 
 	/* (non-Javadoc)
@@ -134,7 +129,6 @@ public class MenuScreen extends AbstractJamScreen {
 	 */
 	@Override
 	protected void onDeactivate(AbstractGameSystems game_systems) {
-		menu_sound.unload();
 	}
 
 	/* (non-Javadoc)

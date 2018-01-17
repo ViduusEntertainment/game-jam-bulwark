@@ -5,6 +5,7 @@
  */
 package org.viduus.charon.gamejam.graphics.frames.menu;
 
+import org.viduus.charon.gamejam.audio.AudioEngine;
 import org.viduus.charon.gamejam.graphics.GraphicsEngine;
 import org.viduus.charon.global.AbstractGameSystems;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
@@ -12,11 +13,6 @@ import org.viduus.charon.global.graphics.opengl.OpenGLFrame;
 import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
 import org.viduus.charon.global.graphics.util.IntDimension;
 import org.viduus.charon.global.input.controller.ControllerState;
-import org.viduus.charon.global.util.ResourceLoader;
-import org.viduus.charon.global.util.logging.ErrorHandler;
-
-import kuusisto.tinysound.Sound;
-import kuusisto.tinysound.TinySound;
 
 /**
  * 
@@ -26,7 +22,6 @@ import kuusisto.tinysound.TinySound;
 public class IntroScreen extends AbstractJamScreen {
 
 	private Animation<?> logo;
-	private Sound intro_sound;
 
 	/**
 	 * @param graphics_frame
@@ -62,13 +57,12 @@ public class IntroScreen extends AbstractJamScreen {
 	 * @see org.viduus.charon.global.graphics.screens.AbstractGameScreen#onActivate(org.viduus.charon.global.AbstractGameSystems)
 	 */
 	@Override
-	protected void onActivate(AbstractGameSystems game_systems) {
+	protected void onActivate(int previous_screen_id, AbstractGameSystems game_systems) {
+		AudioEngine.INTRO_SOUND.play();
+		
 		game_frame.setTitle("Space!");
 		game_frame.setLocationRelativeTo(null);
 		game_frame.setDesiredFPS(30);
-		
-		intro_sound = ErrorHandler.tryRun(() -> TinySound.loadSound(ResourceLoader.loadResource("resources/audio/sfx/intro/viduus.ogg")));
-		intro_sound.play();
 		
 		logo = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:viduus_logo.anim_0");
 	}
@@ -78,7 +72,7 @@ public class IntroScreen extends AbstractJamScreen {
 	 */
 	@Override
 	protected void onDeactivate(AbstractGameSystems game_systems) {
-		intro_sound.unload();
+		AudioEngine.INTRO_SOUND.unload();
 	}
 
 	/* (non-Javadoc)

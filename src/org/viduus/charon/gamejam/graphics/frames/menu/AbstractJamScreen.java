@@ -38,7 +38,7 @@ public abstract class AbstractJamScreen extends AbstractGameScreen {
 	}
 	
 	@Override
-	protected void onActivate(AbstractGameSystems game_systems) {
+	protected void onActivate(int previous_screen_id, AbstractGameSystems game_systems) {
 		ui_elements.stream().forEach(element -> element.activate(game_systems));
 	}
 	

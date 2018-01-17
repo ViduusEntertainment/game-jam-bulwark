@@ -33,7 +33,7 @@ public class GameOverScreen extends AbstractJamScreen {
 	}
 	
 	@Override
-	protected void onActivate(AbstractGameSystems game_systems) {
+	protected void onActivate(int previous_screen_id, AbstractGameSystems game_systems) {
 		
 	}
 	

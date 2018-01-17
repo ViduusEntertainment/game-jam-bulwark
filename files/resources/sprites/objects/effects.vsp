@@ -702,7 +702,7 @@
         },
         "animations": [
           {
-            "name": "vid:animations:object/effects.shield-idle",
+            "name": "vid:animations:object/effects.emp-idle",
             "sustain": true,
             "variants": [
               {

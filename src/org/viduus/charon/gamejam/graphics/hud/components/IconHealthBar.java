@@ -22,12 +22,16 @@ public class IconHealthBar {
 	private final Animation<?>
 		full,
 		empty;
-	private final int num_icons;
+	private int num_icons;
 	
 	public IconHealthBar(int num_icons, AbstractGameSystems game_systems) {
 		this.num_icons = num_icons;
 		full = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/icon_health_bar.full");
 		empty = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/icon_health_bar.empty");
+	}
+	
+	public void setNumIcons(int num_icons) {
+		this.num_icons = num_icons;
 	}
 	
 	public void render(OpenGLGraphics graphics, int x, int y, float d_sec, PlayerParty players) {

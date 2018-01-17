@@ -7,7 +7,7 @@ package org.viduus.charon.gamejam.graphics.frames.menu;
 
 import java.util.Random;
 
-import org.dyn4j.geometry.Vector2;
+import org.viduus.charon.gamejam.audio.AudioEngine;
 import org.viduus.charon.gamejam.graphics.GraphicsEngine;
 import org.viduus.charon.gamejam.graphics.ui.CheckBox;
 import org.viduus.charon.gamejam.graphics.ui.HorizontalUpgradeBox;
@@ -24,7 +24,6 @@ import org.viduus.charon.global.graphics.opengl.OpenGLFrame;
 import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
 import org.viduus.charon.global.graphics.opengl.font.OpenGLFont;
 import org.viduus.charon.global.graphics.util.IntDimension;
-import org.viduus.charon.global.graphics.util.Size;
 import org.viduus.charon.global.input.controller.ControllerState;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.Weapon2D;
 
@@ -213,7 +212,7 @@ public class UpgradeScreen extends AbstractJamScreen {
 			Weapon2D s_wep = main_character.getSecondaryWeapon();
 			
 			OpenGLFont.drawString2D(graphics, "Player Stats", (int) (c1_left + (180 - OpenGLFont.getStringWidth("Player Stats"))/2), top);
-			OpenGLFont.drawString2D(graphics, "Hearts: " + main_character.getShip().getHearts(), c1_left, top + dr);
+			OpenGLFont.drawString2D(graphics, "Hearts: " + Math.round(main_character.getShip().getHearts()), c1_left, top + dr);
 			OpenGLFont.drawString2D(graphics, "Currency: " + main_character.getMoney(), c1_left, top + 2*dr);
 			OpenGLFont.drawString2D(graphics, "P. DMG: " + p_wep.getFloat(Property.DAMAGE), c1_left, top + 3*dr);
 			OpenGLFont.drawString2D(graphics, "S. DMG: " + s_wep.getFloat(Property.DAMAGE), c1_left, top + 4*dr);
@@ -288,29 +287,45 @@ public class UpgradeScreen extends AbstractJamScreen {
 				if (main_character.tryPurchaseShip("Mk1", 0))
 					mark_1_ship_button.setPurchased();
 				armor_upgrade_option.setMaxLevel(1);
+				
+				// Only here for testing until we get the equip buttons
+				main_character.tryEquipShip("Mk1");
 			}
 			else if (mark_2_ship_button.hasFocus()) {
 				if (main_character.tryPurchaseShip("Mk2", 40000))
 					mark_2_ship_button.setPurchased();
 				armor_upgrade_option.setMaxLevel(1);
+				
+				// Only here for testing until we get the equip buttons
+				main_character.tryEquipShip("Mk2");
 			}
 			else if (heavy_variant_button.hasFocus()) {
 				if (main_character.tryPurchaseShip("Heavy", 40000))
 					heavy_variant_button.setPurchased();
 				armor_upgrade_option.setMaxLevel(3);
+				
+				// Only here for testing until we get the equip buttons
+				main_character.tryEquipShip("Heavy");
 			}
 			else if (fast_variant_button.hasFocus()) {
 				if (main_character.tryPurchaseShip("Fast", 40000))
 					fast_variant_button.setPurchased();
 				armor_upgrade_option.setMaxLevel(0);
+				
+				// Only here for testing until we get the equip buttons
+				main_character.tryEquipShip("Fast");
 			}
 			else if (basic_gun_button.hasFocus()) {
+				// technically the basic gun is already purchased but whatevs. I call basic_gun_button.
 				if (!basic_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("Basic", 0))
 					basic_gun_button.setPurchased();
 				else if (5 > main_character.getUpgradeLevel("Basic")) {
 					if(main_character.tryUpgradeWeapon("Basic", basic_gun_button.getNextPrice()))
 						basic_gun_button.setLevel(main_character.getUpgradeLevel("Basic"));
 				}
+				
+				// Only here for testing until we get the equip buttons
+				main_character.tryEquipPrimaryWeapon("Basic");
 			}
 			else if (chain_gun_button.hasFocus()) {
 				if (!chain_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("Chain", 15000))
@@ -319,6 +334,9 @@ public class UpgradeScreen extends AbstractJamScreen {
 					if(main_character.tryUpgradeWeapon("Chain", chain_gun_button.getNextPrice()))
 						chain_gun_button.setLevel(main_character.getUpgradeLevel("Chain"));
 				}
+				
+				// Only here for testing until we get the equip buttons
+				main_character.tryEquipPrimaryWeapon("Chain");
 			}
 			else if (scatter_gun_button.hasFocus()) {
 				if (!scatter_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("Scatter", 10000))
@@ -327,6 +345,9 @@ public class UpgradeScreen extends AbstractJamScreen {
 					if(main_character.tryUpgradeWeapon("Scatter", scatter_gun_button.getNextPrice()))
 						scatter_gun_button.setLevel(main_character.getUpgradeLevel("Scatter"));
 				}
+				
+				// Only here for testing until we get the equip buttons
+				main_character.tryEquipPrimaryWeapon("Scatter");
 			}
 			else if (arc_gun_button.hasFocus()) {
 				if (!arc_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("Arc", 25000))
@@ -335,6 +356,9 @@ public class UpgradeScreen extends AbstractJamScreen {
 					if(main_character.tryUpgradeWeapon("Arc", arc_gun_button.getNextPrice()))
 						arc_gun_button.setLevel(main_character.getUpgradeLevel("Arc"));
 				}
+				
+				// Only here for testing until we get the equip buttons
+				main_character.tryEquipPrimaryWeapon("Arc");
 			}
 			else if (laser_gun_button.hasFocus()) {
 				if (!laser_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("ChargeLaser", 20000))
@@ -343,6 +367,9 @@ public class UpgradeScreen extends AbstractJamScreen {
 					if(main_character.tryUpgradeWeapon("ChargeLaser", laser_gun_button.getNextPrice()))
 						laser_gun_button.setLevel(main_character.getUpgradeLevel("ChargeLaser"));
 				}
+				
+				// Only here for testing until we get the equip buttons
+				main_character.tryEquipPrimaryWeapon("ChargeLaser");
 			}
 			else if (basic_missiles_button.hasFocus()) {
 				if (!basic_missiles_button.getPurchased() && main_character.tryPurchaseSecondaryWeapon("BasicMissile", 0))
@@ -351,6 +378,9 @@ public class UpgradeScreen extends AbstractJamScreen {
 					if(main_character.tryUpgradeWeapon("BasicMissile", basic_missiles_button.getNextPrice()))
 						basic_missiles_button.setLevel(main_character.getUpgradeLevel("BasicMissile"));
 				}
+				
+				// Only here for testing until we get the equip buttons
+				main_character.tryEquipSecondaryWeapon("BasicMissile");
 			}
 			else if (scatter_missiles_button.hasFocus()) {
 				if (!scatter_missiles_button.getPurchased() && main_character.tryPurchaseSecondaryWeapon("ScatterMissile", 15000))
@@ -359,6 +389,9 @@ public class UpgradeScreen extends AbstractJamScreen {
 					if(main_character.tryUpgradeWeapon("ScatterMissile", scatter_missiles_button.getNextPrice()))
 						scatter_missiles_button.setLevel(main_character.getUpgradeLevel("ScatterMissile"));
 				}
+				
+				// Only here for testing until we get the equip buttons
+				main_character.tryEquipSecondaryWeapon("ScatterMissile");
 			}
 			else if (bomb_button.hasFocus()) {
 				if (!bomb_button.getPurchased() && main_character.tryPurchaseSecondaryWeapon("Bomb", 10000))
@@ -367,6 +400,9 @@ public class UpgradeScreen extends AbstractJamScreen {
 					if(main_character.tryUpgradeWeapon("Bomb", bomb_button.getNextPrice()))
 						bomb_button.setLevel(main_character.getUpgradeLevel("Bomb"));
 				}
+				
+				// Only here for testing until we get the equip buttons
+				main_character.tryEquipSecondaryWeapon("Bomb");
 			}
 			else if (emp_button.hasFocus()) {
 				if (!emp_button.getPurchased() && main_character.tryPurchaseSecondaryWeapon("Emp", 25000))
@@ -375,6 +411,9 @@ public class UpgradeScreen extends AbstractJamScreen {
 					if(main_character.tryUpgradeWeapon("Emp", emp_button.getNextPrice()))
 						emp_button.setLevel(main_character.getUpgradeLevel("Emp"));
 				}
+				
+				// Only here for testing until we get the equip buttons
+				main_character.tryEquipSecondaryWeapon("Emp");
 			}
 			else if (gravity_orb_button.hasFocus()) {
 				if (!gravity_orb_button.getPurchased() && main_character.tryPurchaseSecondaryWeapon("GravityOrb", 20000))
@@ -383,6 +422,9 @@ public class UpgradeScreen extends AbstractJamScreen {
 					if(main_character.tryUpgradeWeapon("GravityOrb", gravity_orb_button.getNextPrice()))
 						gravity_orb_button.setLevel(main_character.getUpgradeLevel("GravityOrb"));
 				}
+				
+				// Only here for testing until we get the equip buttons
+				main_character.tryEquipSecondaryWeapon("GravityOrb");
 			}
 		}
 	}
@@ -391,7 +433,7 @@ public class UpgradeScreen extends AbstractJamScreen {
 	 * @see org.viduus.charon.global.graphics.screens.AbstractGameScreen#onActivate(org.viduus.charon.global.AbstractGameSystems)
 	 */
 	@Override
-	protected void onActivate(AbstractGameSystems game_systems) {
+	protected void onActivate(int previous_screen_id, AbstractGameSystems game_systems) {
 		// pause engine state
 		game_systems.graphics_engine.disable(GlobalEngineFlags.RENDER_PLAYER_HUD);
 		game_systems.world_engine.disable(GlobalEngineFlags.TICK_WORLD);
@@ -402,12 +444,16 @@ public class UpgradeScreen extends AbstractJamScreen {
 		
 		// load stuff
 		upgrade_menu = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/upgrade_menu.menu");
-		super.onActivate(game_systems);
+		super.onActivate(previous_screen_id, game_systems);
 		
 		/*
 		 * Demotivational message stuff
 		 */
 		demotivational_message_selection = RN_JESUS.nextInt(demotivational_messages.length);
+		
+		AudioEngine.LEVEL1_MUSIC.stop();
+		if (previous_screen_id != GraphicsEngine.MENU_SCREEN)
+			AudioEngine.MENU_MUSIC.play(true);
 	}
 
 	/* (non-Javadoc)
@@ -419,6 +465,9 @@ public class UpgradeScreen extends AbstractJamScreen {
 		
 		// fix engine state
 		game_systems.graphics_engine.enable(GlobalEngineFlags.RENDER_PLAYER_HUD);
+		
+		AudioEngine.MENU_MUSIC.stop(); 
+		AudioEngine.LEVEL1_MUSIC.play(true);
 	}
 
 	/* (non-Javadoc)
