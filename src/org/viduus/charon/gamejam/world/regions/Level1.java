@@ -204,13 +204,6 @@ public class Level1 extends AutoSideScrollingRegion {
 		else
 			return new Wavey2Wave(world_engine, this);
 	}
-
-//	private void tryPlaySound(CooldownTimer cooldown_timer, Sound sound) {
-//		if (!cooldown_timer.isCooling()) {
-//			audio_engine.playSound(sound);
-//			cooldown_timer.reset();
-//		}
-//	}
 	
 	@Override
 	public void onReleased() {

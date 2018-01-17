@@ -1,7 +1,7 @@
 package org.viduus.charon.gamejam.world.objects.weapons.range;
 
 import org.dyn4j.geometry.Vector2;
-import org.viduus.charon.gamejam.world.objects.weapons.bullets.ChainLightningBullet;
+import org.viduus.charon.gamejam.world.objects.weapons.bullets.ArcBullet;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.event.events.HitByWeaponEvent;
 import org.viduus.charon.global.util.identification.Uid;
@@ -10,15 +10,15 @@ import org.viduus.charon.global.world.objects.twodimensional.Object2D;
 import org.viduus.charon.global.world.objects.twodimensional.character.Character2D;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.range.bullets.Bullet2D;
 
-public class ChainLightningGun extends Gun {
+public class ArcGun extends Gun {
 
-	public ChainLightningGun(AbstractWorldEngine world_engine, String name, Character2D owner, float damage) {
+	public ArcGun(AbstractWorldEngine world_engine, String name, Character2D owner, float damage) {
 		super(world_engine, name, owner, .5f, damage, Integer.MAX_VALUE);
 	}
 
 	@Override
 	protected Bullet2D createBullet() {
-		return new ChainLightningBullet(world_engine, Uid.generateUid("vid:bullet", "ChainLightningBullet"), "ChainLightningBullet", this, getLocation().copy(), get(Property.DAMAGE), 0);
+		return new ArcBullet(world_engine, Uid.generateUid("vid:bullet", "ChainLightningBullet"), "ChainLightningBullet", this, getLocation().copy(), get(Property.DAMAGE), 0, 0, null);
 	}
 
 	@Override

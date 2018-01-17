@@ -14,7 +14,7 @@ import org.viduus.charon.gamejam.GameSystems;
 import org.viduus.charon.gamejam.input.PlayerControls;
 import org.viduus.charon.gamejam.world.objects.weapons.range.BombDropper;
 import org.viduus.charon.gamejam.world.objects.weapons.range.ChainGun;
-import org.viduus.charon.gamejam.world.objects.weapons.range.ChainLightningGun;
+import org.viduus.charon.gamejam.world.objects.weapons.range.ArcGun;
 import org.viduus.charon.gamejam.world.objects.weapons.range.DefaultGun;
 import org.viduus.charon.gamejam.world.objects.weapons.range.EMP;
 import org.viduus.charon.gamejam.world.objects.weapons.range.GravityBombGun;
@@ -448,7 +448,7 @@ public class PlayerCharacter extends PlayableCharacter2D {
 			weapon = new ScatterGun(world_engine, "Scatter", this, calculateWeaponDamage(name, 40));
 			break;
 		case "Arc":
-			weapon = new ChainLightningGun(world_engine, "Arc", this, calculateWeaponDamage(name, 60));
+			weapon = new ArcGun(world_engine, "Arc", this, calculateWeaponDamage(name, 60));
 			break;
 		case "ChargeLaser":
 			weapon = new LaserGun(world_engine, "ChargeLaser", this, calculateWeaponDamage(name, 250));
@@ -639,7 +639,6 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	@Override
 	protected void onCollision(CollisionEvent collision_event) {
 		if (!immunity_timer.isCooling()) {		
-			OutputHandler.println("shit: " + getFloat(Property.HEALTH));
 			set(Property.HEALTH, getFloat(Property.HEALTH) - 1);
 			immunity_timer.reset();
 		}

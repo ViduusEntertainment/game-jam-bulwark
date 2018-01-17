@@ -14,6 +14,11 @@ public class EnemyFilter extends Character2DFilter<Enemy> implements Filter {
 	protected boolean collisionAllowed(Filter filter) {
 		if (filter instanceof WorldFilter || filter instanceof EnemyBulletFilter || filter instanceof GravityOrbFilter) 
 			return false;
+		else if (filter instanceof ArcBulletFilter) {
+			if (((ArcBulletFilter)filter).non_collidable == getObject()) {
+				return false;
+			}
+		}
 		return super.collisionAllowed(filter);
 	}
 }
