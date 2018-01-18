@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.dyn4j.geometry.AABB;
 import org.dyn4j.geometry.Vector2;
+import org.viduus.charon.gamejam.audio.AudioEngine;
 import org.viduus.charon.gamejam.world.WorldEngine;
 import org.viduus.charon.gamejam.world.objects.effects.Explosion;
 import org.viduus.charon.gamejam.world.objects.weapons.range.BossLaserGun;
+import org.viduus.charon.gamejam.world.regions.Level1;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.event.events.CollisionEvent;
 import org.viduus.charon.global.event.events.HitByWeaponEvent;
@@ -16,7 +18,6 @@ import org.viduus.charon.global.event.events.WeaponUseEvent;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.util.Size;
 import org.viduus.charon.global.util.identification.IdentifiedResource;
-import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.range.bullets.Bullet2D;
 import org.viduus.charon.global.world.regions.BaseRegion;
@@ -25,15 +26,17 @@ import org.viduus.charon.global.world.util.CooldownTimer;
 public class BosserbossEnemy extends Enemy {
 
 	private static final float SPEED = 100.0f;
-	private static final float HEALTH = 1000;
-	private CooldownTimer immunity_timer = new CooldownTimer(0.1f);
-	private CooldownTimer weapon_timer = new CooldownTimer(5f);
+	private static final float HEALTH = 10000;
+	private CooldownTimer immunity_timer = new CooldownTimer(Float.MAX_VALUE);
+	private CooldownTimer weapon_timer = new CooldownTimer(Float.MAX_VALUE);
+	private CooldownTimer wait_timer = new CooldownTimer(3f);
 	private Animation<?> normal_animation;
 	private Animation<?> shooting_animation;
 	
 	public BosserbossEnemy(AbstractWorldEngine world_engine, String name, Vector2 location) {
 		super(world_engine, name, location, SPEED, HEALTH, 0, HEALTH, 0, "vid:animation:enemies/boss", "boss", "idle", 0);
 		set(Property.AUTO_SPRITE_UPDATE, true);
+		wait_timer.reset();
 	}
 	
 	@Override
@@ -41,6 +44,20 @@ public class BosserbossEnemy extends Enemy {
 		super.onTick(tick_event);
 		weapon_timer.update(tick_event.time_elapsed);	
 		immunity_timer.update(tick_event.time_elapsed);
+		wait_timer.update(tick_event.time_elapsed);
+		
+		if (!wait_timer.isCooling()) {
+			getBody().setLinearVelocity(new Vector2(getFloat(Property.SPEED) * -1, 0));
+			wait_timer.setCooldown(Float.MAX_VALUE);
+			wait_timer.reset();
+			AudioEngine.LEVEL1_MUSIC.stop();
+			Level1.BOSS_BATTLE_MUSIC.play(true);
+			weapon_timer.setCooldown(5f);
+			weapon_timer.reset();
+			immunity_timer.setCooldown(0.1f);
+			immunity_timer.reset();
+		}
+		
 		if (getVector2(Property.LOCATION).distanceSquared(getVector2(Property.INITIAL_LOCATION)) > 62500) {
 			Size world_size = ((WorldEngine)world_engine).getWorldSize();
 			set(Property.MOVEMENT_TYPE, NPC_MOVEMENT.FREE_ROAM);
@@ -124,4 +141,9 @@ public class BosserbossEnemy extends Enemy {
 	
 	@Override
 	protected void onCollision(CollisionEvent collision_event) {}
+	
+	@Override
+	public void onAttached(IdentifiedResource owner) {
+		Level1.BOSS_SCREECH_SOUND.play();
+	}
 }

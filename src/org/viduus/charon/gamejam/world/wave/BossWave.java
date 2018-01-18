@@ -47,7 +47,6 @@ public class BossWave extends EnemyWave {
 	protected void createEnemies(HashSet<NonPlayableCharacter2D> enemies) {
 		Size world_size = world_engine.getWorldSize();
 		boss = createBossEnemy(new Vector2(world_size.width + 250, world_size.height / 2));
-		boss.getBody().setLinearVelocity(new Vector2(boss.getFloat(Property.SPEED) * -1, 0));
 		enemies.add(boss);
 	}
 

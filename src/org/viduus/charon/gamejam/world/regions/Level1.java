@@ -9,6 +9,7 @@ import java.util.Random;
 
 import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.GameConstants.EngineFlags;
+import org.viduus.charon.gamejam.audio.AudioEngine;
 import org.viduus.charon.gamejam.graphics.GraphicsEngine;
 import org.viduus.charon.gamejam.world.objects.character.nonplayable.BosserbossEnemy;
 import org.viduus.charon.gamejam.world.objects.character.nonplayable.Enemy;
@@ -34,8 +35,8 @@ import org.viduus.charon.global.util.identification.IdentifiedResource;
 import org.viduus.charon.global.util.logging.ErrorHandler;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;
-import org.viduus.charon.global.world.util.CooldownTimer;
 
+import kuusisto.tinysound.Music;
 import kuusisto.tinysound.Sound;
 import kuusisto.tinysound.TinySound;
 
@@ -63,13 +64,13 @@ public class Level1 extends AutoSideScrollingRegion {
 	public static Sound LASER_CHARGE_SOUND; 
 	public static Sound BOSS_SCREECH_SOUND; 
 	public static Sound EMP_SOUND;
+	public static Music BOSS_BATTLE_MUSIC;
 	
 	private final AbstractGraphicsEngine graphics_engine;
 	
 	private float total_enemy_health = 10000.0f;
-	private float enemy_health = 1000.0f;
+	private float enemy_health = 10000.0f;
 	private boolean is_battling_boss = false;
-	private CooldownTimer boss_screech_timer = new CooldownTimer(5f);
 	private BosserbossEnemy boss;
 	
 	/**
@@ -81,7 +82,6 @@ public class Level1 extends AutoSideScrollingRegion {
 		this.party = party;
 		active_enemy_wave = createRandomWave();
 		this.graphics_engine = graphics_engine;
-
 		new Thread(new Runnable() {
 			public void run() {
 				ErrorHandler.tryRun(() -> {
@@ -93,6 +93,7 @@ public class Level1 extends AutoSideScrollingRegion {
 					LASER_CHARGE_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/charge_laser.ogg"));
 					BOSS_SCREECH_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/boss_screech.ogg"));
 					EMP_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/EMP.ogg"));
+					BOSS_BATTLE_MUSIC = TinySound.loadMusic(ErrorHandler.tryRun(() -> ResourceLoader.loadResourceWithError("resources/audio/music/game/gamejam_boss_battle.ogg")));
 				});
 			}
 		}).start();
@@ -153,7 +154,8 @@ public class Level1 extends AutoSideScrollingRegion {
 		if (death_event.object_that_died instanceof BosserbossEnemy) {
 			is_battling_boss = false;
 			enemy_health = 10000f;
-			boss_screech_timer = new CooldownTimer(5f);
+			BOSS_BATTLE_MUSIC.stop();
+			AudioEngine.LEVEL1_MUSIC.play(true);
 		}
 		else if (death_event.object_that_died instanceof Enemy) {
 			Enemy enemy = (Enemy)death_event.object_that_died;
@@ -189,20 +191,15 @@ public class Level1 extends AutoSideScrollingRegion {
 					active_enemy_wave = createRandomWave();
 				} 
 				else if (getPercentEnemyHealth() <= 0.0f && !is_battling_boss) {
-					if (!boss_screech_timer.isCooling()) {
-						BOSS_SCREECH_SOUND.play();
-						boss_screech_timer.reset();
-					}
-					else {
-						BossWave boss_wave = new BossWave(world_engine, this);
-						active_enemy_wave = boss_wave;
-						boss = boss_wave.getBoss();
-						enemy_health = 10000f;
-						is_battling_boss = true;
-					}
+					BossWave boss_wave = new BossWave(world_engine, this);
+					active_enemy_wave = boss_wave;
+					boss = boss_wave.getBoss();
+					enemy_health = 10000f;
+					is_battling_boss = true;
 				}
 			} 
 			else {
+				BOSS_BATTLE_MUSIC.stop();
 				graphics_engine.showFrame(GraphicsEngine.UPGRADE_SCREEN);
 			}
 			
@@ -257,6 +254,7 @@ public class Level1 extends AutoSideScrollingRegion {
 		LASER_CHARGE_SOUND.unload();
 		BOSS_SCREECH_SOUND.unload();
 		EMP_SOUND.unload();
+		BOSS_BATTLE_MUSIC.unload();
 	}
 
 	@Override
