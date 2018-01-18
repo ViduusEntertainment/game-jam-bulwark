@@ -27,7 +27,7 @@ public class GravityBombBullet extends Bullet {
 	 */
 	public GravityBombBullet(AbstractWorldEngine world_engine, Uid uid, String name, Weapon2D owner, Vector2 location) {
 		super(world_engine, uid, name, owner, location, new Vector2(800, 0), "vid:animation:objects/bullets", "gravity_bomb", 0f);
-		setCollisionFilter(new GravityOrbFilter(this));
+		set(Property.COLLISION_FILTER, new GravityOrbFilter(this));
 		gravity_timer = new CooldownTimer(3f);
 	}
 	
@@ -73,7 +73,7 @@ public class GravityBombBullet extends Bullet {
 		for (IdentifiedResource resource : enemies) {
 			Enemy enemy = (Enemy)resource;
 			enemy.set(Property.MOVEMENT_TYPE, NPC_MOVEMENT.MANUAL);
-			enemy.setLinearVelocity(enemy.get(Property.INITIAL_LINEAR_VELOCITY));
+			enemy.getBody().setLinearVelocity(enemy.get(Property.INITIAL_LINEAR_VELOCITY));
 		}
 	}
 	

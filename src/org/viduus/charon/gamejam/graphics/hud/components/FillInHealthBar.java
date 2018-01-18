@@ -6,6 +6,7 @@
 package org.viduus.charon.gamejam.graphics.hud.components;
 
 import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
+import org.viduus.charon.gamejam.world.regions.Level1;
 import org.viduus.charon.global.AbstractGameSystems;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
@@ -53,7 +54,7 @@ public class FillInHealthBar {
 		 * Draw the inside of the health bar
 		 */
 		
-		float percent_health = character.getPercentEnemyHealth();
+		float percent_health = ((Level1)character.getCurrentRegion()).getPercentEnemyHealth();
 		
 		int max_pixels = WIDTH - 2*BORDER_SIZE;
 		int pixels = (int) Math.floor(percent_health * max_pixels);

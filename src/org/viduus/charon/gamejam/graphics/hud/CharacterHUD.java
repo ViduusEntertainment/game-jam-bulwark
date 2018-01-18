@@ -65,7 +65,7 @@ public class CharacterHUD extends HeadsUpDisplay {
 		enemy_health_bar.render(graphics, screen_width/2, 2, d_sec, players);
 		player_health_bar.render(graphics, 0, 0, d_sec, players);
 		missile_stock_counter.render(graphics, 2, 18, d_sec);
-		currency_counter.render(graphics, screen_width-50, 2, d_sec);
+		currency_counter.render(graphics, screen_width-70, 2, d_sec);
 		missile_cooldown_counter.render(graphics, screen_width/2-33, screen_height-34, d_sec);
 		shield_cooldown_counter.render(graphics, screen_width/2+1, screen_height-34, d_sec);
 	}

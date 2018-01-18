@@ -11,6 +11,7 @@ import org.viduus.charon.gamejam.world.objects.character.nonplayable.KamikazeEne
 import org.viduus.charon.gamejam.world.objects.character.nonplayable.StandardEnemy;
 import org.viduus.charon.gamejam.world.objects.character.nonplayable.TankEnemy;
 import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
+import org.viduus.charon.gamejam.world.objects.weapons.range.BossLaserGun;
 import org.viduus.charon.gamejam.world.objects.weapons.range.EnemyGun;
 import org.viduus.charon.gamejam.world.regions.Level1;
 import org.viduus.charon.global.GameConstants.Property;
@@ -25,7 +26,7 @@ import org.viduus.charon.global.world.util.CooldownTimer;
 
 public abstract class EnemyWave {
 	
-	private HashSet<NonPlayableCharacter2D> enemies = new HashSet<>();
+	protected HashSet<NonPlayableCharacter2D> enemies = new HashSet<>();
 	protected final Level1 region;
 	protected final WorldEngine world_engine;
 	protected boolean launched = false;
@@ -68,7 +69,7 @@ public abstract class EnemyWave {
 	protected StandardEnemy createStandardEnemy(Vector2 location) {
 		StandardEnemy enemy = new StandardEnemy(world_engine, "StandardEnemy", location);
 		EnemyGun weapon = new EnemyGun(world_engine, "Enemy Weapon", enemy);
-		enemy.setLinearVelocity(new Vector2(-100, 0));
+		enemy.getBody().setLinearVelocity(new Vector2(-100, 0));
 		world_engine.insert(enemy);
 		world_engine.insert(weapon);
 		enemy.equipWeapon(weapon);
@@ -100,7 +101,10 @@ public abstract class EnemyWave {
 	
 	protected BosserbossEnemy createBossEnemy(Vector2 location) {
 		BosserbossEnemy enemy = new BosserbossEnemy(world_engine, "BosserbossEnemy", location);
+		BossLaserGun weapon = new BossLaserGun(world_engine, "Boss Weapon", enemy);
 		world_engine.insert(enemy);
+		world_engine.insert(weapon);
+		enemy.equipWeapon(weapon);
 		return enemy;
 	}
 	

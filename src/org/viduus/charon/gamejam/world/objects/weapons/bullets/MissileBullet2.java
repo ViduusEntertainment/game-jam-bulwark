@@ -25,7 +25,7 @@ public class MissileBullet2 extends Bullet {
 	 */
 	public MissileBullet2(AbstractWorldEngine world_engine, Uid uid, String name, Weapon2D owner, Vector2 location, float damage) {
 		super(world_engine, uid, name, owner, location, new Vector2(600, 0), "vid:animation:objects/bullets", "player_missile_2", damage);
-		setCollisionFilter(new Bullet2DFilter(this));
+		set(Property.COLLISION_FILTER, new Bullet2DFilter(this));
 	}
 	
 	@Override 
@@ -37,17 +37,17 @@ public class MissileBullet2 extends Bullet {
 			BaseRegion region = get(Property.CURRENT_REGION);
 			
 			MissileBullet3 bullet1 = new MissileBullet3(world_engine, Uid.generateUid("vid:bullet", "MissileBullet3"), "MissileBullet3", (Weapon2D)getOwner(), getLocation().copy(), 600f);
-			bullet1.setLinearVelocity(new Vector2(600, 200));
+			bullet1.getBody().setLinearVelocity(new Vector2(600, 200));
 			world_engine.insert(bullet1);
 			region.queueEntityForAddition(bullet1);
 			
 			MissileBullet3 bullet2 = new MissileBullet3(world_engine, Uid.generateUid("vid:bullet", "MissileBullet3"), "MissileBullet3", (Weapon2D)getOwner(), getLocation().copy(), 600f);
-			bullet2.setLinearVelocity(new Vector2(600, 0));
+			bullet2.getBody().setLinearVelocity(new Vector2(600, 0));
 			world_engine.insert(bullet2);
 			region.queueEntityForAddition(bullet2);
 			
 			MissileBullet3 bullet3 = new MissileBullet3(world_engine, Uid.generateUid("vid:bullet", "MissileBullet3"), "MissileBullet3", (Weapon2D)getOwner(), getLocation().copy(), 600f);
-			bullet3.setLinearVelocity(new Vector2(600, -200));
+			bullet3.getBody().setLinearVelocity(new Vector2(600, -200));
 			world_engine.insert(bullet3);
 			region.queueEntityForAddition(bullet3);
 		}

@@ -8,7 +8,6 @@ package org.viduus.charon.gamejam.world.objects.character.playable;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import org.dyn4j.dynamics.joint.WeldJoint;
 import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.GameSystems;
 import org.viduus.charon.gamejam.input.PlayerControls;
@@ -96,9 +95,6 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	private Ship ship;
 	
 	private int money = 1000000;
-	
-	private float total_enemy_health = 10000.0f;
-	private float enemy_health = 10000.0f;
 	
 	private int thruster_upgrades = 0;
 	private int armor_upgrades = 0;
@@ -304,7 +300,7 @@ public class PlayerCharacter extends PlayableCharacter2D {
 			dy *= org.viduus.charon.global.util.math.Constants.SQRT2OVER2;
 		}
 		
-		setLinearVelocity(new Vector2(dx, dy));
+		getBody().setLinearVelocity(new Vector2(dx, dy));
 	}
 	
 	public int getMoney() {
@@ -351,24 +347,6 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	
 	public Weapon2D getSecondaryWeapon() {
 		return secondary_weapon;
-	}
-	
-	public void setTotalEnemyHealth(float total_enemy_health) {
-		this.total_enemy_health = total_enemy_health;
-	}
-	
-	public float getPercentEnemyHealth() {
-		return enemy_health / total_enemy_health;
-	}
-	
-	
-	public float getEnemyHealth() {
-		return enemy_health;
-	}
-	
-	public void setEnemyHealth(float enemy_health) {
-		if (enemy_health < 0) enemy_health = 0;
-		this.enemy_health = enemy_health;
 	}
 	
 	private void setShip(Ship ship) {
@@ -599,17 +577,17 @@ public class PlayerCharacter extends PlayableCharacter2D {
 			RangeWeapon2D weapon = (RangeWeapon2D)weapon_use_event.weapon;
 			if (weapon instanceof ScatterGun) {
 				Bullet2D bullet1 = weapon.getBullet();
-				bullet1.setLinearVelocity(new Vector2(800, -100));
+				bullet1.getBody().setLinearVelocity(new Vector2(800, -100));
 				world_engine.insert(bullet1);
 				this.<BaseRegion>get(Property.CURRENT_REGION).queueEntityForAddition(bullet1);
 				
 				Bullet2D bullet2 = weapon.getBullet();
-				bullet2.setLinearVelocity(new Vector2(800, 0));
+				bullet2.getBody().setLinearVelocity(new Vector2(800, 0));
 				world_engine.insert(bullet2);
 				this.<BaseRegion>get(Property.CURRENT_REGION).queueEntityForAddition(bullet2);
 				
 				Bullet2D bullet3 = weapon.getBullet();
-				bullet3.setLinearVelocity(new Vector2(800, 100));
+				bullet3.getBody().setLinearVelocity(new Vector2(800, 100));
 				world_engine.insert(bullet3);
 				this.<BaseRegion>get(Property.CURRENT_REGION).queueEntityForAddition(bullet3);
 			}
@@ -638,10 +616,10 @@ public class PlayerCharacter extends PlayableCharacter2D {
 
 	@Override
 	protected void onCollision(CollisionEvent collision_event) {
-		if (!immunity_timer.isCooling()) {		
-			set(Property.HEALTH, getFloat(Property.HEALTH) - 1);
-			immunity_timer.reset();
-		}
+//		if (!immunity_timer.isCooling()) {		
+//			set(Property.HEALTH, getFloat(Property.HEALTH) - 1);
+//			immunity_timer.reset();
+//		}
 	}
 	
 	

@@ -10,8 +10,10 @@ import java.util.Random;
 import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.GameConstants.EngineFlags;
 import org.viduus.charon.gamejam.graphics.GraphicsEngine;
+import org.viduus.charon.gamejam.world.objects.character.nonplayable.BosserbossEnemy;
 import org.viduus.charon.gamejam.world.objects.character.nonplayable.Enemy;
 import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
+import org.viduus.charon.gamejam.world.wave.BossWave;
 import org.viduus.charon.gamejam.world.wave.EnemyWave;
 import org.viduus.charon.gamejam.world.wave.LeftDiagonalWave;
 import org.viduus.charon.gamejam.world.wave.RightDiagonalWave;
@@ -30,9 +32,9 @@ import org.viduus.charon.global.player.PlayerParty;
 import org.viduus.charon.global.util.ResourceLoader;
 import org.viduus.charon.global.util.identification.IdentifiedResource;
 import org.viduus.charon.global.util.logging.ErrorHandler;
-import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;
+import org.viduus.charon.global.world.util.CooldownTimer;
 
 import kuusisto.tinysound.Sound;
 import kuusisto.tinysound.TinySound;
@@ -63,7 +65,12 @@ public class Level1 extends AutoSideScrollingRegion {
 	public static Sound EMP_SOUND;
 	
 	private final AbstractGraphicsEngine graphics_engine;
-	private boolean played_boss_screech = false;
+	
+	private float total_enemy_health = 10000.0f;
+	private float enemy_health = 1000.0f;
+	private boolean is_battling_boss = false;
+	private CooldownTimer boss_screech_timer = new CooldownTimer(5f);
+	private BosserbossEnemy boss;
 	
 	/**
 	 * @param world_engine
@@ -143,11 +150,16 @@ public class Level1 extends AutoSideScrollingRegion {
 	protected void onObjectDeath(DeathEvent death_event) {
 		super.onObjectDeath(death_event);
 		
-		if (death_event.object_that_died instanceof Enemy) {
+		if (death_event.object_that_died instanceof BosserbossEnemy) {
+			is_battling_boss = false;
+			enemy_health = 10000f;
+			boss_screech_timer = new CooldownTimer(5f);
+		}
+		else if (death_event.object_that_died instanceof Enemy) {
 			Enemy enemy = (Enemy)death_event.object_that_died;
 			PlayerCharacter player = (PlayerCharacter) party.get(0);
 			player.giveMoney(enemy.getReward());
-			player.setEnemyHealth(player.getEnemyHealth() - enemy.getFloat(Property.MAX_HEALTH));
+			setEnemyHealth(getEnemyHealth() - enemy.getFloat(Property.MAX_HEALTH));
 		}
 		
 		if (active_enemy_wave != null) {
@@ -172,18 +184,30 @@ public class Level1 extends AutoSideScrollingRegion {
 			
 			if (active_enemy_wave != null)
 				active_enemy_wave.onTick(tick_event);
-			if ((active_enemy_wave == null || active_enemy_wave.isFinished()) && !player_dead) {
-				active_enemy_wave = createRandomWave();
-				OutputHandler.println(active_enemy_wave.getClass().getSimpleName());
-			}
-			
-			if (player_dead && active_enemy_wave.isFinished()) {
+			if (!player_dead) {
+				if ((active_enemy_wave == null || active_enemy_wave.isFinished()) && getPercentEnemyHealth() > 0.0f) {
+					active_enemy_wave = createRandomWave();
+				} 
+				else if (getPercentEnemyHealth() <= 0.0f && !is_battling_boss) {
+					if (!boss_screech_timer.isCooling()) {
+						BOSS_SCREECH_SOUND.play();
+						boss_screech_timer.reset();
+					}
+					else {
+						BossWave boss_wave = new BossWave(world_engine, this);
+						active_enemy_wave = boss_wave;
+						boss = boss_wave.getBoss();
+						enemy_health = 10000f;
+						is_battling_boss = true;
+					}
+				}
+			} 
+			else {
 				graphics_engine.showFrame(GraphicsEngine.UPGRADE_SCREEN);
 			}
 			
-			if (!played_boss_screech && player.getPercentEnemyHealth() < 0.5f) {
-				BOSS_SCREECH_SOUND.play();
-				played_boss_screech = true;
+			if (is_battling_boss) {
+				setEnemyHealth(boss.getFloat(Property.HEALTH));
 			}
 		}
 	}
@@ -203,6 +227,24 @@ public class Level1 extends AutoSideScrollingRegion {
 			return new Wavey1Wave(world_engine, this);
 		else
 			return new Wavey2Wave(world_engine, this);
+	}
+	
+	public void setTotalEnemyHealth(float total_enemy_health) {
+		this.total_enemy_health = total_enemy_health;
+	}
+	
+	public float getPercentEnemyHealth() {
+		return enemy_health / total_enemy_health;
+	}
+	
+	
+	public float getEnemyHealth() {
+		return enemy_health;
+	}
+	
+	public void setEnemyHealth(float enemy_health) {
+		if (enemy_health < 0) enemy_health = 0;
+		this.enemy_health = enemy_health;
 	}
 	
 	@Override

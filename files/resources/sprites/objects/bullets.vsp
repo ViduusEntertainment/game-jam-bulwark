@@ -3042,6 +3042,280 @@
             ]
           }
         ]
+      },
+	  {
+        "metadata": {
+          "rows": 1,
+          "columns": 4,
+          "name": "boss_laser_charge"
+        },
+        "row_offset": 1000,
+        "location": {
+          "x": 0,
+          "y": 112,
+          "metadata": {
+            
+          }
+        },
+        "center": {
+          "x": 0,
+          "y": 0,
+          "metadata": {
+            
+          }
+        },
+        "size": {
+          "width": 16,
+          "height": 16
+        },
+        "masks": {
+          "0": {
+            "collision": [
+              
+            ],
+            "image": [
+              
+            ]
+          },
+          "1": {
+            "collision": [
+              
+            ],
+            "image": [
+              
+            ]
+          },
+          "2": {
+            "collision": [
+              
+            ],
+            "image": [
+              
+            ]
+          },
+          "3": {
+            "collision": [
+              
+            ],
+            "image": [
+              
+            ]
+          }
+        },
+        "animations": [
+          {
+            "name": "vid:animation:objects/bullets.boss_laser_charge-idle",
+            "sustain": true,
+            "variants": [
+              {
+                "frames": [
+                  {
+                    "id": 0,
+                    "duration": 150
+                  },
+                  {
+                    "id": 1,
+                    "duration": 150
+                  },
+                  {
+                    "id": 2,
+                    "duration": 150
+                  },
+                  {
+                    "id": 3,
+                    "duration": 150
+                  }
+                ],
+                "probability": 1.0,
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "metadata": {
+          "rows": 1,
+          "columns": 3,
+          "name": "boss_laser_beam"
+        },
+        "row_offset": 1000,
+        "location": {
+          "x": 80,
+          "y": 112,
+          "metadata": {
+            
+          }
+        },
+        "center": {
+          "x": 0,
+          "y": 0,
+          "metadata": {
+            
+          }
+        },
+        "size": {
+          "width": 32,
+          "height": 16
+        },
+        "masks": {
+          "0": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 112,
+                    "y": 120,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 80,
+                    "y": 120,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 80,
+                    "y": 117,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 112,
+                    "y": 117,
+                    "metadata": {
+                      
+                    }
+                  }
+                ],
+                "metadata": {
+                  
+                }
+              }
+            ],
+            "image": [
+              
+            ]
+          },
+          "1": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 144,
+                    "y": 120,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 112,
+                    "y": 120,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 112,
+                    "y": 117,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 144,
+                    "y": 117,
+                    "metadata": {
+                      
+                    }
+                  }
+                ],
+                "metadata": {
+                  
+                }
+              }
+            ],
+            "image": [
+              
+            ]
+          },
+          "2": {
+            "collision": [
+              {
+                "vertices": [
+                  {
+                    "x": 175,
+                    "y": 120,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 144,
+                    "y": 120,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 144,
+                    "y": 117,
+                    "metadata": {
+                      
+                    }
+                  },
+                  {
+                    "x": 175,
+                    "y": 117,
+                    "metadata": {
+                      
+                    }
+                  }
+                ],
+                "metadata": {
+                  
+                }
+              }
+            ],
+            "image": [
+              
+            ]
+          }
+        },
+        "animations": [
+          {
+            "name": "vid:animation:objects/bullets.boss_laser_beam-idle",
+            "sustain": true,
+            "variants": [
+              {
+                "frames": [
+                  {
+                    "id": 0,
+                    "duration": 250
+                  },
+                  {
+                    "id": 1,
+                    "duration": 250
+                  },
+                  {
+                    "id": 2,
+                    "duration": 250
+                  }
+                ],
+                "probability": 1.0,
+                "metadata": {
+                  "name": "Variant (0)"
+                }
+              }
+            ]
+          }
+        ]
       }
 	],
     "free": []

@@ -11,7 +11,6 @@ import org.viduus.charon.global.event.events.CollisionEvent;
 import org.viduus.charon.global.event.events.HitByWeaponEvent;
 import org.viduus.charon.global.util.identification.IdentifiedResource;
 import org.viduus.charon.global.util.identification.Uid;
-import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.Weapon2D;
 import org.viduus.charon.global.world.regions.BaseRegion;
@@ -19,7 +18,6 @@ import org.viduus.charon.global.world.regions.BaseRegion;
 public class ArcBullet extends Bullet{
 	
 	private int level = 0;
-	private double rotation;
 	
 	public ArcBullet(AbstractWorldEngine world_engine, Uid uid, String name, Weapon2D owner, Vector2 location, float damage, double rotation, int level, Enemy non_collidable) {
 		this(world_engine, uid, name, owner, location, new Vector2(800, 0), damage, rotation, level, non_collidable);
@@ -27,9 +25,9 @@ public class ArcBullet extends Bullet{
 	
 	public ArcBullet(AbstractWorldEngine world_engine, Uid uid, String name, Weapon2D owner, Vector2 location, Vector2 velocity, float damage, double rotation, int level, Enemy non_collidable) {
 		super(world_engine, uid, name, owner, location, velocity, "vid:animation:objects/bullets", "chain_lightning", damage);
-		this.rotation = rotation;
 		this.level = level;
-		setCollisionFilter(new ArcBulletFilter(this, non_collidable));
+		set(Property.ROTATION, rotation);
+		set(Property.COLLISION_FILTER, new ArcBulletFilter(this, non_collidable));
 	}
 
 	@Override
@@ -72,11 +70,5 @@ public class ArcBullet extends Bullet{
 				}
 			}
 		}
-	}
-	
-	@Override
-	public void beforeBodyCreation() {
-		super.beforeBodyCreation();
-		set(Property.ROTATION, rotation);
 	}
 }

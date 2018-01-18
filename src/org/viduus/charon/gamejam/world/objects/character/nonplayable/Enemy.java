@@ -28,7 +28,7 @@ public abstract class Enemy extends NonPlayableCharacter2D{
 			float mana, float max_health, float max_mana, String animation_file, String sprite_id, String animation_name, int reward) {
 		super(world_engine, name, location, speed, health, mana, max_health, max_mana, animation_file, sprite_id, animation_name);
 		this.reward = reward;
-		setCollisionFilter(new EnemyFilter(this));
+		set(Property.COLLISION_FILTER, new EnemyFilter(this));
 	}
 	
 	@Override

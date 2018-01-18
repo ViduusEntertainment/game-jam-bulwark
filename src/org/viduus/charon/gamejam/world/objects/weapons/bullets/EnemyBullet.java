@@ -2,6 +2,7 @@ package org.viduus.charon.gamejam.world.objects.weapons.bullets;
 
 import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.physics.twodimensional.filters.EnemyBulletFilter;
+import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.event.events.HitByWeaponEvent;
 import org.viduus.charon.global.util.identification.IdentifiedResource;
 import org.viduus.charon.global.util.identification.Uid;
@@ -18,8 +19,8 @@ public class EnemyBullet extends Bullet {
 	 */
 	public EnemyBullet(AbstractWorldEngine world_engine, Uid uid, String name, Weapon2D owner, Vector2 location) {
 		super(world_engine, uid, name, owner, location, new Vector2(-200, 0), "vid:animation:objects/bullets", "enemy_bullet", 0f);
-		setCollisionFilter(new EnemyBulletFilter(this));
-		setIsBullet(false);
+		set(Property.COLLISION_FILTER, new EnemyBulletFilter(this));
+		set(Property.IS_BULLET, false);
 	}
 
 	@Override

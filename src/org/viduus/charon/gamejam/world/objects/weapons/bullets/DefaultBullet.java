@@ -4,6 +4,7 @@ import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.physics.twodimensional.filters.FriendlyBulletFilter;
 import org.viduus.charon.gamejam.world.regions.Level1;
 import org.viduus.charon.global.event.events.HitByWeaponEvent;
+import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.util.identification.IdentifiedResource;
 import org.viduus.charon.global.util.identification.Uid;
 import org.viduus.charon.global.world.AbstractWorldEngine;
@@ -19,7 +20,7 @@ public class DefaultBullet extends Bullet{
 	 */
 	public DefaultBullet(AbstractWorldEngine world_engine, Uid uid, String name, Weapon2D owner, Vector2 location, float damage) {
 		super(world_engine, uid, name, owner, location, new Vector2(800, 0), "vid:animation:objects/bullets", "player_normal", damage);
-		setCollisionFilter(new FriendlyBulletFilter(this));
+		set(Property.COLLISION_FILTER, new FriendlyBulletFilter(this));
 	}
 
 	@Override

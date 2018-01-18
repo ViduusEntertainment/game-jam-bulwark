@@ -28,7 +28,7 @@ public class EMPDevice extends Bullet{
 	 */
 	public EMPDevice(AbstractWorldEngine world_engine, Uid uid, String name, Weapon2D owner, Vector2 location, float damage) {
 		super(world_engine, uid, name, owner, location, new Vector2(0, 0), "vid:animation:objects/effects", "emp", damage);
-		setCollisionFilter(new FriendlyBulletFilter(this));
+		set(Property.COLLISION_FILTER, new FriendlyBulletFilter(this));
 	}
 	
 	@Override
