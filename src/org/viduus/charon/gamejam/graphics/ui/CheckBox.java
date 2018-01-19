@@ -8,7 +8,6 @@ package org.viduus.charon.gamejam.graphics.ui;
 import org.viduus.charon.global.AbstractGameSystems;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
-import org.viduus.charon.global.graphics.opengl.font.OpenGLFont;
 
 /**
  * 

@@ -3,7 +3,6 @@ package org.viduus.charon.gamejam.physics.twodimensional.listeners;
 import org.dyn4j.collision.Collidable;
 import org.dyn4j.collision.Fixture;
 import org.viduus.charon.global.event.events.ObjectRemovalEvent;
-import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;
 

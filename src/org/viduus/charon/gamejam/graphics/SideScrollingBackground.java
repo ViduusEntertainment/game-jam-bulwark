@@ -11,15 +11,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import org.viduus.charon.global.AbstractGameSystems;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
-import org.viduus.charon.global.graphics.opengl.OpenGLFrame;
 import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
 import org.viduus.charon.global.graphics.opengl.shaders.ShaderProgram;
 import org.viduus.charon.global.graphics.opengl.shaders.variables.ShaderAttribute;
 import org.viduus.charon.global.graphics.opengl.shapes.Rectangle;
 import org.viduus.charon.global.util.logging.ErrorHandler;
-import org.viduus.charon.global.util.logging.OutputHandler;
 
 /**
  * 

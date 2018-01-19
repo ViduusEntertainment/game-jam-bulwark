@@ -11,9 +11,9 @@ import java.util.HashSet;
 import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.GameSystems;
 import org.viduus.charon.gamejam.input.PlayerControls;
+import org.viduus.charon.gamejam.world.objects.weapons.range.ArcGun;
 import org.viduus.charon.gamejam.world.objects.weapons.range.BombDropper;
 import org.viduus.charon.gamejam.world.objects.weapons.range.ChainGun;
-import org.viduus.charon.gamejam.world.objects.weapons.range.ArcGun;
 import org.viduus.charon.gamejam.world.objects.weapons.range.DefaultGun;
 import org.viduus.charon.gamejam.world.objects.weapons.range.EMP;
 import org.viduus.charon.gamejam.world.objects.weapons.range.GravityBombGun;
@@ -35,12 +35,9 @@ import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.global.event.events.WeaponUseEvent;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.input.InputEngine;
-import org.viduus.charon.global.input.controller.Controller;
 import org.viduus.charon.global.input.player.PlayerControlsState;
 import org.viduus.charon.global.util.identification.IdentifiedResource;
-import org.viduus.charon.global.util.identification.Uid;
 import org.viduus.charon.global.util.logging.ErrorHandler;
-import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.objects.twodimensional.character.playable.PlayableCharacter2D;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.Weapon2D;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.range.RangeWeapon2D;
@@ -69,7 +66,6 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	private final GameSystems game_systems;
 	private Vector2 last_trans = new Vector2();
 	private boolean controller_binded = false;
-	private Controller default_controller;
 	
 	/*
 	 * Animation
@@ -550,7 +546,6 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	public void bindInputEngine(InputEngine input_engine) {
 		if( !controller_binded ){
 			controller_binded = true;
-			default_controller = this.game_systems.input_engine.getDefaultController();
 			setController(new PlayerControls());
 			game_systems.input_engine.registerListener(0, "main-player-default-controls", getController());
 		}else{

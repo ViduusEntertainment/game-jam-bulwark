@@ -15,22 +15,18 @@ import org.dyn4j.geometry.AABB;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.MassType;
 import org.dyn4j.geometry.Vector2;
-import org.viduus.charon.gamejam.GameConstants;
 import org.viduus.charon.gamejam.physics.twodimensional.WorldBounds;
 import org.viduus.charon.gamejam.physics.twodimensional.filters.WorldFilter;
 import org.viduus.charon.gamejam.physics.twodimensional.listeners.BoundsListener;
 import org.viduus.charon.gamejam.world.regions.Level1;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.GameInfo;
-import org.viduus.charon.global.audio.AudioCategory;
-import org.viduus.charon.global.audio.Sound;
 import org.viduus.charon.global.graphics.util.Size;
 import org.viduus.charon.global.physics.twodimensional.listeners.CollisionListener;
 import org.viduus.charon.global.util.identification.Uid;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.character.playable.PlayableCharacter2D;
 import org.viduus.charon.global.world.regions.BaseRegion;
-import org.viduus.charon.global.world.util.CooldownTimer;
 
 /**
  * 

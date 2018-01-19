@@ -12,9 +12,7 @@ import org.viduus.charon.gamejam.item.ItemEngine;
 import org.viduus.charon.gamejam.quest.QuestEngine;
 import org.viduus.charon.gamejam.world.WorldEngine;
 import org.viduus.charon.global.input.InputEngine;
-import org.viduus.charon.global.input.controller.ControllerInputListener;
 import org.viduus.charon.global.input.controller.ControllerState;
-import org.viduus.charon.global.input.controller.device.KeyboardMouseController;
 import org.viduus.charon.global.util.systems.SystemsEngine;
 import org.viduus.charon.global.world.dialog.DialogEngine;
 
@@ -43,25 +41,16 @@ public class GameRunner {
 				new GraphicsEngine()
 		);
 		
-		game_systems.graphics_engine.bindController((KeyboardMouseController) game_systems.input_engine.getDefaultController());
-		game_systems.input_engine.registerListener(0, "default-controls", new ControllerInputListener(){
-
-			@Override
-			public void onControllerState(ControllerState e) {
-				if( e.getKeyState(ControllerState.EXIT_GAME_KEY) == ControllerState.PRESSED_STATE ){
-					game_systems.closeApplication();
-				}
+		game_systems.input_engine.registerListener(0, "default-controls", (ControllerState e) -> {
+			if( e.getKeyState(ControllerState.EXIT_GAME_KEY) == ControllerState.PRESSED_STATE ){
+				game_systems.closeApplication();
 			}
-			
 		});
 		
-		// Will enter a semi-infinite loop here until the main window is closed
-		game_systems.graphics_engine.startEventQueue();
+		// Will enter a semi-infinite loop here until the game is stopped
+		game_systems.enterGameLoop();
 		
-		game_systems.closeApplication();
-		game_systems.joinApplicationCloseThread();
-		
-		// Force the game to close
+		// FIXME: Force the game to close
 		System.exit(0);
 	}
 

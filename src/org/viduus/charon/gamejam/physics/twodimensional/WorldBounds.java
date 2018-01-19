@@ -3,8 +3,6 @@ package org.viduus.charon.gamejam.physics.twodimensional;
 import org.dyn4j.collision.AbstractBounds;
 import org.dyn4j.collision.Collidable;
 import org.dyn4j.geometry.AABB;
-import org.dyn4j.geometry.Vector2;
-import org.viduus.charon.global.util.logging.OutputHandler;
 
 public class WorldBounds extends AbstractBounds {
 

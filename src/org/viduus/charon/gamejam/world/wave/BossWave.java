@@ -6,7 +6,6 @@ import java.util.Random;
 import org.dyn4j.geometry.Vector2;
 import org.viduus.charon.gamejam.world.objects.character.nonplayable.BosserbossEnemy;
 import org.viduus.charon.gamejam.world.objects.character.nonplayable.Enemy;
-import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.global.graphics.util.Size;
 import org.viduus.charon.global.world.AbstractWorldEngine;

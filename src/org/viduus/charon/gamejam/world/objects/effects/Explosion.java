@@ -1,12 +1,11 @@
 package org.viduus.charon.gamejam.world.objects.effects;
 
 import org.dyn4j.geometry.Vector2;
-import org.viduus.charon.global.event.events.CollisionEvent;
-import org.viduus.charon.global.event.events.HitByWeaponEvent;
-import org.viduus.charon.global.event.events.ObjectRemovalEvent;
-import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.gamejam.world.regions.Level1;
 import org.viduus.charon.global.GameConstants.Property;
+import org.viduus.charon.global.event.events.CollisionEvent;
+import org.viduus.charon.global.event.events.HitByWeaponEvent;
+import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.util.identification.IdentifiedResource;
 import org.viduus.charon.global.util.identification.Uid;

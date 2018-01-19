@@ -6,9 +6,8 @@
 package org.viduus.charon.gamejam.input;
 
 import org.viduus.charon.global.input.controller.ControllerState;
-import org.viduus.charon.global.input.controller.device.joystick.JoystickController;
+import org.viduus.charon.global.input.controller.device.JoystickController;
 import org.viduus.charon.global.input.player.PlayerController;
-import org.viduus.charon.global.util.logging.OutputHandler;
 
 /**
  * 

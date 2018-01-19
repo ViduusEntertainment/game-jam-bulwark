@@ -8,11 +8,9 @@ package org.viduus.charon.gamejam.graphics.hud.components;
 import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
 import org.viduus.charon.gamejam.world.regions.Level1;
 import org.viduus.charon.global.AbstractGameSystems;
-import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
 import org.viduus.charon.global.player.PlayerParty;
-import org.viduus.charon.global.world.objects.twodimensional.character.playable.PlayableCharacter2D;
 
 /**
  * 

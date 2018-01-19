@@ -1,0 +1,192 @@
+{
+  "sprite_map": "resources/img/sprites/controller.png",
+  "size": {
+    "width": 2000,
+    "height": 1000
+  },
+  "hands": {
+    "left": [],
+    "right": []
+  },
+  "layouts": {
+    "static": [],
+    "tiled": [
+      {
+        "row_offset": 1000,
+        "location": {
+          "x": 0,
+          "y": 0
+        },
+        "center": {
+          "x": 0,
+          "y": 0
+        },
+        "size": {
+          "width": 16,
+          "height": 16
+        },
+        "masks": {
+          "0": {
+            "collision": [],
+            "image": []
+          },
+          "1": {
+            "collision": [],
+            "image": []
+          },
+          "2": {
+            "collision": [],
+            "image": []
+          },
+          "3": {
+            "collision": [],
+            "image": []
+          },
+          "4": {
+            "collision": [],
+            "image": []
+          },
+          "5": {
+            "collision": [],
+            "image": []
+          }
+        },
+        "animations": [
+          {
+            "name": "vid:animations:controller/xbox.a",
+            "sustain": true,
+            "variants": [
+              {
+                "frames": [
+                  {
+                    "id": 0,
+                    "duration": 250
+                  }
+                ],
+                "probability": 1.0
+              }
+            ]
+          },
+          {
+            "name": "vid:animations:controller/xbox.b",
+            "sustain": true,
+            "variants": [
+              {
+                "frames": [
+                  {
+                    "id": 1,
+                    "duration": 250
+                  }
+                ],
+                "probability": 1.0
+              }
+            ]
+          }
+          {
+            "name": "vid:animations:controller/xbox.x",
+            "sustain": true,
+            "variants": [
+              {
+                "frames": [
+                  {
+                    "id": 2,
+                    "duration": 250
+                  }
+                ],
+                "probability": 1.0
+              }
+            ]
+          }
+          {
+            "name": "vid:animations:controller/xbox.y",
+            "sustain": true,
+            "variants": [
+              {
+                "frames": [
+                  {
+                    "id": 3,
+                    "duration": 250
+                  }
+                ],
+                "probability": 1.0
+              }
+            ]
+          },
+          {
+            "name": "vid:animations:controller/xbox.joystick",
+            "sustain": true,
+            "variants": [
+              {
+                "frames": [
+                  {
+                    "id": 4,
+                    "duration": 250
+                  }
+                ],
+                "probability": 1.0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "row_offset": 1000,
+        "location": {
+          "x": 0,
+          "y": 16
+        },
+        "center": {
+          "x": 0,
+          "y": 0
+        },
+        "size": {
+          "width": 48,
+          "height": 16
+        },
+        "masks": {
+          "0": {
+            "collision": [],
+            "image": []
+          },
+          "1": {
+            "collision": [],
+            "image": []
+          }
+        },
+        "animations": [
+          {
+            "name": "vid:animations:controller/xbox.start",
+            "sustain": true,
+            "variants": [
+              {
+                "frames": [
+                  {
+                    "id": 0,
+                    "duration": 250
+                  }
+                ],
+                "probability": 1.0
+              }
+            ]
+          },
+          {
+            "name": "vid:animations:controller/xbox.select",
+            "sustain": true,
+            "variants": [
+              {
+                "frames": [
+                  {
+                    "id": 1,
+                    "duration": 250
+                  }
+                ],
+                "probability": 1.0
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "free": []
+  }
+}

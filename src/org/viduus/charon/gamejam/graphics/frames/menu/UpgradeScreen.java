@@ -71,23 +71,21 @@ public class UpgradeScreen extends AbstractJamScreen {
 		thruster_upgrade_option,
 		shield_upgrade_option,
 		armor_upgrade_option;
-	
-
 	private CheckBox
-	equip_mk1_button,
-	equip_mk2_button,
-	equip_heavy_button,
-	equip_fast_button,
-	equip_basic_gun_button,
-	equip_chain_gun_button,
-	equip_scatter_gun_button,
-	equip_arc_gun_button,
-	equip_laser_gun_button,
-	equip_basic_missiles_button,
-	equip_scatter_missiles_button,
-	equip_bomb_button,
-	equip_emp_button,
-	equip_gravity_orb_button;
+		equip_mk1_button,
+		equip_mk2_button,
+		equip_heavy_button,
+		equip_fast_button,
+		equip_basic_gun_button,
+		equip_chain_gun_button,
+		equip_scatter_gun_button,
+		equip_arc_gun_button,
+		equip_laser_gun_button,
+		equip_basic_missiles_button,
+		equip_scatter_missiles_button,
+		equip_bomb_button,
+		equip_emp_button,
+		equip_gravity_orb_button;
 	
 	private ShipTakeoffBox deploy_ship_button;
 
@@ -186,10 +184,14 @@ public class UpgradeScreen extends AbstractJamScreen {
 		
 		int side_bar_width = (screen_width-menu_width)/2;
 		
+		int row1_y = menu_y + 143;
+		int row2_y = menu_y + 240;
+		int row3_y = menu_y + 364;
+		
 		// render ui background shadow
-		UIElement.renderColoredSquare(graphics, menu_x + 186, menu_y, menu_width - 186, 143, 0.1882352941f, 0.3764705882f, 0.5098039216f, 0.2f);
-		UIElement.renderColoredSquare(graphics, menu_x, menu_y, 186, menu_height, 0.1882352941f, 0.3764705882f, 0.5098039216f, 0.2f);
-		UIElement.renderColoredSquare(graphics, menu_x + 186, menu_y + 240, menu_width - 186, 160, 0.1882352941f, 0.3764705882f, 0.5098039216f, 0.2f);
+		UIElement.renderColoredSquare(graphics, menu_x + 186, menu_y, menu_width - 186, row1_y, 0.1882352941f, 0.3764705882f, 0.5098039216f, 0.2f);
+		UIElement.renderColoredSquare(graphics, menu_x, menu_y, 186, row3_y, 0.1882352941f, 0.3764705882f, 0.5098039216f, 0.2f);
+		UIElement.renderColoredSquare(graphics, menu_x + 186, menu_y + row2_y, menu_width - 186, row3_y - row2_y, 0.1882352941f, 0.3764705882f, 0.5098039216f, 0.2f);
 		
 		// render left and right borders
 		UIElement.renderColoredSquare(graphics, 0, 0, side_bar_width, menu_height, 0, 0, 0, 0.2f);
@@ -246,11 +248,18 @@ public class UpgradeScreen extends AbstractJamScreen {
 		 */
 		{
 			int tlx = menu_x + 3;
-			int tly = menu_y + 370;
 			
-			UIElement.renderColoredSquare(graphics, tlx, tly, menu_width-6, 27, 0.1333333333f, 0.1254901961f, 0.2039215686f, 0.8f);
+			UIElement.renderColoredSquare(graphics, tlx, row3_y, menu_width-6, menu_height - row3_y, 0.1333333333f, 0.1254901961f, 0.2039215686f, 0.8f);
 			
-			OpenGLFont.drawString2D(graphics, "Commander: " + demotivational_messages[demotivational_message_selection], tlx + 5, tly + 16);
+			OpenGLFont.drawString2D(graphics, "Commander: " + demotivational_messages[demotivational_message_selection], tlx + 3, row3_y + 13);
+		}
+		
+		
+		/*
+		 * Controls
+		 */
+		{
+			
 		}
 		
 		// draw outline ui
@@ -523,7 +532,7 @@ public class UpgradeScreen extends AbstractJamScreen {
 		{
 			int top = 244 + 20;
 			int left = dx + 10;
-			int rh = 35;
+			int rh = 32;
 			
 			int c1_left = left;
 			int c2_left = left+100;
@@ -542,7 +551,7 @@ public class UpgradeScreen extends AbstractJamScreen {
 		{
 			int top = 244 + 20;
 			int left = dx + 201 + 8;
-			int rh = 35;
+			int rh = 32;
 			
 			int c1_left = left;
 			int c2_left = left+100;

@@ -2,10 +2,9 @@ package org.viduus.charon.gamejam.audio;
 
 import org.viduus.charon.global.AbstractGameSystems;
 import org.viduus.charon.global.AbstractGameSystems.PauseType;
+import org.viduus.charon.global.GameInfo;
 import org.viduus.charon.global.util.ResourceLoader;
 import org.viduus.charon.global.util.logging.ErrorHandler;
-import org.viduus.charon.global.util.logging.OutputHandler;
-import org.viduus.charon.global.GameInfo;
 
 import kuusisto.tinysound.Music;
 import kuusisto.tinysound.Sound;
@@ -35,10 +34,17 @@ public class AudioEngine extends org.viduus.charon.global.audio.AudioEngine{
 			}
 		}).start();
 	}
+	
 	@Override
-	protected void onLoadGame(GameInfo game_info) {}
+	protected void onLoadGame(GameInfo game_info) {
+		
+	}
+	
 	@Override
-	protected void onSaveAndDisposeGame() {}
+	protected void onSaveAndDisposeGame() {
+		
+	}
+	
 	@Override
 	protected void onSaveAndDisposeEngine() {
 		INTRO_SOUND.unload();
@@ -46,12 +52,25 @@ public class AudioEngine extends org.viduus.charon.global.audio.AudioEngine{
 		LEVEL1_MUSIC.unload();
 		TinySound.shutdown();
 	}
+	
 	@Override
-	public void onStartGame() {}
+	public void onStartGame() {
+		
+	}
+	
 	@Override
-	public void onPauseGame(PauseType pause_type) {}
+	public void onPauseGame(PauseType pause_type) {
+		
+	}
+	
 	@Override
-	public void onContinueGame() {}
+	public void onContinueGame() {
+		
+	}
+	
 	@Override
-	public void onStopGame() {}
+	public void onStopGame() {
+		
+	}
+	
 }
