@@ -84,7 +84,7 @@ public class Level1 extends AutoSideScrollingRegion {
 		this.graphics_engine = graphics_engine;
 		new Thread(new Runnable() {
 			public void run() {
-				ErrorHandler.tryRun(() -> {
+				ErrorHandler.tryRunThrow(() -> {
 					KAMIKAZE_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/kamikaze.ogg"));
 					EXPLOSION_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/explosion.ogg"));
 					BASIC_BULLET_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/basic_bullet.ogg"));
@@ -93,7 +93,7 @@ public class Level1 extends AutoSideScrollingRegion {
 					LASER_CHARGE_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/charge_laser.ogg"));
 					BOSS_SCREECH_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/boss_screech.ogg"));
 					EMP_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/EMP.ogg"));
-					BOSS_BATTLE_MUSIC = TinySound.loadMusic(ErrorHandler.tryRun(() -> ResourceLoader.loadResourceWithError("resources/audio/music/game/gamejam_boss_battle.ogg")));
+					BOSS_BATTLE_MUSIC = TinySound.loadMusic(ErrorHandler.tryRunThrow(() -> ResourceLoader.loadResourceWithError("resources/audio/music/game/gamejam_boss_battle.ogg")));
 				});
 			}
 		}).start();

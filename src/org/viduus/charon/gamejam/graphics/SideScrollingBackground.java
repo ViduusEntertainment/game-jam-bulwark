@@ -69,7 +69,7 @@ public class SideScrollingBackground {
 		
 		graphics.view_matrix.reset();
 		
-		ErrorHandler.tryRun(() -> {
+		ErrorHandler.tryRunThrow(() -> {
 			// Grab the current active shader
 			String prev_shader = graphics.shader_manager.getActiveShaderName();
 			graphics.shader_manager.useShader("opengl_frame");

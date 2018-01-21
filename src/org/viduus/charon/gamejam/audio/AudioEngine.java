@@ -23,13 +23,13 @@ public class AudioEngine extends org.viduus.charon.global.audio.AudioEngine{
 	protected void onLoadEngine(AbstractGameSystems game_systems) {
 		TinySound.init();
 		
-		INTRO_SOUND = ErrorHandler.tryRun(() -> TinySound.loadSound(ResourceLoader.loadResource("resources/audio/sfx/intro/viduus.ogg")));
-		MENU_MUSIC = TinySound.loadMusic(ErrorHandler.tryRun(() -> ResourceLoader.loadResourceWithError("resources/audio/music/menu/main_menu.ogg")));
+		INTRO_SOUND = ErrorHandler.tryRunThrow(() -> TinySound.loadSound(ResourceLoader.loadResource("resources/audio/sfx/intro/viduus.ogg")));
+		MENU_MUSIC = TinySound.loadMusic(ErrorHandler.tryRunThrow(() -> ResourceLoader.loadResourceWithError("resources/audio/music/menu/main_menu.ogg")));
 		
 		new Thread(new Runnable() {
 			public void run() {
-				ErrorHandler.tryRun(() -> {
-					LEVEL1_MUSIC = TinySound.loadMusic(ErrorHandler.tryRun(() -> ResourceLoader.loadResourceWithError("resources/audio/music/game/gamejam_level1_theme.ogg")));
+				ErrorHandler.tryRunThrow(() -> {
+					LEVEL1_MUSIC = TinySound.loadMusic(ErrorHandler.tryRunThrow(() -> ResourceLoader.loadResourceWithError("resources/audio/music/game/gamejam_level1_theme.ogg")));
 				});
 			}
 		}).start();

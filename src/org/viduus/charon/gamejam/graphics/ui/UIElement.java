@@ -139,7 +139,7 @@ public abstract class UIElement extends OpenGLButton {
 			graphics.shader_manager.useShader(prev_shader);
 			
 		}catch( ShaderException e ){
-			ErrorHandler.catchError(e);
+			ErrorHandler.handleError(e);
 		}
 	}
 	
