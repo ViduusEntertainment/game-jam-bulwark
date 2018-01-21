@@ -30,7 +30,7 @@ public class BossLaserGun extends Gun {
 	@Override 
 	protected void beforeBodyCreation() {
 		Object2D owner = getOwner();
-		Vector2 location = owner.getVector2(Property.LOCATION).copy().add(-100, -30);
+		Vector2 location = owner.getVector2(Property.LOCATION).copy().add(-93, -72);
 		set(Property.LOCATION, location);
 	}
 	

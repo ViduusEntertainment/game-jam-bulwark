@@ -1,7 +1,7 @@
 package org.viduus.charon.gamejam.world.objects.character.nonplayable;
 
 import org.dyn4j.geometry.Vector2;
-import org.viduus.charon.gamejam.world.regions.Level1;
+import org.viduus.charon.gamejam.audio.AudioEngine;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.global.world.AbstractWorldEngine;
@@ -25,7 +25,7 @@ public class KamikazeEnemy extends Enemy{
 		Object2D followee = this.<Object2D>get(Property.FOLLOWEE);
 		if (!sound_played && followee.getLocation().distanceSquared(getLocation()) < STOP_DISTANCE) {
 			set(Property.MOVEMENT_TYPE, NPC_MOVEMENT.MANUAL);
-			Level1.KAMIKAZE_SOUND.play(0.1);
+			AudioEngine.KAMIKAZE_SOUND.play(0.15);
 			sound_played = true;
 		}
 		super.onTick(tick_event);

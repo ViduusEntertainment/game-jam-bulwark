@@ -3,6 +3,7 @@ package org.viduus.charon.gamejam.world.objects.weapons.bullets;
 import org.dyn4j.dynamics.joint.Joint;
 import org.dyn4j.dynamics.joint.WeldJoint;
 import org.dyn4j.geometry.Vector2;
+import org.viduus.charon.gamejam.audio.AudioEngine;
 import org.viduus.charon.gamejam.physics.twodimensional.filters.FriendlyBulletFilter;
 import org.viduus.charon.gamejam.world.regions.Level1;
 import org.viduus.charon.global.GameConstants.Property;
@@ -13,7 +14,6 @@ import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.util.identification.IdentifiedResource;
 import org.viduus.charon.global.util.identification.Uid;
-import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.Weapon2D;
@@ -61,11 +61,9 @@ public class EMPDevice extends Bullet{
 
 	@Override
 	public void onAttached(IdentifiedResource owner) {
-		Level1.EMP_SOUND.play(Level1.SFX);
+		AudioEngine.EMP_SOUND.play(Level1.SFX);
 	}
 	
 	@Override
-	public void onDetached(IdentifiedResource owner) {
-		OutputHandler.println("detached");
-	}
+	public void onDetached(IdentifiedResource owner) {}
 }

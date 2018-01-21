@@ -1,7 +1,9 @@
 package org.viduus.charon.gamejam.world.objects.weapons.bullets;
 
 import org.dyn4j.geometry.Vector2;
+import org.viduus.charon.gamejam.audio.AudioEngine;
 import org.viduus.charon.gamejam.physics.twodimensional.filters.EnemyBulletFilter;
+import org.viduus.charon.gamejam.world.regions.Level1;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.event.events.HitByWeaponEvent;
 import org.viduus.charon.global.event.events.TickEvent;
@@ -36,5 +38,7 @@ public class BossLaserBeam extends Bullet{
 	}
 
 	@Override
-	public void onAttached(IdentifiedResource owner) {}
+	public void onAttached(IdentifiedResource owner) {
+		AudioEngine.BOSS_LASER.play(0.05);
+	}
 }

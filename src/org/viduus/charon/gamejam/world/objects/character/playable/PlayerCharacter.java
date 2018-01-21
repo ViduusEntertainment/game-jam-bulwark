@@ -71,6 +71,7 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	 * Animation
 	 */
 	private Animation<?>[] vertical_animations = null;
+	private Animation<?>[] vertical_shield_animations = null;
 	private int last_animation_index = -1;
 	private int animation_index;
 	
@@ -95,6 +96,8 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	private int thruster_upgrades = 0;
 	private int armor_upgrades = 0;
 	private int shield_upgrades = 0;
+	private boolean using_shield = false;
+	private boolean last_shield_state = false;
 	
 	private HashMap<String, Integer> upgrades = new HashMap<>();
 	
@@ -140,6 +143,16 @@ public class PlayerCharacter extends PlayableCharacter2D {
 				(Animation<?>) world_engine.resolve("vid:animation:player/player_ship.red_ship-walk_u_start_3"),
 				(Animation<?>) world_engine.resolve("vid:animation:player/player_ship.red_ship-walk_u_start_4")
 			};
+			
+			vertical_shield_animations = new Animation<?>[] {
+				(Animation<?>) world_engine.resolve("vid:animation:player/player_ship.red_ship-walk_d_start_4_shield"),
+				(Animation<?>) world_engine.resolve("vid:animation:player/player_ship.red_ship-walk_d_start_3_shield"),
+				(Animation<?>) world_engine.resolve("vid:animation:player/player_ship.red_ship-walk_d_start_2_shield"),
+				(Animation<?>) world_engine.resolve("vid:animation:player/player_ship.red_ship-walk_d_start_1_shield"),
+				(Animation<?>) world_engine.resolve("vid:animation:player/player_ship.red_ship-walk_u_start_2_shield"),
+				(Animation<?>) world_engine.resolve("vid:animation:player/player_ship.red_ship-walk_u_start_3_shield"),
+				(Animation<?>) world_engine.resolve("vid:animation:player/player_ship.red_ship-walk_u_start_4_shield")
+			};
 		}
 
 		Animation<?> curr_animation = get(Property.CURRENT_ANIMATION);
@@ -176,15 +189,15 @@ public class PlayerCharacter extends PlayableCharacter2D {
 				animation_index = 0;
 
 			// skip setting the animation if already set
-			if (animation_index == last_animation_index)
+			if (animation_index == last_animation_index && last_shield_state == using_shield)
 				return;
 			last_animation_index = animation_index;
 		}
 		
-		setAnimation(vertical_animations[animation_index]);
-		set(Property.CURRENT_ANIMATION, vertical_animations[animation_index]);
+		setAnimation(using_shield ? vertical_shield_animations[animation_index] : vertical_animations[animation_index]);
 		
 		last_animation_index = animation_index;
+		last_shield_state = using_shield;
 	}
 
 	/* (non-Javadoc)
@@ -198,6 +211,8 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		if (secondary_weapon_timer != null) secondary_weapon_timer.update(time_elapsed);
 		shield_timer.update(time_elapsed);
 		immunity_timer.update(time_elapsed);
+		
+		using_shield = shield_timer.secondsSinceLastCooldown() < 3.0f;
 		
 		// Player hit Interaction key/button. Set this object to be in an interacting state
 		this.<Boolean>set(Property.IS_INTERACTING, controls_state.isSelect());
@@ -238,7 +253,6 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		
 		if (controls_state.getShield()) {
 			if (!shield_timer.isCooling()) {
-//				world_engine.queueEvent(this, new WeaponUseEvent(new EMP(world_engine, Uid.generateUid("vid:effect", "Shield"), "Shield", this)), WeaponUseEvent.class);
 				shield_timer.reset();
 			}
 		}
@@ -611,7 +625,7 @@ public class PlayerCharacter extends PlayableCharacter2D {
 
 	@Override
 	protected void onCollision(CollisionEvent collision_event) {
-//		if (!immunity_timer.isCooling()) {		
+//		if (!immunity_timer.isCooling() && !using_shield) {		
 //			set(Property.HEALTH, getFloat(Property.HEALTH) - 1);
 //			immunity_timer.reset();
 //		}

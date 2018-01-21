@@ -12,6 +12,7 @@ import org.viduus.charon.gamejam.world.objects.character.nonplayable.StandardEne
 import org.viduus.charon.gamejam.world.objects.character.nonplayable.TankEnemy;
 import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
 import org.viduus.charon.gamejam.world.objects.weapons.range.BossLaserGun;
+import org.viduus.charon.gamejam.world.objects.weapons.range.BossScatterGun;
 import org.viduus.charon.gamejam.world.objects.weapons.range.EnemyGun;
 import org.viduus.charon.gamejam.world.regions.Level1;
 import org.viduus.charon.global.GameConstants.Property;
@@ -100,10 +101,13 @@ public abstract class EnemyWave {
 	
 	protected BosserbossEnemy createBossEnemy(Vector2 location) {
 		BosserbossEnemy enemy = new BosserbossEnemy(world_engine, "BosserbossEnemy", location);
-		BossLaserGun weapon = new BossLaserGun(world_engine, "Boss Weapon", enemy);
+		BossScatterGun primary_weapon = new BossScatterGun(world_engine, "Boss Primary Weapon", enemy);
+		BossLaserGun secondary_weapon = new BossLaserGun(world_engine, "Boss Secondary Weapon", enemy);
 		world_engine.insert(enemy);
-		world_engine.insert(weapon);
-		enemy.equipWeapon(weapon);
+		world_engine.insert(primary_weapon);
+		world_engine.insert(secondary_weapon);
+		enemy.equipWeapon(primary_weapon);
+		enemy.equipWeapon(secondary_weapon);
 		return enemy;
 	}
 	

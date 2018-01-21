@@ -30,15 +30,9 @@ import org.viduus.charon.global.graphics.AbstractGraphicsEngine;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.util.Size;
 import org.viduus.charon.global.player.PlayerParty;
-import org.viduus.charon.global.util.ResourceLoader;
 import org.viduus.charon.global.util.identification.IdentifiedResource;
-import org.viduus.charon.global.util.logging.ErrorHandler;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.Object2D;
-
-import kuusisto.tinysound.Music;
-import kuusisto.tinysound.Sound;
-import kuusisto.tinysound.TinySound;
 
 /**
  * 
@@ -52,19 +46,6 @@ public class Level1 extends AutoSideScrollingRegion {
 	private static Random RN_CODY = new Random();
 	
 	public static float SFX = 0.3f;
-	
-	/*
-	 * Sounds
-	 */
-	public static Sound KAMIKAZE_SOUND;
-	public static Sound EXPLOSION_SOUND;
-	public static Sound BASIC_BULLET_SOUND;
-	public static Sound MISSILE_SOUND;
-	public static Sound SCATTERSHOT_SOUND;
-	public static Sound LASER_CHARGE_SOUND; 
-	public static Sound BOSS_SCREECH_SOUND; 
-	public static Sound EMP_SOUND;
-	public static Music BOSS_BATTLE_MUSIC;
 	
 	private final AbstractGraphicsEngine graphics_engine;
 	
@@ -82,21 +63,6 @@ public class Level1 extends AutoSideScrollingRegion {
 		this.party = party;
 		active_enemy_wave = createRandomWave();
 		this.graphics_engine = graphics_engine;
-		new Thread(new Runnable() {
-			public void run() {
-				ErrorHandler.tryRun(() -> {
-					KAMIKAZE_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/kamikaze.ogg"));
-					EXPLOSION_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/explosion.ogg"));
-					BASIC_BULLET_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/basic_bullet.ogg"));
-					MISSILE_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/missile.ogg"));
-					SCATTERSHOT_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/scattershot.ogg"));
-					LASER_CHARGE_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/charge_laser.ogg"));
-					BOSS_SCREECH_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/boss_screech.ogg"));
-					EMP_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/EMP.ogg"));
-					BOSS_BATTLE_MUSIC = TinySound.loadMusic(ErrorHandler.tryRun(() -> ResourceLoader.loadResourceWithError("resources/audio/music/game/gamejam_boss_battle.ogg")));
-				});
-			}
-		}).start();
 	}
 	
 	public PlayerParty getParty() {
@@ -154,7 +120,7 @@ public class Level1 extends AutoSideScrollingRegion {
 		if (death_event.object_that_died instanceof BosserbossEnemy) {
 			is_battling_boss = false;
 			enemy_health = 10000f;
-			BOSS_BATTLE_MUSIC.stop();
+			AudioEngine.BOSS_BATTLE_MUSIC.stop();
 			AudioEngine.LEVEL1_MUSIC.play(true);
 		}
 		else if (death_event.object_that_died instanceof Enemy) {
@@ -199,7 +165,7 @@ public class Level1 extends AutoSideScrollingRegion {
 				}
 			} 
 			else {
-				BOSS_BATTLE_MUSIC.stop();
+				AudioEngine.BOSS_BATTLE_MUSIC.stop();
 				graphics_engine.showFrame(GraphicsEngine.UPGRADE_SCREEN);
 			}
 			
@@ -246,15 +212,6 @@ public class Level1 extends AutoSideScrollingRegion {
 	
 	@Override
 	public void onReleased() {
-		KAMIKAZE_SOUND.unload();
-		EXPLOSION_SOUND.unload();
-		BASIC_BULLET_SOUND.unload();
-		MISSILE_SOUND.unload();
-		SCATTERSHOT_SOUND.unload();
-		LASER_CHARGE_SOUND.unload();
-		BOSS_SCREECH_SOUND.unload();
-		EMP_SOUND.unload();
-		BOSS_BATTLE_MUSIC.unload();
 	}
 
 	@Override
