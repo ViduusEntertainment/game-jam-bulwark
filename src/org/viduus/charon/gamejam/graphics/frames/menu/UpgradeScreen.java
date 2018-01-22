@@ -7,12 +7,14 @@ package org.viduus.charon.gamejam.graphics.frames.menu;
 
 import java.util.Random;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.viduus.charon.gamejam.audio.AudioEngine;
 import org.viduus.charon.gamejam.graphics.GraphicsEngine;
 import org.viduus.charon.gamejam.graphics.ui.HorizontalUpgradeBox;
 import org.viduus.charon.gamejam.graphics.ui.ShipSelectionBox;
 import org.viduus.charon.gamejam.graphics.ui.ShipTakeoffBox;
 import org.viduus.charon.gamejam.graphics.ui.UIElement;
+import org.viduus.charon.gamejam.graphics.ui.UIString;
 import org.viduus.charon.gamejam.graphics.ui.VerticalUpgradeBox;
 import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
 import org.viduus.charon.global.AbstractGameSystems;
@@ -21,6 +23,7 @@ import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.opengl.OpenGLFrame;
 import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
+import org.viduus.charon.global.graphics.opengl.components.OpenGLComponent;
 import org.viduus.charon.global.graphics.opengl.font.OpenGLFont;
 import org.viduus.charon.global.graphics.util.IntDimension;
 import org.viduus.charon.global.input.controller.ControllerState;
@@ -36,7 +39,12 @@ public class UpgradeScreen extends AbstractJamScreen {
 
 	private static final Random RN_JESUS = new Random();
 	
-	private Animation<?> upgrade_menu;
+	private Animation<?>
+		upgrade_menu,
+		controller_a,
+		controller_x,
+		keyboard_a,
+		keyboard_space;
 	private String[] demotivational_messages = {
 		"You pilots aren't worth the Currency we pay you.",
 		"Every crashed drone comes out of your pay.",
@@ -471,12 +479,23 @@ public class UpgradeScreen extends AbstractJamScreen {
 			OpenGLFont.drawString2D(graphics, "Commander: " + demotivational_messages[demotivational_message_selection], tlx + 3, row3_y + 13);
 		}
 		
-		
 		/*
 		 * Controls
 		 */
 		{
+			int top = row3_y + 33;
+			int left = menu_x + 3;
 			
+			if (focused_components.size() > 0) {
+				OpenGLComponent focused_component = focused_components.get(0);
+				
+				if (focused_component instanceof UIElement) {
+					UIString tool_tip = ((UIElement)focused_component).getToolTip();
+					if (tool_tip != null) {
+						tool_tip.render(graphics, d_sec, left + 3, top);
+					}
+				}
+			}
 		}
 		
 		// draw outline ui
@@ -498,6 +517,35 @@ public class UpgradeScreen extends AbstractJamScreen {
 		
 		// load stuff
 		upgrade_menu = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/upgrade_menu.menu");
+		controller_a = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:controller/xbox.a");
+		controller_x = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:controller/xbox.x");
+		keyboard_a = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:controller/keyboard.A");
+		keyboard_space = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:controller/keyboard.space");
+		
+		// set tooltips
+		basic_gun_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Equip")));
+		chain_gun_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Equip")));
+		scatter_gun_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Equip")));
+		arc_gun_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Equip")));
+		laser_gun_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Equip")));
+		
+		basic_missiles_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Equip")));
+		scatter_missiles_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Equip")));
+		bomb_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Equip")));
+		emp_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Equip")));
+		gravity_orb_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Equip")));
+		
+		mark_1_ship_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Use")));
+		heavy_variant_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Use")));
+		fast_variant_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Use")));
+		mark_2_ship_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Use")));
+		
+		thruster_upgrade_option.setToolTip(new UIString(controller_a, "Upgrade"));
+		shield_upgrade_option.setToolTip(new UIString(controller_a, "Upgrade"));
+		armor_upgrade_option.setToolTip(new UIString(controller_a, "Upgrade"));
+		
+		deploy_ship_button.setToolTip(new UIString(controller_a, "Start!"));
+	
 		super.onActivate(previous_screen_id, game_systems);
 		
 		/*

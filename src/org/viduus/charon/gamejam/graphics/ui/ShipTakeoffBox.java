@@ -16,6 +16,10 @@ import org.viduus.charon.global.graphics.opengl.font.OpenGLFont;
  */
 public class ShipTakeoffBox extends UIElement {
 
+	public ShipTakeoffBox() {
+		
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.viduus.charon.gamejam.graphics.ui.UIElement#render(org.viduus.charon.global.graphics.opengl.OpenGLGraphics, float)
 	 */

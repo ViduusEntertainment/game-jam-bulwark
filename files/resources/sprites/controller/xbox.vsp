@@ -1,8 +1,8 @@
 {
   "sprite_map": "resources/img/sprites/controller.png",
   "size": {
-    "width": 2000,
-    "height": 1000
+    "width": 96,
+    "height": 96
   },
   "hands": {
     "left": [],
@@ -81,7 +81,7 @@
                 "probability": 1.0
               }
             ]
-          }
+          },
           {
             "name": "vid:animations:controller/xbox.x",
             "sustain": true,
@@ -96,7 +96,7 @@
                 "probability": 1.0
               }
             ]
-          }
+          },
           {
             "name": "vid:animations:controller/xbox.y",
             "sustain": true,

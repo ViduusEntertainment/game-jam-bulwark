@@ -44,9 +44,18 @@ public abstract class UIElement extends OpenGLComponent implements ControllerInp
 		money;
 
 	private final List<ControllerInputListener> controller_listeners = new ArrayList<>();
+	private UIString tool_tip = null;
 	
 	public UIElement() {
 		setAlphaComponent(0.0f);
+	}
+	
+	public void setToolTip(UIString tool_tip) {
+		this.tool_tip = tool_tip;
+	}
+	
+	public UIString getToolTip() {
+		return tool_tip;
 	}
 	
 	public abstract void render(OpenGLGraphics graphics, float d_sec);

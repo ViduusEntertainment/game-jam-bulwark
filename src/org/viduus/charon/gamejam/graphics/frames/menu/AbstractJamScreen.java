@@ -15,7 +15,6 @@ import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
 import org.viduus.charon.global.graphics.opengl.components.OpenGLComponent;
 import org.viduus.charon.global.graphics.screens.AbstractGameScreen;
 import org.viduus.charon.global.input.controller.ControllerState;
-import org.viduus.charon.global.util.logging.OutputHandler;
 
 /**
  * 
@@ -65,7 +64,6 @@ public abstract class AbstractJamScreen extends AbstractGameScreen {
 		super.onControllerState(e);
 		focused_components.forEach(comp -> {
 			if (comp instanceof UIElement) {
-				OutputHandler.println("focused "+comp.getClass().getSimpleName());
 				((UIElement)comp).onControllerState(e);
 			}
 		});
