@@ -625,10 +625,10 @@ public class PlayerCharacter extends PlayableCharacter2D {
 
 	@Override
 	protected void onCollision(CollisionEvent collision_event) {
-//		if (!immunity_timer.isCooling() && !using_shield) {		
-//			set(Property.HEALTH, getFloat(Property.HEALTH) - 1);
-//			immunity_timer.reset();
-//		}
+		if (!immunity_timer.isCooling() && !using_shield) {		
+			set(Property.HEALTH, getFloat(Property.HEALTH) - 1);
+			immunity_timer.reset();
+		}
 	}
 	
 	
