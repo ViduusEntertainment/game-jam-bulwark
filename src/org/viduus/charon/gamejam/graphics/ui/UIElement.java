@@ -5,15 +5,23 @@
  */
 package org.viduus.charon.gamejam.graphics.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.lwjgl.glfw.GLFWCursorPosCallback;
+import org.lwjgl.glfw.GLFWKeyCallback;
+import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.viduus.charon.global.AbstractGameSystems;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
-import org.viduus.charon.global.graphics.opengl.components.OpenGLButton;
+import org.viduus.charon.global.graphics.opengl.components.OpenGLComponent;
 import org.viduus.charon.global.graphics.opengl.font.OpenGLFont;
 import org.viduus.charon.global.graphics.opengl.shaders.ShaderProgram;
 import org.viduus.charon.global.graphics.opengl.shaders.exceptions.ShaderException;
 import org.viduus.charon.global.graphics.opengl.shaders.variables.ShaderAttribute;
 import org.viduus.charon.global.graphics.opengl.shapes.Rectangle;
+import org.viduus.charon.global.input.controller.ControllerInputListener;
+import org.viduus.charon.global.input.controller.ControllerState;
 import org.viduus.charon.global.util.logging.ErrorHandler;
 
 /**
@@ -21,7 +29,7 @@ import org.viduus.charon.global.util.logging.ErrorHandler;
  *
  * @author Ethan Toney
  */
-public abstract class UIElement extends OpenGLButton {
+public abstract class UIElement extends OpenGLComponent implements ControllerInputListener {
 
 	private static boolean animations_loaded = false;
 	private static Animation<?>
@@ -35,6 +43,8 @@ public abstract class UIElement extends OpenGLButton {
 		border_l,
 		money;
 
+	private final List<ControllerInputListener> controller_listeners = new ArrayList<>();
+	
 	public UIElement() {
 		setAlphaComponent(0.0f);
 	}
@@ -141,6 +151,68 @@ public abstract class UIElement extends OpenGLButton {
 		}catch( ShaderException e ){
 			ErrorHandler.handleError(e);
 		}
+	}
+	
+	/**
+	 * Key callbacks should not be used with UIElements and can cause inconsistent behavior when used.
+	 * Use controller input listeners instead.
+	 * 
+	 * @see #addControllerListener(ControllerInputListener)
+	 * @deprecated
+	 * @throws RuntimeException always thrown
+	 */
+	@Override
+	public final void addKeyListener(GLFWKeyCallback listener) {
+		throw new RuntimeException("UIElements should not use key callbacks. Use controller listeners instead.");
+	}
+	
+	/**
+	 * Mouse button callbacks should not be used with UIElements and can cause inconsistent behavior when used.
+	 * Use controller input listeners instead.
+	 * 
+	 * @see #addControllerListener(ControllerInputListener)
+	 * @deprecated
+	 * @throws RuntimeException always thrown
+	 */
+	@Override
+	public final void addMouseListener(GLFWMouseButtonCallback listener) {
+		throw new RuntimeException("UIElements should not use mouse button callbacks. Use controller listeners instead.");
+	}
+	
+	/**
+	 * Cursor position callbacks should not be used with UIElements and can cause inconsistent behavior when used.
+	 * Use controller input listeners instead.
+	 * 
+	 * @see #addControllerListener(ControllerInputListener)
+	 * @deprecated
+	 * @throws RuntimeException always thrown
+	 */
+	@Override
+	public final void addMouseMotionListener(GLFWCursorPosCallback listener) {
+		throw new RuntimeException("UIElements should not use cursor position callbacks. Use controller listeners instead.");
+	}
+	
+	public void addControllerListener(ControllerInputListener controller_listener) {
+		controller_listeners.add(controller_listener);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.viduus.charon.global.input.controller.ControllerInputListener#onControllerState(org.viduus.charon.global.input.controller.ControllerState)
+	 */
+	@Override
+	public final void onControllerState(ControllerState e) {
+		for (ControllerInputListener listener : controller_listeners) {
+			listener.onControllerState(e);
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see org.viduus.charon.global.graphics.opengl.components.OpenGLComponent#resetState()
+	 */
+	@Override
+	public void resetState() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

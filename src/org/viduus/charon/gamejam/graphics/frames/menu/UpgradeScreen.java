@@ -9,7 +9,6 @@ import java.util.Random;
 
 import org.viduus.charon.gamejam.audio.AudioEngine;
 import org.viduus.charon.gamejam.graphics.GraphicsEngine;
-import org.viduus.charon.gamejam.graphics.ui.CheckBox;
 import org.viduus.charon.gamejam.graphics.ui.HorizontalUpgradeBox;
 import org.viduus.charon.gamejam.graphics.ui.ShipSelectionBox;
 import org.viduus.charon.gamejam.graphics.ui.ShipTakeoffBox;
@@ -25,6 +24,7 @@ import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
 import org.viduus.charon.global.graphics.opengl.font.OpenGLFont;
 import org.viduus.charon.global.graphics.util.IntDimension;
 import org.viduus.charon.global.input.controller.ControllerState;
+import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.Weapon2D;
 
 /**
@@ -71,21 +71,6 @@ public class UpgradeScreen extends AbstractJamScreen {
 		thruster_upgrade_option,
 		shield_upgrade_option,
 		armor_upgrade_option;
-	private CheckBox
-		equip_mk1_button,
-		equip_mk2_button,
-		equip_heavy_button,
-		equip_fast_button,
-		equip_basic_gun_button,
-		equip_chain_gun_button,
-		equip_scatter_gun_button,
-		equip_arc_gun_button,
-		equip_laser_gun_button,
-		equip_basic_missiles_button,
-		equip_scatter_missiles_button,
-		equip_bomb_button,
-		equip_emp_button,
-		equip_gravity_orb_button;
 	
 	private ShipTakeoffBox deploy_ship_button;
 
@@ -99,75 +84,307 @@ public class UpgradeScreen extends AbstractJamScreen {
 		
 		setAlphaComponent(0);
 		
-		/*
+		/* --------------------------------------------------------------------
 		 * Ship stuff
 		 */
 		mark_1_ship_button = new ShipSelectionBox("MK 1", "The standard ship", 3, 5, 1, 0);
+		mark_1_ship_button.addControllerListener(e -> {
+			// purchase/upgrade
+			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
+				if (main_character.tryPurchaseShip("Mk1", 0))
+					mark_1_ship_button.setPurchased();
+				armor_upgrade_option.setMaxLevel(1);
+			}
+			// equip
+			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
+				main_character.tryEquipShip("Mk1");
+			}
+		});
 		add(mark_1_ship_button);
 		
 		mark_2_ship_button = new ShipSelectionBox("MK 2", "New and improved", 4, 5, 1, 40000);
+		mark_2_ship_button.addControllerListener(e -> {
+			// purchase/upgrade
+			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
+				if (main_character.tryPurchaseShip("Mk2", 40000))
+					mark_2_ship_button.setPurchased();
+				armor_upgrade_option.setMaxLevel(1);
+			}
+			// equip
+			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
+				main_character.tryEquipShip("Mk2");
+			}
+		});
 		add(mark_2_ship_button);
 		
 		heavy_variant_button = new ShipSelectionBox("MK 2 - heavy", "Take a hit or two!", 3, 5, 3, 40000);
+		heavy_variant_button.addControllerListener(e -> {
+			// purchase/upgrade
+			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
+				if (main_character.tryPurchaseShip("Heavy", 40000))
+					heavy_variant_button.setPurchased();
+				armor_upgrade_option.setMaxLevel(3);
+			}
+			// equip
+			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
+				main_character.tryEquipShip("Heavy");
+			}
+		});
 		add(heavy_variant_button);
 		
 		fast_variant_button = new ShipSelectionBox("MK 2 - fast", "Move quick!", 3, 6, 0, 40000);
+		fast_variant_button.addControllerListener(e -> {
+			// purchase/upgrade
+			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
+				if (main_character.tryPurchaseShip("Fast", 40000))
+					fast_variant_button.setPurchased();
+				armor_upgrade_option.setMaxLevel(0);
+			}
+			// equip
+			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
+				main_character.tryEquipShip("Fast");
+			}
+		});
 		add(fast_variant_button);
 
-		/*
+		/* --------------------------------------------------------------------
 		 * Ship upgrade stuff
 		 */
 		thruster_upgrade_option = new VerticalUpgradeBox("vid:animation:hud/icons.thrusters", "Thruster", new int[] {2000, 4000, 6000, 8000, 10000});
+		thruster_upgrade_option.addControllerListener(e -> {
+			// purchase/upgrade
+			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
+				if (thruster_upgrade_option.getMaxLevel() > main_character.getThrusterUpgrades()) {
+					if(main_character.upgradeThruster(thruster_upgrade_option.getNextPrice()))
+						thruster_upgrade_option.setLevel(main_character.getThrusterUpgrades());
+				}
+			}
+		});
 		add(thruster_upgrade_option);
 
 		shield_upgrade_option = new VerticalUpgradeBox("vid:animation:hud/icons.shield", "Shield", new int[] {1000, 2000, 3000, 4000, 5000});
+		shield_upgrade_option.addControllerListener(e -> {
+			// purchase/upgrade
+			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
+				if (shield_upgrade_option.getMaxLevel() > main_character.getShieldUpgrades()) {
+					if(main_character.upgradeShield(shield_upgrade_option.getNextPrice()))
+						shield_upgrade_option.setLevel(main_character.getShieldUpgrades());
+				}
+			}
+		});
 		add(shield_upgrade_option);
 		
 		armor_upgrade_option = new VerticalUpgradeBox("vid:animation:hud/icons.armor", "Armor", new int[] {1000, 2000, 3000});
+		armor_upgrade_option.addControllerListener(e -> {
+			// purchase/upgrade
+			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
+				if (armor_upgrade_option.getMaxLevel() > main_character.getArmorUpgrades()) {
+					if(main_character.upgradeArmor(armor_upgrade_option.getNextPrice()))
+						armor_upgrade_option.setLevel(main_character.getArmorUpgrades());
+				}
+			}
+		});
 		add(armor_upgrade_option);
 		armor_upgrade_option.setMaxLevel(1);
 		
-		/*
+		/* --------------------------------------------------------------------
 		 * Start fighting stuff
 		 */
 		deploy_ship_button = new ShipTakeoffBox();
+		deploy_ship_button.addControllerListener(e -> {
+			// purchase/upgrade
+			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
+				OutputHandler.println("what?");
+				game_systems.graphics_engine.showFrame(GraphicsEngine.START_GAME_SCREEN);
+			}
+		});
 		add(deploy_ship_button);
 		
-		/*
+		/* --------------------------------------------------------------------
 		 * Primary weapon stuff
 		 */
 		basic_gun_button = new HorizontalUpgradeBox("Basic Gun", 0, new int[] {1000, 2000, 3000, 4000, 5000});
+		basic_gun_button.addControllerListener(e -> {
+			// purchase/upgrade
+			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
+				if (!basic_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("Basic", 0))
+					basic_gun_button.setPurchased();
+				else if (5 > main_character.getUpgradeLevel("Basic")) {
+					if(main_character.tryUpgradeWeapon("Basic", basic_gun_button.getNextPrice()))
+						basic_gun_button.setLevel(main_character.getUpgradeLevel("Basic"));
+				}
+			}
+			// equip
+			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
+				main_character.tryEquipPrimaryWeapon("Basic");
+			}
+		});
 		add(basic_gun_button);
 		basic_gun_button.setPurchased();
 		
 		chain_gun_button = new HorizontalUpgradeBox("Chain Gun", 15000, new int[] {1500, 3000, 4500, 6000, 7500});
+		chain_gun_button.addControllerListener(e -> {
+			// purchase/upgrade
+			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
+				if (!chain_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("Chain", 15000))
+					chain_gun_button.setPurchased();
+				else if (5 > main_character.getUpgradeLevel("Chain")) {
+					if(main_character.tryUpgradeWeapon("Chain", chain_gun_button.getNextPrice()))
+						chain_gun_button.setLevel(main_character.getUpgradeLevel("Chain"));
+				}
+			}
+			// equip
+			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
+				main_character.tryEquipPrimaryWeapon("Chain");
+			}
+		});
 		add(chain_gun_button);
 		
 		scatter_gun_button = new HorizontalUpgradeBox("Scatter Gun", 10000, new int[] {1200, 2400, 3600, 4800, 6000});
+		scatter_gun_button.addControllerListener(e -> {
+			// purchase/upgrade
+			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
+				if (!scatter_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("Scatter", 10000))
+					scatter_gun_button.setPurchased();
+				else if (5 > main_character.getUpgradeLevel("Scatter")) {
+					if(main_character.tryUpgradeWeapon("Scatter", scatter_gun_button.getNextPrice()))
+						scatter_gun_button.setLevel(main_character.getUpgradeLevel("Scatter"));
+				}
+			}
+			// equip
+			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
+				main_character.tryEquipPrimaryWeapon("Scatter");
+			}
+		});
 		add(scatter_gun_button);
 		
 		arc_gun_button = new HorizontalUpgradeBox("Arc Gun", 25000, new int[] {1800, 3600, 5400, 7200, 9000});
+		arc_gun_button.addControllerListener(e -> {
+			// purchase/upgrade
+			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
+				if (!arc_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("Arc", 25000))
+					arc_gun_button.setPurchased();
+				else if (5 > main_character.getUpgradeLevel("Arc")) {
+					if(main_character.tryUpgradeWeapon("Arc", arc_gun_button.getNextPrice()))
+						arc_gun_button.setLevel(main_character.getUpgradeLevel("Arc"));
+				}
+			}
+			// equip
+			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
+				main_character.tryEquipPrimaryWeapon("Arc");
+			}
+		});
 		add(arc_gun_button);
 		
 		laser_gun_button = new HorizontalUpgradeBox("Charge Laser", 20000, new int[] {1600, 3200, 4800, 6400, 8000});
+		laser_gun_button.addControllerListener(e -> {
+			// purchase/upgrade
+			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
+				if (!laser_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("ChargeLaser", 20000))
+					laser_gun_button.setPurchased();
+				else if (5 > main_character.getUpgradeLevel("ChargeLaser")) {
+					if(main_character.tryUpgradeWeapon("ChargeLaser", laser_gun_button.getNextPrice()))
+						laser_gun_button.setLevel(main_character.getUpgradeLevel("ChargeLaser"));
+				}
+			}
+			// equip
+			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
+				main_character.tryEquipPrimaryWeapon("ChargeLaser");
+			}
+		});
 		add(laser_gun_button);
 		
-		/*
+		/* --------------------------------------------------------------------
 		 * Secondary weapon stuff
 		 */
 		basic_missiles_button = new HorizontalUpgradeBox("Basic Missiles", 500, new int[] {1600, 3200, 4800, 6400, 8000});
+		basic_missiles_button.addControllerListener(e -> {
+			// purchase/upgrade
+			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
+				if (!basic_missiles_button.getPurchased() && main_character.tryPurchaseSecondaryWeapon("BasicMissile", 0))
+					basic_missiles_button.setPurchased();
+				else if (5 > main_character.getUpgradeLevel("BasicMissile")) {
+					if(main_character.tryUpgradeWeapon("BasicMissile", basic_missiles_button.getNextPrice()))
+						basic_missiles_button.setLevel(main_character.getUpgradeLevel("BasicMissile"));
+				}
+			}
+			// equip
+			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
+				main_character.tryEquipSecondaryWeapon("BasicMissile");
+			}
+		});
 		add(basic_missiles_button);
 
 		scatter_missiles_button = new HorizontalUpgradeBox("Scatter Missiles", 1000, new int[] {1600, 3200, 4800, 6400, 8000});
+		scatter_missiles_button.addControllerListener(e -> {
+			// purchase/upgrade
+			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
+				if (!scatter_missiles_button.getPurchased() && main_character.tryPurchaseSecondaryWeapon("ScatterMissile", 15000))
+					scatter_missiles_button.setPurchased();
+				else if (5 > main_character.getUpgradeLevel("ScatterMissile")) {
+					if(main_character.tryUpgradeWeapon("ScatterMissile", scatter_missiles_button.getNextPrice()))
+						scatter_missiles_button.setLevel(main_character.getUpgradeLevel("ScatterMissile"));
+				}
+			}
+			// equip
+			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
+				main_character.tryEquipSecondaryWeapon("ScatterMissile");
+			}
+		});
 		add(scatter_missiles_button);
 
 		bomb_button = new HorizontalUpgradeBox("Bomb", 800, new int[] {1600, 3200, 4800, 6400, 8000});
+		bomb_button.addControllerListener(e -> {
+			// purchase/upgrade
+			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
+				if (!bomb_button.getPurchased() && main_character.tryPurchaseSecondaryWeapon("Bomb", 10000))
+					bomb_button.setPurchased();
+				else if (5 > main_character.getUpgradeLevel("Bomb")) {
+					if(main_character.tryUpgradeWeapon("Bomb", bomb_button.getNextPrice()))
+						bomb_button.setLevel(main_character.getUpgradeLevel("Bomb"));
+				}
+			}
+			// equip
+			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
+				main_character.tryEquipSecondaryWeapon("Bomb");
+			}
+		});
 		add(bomb_button);
 
 		emp_button = new HorizontalUpgradeBox("Emp", 5000, new int[] {1600, 3200, 4800, 6400, 8000});
+		emp_button.addControllerListener(e -> {
+			// purchase/upgrade
+			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
+				if (!emp_button.getPurchased() && main_character.tryPurchaseSecondaryWeapon("Emp", 25000))
+					emp_button.setPurchased();
+				else if (5 > main_character.getUpgradeLevel("Emp")) {
+					if(main_character.tryUpgradeWeapon("Emp", emp_button.getNextPrice()))
+						emp_button.setLevel(main_character.getUpgradeLevel("Emp"));
+				}
+			}
+			// equip
+			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
+				main_character.tryEquipSecondaryWeapon("Emp");
+			}
+		});
 		add(emp_button);
 
 		gravity_orb_button = new HorizontalUpgradeBox("Gravity Orb", 6000, new int[] {1600, 3200, 4800, 6400, 8000});
+		gravity_orb_button.addControllerListener(e -> {
+			// purchase/upgrade
+			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
+				if (!gravity_orb_button.getPurchased() && main_character.tryPurchaseSecondaryWeapon("GravityOrb", 20000))
+					gravity_orb_button.setPurchased();
+				else if (5 > main_character.getUpgradeLevel("GravityOrb")) {
+					if(main_character.tryUpgradeWeapon("GravityOrb", gravity_orb_button.getNextPrice()))
+						gravity_orb_button.setLevel(main_character.getUpgradeLevel("GravityOrb"));
+				}
+			}
+			// equip
+			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
+				main_character.tryEquipSecondaryWeapon("GravityOrb");
+			}
+		});
 		add(gravity_orb_button);
 	}
 	
@@ -264,178 +481,6 @@ public class UpgradeScreen extends AbstractJamScreen {
 		
 		// draw outline ui
 		upgrade_menu.renderAnimation(graphics, d_sec, menu_x, menu_y, 1);
-	}
-	
-	@Override
-	public void onControllerState(ControllerState e) {
-		super.onControllerState(e);
-		
-		if (e.getKeyState(ControllerState.SELECT_KEY) == ControllerState.PRESSED_STATE) {
-			if (thruster_upgrade_option.hasFocus()) {
-				if (thruster_upgrade_option.getMaxLevel() > main_character.getThrusterUpgrades()) {
-					if(main_character.upgradeThruster(thruster_upgrade_option.getNextPrice()))
-						thruster_upgrade_option.setLevel(main_character.getThrusterUpgrades());
-				}
-			}
-			else if (shield_upgrade_option.hasFocus()) {
-				if (shield_upgrade_option.getMaxLevel() > main_character.getShieldUpgrades()) {
-					if(main_character.upgradeShield(shield_upgrade_option.getNextPrice()))
-						shield_upgrade_option.setLevel(main_character.getShieldUpgrades());
-				}
-			}
-			else if (armor_upgrade_option.hasFocus()) {
-				if (armor_upgrade_option.getMaxLevel() > main_character.getArmorUpgrades()) {
-					if(main_character.upgradeArmor(armor_upgrade_option.getNextPrice()))
-						armor_upgrade_option.setLevel(main_character.getArmorUpgrades());
-				}
-			}
-			else if (deploy_ship_button.hasFocus()) {
-				game_systems.graphics_engine.showFrame(GraphicsEngine.START_GAME_SCREEN);
-			}
-			else if (mark_1_ship_button.hasFocus()) {
-				if (main_character.tryPurchaseShip("Mk1", 0))
-					mark_1_ship_button.setPurchased();
-				armor_upgrade_option.setMaxLevel(1);
-				
-				// Only here for testing until we get the equip buttons
-				main_character.tryEquipShip("Mk1");
-			}
-			else if (mark_2_ship_button.hasFocus()) {
-				if (main_character.tryPurchaseShip("Mk2", 40000))
-					mark_2_ship_button.setPurchased();
-				armor_upgrade_option.setMaxLevel(1);
-				
-				// Only here for testing until we get the equip buttons
-				main_character.tryEquipShip("Mk2");
-			}
-			else if (heavy_variant_button.hasFocus()) {
-				if (main_character.tryPurchaseShip("Heavy", 40000))
-					heavy_variant_button.setPurchased();
-				armor_upgrade_option.setMaxLevel(3);
-				
-				// Only here for testing until we get the equip buttons
-				main_character.tryEquipShip("Heavy");
-			}
-			else if (fast_variant_button.hasFocus()) {
-				if (main_character.tryPurchaseShip("Fast", 40000))
-					fast_variant_button.setPurchased();
-				armor_upgrade_option.setMaxLevel(0);
-				
-				// Only here for testing until we get the equip buttons
-				main_character.tryEquipShip("Fast");
-			}
-			else if (basic_gun_button.hasFocus()) {
-				// technically the basic gun is already purchased but whatevs. I call basic_gun_button.
-				if (!basic_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("Basic", 0))
-					basic_gun_button.setPurchased();
-				else if (5 > main_character.getUpgradeLevel("Basic")) {
-					if(main_character.tryUpgradeWeapon("Basic", basic_gun_button.getNextPrice()))
-						basic_gun_button.setLevel(main_character.getUpgradeLevel("Basic"));
-				}
-				
-				// Only here for testing until we get the equip buttons
-				main_character.tryEquipPrimaryWeapon("Basic");
-			}
-			else if (chain_gun_button.hasFocus()) {
-				if (!chain_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("Chain", 15000))
-					chain_gun_button.setPurchased();
-				else if (5 > main_character.getUpgradeLevel("Chain")) {
-					if(main_character.tryUpgradeWeapon("Chain", chain_gun_button.getNextPrice()))
-						chain_gun_button.setLevel(main_character.getUpgradeLevel("Chain"));
-				}
-				
-				// Only here for testing until we get the equip buttons
-				main_character.tryEquipPrimaryWeapon("Chain");
-			}
-			else if (scatter_gun_button.hasFocus()) {
-				if (!scatter_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("Scatter", 10000))
-					scatter_gun_button.setPurchased();
-				else if (5 > main_character.getUpgradeLevel("Scatter")) {
-					if(main_character.tryUpgradeWeapon("Scatter", scatter_gun_button.getNextPrice()))
-						scatter_gun_button.setLevel(main_character.getUpgradeLevel("Scatter"));
-				}
-				
-				// Only here for testing until we get the equip buttons
-				main_character.tryEquipPrimaryWeapon("Scatter");
-			}
-			else if (arc_gun_button.hasFocus()) {
-				if (!arc_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("Arc", 25000))
-					arc_gun_button.setPurchased();
-				else if (5 > main_character.getUpgradeLevel("Arc")) {
-					if(main_character.tryUpgradeWeapon("Arc", arc_gun_button.getNextPrice()))
-						arc_gun_button.setLevel(main_character.getUpgradeLevel("Arc"));
-				}
-				
-				// Only here for testing until we get the equip buttons
-				main_character.tryEquipPrimaryWeapon("Arc");
-			}
-			else if (laser_gun_button.hasFocus()) {
-				if (!laser_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("ChargeLaser", 20000))
-					laser_gun_button.setPurchased();
-				else if (5 > main_character.getUpgradeLevel("ChargeLaser")) {
-					if(main_character.tryUpgradeWeapon("ChargeLaser", laser_gun_button.getNextPrice()))
-						laser_gun_button.setLevel(main_character.getUpgradeLevel("ChargeLaser"));
-				}
-				
-				// Only here for testing until we get the equip buttons
-				main_character.tryEquipPrimaryWeapon("ChargeLaser");
-			}
-			else if (basic_missiles_button.hasFocus()) {
-				if (!basic_missiles_button.getPurchased() && main_character.tryPurchaseSecondaryWeapon("BasicMissile", 0))
-					basic_missiles_button.setPurchased();
-				else if (5 > main_character.getUpgradeLevel("BasicMissile")) {
-					if(main_character.tryUpgradeWeapon("BasicMissile", basic_missiles_button.getNextPrice()))
-						basic_missiles_button.setLevel(main_character.getUpgradeLevel("BasicMissile"));
-				}
-				
-				// Only here for testing until we get the equip buttons
-				main_character.tryEquipSecondaryWeapon("BasicMissile");
-			}
-			else if (scatter_missiles_button.hasFocus()) {
-				if (!scatter_missiles_button.getPurchased() && main_character.tryPurchaseSecondaryWeapon("ScatterMissile", 15000))
-					scatter_missiles_button.setPurchased();
-				else if (5 > main_character.getUpgradeLevel("ScatterMissile")) {
-					if(main_character.tryUpgradeWeapon("ScatterMissile", scatter_missiles_button.getNextPrice()))
-						scatter_missiles_button.setLevel(main_character.getUpgradeLevel("ScatterMissile"));
-				}
-				
-				// Only here for testing until we get the equip buttons
-				main_character.tryEquipSecondaryWeapon("ScatterMissile");
-			}
-			else if (bomb_button.hasFocus()) {
-				if (!bomb_button.getPurchased() && main_character.tryPurchaseSecondaryWeapon("Bomb", 10000))
-					bomb_button.setPurchased();
-				else if (5 > main_character.getUpgradeLevel("Bomb")) {
-					if(main_character.tryUpgradeWeapon("Bomb", bomb_button.getNextPrice()))
-						bomb_button.setLevel(main_character.getUpgradeLevel("Bomb"));
-				}
-				
-				// Only here for testing until we get the equip buttons
-				main_character.tryEquipSecondaryWeapon("Bomb");
-			}
-			else if (emp_button.hasFocus()) {
-				if (!emp_button.getPurchased() && main_character.tryPurchaseSecondaryWeapon("Emp", 25000))
-					emp_button.setPurchased();
-				else if (5 > main_character.getUpgradeLevel("Emp")) {
-					if(main_character.tryUpgradeWeapon("Emp", emp_button.getNextPrice()))
-						emp_button.setLevel(main_character.getUpgradeLevel("Emp"));
-				}
-				
-				// Only here for testing until we get the equip buttons
-				main_character.tryEquipSecondaryWeapon("Emp");
-			}
-			else if (gravity_orb_button.hasFocus()) {
-				if (!gravity_orb_button.getPurchased() && main_character.tryPurchaseSecondaryWeapon("GravityOrb", 20000))
-					gravity_orb_button.setPurchased();
-				else if (5 > main_character.getUpgradeLevel("GravityOrb")) {
-					if(main_character.tryUpgradeWeapon("GravityOrb", gravity_orb_button.getNextPrice()))
-						gravity_orb_button.setLevel(main_character.getUpgradeLevel("GravityOrb"));
-				}
-				
-				// Only here for testing until we get the equip buttons
-				main_character.tryEquipSecondaryWeapon("GravityOrb");
-			}
-		}
 	}
 
 	/* (non-Javadoc)
