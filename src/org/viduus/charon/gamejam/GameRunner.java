@@ -8,13 +8,10 @@ package org.viduus.charon.gamejam;
 import org.viduus.charon.gamejam.audio.AudioEngine;
 import org.viduus.charon.gamejam.event.EventEngine;
 import org.viduus.charon.gamejam.graphics.GraphicsEngine;
-import org.viduus.charon.gamejam.item.ItemEngine;
-import org.viduus.charon.gamejam.quest.QuestEngine;
 import org.viduus.charon.gamejam.world.WorldEngine;
 import org.viduus.charon.global.input.InputEngine;
 import org.viduus.charon.global.input.controller.ControllerState;
 import org.viduus.charon.global.util.systems.SystemsEngine;
-import org.viduus.charon.global.world.dialog.DialogEngine;
 
 /**
  * 
@@ -26,17 +23,14 @@ public class GameRunner {
 	private GameSystems game_systems;
 
 	/**
-	 * TODO
+	 * TODO                                                                                                                                                                                                                                                                                                                                                                                                   
 	 */
 	public GameRunner() {
 		game_systems = new GameSystems(
 				new AudioEngine(),
-				new ItemEngine(),
-				new QuestEngine(),
 				new SystemsEngine(),
 				new WorldEngine(60),
 				new InputEngine(),
-				new DialogEngine(),
 				new EventEngine(),
 				new GraphicsEngine()
 		);

@@ -34,13 +34,13 @@ public class AudioEngine extends org.viduus.charon.global.audio.AudioEngine{
 	protected void onLoadEngine(AbstractGameSystems game_systems) {
 		TinySound.init();
 		
-		INTRO_SOUND = ErrorHandler.tryRun(() -> TinySound.loadSound(ResourceLoader.loadResource("resources/audio/sfx/intro/viduus.ogg")));
-		MENU_MUSIC = TinySound.loadMusic(ErrorHandler.tryRun(() -> ResourceLoader.loadResourceWithError("resources/audio/music/menu/main_menu.ogg")));
+		INTRO_SOUND = ErrorHandler.tryRunThrow(() -> TinySound.loadSound(ResourceLoader.loadResource("resources/audio/sfx/intro/viduus.ogg")));
+		MENU_MUSIC = TinySound.loadMusic(ErrorHandler.tryRunThrow(() -> ResourceLoader.loadResourceWithError("resources/audio/music/menu/main_menu.ogg")));
 		
 		new Thread(new Runnable() {
 			public void run() {
-				ErrorHandler.tryRun(() -> {
-					LEVEL1_MUSIC = TinySound.loadMusic(ErrorHandler.tryRun(() -> ResourceLoader.loadResourceWithError("resources/audio/music/game/gamejam_level1_theme.ogg")));
+				ErrorHandler.tryRunThrow(() -> {
+					LEVEL1_MUSIC = TinySound.loadMusic(ErrorHandler.tryRunThrow(() -> ResourceLoader.loadResourceWithError("resources/audio/music/game/gamejam_level1_theme.ogg")));
 					KAMIKAZE_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/kamikaze.ogg"));
 					EXPLOSION_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/explosion.ogg"));
 					BASIC_BULLET_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/basic_bullet.ogg"));
@@ -51,7 +51,7 @@ public class AudioEngine extends org.viduus.charon.global.audio.AudioEngine{
 					EMP_SOUND = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/EMP.ogg"));
 					BOSS_ORB = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/boss_orb.ogg"));
 					BOSS_LASER = TinySound.loadSound(ResourceLoader.loadResourceWithError("resources/audio/sfx/game/boss_laser.ogg"));
-					BOSS_BATTLE_MUSIC = TinySound.loadMusic(ErrorHandler.tryRun(() -> ResourceLoader.loadResourceWithError("resources/audio/music/game/gamejam_boss_battle.ogg")));
+					BOSS_BATTLE_MUSIC = TinySound.loadMusic(ErrorHandler.tryRunThrow(() -> ResourceLoader.loadResourceWithError("resources/audio/music/game/gamejam_boss_battle.ogg")));
 				});
 			}
 		}).start();
