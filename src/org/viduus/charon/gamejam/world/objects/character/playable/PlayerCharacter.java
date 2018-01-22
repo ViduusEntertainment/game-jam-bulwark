@@ -98,6 +98,8 @@ public class PlayerCharacter extends PlayableCharacter2D {
 	private int shield_upgrades = 0;
 	private boolean using_shield = false;
 	private boolean last_shield_state = false;
+	private String last_equipped_primary = null;
+	private String last_equipped_secondary = null;
 	
 	private HashMap<String, Integer> upgrades = new HashMap<>();
 	
@@ -121,7 +123,9 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		setShip(new Mk1());
 		purchased_ships.add("Mk1");
 		upgrades.put("Basic", 0);
-		upgrades.put("Missile1", 0);
+		upgrades.put("BasicMissile", 0);
+		last_equipped_primary = "Basic";
+		last_equipped_secondary = "BasicMissile";
 	}
 	
 	@Override
@@ -445,6 +449,8 @@ public class PlayerCharacter extends PlayableCharacter2D {
 			throw new RuntimeException("Invalid primary weapon name.");
 		}
 		
+		last_equipped_primary = name;
+		
 		world_engine.insert(weapon);
 		equipPrimaryWeapon(weapon);
 		
@@ -475,6 +481,8 @@ public class PlayerCharacter extends PlayableCharacter2D {
 			throw new RuntimeException("Invalid secondary weapon name.");
 		}
 		
+		last_equipped_secondary = name;
+		
 		world_engine.insert(weapon);
 		equipSecondaryWeapon(weapon);
 		
@@ -486,6 +494,8 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		if (money >= price && upgrade < 5) {
 			takeMoney(price);
 			upgrades.put(name, ++upgrade);
+			if (last_equipped_primary != null) tryEquipPrimaryWeapon(last_equipped_primary);
+			if (last_equipped_secondary != null) tryEquipSecondaryWeapon(last_equipped_secondary);
 			return true;
 		}
 		return false;
