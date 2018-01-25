@@ -122,9 +122,9 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		this.<Boolean>set(Property.IS_MOVABLE, true);	
 		setShip(new Mk1());
 		purchased_ships.add("Mk1");
-		upgrades.put("Basic", 0);
+		upgrades.put("BasicGun", 0);
 		upgrades.put("BasicMissile", 0);
-		last_equipped_primary = "Basic";
+		last_equipped_primary = "BasicGun";
 		last_equipped_secondary = "BasicMissile";
 	}
 	
@@ -430,17 +430,17 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		
 		Weapon2D weapon = null;
 		switch (name) {
-		case "Basic":
-			weapon = new DefaultGun(world_engine, "Basic", this, calculateWeaponDamage(name, 100));
+		case "BasicGun":
+			weapon = new DefaultGun(world_engine, "BasicGun", this, calculateWeaponDamage(name, 100));
 			break;
-		case "Chain":
-			weapon = new ChainGun(world_engine, "Chain", this, calculateWeaponDamage(name, 60));
+		case "ChainGun":
+			weapon = new ChainGun(world_engine, "ChainGun", this, calculateWeaponDamage(name, 60));
 			break;
-		case "Scatter":
-			weapon = new ScatterGun(world_engine, "Scatter", this, calculateWeaponDamage(name, 40));
+		case "ScatterGun":
+			weapon = new ScatterGun(world_engine, "ScatterGun", this, calculateWeaponDamage(name, 40));
 			break;
-		case "Arc":
-			weapon = new ArcGun(world_engine, "Arc", this, calculateWeaponDamage(name, 60));
+		case "ArcGun":
+			weapon = new ArcGun(world_engine, "ArcGun", this, calculateWeaponDamage(name, 60));
 			break;
 		case "ChargeLaser":
 			weapon = new LaserGun(world_engine, "ChargeLaser", this, calculateWeaponDamage(name, 250));

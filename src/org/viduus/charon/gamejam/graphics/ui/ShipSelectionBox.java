@@ -5,6 +5,7 @@
  */
 package org.viduus.charon.gamejam.graphics.ui;
 
+import org.viduus.charon.gamejam.world.objects.character.playable.PlayerCharacter;
 import org.viduus.charon.global.AbstractGameSystems;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.graphics.opengl.OpenGLGraphics;
@@ -17,7 +18,9 @@ import org.viduus.charon.global.graphics.opengl.font.OpenGLFont;
  */
 public class ShipSelectionBox extends UIElement {
 
-	private boolean is_purchased = false;
+	private boolean
+		is_purchased = false,
+		is_equipped = false;
 	private String
 		description,
 		name;
@@ -30,7 +33,9 @@ public class ShipSelectionBox extends UIElement {
 		heart_animation,
 		speed_animation,
 		armor_animation,
-		money;
+		money,
+		check_on,
+		check_off;
 
 	public ShipSelectionBox(String name, String description, int hearts, int speed, int armor_slots, int price) {
 		this.name = name;
@@ -50,9 +55,11 @@ public class ShipSelectionBox extends UIElement {
 		int dr = OpenGLFont.getLineHeight() - 2;
 		int iw = 18;
 		int left = getX() + 4;
-		int top = getY() + 2;
+		int top = getY() + 5;
 		
-		OpenGLFont.drawString2D(graphics, name, left, top + ds);
+		Animation<?> check_anim = (is_equipped) ? check_on : check_off;
+		check_anim.renderAnimation(graphics, d_sec, left + 7, top + 5, 1);
+		OpenGLFont.drawString2D(graphics, name, left + 17, top - 1 + ds);
 		OpenGLFont.drawString2D(graphics, description, left, top + dr + ds);
 		
 		heart_animation.renderAnimation(graphics, d_sec, left, top + 2*dr, 1);
@@ -76,6 +83,14 @@ public class ShipSelectionBox extends UIElement {
 			}
 		}
 	}
+	
+	public void equip() {
+		is_equipped = true;
+	}
+	
+	public void unequip() {
+		is_equipped = false;
+	}
 
 	/* (non-Javadoc)
 	 * @see org.viduus.charon.gamejam.graphics.ui.UIElement#onActivate(org.viduus.charon.global.AbstractGameSystems)
@@ -85,6 +100,8 @@ public class ShipSelectionBox extends UIElement {
 		heart_animation = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/icons.heart_full");
 		speed_animation = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/icons.thrusters_on");
 		armor_animation = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/icons.armor_on");
+		check_on = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/icons.check_on");
+		check_off = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/icons.check_off");
 		money = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/icons.money");
 		updateSize();
 	}
@@ -97,6 +114,8 @@ public class ShipSelectionBox extends UIElement {
 		game_systems.graphics_engine.release(heart_animation);
 		game_systems.graphics_engine.release(speed_animation);
 		game_systems.graphics_engine.release(armor_animation);
+		game_systems.graphics_engine.release(check_on);
+		game_systems.graphics_engine.release(check_off);
 		game_systems.graphics_engine.release(money);
 	}
 
@@ -105,10 +124,17 @@ public class ShipSelectionBox extends UIElement {
 	 */
 	@Override
 	protected void updateSize() {
-		setSize(87, 43);
+		setSize(87, 46);
 	}
 	
 	public void setPurchased() {
 		is_purchased = true;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getShipName() {
+		return name.replaceAll(" ", "");
 	}
 }

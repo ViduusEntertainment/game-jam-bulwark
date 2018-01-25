@@ -347,6 +347,14 @@
             "collision": [],
             "image": []
           },
+		  "6": {
+            "collision": [],
+            "image": []
+          },
+		  "7": {
+            "collision": [],
+            "image": []
+          },
           "1000": {
             "collision": [],
             "image": []
@@ -549,7 +557,7 @@
                 "probability": 1,
                 "frames": [
                   {
-                    "id": 4,
+                    "id": 7,
                     "duration": 250
                   }
                 ],
@@ -567,7 +575,7 @@
                 "probability": 1,
                 "frames": [
                   {
-                    "id": 5,
+                    "id": 6,
                     "duration": 250
                   }
                 ],

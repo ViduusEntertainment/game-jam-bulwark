@@ -85,6 +85,12 @@ public class UpgradeScreen extends AbstractJamScreen {
 
 	private PlayerCharacter main_character;
 
+	private ShipSelectionBox last_ship_button;
+
+	private HorizontalUpgradeBox last_main_button;
+
+	private HorizontalUpgradeBox last_secondary_button;
+
 	/**
 	 * @param graphics_frame
 	 */
@@ -106,7 +112,7 @@ public class UpgradeScreen extends AbstractJamScreen {
 			}
 			// equip
 			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
-				main_character.tryEquipShip("Mk1");
+				tryEquipShip(mark_1_ship_button);
 			}
 		});
 		add(mark_1_ship_button);
@@ -121,7 +127,7 @@ public class UpgradeScreen extends AbstractJamScreen {
 			}
 			// equip
 			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
-				main_character.tryEquipShip("Mk2");
+				tryEquipShip(mark_2_ship_button);
 			}
 		});
 		add(mark_2_ship_button);
@@ -136,7 +142,7 @@ public class UpgradeScreen extends AbstractJamScreen {
 			}
 			// equip
 			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
-				main_character.tryEquipShip("Heavy");
+				tryEquipShip(heavy_variant_button);
 			}
 		});
 		add(heavy_variant_button);
@@ -151,7 +157,7 @@ public class UpgradeScreen extends AbstractJamScreen {
 			}
 			// equip
 			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
-				main_character.tryEquipShip("Fast");
+				tryEquipShip(fast_variant_button);
 			}
 		});
 		add(fast_variant_button);
@@ -203,7 +209,6 @@ public class UpgradeScreen extends AbstractJamScreen {
 		deploy_ship_button.addControllerListener(e -> {
 			// purchase/upgrade
 			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
-				OutputHandler.println("what?");
 				game_systems.graphics_engine.showFrame(GraphicsEngine.START_GAME_SCREEN);
 			}
 		});
@@ -216,16 +221,16 @@ public class UpgradeScreen extends AbstractJamScreen {
 		basic_gun_button.addControllerListener(e -> {
 			// purchase/upgrade
 			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
-				if (!basic_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("Basic", 0))
+				if (!basic_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("BasicGun", 0))
 					basic_gun_button.setPurchased();
-				else if (5 > main_character.getUpgradeLevel("Basic")) {
-					if(main_character.tryUpgradeWeapon("Basic", basic_gun_button.getNextPrice()))
-						basic_gun_button.setLevel(main_character.getUpgradeLevel("Basic"));
+				else if (5 > main_character.getUpgradeLevel("BasicGun")) {
+					if(main_character.tryUpgradeWeapon("BasicGun", basic_gun_button.getNextPrice()))
+						basic_gun_button.setLevel(main_character.getUpgradeLevel("BasicGun"));
 				}
 			}
 			// equip
 			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
-				main_character.tryEquipPrimaryWeapon("Basic");
+				tryEquipPrimaryWeapon(basic_gun_button);
 			}
 		});
 		add(basic_gun_button);
@@ -235,16 +240,16 @@ public class UpgradeScreen extends AbstractJamScreen {
 		chain_gun_button.addControllerListener(e -> {
 			// purchase/upgrade
 			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
-				if (!chain_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("Chain", 15000))
+				if (!chain_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("ChainGun", 15000))
 					chain_gun_button.setPurchased();
-				else if (5 > main_character.getUpgradeLevel("Chain")) {
-					if(main_character.tryUpgradeWeapon("Chain", chain_gun_button.getNextPrice()))
-						chain_gun_button.setLevel(main_character.getUpgradeLevel("Chain"));
+				else if (5 > main_character.getUpgradeLevel("ChainGun")) {
+					if(main_character.tryUpgradeWeapon("ChainGun", chain_gun_button.getNextPrice()))
+						chain_gun_button.setLevel(main_character.getUpgradeLevel("ChainGun"));
 				}
 			}
 			// equip
 			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
-				main_character.tryEquipPrimaryWeapon("Chain");
+				tryEquipPrimaryWeapon(chain_gun_button);
 			}
 		});
 		add(chain_gun_button);
@@ -253,16 +258,16 @@ public class UpgradeScreen extends AbstractJamScreen {
 		scatter_gun_button.addControllerListener(e -> {
 			// purchase/upgrade
 			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
-				if (!scatter_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("Scatter", 10000))
+				if (!scatter_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("ScatterGun", 10000))
 					scatter_gun_button.setPurchased();
-				else if (5 > main_character.getUpgradeLevel("Scatter")) {
-					if(main_character.tryUpgradeWeapon("Scatter", scatter_gun_button.getNextPrice()))
-						scatter_gun_button.setLevel(main_character.getUpgradeLevel("Scatter"));
+				else if (5 > main_character.getUpgradeLevel("ScatterGun")) {
+					if(main_character.tryUpgradeWeapon("ScatterGun", scatter_gun_button.getNextPrice()))
+						scatter_gun_button.setLevel(main_character.getUpgradeLevel("ScatterGun"));
 				}
 			}
 			// equip
 			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
-				main_character.tryEquipPrimaryWeapon("Scatter");
+				tryEquipPrimaryWeapon(scatter_gun_button);
 			}
 		});
 		add(scatter_gun_button);
@@ -271,16 +276,16 @@ public class UpgradeScreen extends AbstractJamScreen {
 		arc_gun_button.addControllerListener(e -> {
 			// purchase/upgrade
 			if (e.getKeyState(ControllerState.ACTION1) == ControllerState.PRESSED_STATE) {
-				if (!arc_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("Arc", 25000))
+				if (!arc_gun_button.getPurchased() && main_character.tryPurchasePrimaryWeapon("ArcGun", 25000))
 					arc_gun_button.setPurchased();
-				else if (5 > main_character.getUpgradeLevel("Arc")) {
-					if(main_character.tryUpgradeWeapon("Arc", arc_gun_button.getNextPrice()))
-						arc_gun_button.setLevel(main_character.getUpgradeLevel("Arc"));
+				else if (5 > main_character.getUpgradeLevel("ArcGun")) {
+					if(main_character.tryUpgradeWeapon("ArcGun", arc_gun_button.getNextPrice()))
+						arc_gun_button.setLevel(main_character.getUpgradeLevel("ArcGun"));
 				}
 			}
 			// equip
 			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
-				main_character.tryEquipPrimaryWeapon("Arc");
+				tryEquipPrimaryWeapon(arc_gun_button);
 			}
 		});
 		add(arc_gun_button);
@@ -298,7 +303,7 @@ public class UpgradeScreen extends AbstractJamScreen {
 			}
 			// equip
 			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
-				main_character.tryEquipPrimaryWeapon("ChargeLaser");
+				tryEquipPrimaryWeapon(laser_gun_button);
 			}
 		});
 		add(laser_gun_button);
@@ -319,7 +324,7 @@ public class UpgradeScreen extends AbstractJamScreen {
 			}
 			// equip
 			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
-				main_character.tryEquipSecondaryWeapon("BasicMissile");
+				tryEquipSecondaryWeapon(basic_missiles_button);
 			}
 		});
 		add(basic_missiles_button);
@@ -337,7 +342,7 @@ public class UpgradeScreen extends AbstractJamScreen {
 			}
 			// equip
 			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
-				main_character.tryEquipSecondaryWeapon("ScatterMissile");
+				tryEquipSecondaryWeapon(scatter_missiles_button);
 			}
 		});
 		add(scatter_missiles_button);
@@ -355,7 +360,7 @@ public class UpgradeScreen extends AbstractJamScreen {
 			}
 			// equip
 			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
-				main_character.tryEquipSecondaryWeapon("Bomb");
+				tryEquipSecondaryWeapon(bomb_button);
 			}
 		});
 		add(bomb_button);
@@ -373,7 +378,7 @@ public class UpgradeScreen extends AbstractJamScreen {
 			}
 			// equip
 			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
-				main_character.tryEquipSecondaryWeapon("Emp");
+				tryEquipSecondaryWeapon(emp_button);
 			}
 		});
 		add(emp_button);
@@ -391,10 +396,40 @@ public class UpgradeScreen extends AbstractJamScreen {
 			}
 			// equip
 			else if (e.getKeyState(ControllerState.ACTION2) == ControllerState.PRESSED_STATE) {
-				main_character.tryEquipSecondaryWeapon("GravityOrb");
+				tryEquipSecondaryWeapon(gravity_orb_button);
 			}
 		});
 		add(gravity_orb_button);
+	}
+	
+	private void tryEquipShip(ShipSelectionBox button) {
+		if (main_character.tryEquipShip(button.getShipName())) {
+			button.equip();
+			if (last_ship_button != null) {
+				last_ship_button.unequip();
+			}
+			last_ship_button = button;
+		}
+	}
+	
+	private void tryEquipPrimaryWeapon(HorizontalUpgradeBox button) {
+		if (main_character.tryEquipPrimaryWeapon(button.getName())) {
+			button.equip();
+			if (last_main_button != null) {
+				last_main_button.unequip();
+			}
+			last_main_button = button;
+		}
+	}
+	
+	private void tryEquipSecondaryWeapon(HorizontalUpgradeBox button) {
+		if (main_character.tryEquipSecondaryWeapon(button.getName())) {
+			button.equip();
+			if (last_secondary_button != null) {
+				last_secondary_button.unequip();
+			}
+			last_secondary_button = button;
+		}
 	}
 	
 	@Override

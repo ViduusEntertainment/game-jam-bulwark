@@ -20,10 +20,14 @@ public class HorizontalUpgradeBox extends UIElement {
 	private static final int MAX_LEVEL = 5;
 	
 	private final String upgrade_text;
-	private boolean is_purchased = false;
+	private boolean
+		is_purchased = false,
+		is_equipped = false;
 	private Animation<?>
 		animation_on,
 		animation_off,
+		check_on,
+		check_off,
 		money;
 	private int
 		level = 0,
@@ -66,6 +70,8 @@ public class HorizontalUpgradeBox extends UIElement {
 			animation_off.renderAnimation(graphics, d_sec, getX()+9 + 16*i, getY()+8+16, 1);
 		}
 		updateSize();
+		Animation<?> check_anim = (is_equipped) ? check_on : check_off;
+		check_anim.renderAnimation(graphics, d_sec, getX() + 7, getY() + 5, 1);
 		OpenGLFont.drawString2D(graphics, upgrade_text, getX()+4, getY()+OpenGLFont.getLineHeight()-1);
 		
 		if (hasFocus()) {
@@ -89,6 +95,8 @@ public class HorizontalUpgradeBox extends UIElement {
 	public void onActivate(AbstractGameSystems game_systems) {
 		animation_on = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/icons.select_on");
 		animation_off = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/icons.select_off");
+		check_on = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/icons.check_on");
+		check_off = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/icons.check_off");
 		money = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:hud/icons.money");
 		updateSize();
 	}
@@ -100,6 +108,8 @@ public class HorizontalUpgradeBox extends UIElement {
 	public void onDeactivate(AbstractGameSystems game_systems) {
 		game_systems.graphics_engine.release(animation_on);
 		game_systems.graphics_engine.release(animation_off);
+		game_systems.graphics_engine.release(check_on);
+		game_systems.graphics_engine.release(check_off);
 		game_systems.graphics_engine.release(money);
 	}
 
@@ -109,6 +119,21 @@ public class HorizontalUpgradeBox extends UIElement {
 	@Override
 	protected void updateSize() {
 		setSize((int) Math.max(4+OpenGLFont.getStringWidth(upgrade_text), 16*5), 31);
+	}
+
+	/**
+	 * @return
+	 */
+	public String getName() {
+		return upgrade_text.replaceAll(" ", "");
+	}
+
+	public void equip() {
+		is_equipped  = true;
+	}
+	
+	public void unequip() {
+		is_equipped = false;
 	}
 	
 }
