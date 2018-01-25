@@ -27,6 +27,7 @@ import org.viduus.charon.global.graphics.opengl.components.OpenGLComponent;
 import org.viduus.charon.global.graphics.opengl.font.OpenGLFont;
 import org.viduus.charon.global.graphics.util.IntDimension;
 import org.viduus.charon.global.input.controller.ControllerState;
+import org.viduus.charon.global.input.events.ControllerTypeChangeEvent;
 import org.viduus.charon.global.util.logging.OutputHandler;
 import org.viduus.charon.global.world.objects.twodimensional.weapon.Weapon2D;
 
@@ -501,6 +502,44 @@ public class UpgradeScreen extends AbstractJamScreen {
 		// draw outline ui
 		upgrade_menu.renderAnimation(graphics, d_sec, menu_x, menu_y, 1);
 	}
+	
+	private void onControllerTypeChange(ControllerTypeChangeEvent event) {
+		Animation<?> action_1, action_2;
+		
+		switch (event.type) {
+		case GAMEPAD:
+			action_1 = controller_a;
+			action_2 = controller_x;
+			break;
+		default:
+			action_1 = keyboard_space;
+			action_2 = keyboard_a;
+			break;
+		}
+		
+		basic_gun_button.setToolTip(new UIString(Pair.of(action_1, "Unlock/Upgrade   "), Pair.of(action_2, "Equip")));
+		chain_gun_button.setToolTip(new UIString(Pair.of(action_1, "Unlock/Upgrade   "), Pair.of(action_2, "Equip")));
+		scatter_gun_button.setToolTip(new UIString(Pair.of(action_1, "Unlock/Upgrade   "), Pair.of(action_2, "Equip")));
+		arc_gun_button.setToolTip(new UIString(Pair.of(action_1, "Unlock/Upgrade   "), Pair.of(action_2, "Equip")));
+		laser_gun_button.setToolTip(new UIString(Pair.of(action_1, "Unlock/Upgrade   "), Pair.of(action_2, "Equip")));
+		
+		basic_missiles_button.setToolTip(new UIString(Pair.of(action_1, "Unlock/Upgrade   "), Pair.of(action_2, "Equip")));
+		scatter_missiles_button.setToolTip(new UIString(Pair.of(action_1, "Unlock/Upgrade   "), Pair.of(action_2, "Equip")));
+		bomb_button.setToolTip(new UIString(Pair.of(action_1, "Unlock/Upgrade   "), Pair.of(action_2, "Equip")));
+		emp_button.setToolTip(new UIString(Pair.of(action_1, "Unlock/Upgrade   "), Pair.of(action_2, "Equip")));
+		gravity_orb_button.setToolTip(new UIString(Pair.of(action_1, "Unlock/Upgrade   "), Pair.of(action_2, "Equip")));
+		
+		mark_1_ship_button.setToolTip(new UIString(Pair.of(action_1, "Unlock/Upgrade   "), Pair.of(action_2, "Use")));
+		heavy_variant_button.setToolTip(new UIString(Pair.of(action_1, "Unlock/Upgrade   "), Pair.of(action_2, "Use")));
+		fast_variant_button.setToolTip(new UIString(Pair.of(action_1, "Unlock/Upgrade   "), Pair.of(action_2, "Use")));
+		mark_2_ship_button.setToolTip(new UIString(Pair.of(action_1, "Unlock/Upgrade   "), Pair.of(action_2, "Use")));
+		
+		thruster_upgrade_option.setToolTip(new UIString(action_1, "Upgrade"));
+		shield_upgrade_option.setToolTip(new UIString(action_1, "Upgrade"));
+		armor_upgrade_option.setToolTip(new UIString(action_1, "Upgrade"));
+		
+		deploy_ship_button.setToolTip(new UIString(action_1, "Start!"));
+	}
 
 	/* (non-Javadoc)
 	 * @see org.viduus.charon.global.graphics.screens.AbstractGameScreen#onActivate(org.viduus.charon.global.AbstractGameSystems)
@@ -523,30 +562,11 @@ public class UpgradeScreen extends AbstractJamScreen {
 		keyboard_space = (Animation<?>) game_systems.graphics_engine.resolve("vid:animation:controller/keyboard.space");
 		
 		// set tooltips
-		basic_gun_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Equip")));
-		chain_gun_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Equip")));
-		scatter_gun_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Equip")));
-		arc_gun_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Equip")));
-		laser_gun_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Equip")));
-		
-		basic_missiles_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Equip")));
-		scatter_missiles_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Equip")));
-		bomb_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Equip")));
-		emp_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Equip")));
-		gravity_orb_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Equip")));
-		
-		mark_1_ship_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Use")));
-		heavy_variant_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Use")));
-		fast_variant_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Use")));
-		mark_2_ship_button.setToolTip(new UIString(Pair.of(controller_a, "Unlock/Upgrade   "), Pair.of(controller_x, "Use")));
-		
-		thruster_upgrade_option.setToolTip(new UIString(controller_a, "Upgrade"));
-		shield_upgrade_option.setToolTip(new UIString(controller_a, "Upgrade"));
-		armor_upgrade_option.setToolTip(new UIString(controller_a, "Upgrade"));
-		
-		deploy_ship_button.setToolTip(new UIString(controller_a, "Start!"));
+		onControllerTypeChange(new ControllerTypeChangeEvent(game_systems.input_engine.getLastUsedControllerType()));
 	
 		super.onActivate(previous_screen_id, game_systems);
+		
+		game_systems.input_engine.registerGlobalEventCallback(ControllerTypeChangeEvent.class, this::onControllerTypeChange);
 		
 		/*
 		 * Demotivational message stuff
