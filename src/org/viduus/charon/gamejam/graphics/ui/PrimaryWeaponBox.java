@@ -15,7 +15,7 @@ import org.viduus.charon.global.graphics.opengl.font.OpenGLFont;
  *
  * @author Ethan Toney
  */
-public class HorizontalUpgradeBox extends UIElement {
+public class PrimaryWeaponBox extends UIElement {
 
 	private static final int MAX_LEVEL = 5;
 	
@@ -34,7 +34,7 @@ public class HorizontalUpgradeBox extends UIElement {
 		purchase_cost;
 	private int[] upgrade_cost;
 
-	public HorizontalUpgradeBox(String upgrade_text, int purchase_cost, int[] upgrade_cost) {
+	public PrimaryWeaponBox(String upgrade_text, int purchase_cost, int[] upgrade_cost) {
 		this.upgrade_text = upgrade_text;
 		this.upgrade_cost = upgrade_cost;
 		this.purchase_cost = purchase_cost;
@@ -64,15 +64,15 @@ public class HorizontalUpgradeBox extends UIElement {
 		updateSize();
 		int i=0;
 		for (; i<level ; i++) {
-			animation_on.renderAnimation(graphics, d_sec, getX()+9 + 16*i, getY()+8+16, 1);
+			animation_on.renderAnimation(graphics, d_sec, getX()+9 + 16*i, getY()+8+17, 1);
 		}
 		for (; i<MAX_LEVEL ; i++) {
-			animation_off.renderAnimation(graphics, d_sec, getX()+9 + 16*i, getY()+8+16, 1);
+			animation_off.renderAnimation(graphics, d_sec, getX()+9 + 16*i, getY()+8+17, 1);
 		}
 		updateSize();
 		Animation<?> check_anim = (is_equipped) ? check_on : check_off;
-		check_anim.renderAnimation(graphics, d_sec, getX() + 7, getY() + 5, 1);
-		OpenGLFont.drawString2D(graphics, upgrade_text, getX()+4, getY()+OpenGLFont.getLineHeight()-1);
+		check_anim.renderAnimation(graphics, d_sec, getX() + 9, getY() + 9, 1);
+		OpenGLFont.drawString2D(graphics, upgrade_text, getX()+19, getY()+OpenGLFont.getLineHeight());
 		
 		if (hasFocus()) {
 			renderColoredSquare(graphics, getX()+1, getY()+1, getWidth()-1, getHeight()-1, 0.1333333333f, 0.1254901961f, 0.2039215686f, 0.7f);
@@ -118,7 +118,7 @@ public class HorizontalUpgradeBox extends UIElement {
 	 */
 	@Override
 	protected void updateSize() {
-		setSize((int) Math.max(4+OpenGLFont.getStringWidth(upgrade_text), 16*5), 31);
+		setSize((int) Math.max(22+OpenGLFont.getStringWidth(upgrade_text), 16*5), 32);
 	}
 
 	/**
