@@ -5,141 +5,50 @@
  * For more details take a look at the Java Quickstart chapter in the Gradle
  * user guide available at https://docs.gradle.org/3.4/userguide/tutorial_java_projects.html
  */
-plugins {
-	id 'com.moowork.node' version '1.2.0'
-}
-
-// Apply the application plugin to make this executable
+apply plugin: 'java'
+apply plugin: 'eclipse'
 apply plugin: 'application'
-apply plugin: 'com.moowork.node'
 
+/* -----------------------------------------------------------------------------
+ *  Configuration Section
+ */
+
+mainClassName = 'org.viduus.charon.gamejam.GameRunner'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-mainClassName = 'org.viduus.charon.gamejam.GameRunner'
+project.ext.projectVersion = '0.0.1'
+
+/* -----------------------------------------------------------------------------
+ *  Setup Section
+ */
 
 // Account for operating system
-def scriptLoc = ""
 import org.gradle.internal.os.OperatingSystem
 switch ( OperatingSystem.current() ) {
 	case OperatingSystem.WINDOWS:
-    scriptLoc = "scripts/batch/"
 		break
 	case OperatingSystem.LINUX:
 	case OperatingSystem.MAC_OS:
-    scriptLoc = "scripts/bash/"
 		applicationDefaultJvmArgs = ["-XstartOnFirstThread"]
 		break
 }
 
-node {
-	download = true
-}
-
-// When exporting project make sure command line arguments are correct
-startScripts {
-    doLast {
-        unixScript.text = unixScript.text.replace('DEFAULT_JVM_OPTS=""', 'DEFAULT_JVM_OPTS="-XstartOnFirstThread"')
-        windowsScript.text = windowsScript.text.replace('DEFAULT_JVM_OPTS=', 'DEFAULT_JVM_OPTS=')
-    }
-}
-
-// Build information
-project.ext.lwjglVersion = "3.1.1"
-project.ext.steamworks4jVersion = "1.6.1"
-project.ext.jomlVersion = "1.9.2"
-
-allprojects {
-	apply plugin: 'java'
-	apply plugin: 'eclipse'
-
-	sourceSets {
-		main {
-			java {
-				srcDirs = ['src']
-			}
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src']
 		}
 	}
-
-	repositories {
-		jcenter()
-	}
-
-	dependencies {
-		runtime files('files')
-
-		// The production code uses the SLF4J logging API at compile time
-		compile 'org.slf4j:slf4j-api:1.7.21'
-
-		// Declare the dependency for your favourite test framework you want to use in your tests.
-		// TestNG is also supported by the Gradle Test task. Just change the
-		// testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
-		// 'test.useTestNG()' to your build script.
-		testCompile 'junit:junit:4.12'
-
-		// LWJGL
-		compile "org.lwjgl:lwjgl:${lwjglVersion}"
-		compile "org.lwjgl:lwjgl-glfw:${lwjglVersion}"
-		compile "org.lwjgl:lwjgl-jemalloc:${lwjglVersion}"
-		compile "org.lwjgl:lwjgl-openal:${lwjglVersion}"
-		compile "org.lwjgl:lwjgl-opengl:${lwjglVersion}"
-		compile "org.lwjgl:lwjgl-stb:${lwjglVersion}"
-
-		// LWJGL : Windows Natives
-		runtime "org.lwjgl:lwjgl:${lwjglVersion}:natives-windows"
-		runtime "org.lwjgl:lwjgl-glfw:${lwjglVersion}:natives-windows"
-		runtime "org.lwjgl:lwjgl-jemalloc:${lwjglVersion}:natives-windows"
-		runtime "org.lwjgl:lwjgl-openal:${lwjglVersion}:natives-windows"
-		runtime "org.lwjgl:lwjgl-opengl:${lwjglVersion}:natives-windows"
-		runtime "org.lwjgl:lwjgl-stb:${lwjglVersion}:natives-windows"
-
-		// LWJGL : Linux Natives
-		runtime "org.lwjgl:lwjgl:${lwjglVersion}:natives-linux"
-		runtime "org.lwjgl:lwjgl-glfw:${lwjglVersion}:natives-linux"
-		runtime "org.lwjgl:lwjgl-jemalloc:${lwjglVersion}:natives-linux"
-		runtime "org.lwjgl:lwjgl-openal:${lwjglVersion}:natives-linux"
-		runtime "org.lwjgl:lwjgl-opengl:${lwjglVersion}:natives-linux"
-		runtime "org.lwjgl:lwjgl-stb:${lwjglVersion}:natives-linux"
-
-		// LWJGL : Windows Natives
-		runtime "org.lwjgl:lwjgl:${lwjglVersion}:natives-macos"
-		runtime "org.lwjgl:lwjgl-glfw:${lwjglVersion}:natives-macos"
-		runtime "org.lwjgl:lwjgl-jemalloc:${lwjglVersion}:natives-macos"
-		runtime "org.lwjgl:lwjgl-openal:${lwjglVersion}:natives-macos"
-		runtime "org.lwjgl:lwjgl-opengl:${lwjglVersion}:natives-macos"
-		runtime "org.lwjgl:lwjgl-stb:${lwjglVersion}:natives-macos"
-
-		// Steamworks
-		compile "com.code-disaster.steamworks4j:steamworks4j:${steamworks4jVersion}"
-
-		// JOML
-		compile "org.joml:joml:${jomlVersion}"
-
-		// JSON Simple
-		compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
-
-		// PNGDecoder
-		compile group: 'org.l33tlabs.twl', name: 'pngdecoder', version: '1.0'
-
-		// OrientDB
-		compile group: 'com.orientechnologies', name: 'orientdb-core', version: '1.0'
-
-		// Bugsnag
-		compile group: 'com.bugsnag', name: 'bugsnag', version: '3.0.2'
-		
-		// TinySound
-		compile fileTree(dir: 'files/libs/TinySound', include: '*.jar')
-	}
 }
 
-// In this section you declare the dependencies for your production and test code
-dependencies {
-	compile project(':ProjectCharonGlobal')
-}
+/* -----------------------------------------------------------------------------
+ *  Task Section
+ */
 
 jar {
-	baseName = 'Sustention.jar'
-	version =  '0.0.1'
+	baseName = "${project.name}"
+	version =  "${projectVersion}"
 }
 
 task('runDebug', dependsOn: 'classes', type: JavaExec, group: 'application') {
@@ -148,23 +57,98 @@ task('runDebug', dependsOn: 'classes', type: JavaExec, group: 'application') {
 	jvmArgs = ["-XstartOnFirstThread", "-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5006"]
 }
 
-task('setupRepo', type:Exec) {
-	commandLine scriptLoc + 'setup_bash.sh'
+// When exporting project make sure command line arguments are correct
+startScripts {
+	doLast {
+		// normalize if deploying from mac
+		unixScript.text = unixScript.text.replace('DEFAULT_JVM_OPTS=\'"-XstartOnFirstThread"\'', 'DEFAULT_JVM_OPTS=""')
+		windowsScript.text = windowsScript.text.replace('DEFAULT_JVM_OPTS="-XstartOnFirstThread"', 'DEFAULT_JVM_OPTS=')
+
+		// add arguments again
+		unixScript.text = unixScript.text.replace('DEFAULT_JVM_OPTS=""', 'DEFAULT_JVM_OPTS=\'"-XstartOnFirstThread"\'')
+		windowsScript.text = windowsScript.text.replace('DEFAULT_JVM_OPTS=', 'DEFAULT_JVM_OPTS=')
+	}
 }
 
-task('releaseAlpha', type: NodeTask, dependsOn: ':distTar') {
-	script = file('scripts/node/deploy.js')
-	args = ['alpha', "${buildDir}/distributions/Sustention.tar"]
+jar.dependsOn startScripts
+
+/* -----------------------------------------------------------------------------
+ *  Dependency Section
+ */
+
+project.ext.lwjglVersion = "3.1.1"
+project.ext.steamworks4jVersion = "1.6.1"
+project.ext.jomlVersion = "1.9.2"
+
+repositories {
+	jcenter()
 }
 
-task('releaseBeta', type: NodeTask, dependsOn: ':distTar') {
-	script = file('scripts/node/deploy.js')
-	args = ['beta', "${buildDir}/distributions/Sustention.tar"]
-}
+dependencies {
+	runtime files('files')
 
-task('releaseProduction', type: NodeTask, dependsOn: ':distTar') {
-	script = file('scripts/node/deploy.js')
-	args = ['prod', "${buildDir}/distributions/Sustention.tar"]
-}
+	// The production code uses the SLF4J logging API at compile time
+	compile 'org.slf4j:slf4j-api:1.7.21'
 
-jar.dependsOn setupRepo
+	// Declare the dependency for your favourite test framework you want to use in your tests.
+	// TestNG is also supported by the Gradle Test task. Just change the
+	// testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
+	// 'test.useTestNG()' to your build script.
+	testCompile 'junit:junit:4.12'
+
+	// Charon Engine
+	compile project(':charon-engine')
+
+	// LWJGL
+	compile "org.lwjgl:lwjgl:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-glfw:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-jemalloc:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-openal:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-opengl:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-stb:${lwjglVersion}"
+
+	// LWJGL : Windows Natives
+	runtime "org.lwjgl:lwjgl:${lwjglVersion}:natives-windows"
+	runtime "org.lwjgl:lwjgl-glfw:${lwjglVersion}:natives-windows"
+	runtime "org.lwjgl:lwjgl-jemalloc:${lwjglVersion}:natives-windows"
+	runtime "org.lwjgl:lwjgl-openal:${lwjglVersion}:natives-windows"
+	runtime "org.lwjgl:lwjgl-opengl:${lwjglVersion}:natives-windows"
+	runtime "org.lwjgl:lwjgl-stb:${lwjglVersion}:natives-windows"
+
+	// LWJGL : Linux Natives
+	runtime "org.lwjgl:lwjgl:${lwjglVersion}:natives-linux"
+	runtime "org.lwjgl:lwjgl-glfw:${lwjglVersion}:natives-linux"
+	runtime "org.lwjgl:lwjgl-jemalloc:${lwjglVersion}:natives-linux"
+	runtime "org.lwjgl:lwjgl-openal:${lwjglVersion}:natives-linux"
+	runtime "org.lwjgl:lwjgl-opengl:${lwjglVersion}:natives-linux"
+	runtime "org.lwjgl:lwjgl-stb:${lwjglVersion}:natives-linux"
+
+	// LWJGL : Windows Natives
+	runtime "org.lwjgl:lwjgl:${lwjglVersion}:natives-macos"
+	runtime "org.lwjgl:lwjgl-glfw:${lwjglVersion}:natives-macos"
+	runtime "org.lwjgl:lwjgl-jemalloc:${lwjglVersion}:natives-macos"
+	runtime "org.lwjgl:lwjgl-openal:${lwjglVersion}:natives-macos"
+	runtime "org.lwjgl:lwjgl-opengl:${lwjglVersion}:natives-macos"
+	runtime "org.lwjgl:lwjgl-stb:${lwjglVersion}:natives-macos"
+
+	// Steamworks
+	compile "com.code-disaster.steamworks4j:steamworks4j:${steamworks4jVersion}"
+
+	// JOML
+	compile "org.joml:joml:${jomlVersion}"
+
+	// JSON Simple
+	compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
+
+	// PNGDecoder
+	compile group: 'org.l33tlabs.twl', name: 'pngdecoder', version: '1.0'
+
+	// OrientDB
+	compile group: 'com.orientechnologies', name: 'orientdb-core', version: '1.0'
+
+	// Bugsnag
+	compile group: 'com.bugsnag', name: 'bugsnag', version: '3.0.2'
+
+	// TinySound
+	compile fileTree(dir: 'files/libs/TinySound', include: '*.jar')
+}

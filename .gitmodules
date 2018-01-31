@@ -1,2 +1,2 @@
-[submodule "ProjectCharonGlobal"]
-	url = git@github.com:ViduusEntertainment/ProjectCharonGlobal.git
+[submodule "charon-engine"]
+	url = git@github.com:ViduusEntertainment/charon-engine.git
