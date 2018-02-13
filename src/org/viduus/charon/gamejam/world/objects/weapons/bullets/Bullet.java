@@ -25,7 +25,7 @@ public abstract class Bullet extends Bullet2D {
 	public void onTick(TickEvent tick_event) {
 		super.onTick(tick_event);
 		if (getVector2(Property.LOCATION).distanceSquared(getVector2(Property.INITIAL_LOCATION)) > MAX_DISTANCE * MAX_DISTANCE) {
-			world_engine.queueEvent(this, new ObjectRemovalEvent(this), ObjectRemovalEvent.class);
+			world_engine.event_engine.queueEvent(this, new ObjectRemovalEvent(this), ObjectRemovalEvent.class);
 		}
 	}
 

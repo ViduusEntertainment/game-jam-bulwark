@@ -6,7 +6,7 @@
 package org.viduus.charon.gamejam;
 
 import org.viduus.charon.gamejam.audio.AudioEngine;
-import org.viduus.charon.gamejam.event.EventEngine;
+import org.viduus.charon.gamejam.event.WorldEventEngine;
 import org.viduus.charon.gamejam.graphics.GraphicsEngine;
 import org.viduus.charon.gamejam.world.WorldEngine;
 import org.viduus.charon.global.input.InputEngine;
@@ -31,7 +31,7 @@ public class GameRunner {
 				new SystemsEngine(),
 				new WorldEngine(60),
 				new InputEngine(),
-				new EventEngine(),
+				new WorldEventEngine(),
 				new GraphicsEngine()
 		);
 		

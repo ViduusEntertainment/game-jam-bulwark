@@ -71,7 +71,7 @@ public abstract class Enemy extends NonPlayableCharacter2D{
 	@Override
 	protected void onCollision(CollisionEvent collision_event) {
 		if (collision_event.object2D instanceof PlayerCharacter) {
-			world_engine.queueEvent(this, new ObjectRemovalEvent(this), ObjectRemovalEvent.class);
+			world_engine.event_engine.queueEvent(this, new ObjectRemovalEvent(this), ObjectRemovalEvent.class);
 			Explosion explosion = new Explosion(world_engine, "Explosion", getLocation().copy());
 			world_engine.insert(explosion);
 			this.<BaseRegion>get(Property.CURRENT_REGION).queueEntityForAddition(explosion);

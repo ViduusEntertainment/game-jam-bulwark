@@ -15,6 +15,7 @@ import org.dyn4j.geometry.AABB;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.MassType;
 import org.dyn4j.geometry.Vector2;
+import org.viduus.charon.gamejam.event.WorldEventEngine;
 import org.viduus.charon.gamejam.physics.twodimensional.WorldBounds;
 import org.viduus.charon.gamejam.physics.twodimensional.filters.WorldFilter;
 import org.viduus.charon.gamejam.physics.twodimensional.listeners.BoundsListener;
@@ -41,7 +42,7 @@ public class WorldEngine extends AbstractWorldEngine {
 	 * @param fps
 	 */
 	public WorldEngine(int fps) {
-		super(fps);
+		super(fps, new WorldEventEngine());
 	}
 
 	/* (non-Javadoc)

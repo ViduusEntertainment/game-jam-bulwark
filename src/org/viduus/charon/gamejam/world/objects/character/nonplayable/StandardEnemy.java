@@ -45,7 +45,7 @@ public class StandardEnemy extends Enemy {
 			set(Property.CURRENT_ANIMATION, normal_animation);
 			shooting_animation.start();
 			normal_animation.start();
-			world_engine.queueEvent(this, new WeaponUseEvent(getWeapons().get(0)), WeaponUseEvent.class);
+			world_engine.event_engine.queueEvent(this, new WeaponUseEvent(getWeapons().get(0)), WeaponUseEvent.class);
 			weapon_timer.reset();
 		}	
 	}

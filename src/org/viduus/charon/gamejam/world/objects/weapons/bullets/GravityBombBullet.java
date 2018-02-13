@@ -8,6 +8,7 @@ import org.viduus.charon.gamejam.world.objects.character.nonplayable.Enemy;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.event.events.CollisionEvent;
 import org.viduus.charon.global.event.events.HitByWeaponEvent;
+import org.viduus.charon.global.event.events.ObjectRemovalEvent;
 import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.global.util.identification.IdentifiedResource;
 import org.viduus.charon.global.util.identification.Uid;
@@ -36,7 +37,7 @@ public class GravityBombBullet extends Bullet {
 		super.onTick(tick_event);
 		gravity_timer.update(tick_event.time_elapsed);
 		if (!gravity_timer.isCooling()) {
-			getCurrentRegion().queueEntityForRemoval(this);
+			world_engine.event_engine.queueEvent(this, new ObjectRemovalEvent(this), ObjectRemovalEvent.class);
 		}
 		else {
 			List<IdentifiedResource> enemies = world_engine.collect("vid:npc:*");

@@ -33,7 +33,7 @@ public class MissileBullet2 extends Bullet {
 	public void onTick(TickEvent tick_event) {
 		super.onTick(tick_event);
 		if (getLocation().distanceSquared(getVector2(Property.INITIAL_LOCATION)) > MAX_TRAVEL * MAX_TRAVEL) {
-			world_engine.queueEvent(this, new ObjectRemovalEvent(this), ObjectRemovalEvent.class);
+			world_engine.event_engine.queueEvent(this, new ObjectRemovalEvent(this), ObjectRemovalEvent.class);
 			
 			BaseRegion region = get(Property.CURRENT_REGION);
 			

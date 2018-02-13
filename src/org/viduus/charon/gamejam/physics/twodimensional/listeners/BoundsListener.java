@@ -17,7 +17,7 @@ public class BoundsListener implements org.dyn4j.collision.BoundsListener {
 	@Override
 	public <E extends Collidable<T>, T extends Fixture> void outside(E collidable) {
 		Object2D object = (Object2D) collidable.getUserData();
-		world_engine.queueEvent(object, new ObjectRemovalEvent(object), ObjectRemovalEvent.class);
+		world_engine.event_engine.queueEvent(object, new ObjectRemovalEvent(object), ObjectRemovalEvent.class);
 	}
 
 }

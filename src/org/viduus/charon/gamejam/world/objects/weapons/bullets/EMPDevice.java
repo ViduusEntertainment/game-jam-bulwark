@@ -44,7 +44,7 @@ public class EMPDevice extends Bullet{
 		super.onTick(tick_event);
 		if (this.<Animation<?>>get(Property.CURRENT_ANIMATION).animationIsFinished()) {
 			set(Property.CURRENT_ANIMATION, null);
-			world_engine.queueEvent(this, new ObjectRemovalEvent(this), ObjectRemovalEvent.class);
+			world_engine.event_engine.queueEvent(this, new ObjectRemovalEvent(this), ObjectRemovalEvent.class);
 		}
 	}
 
@@ -56,7 +56,7 @@ public class EMPDevice extends Bullet{
 	
 	@Override
 	public void onCollision(CollisionEvent collision_event) {
-		getWorldEngine().queueEvent(collision_event.object2D, new HitByWeaponEvent(this), HitByWeaponEvent.class);
+		getWorldEngine().event_engine.queueEvent(collision_event.object2D, new HitByWeaponEvent(this), HitByWeaponEvent.class);
 	}
 
 	@Override

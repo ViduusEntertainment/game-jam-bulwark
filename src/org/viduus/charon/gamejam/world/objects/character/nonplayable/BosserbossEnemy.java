@@ -107,7 +107,7 @@ public class BosserbossEnemy extends Enemy {
 		if (curr_animation != null) {
 			if (curr_animation.animationIsFinished()) {
 				if (curr_animation == laser_animation) {
-					world_engine.queueEvent(this, new WeaponUseEvent(getWeapons().get(1)), WeaponUseEvent.class);
+					world_engine.event_engine.queueEvent(this, new WeaponUseEvent(getWeapons().get(1)), WeaponUseEvent.class);
 					shooting_animation.start();
 					set(Property.CURRENT_ANIMATION, shooting_animation);
 				} else if (curr_animation == shooting_animation) {
@@ -121,7 +121,7 @@ public class BosserbossEnemy extends Enemy {
 					}
 				}
 			} else if (curr_animation == shooting_animation && shooting_animation.getCurrentFrameID() == 4 && !primary_timer.isCooling()) {
-				world_engine.queueEvent(this, new WeaponUseEvent(getWeapons().get(0)), WeaponUseEvent.class);
+				world_engine.event_engine.queueEvent(this, new WeaponUseEvent(getWeapons().get(0)), WeaponUseEvent.class);
 				primary_timer.reset();
 			}
 		}

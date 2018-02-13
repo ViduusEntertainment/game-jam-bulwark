@@ -8,6 +8,7 @@ import org.viduus.charon.gamejam.audio.AudioEngine;
 import org.viduus.charon.gamejam.world.objects.weapons.bullets.LaserBeam;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.event.events.HitByWeaponEvent;
+import org.viduus.charon.global.event.events.ObjectRemovalEvent;
 import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.util.identification.IdentifiedResource;
@@ -30,7 +31,7 @@ public class LaserCharge extends Gun {
 		Animation<?> current_animation = get(Property.CURRENT_ANIMATION);
 		if (current_animation != null && current_animation.animationIsFinished()) {
 			set(Property.CURRENT_ANIMATION, null);
-			this.<BaseRegion>get(Property.CURRENT_REGION).queueEntityForRemoval(this);
+			world_engine.event_engine.queueEvent(this, new ObjectRemovalEvent(this), ObjectRemovalEvent.class);
 			
 			List<Bullet2D> bullets = new ArrayList<>();
 			

@@ -6,6 +6,7 @@ import org.viduus.charon.gamejam.world.regions.Level1;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.event.events.CollisionEvent;
 import org.viduus.charon.global.event.events.HitByWeaponEvent;
+import org.viduus.charon.global.event.events.ObjectRemovalEvent;
 import org.viduus.charon.global.event.events.TickEvent;
 import org.viduus.charon.global.graphics.animation.sprite.Animation;
 import org.viduus.charon.global.util.identification.IdentifiedResource;
@@ -26,7 +27,7 @@ public class Explosion extends StaticObject2D {
 		Animation<?> current_animation = get(Property.CURRENT_ANIMATION);
 		if (current_animation != null && current_animation.animationIsFinished()) {
 			set(Property.CURRENT_ANIMATION, null);
-			this.<BaseRegion>get(Property.CURRENT_REGION).queueEntityForRemoval(this);
+			world_engine.event_engine.queueEvent(this, new ObjectRemovalEvent(this), ObjectRemovalEvent.class);
 		}
 	}
 

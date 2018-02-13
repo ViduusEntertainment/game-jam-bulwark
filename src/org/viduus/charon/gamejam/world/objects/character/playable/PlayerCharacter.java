@@ -241,7 +241,7 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		if(controls_state.getPrimaryAttack()){
 			if (!primary_weapon_timer.isCooling())
 			{
-				world_engine.queueEvent(this, new WeaponUseEvent(primary_weapon), WeaponUseEvent.class);
+				world_engine.event_engine.queueEvent(this, new WeaponUseEvent(primary_weapon), WeaponUseEvent.class);
 				primary_weapon_timer.reset();
 			}
 		}
@@ -250,7 +250,7 @@ public class PlayerCharacter extends PlayableCharacter2D {
 		if(controls_state.getSecondaryAttack()){
 			if (!secondary_weapon_timer.isCooling() && secondary_weapon.getInteger(Property.PROJECTILE_COUNT) > 0)
 			{
-				world_engine.queueEvent(this, new WeaponUseEvent(secondary_weapon), WeaponUseEvent.class);
+				world_engine.event_engine.queueEvent(this, new WeaponUseEvent(secondary_weapon), WeaponUseEvent.class);
 				secondary_weapon_timer.reset();
 			}
 		}
