@@ -1,9 +1,7 @@
 package org.viduus.charon.gamejam.world.objects.weapons.bullets;
 
 import org.dyn4j.geometry.Vector2;
-import org.viduus.charon.gamejam.audio.AudioEngine;
 import org.viduus.charon.gamejam.physics.twodimensional.filters.FriendlyBulletFilter;
-import org.viduus.charon.gamejam.world.regions.Level1;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.event.events.HitByWeaponEvent;
 import org.viduus.charon.global.util.identification.IdentifiedResource;
@@ -36,6 +34,6 @@ public class ScatterBullet extends Bullet{
 
 	@Override
 	public void onAttached(IdentifiedResource owner) {
-		AudioEngine.SCATTERSHOT_SOUND.play(Level1.SFX);
+		getStereoTrack("scattershot").play();
 	}
 }

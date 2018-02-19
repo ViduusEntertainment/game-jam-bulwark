@@ -52,8 +52,8 @@ public class BosserbossEnemy extends Enemy {
 			getBody().setLinearVelocity(new Vector2(getFloat(Property.SPEED) * -1, 0));
 			wait_timer.setCooldown(Float.MAX_VALUE);
 			wait_timer.reset();
-			AudioEngine.LEVEL1_MUSIC.stop();
-			AudioEngine.BOSS_BATTLE_MUSIC.play(true);
+			AudioEngine.LEVEL1_TRACK.stop();
+			AudioEngine.BOSS_BATTLE_TRACK.play();
 			laser_timer.setCooldown(10f);
 			laser_timer.reset();
 			immunity_timer.setCooldown(0.1f);
@@ -162,6 +162,6 @@ public class BosserbossEnemy extends Enemy {
 	
 	@Override
 	public void onAttached(IdentifiedResource owner) {
-		AudioEngine.BOSS_SCREECH_SOUND.play();
+		AudioEngine.BOSS_SCREECH_TRACK.play();
 	}
 }

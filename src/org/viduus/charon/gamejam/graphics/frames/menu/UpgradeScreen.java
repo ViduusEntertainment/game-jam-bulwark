@@ -583,9 +583,9 @@ public class UpgradeScreen extends AbstractJamScreen {
 		 */
 		demotivational_message_selection = RN_JESUS.nextInt(demotivational_messages.length);
 		
-		AudioEngine.LEVEL1_MUSIC.stop();
+		AudioEngine.LEVEL1_TRACK.stop();
 		if (previous_screen_id != GraphicsEngine.MENU_SCREEN)
-			AudioEngine.MENU_MUSIC.play(true);
+			AudioEngine.MENU_TRACK.play();
 	}
 
 	/* (non-Javadoc)
@@ -598,8 +598,8 @@ public class UpgradeScreen extends AbstractJamScreen {
 		// fix engine state
 		game_systems.graphics_engine.enable(GlobalEngineFlags.RENDER_PLAYER_HUD);
 		
-		AudioEngine.MENU_MUSIC.stop(); 
-		AudioEngine.LEVEL1_MUSIC.play(true);
+		AudioEngine.MENU_TRACK.stop(); 
+		AudioEngine.LEVEL1_TRACK.play();
 	}
 
 	/* (non-Javadoc)

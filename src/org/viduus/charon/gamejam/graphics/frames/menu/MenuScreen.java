@@ -108,6 +108,8 @@ public class MenuScreen extends AbstractJamScreen {
 	 */
 	@Override
 	protected void onActivate(int previous_screen_id, AbstractGameSystems game_systems) {
+		AudioEngine.MENU_TRACK.play();
+		
 		background.addBackgroundSet(-8, 20, new Animation<?>[] {
 			(Animation<?>) game_systems.graphics_engine.resolve("vid:animation:backgrounds/city_landscape.back_1"),
 			(Animation<?>) game_systems.graphics_engine.resolve("vid:animation:backgrounds/city_landscape.back_2"),
@@ -120,8 +122,6 @@ public class MenuScreen extends AbstractJamScreen {
 		});
 		
 		screen_size = game_systems.graphics_engine.getScreenSize();
-		
-		AudioEngine.MENU_MUSIC.play(true);
 	}
 
 	/* (non-Javadoc)

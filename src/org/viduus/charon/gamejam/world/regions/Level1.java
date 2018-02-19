@@ -120,8 +120,8 @@ public class Level1 extends AutoSideScrollingRegion {
 		if (death_event.object_that_died instanceof BosserbossEnemy) {
 			is_battling_boss = false;
 			enemy_health = 10000f;
-			AudioEngine.BOSS_BATTLE_MUSIC.stop();
-			AudioEngine.LEVEL1_MUSIC.play(true);
+			AudioEngine.BOSS_BATTLE_TRACK.stop();
+			AudioEngine.LEVEL1_TRACK.play();
 		}
 		else if (death_event.object_that_died instanceof Enemy) {
 			Enemy enemy = (Enemy)death_event.object_that_died;
@@ -165,7 +165,7 @@ public class Level1 extends AutoSideScrollingRegion {
 				}
 			} 
 			else {
-				AudioEngine.BOSS_BATTLE_MUSIC.stop();
+				AudioEngine.BOSS_BATTLE_TRACK.stop();
 				graphics_engine.showFrame(GraphicsEngine.UPGRADE_SCREEN);
 			}
 			

@@ -58,7 +58,7 @@ public class IntroScreen extends AbstractJamScreen {
 	 */
 	@Override
 	protected void onActivate(int previous_screen_id, AbstractGameSystems game_systems) {
-		AudioEngine.INTRO_SOUND.play();
+		AudioEngine.INTRO_TRACK.play();
 		
 		game_frame.setTitle("Space!");
 		game_frame.setLocationRelativeTo(null);
@@ -72,7 +72,7 @@ public class IntroScreen extends AbstractJamScreen {
 	 */
 	@Override
 	protected void onDeactivate(AbstractGameSystems game_systems) {
-		AudioEngine.INTRO_SOUND.unload();
+		
 	}
 
 	/* (non-Javadoc)

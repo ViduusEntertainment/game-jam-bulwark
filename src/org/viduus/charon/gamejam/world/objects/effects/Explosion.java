@@ -1,8 +1,6 @@
 package org.viduus.charon.gamejam.world.objects.effects;
 
 import org.dyn4j.geometry.Vector2;
-import org.viduus.charon.gamejam.audio.AudioEngine;
-import org.viduus.charon.gamejam.world.regions.Level1;
 import org.viduus.charon.global.GameConstants.Property;
 import org.viduus.charon.global.event.events.CollisionEvent;
 import org.viduus.charon.global.event.events.HitByWeaponEvent;
@@ -13,7 +11,6 @@ import org.viduus.charon.global.util.identification.IdentifiedResource;
 import org.viduus.charon.global.util.identification.Uid;
 import org.viduus.charon.global.world.AbstractWorldEngine;
 import org.viduus.charon.global.world.objects.twodimensional.StaticObject2D;
-import org.viduus.charon.global.world.regions.BaseRegion;
 
 public class Explosion extends StaticObject2D {
 
@@ -48,7 +45,7 @@ public class Explosion extends StaticObject2D {
 	
 	@Override
 	public void onAttached(IdentifiedResource owner) {
-		AudioEngine.EXPLOSION_SOUND.play(Level1.SFX);
+		getMonoTrack("explosion").play();
 	}
 	
 	@Override
