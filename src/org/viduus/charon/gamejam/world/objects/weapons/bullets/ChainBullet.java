@@ -30,6 +30,6 @@ public class ChainBullet extends Bullet{
 
 	@Override
 	public void onAttached(IdentifiedResource owner) {
-		getStereoTrack("basic_bullet").play();
+		getStereoTrack("basic_bullet").setVolume(0.3f).play();
 	}
 }

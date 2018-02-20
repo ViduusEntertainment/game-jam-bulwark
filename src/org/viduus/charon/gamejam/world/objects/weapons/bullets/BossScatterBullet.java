@@ -25,6 +25,6 @@ public class BossScatterBullet extends Bullet{
 
 	@Override
 	public void onAttached(IdentifiedResource owner) {
-		getStereoTrack("boss_orb").play();
+		getStereoTrack("boss_orb").setVolume(0.3f).play();
 	}
 }

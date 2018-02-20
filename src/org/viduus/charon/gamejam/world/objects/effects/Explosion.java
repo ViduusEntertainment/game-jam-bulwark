@@ -45,7 +45,7 @@ public class Explosion extends StaticObject2D {
 	
 	@Override
 	public void onAttached(IdentifiedResource owner) {
-		getMonoTrack("explosion").play();
+		getMonoTrack("explosion").setVolume(0.3f).play();
 	}
 	
 	@Override

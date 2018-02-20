@@ -162,6 +162,6 @@ public class BosserbossEnemy extends Enemy {
 	
 	@Override
 	public void onAttached(IdentifiedResource owner) {
-		AudioEngine.BOSS_SCREECH_TRACK.play();
+		AudioEngine.BOSS_SCREECH_TRACK.setVolume(0.3f).play();
 	}
 }

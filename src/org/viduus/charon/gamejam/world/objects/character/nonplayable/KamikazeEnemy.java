@@ -24,7 +24,7 @@ public class KamikazeEnemy extends Enemy{
 		Object2D followee = this.<Object2D>get(Property.FOLLOWEE);
 		if (!sound_played && followee.getLocation().distanceSquared(getLocation()) < STOP_DISTANCE) {
 			set(Property.MOVEMENT_TYPE, NPC_MOVEMENT.MANUAL);
-			getStereoTrack("kamikaze").play();
+			getStereoTrack("kamikaze").setVolume(0.15f).play();
 			sound_played = true;
 		}
 		super.onTick(tick_event);

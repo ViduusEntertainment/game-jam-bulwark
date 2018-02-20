@@ -45,8 +45,6 @@ public class Level1 extends AutoSideScrollingRegion {
 	private EnemyWave active_enemy_wave;
 	private static Random RN_CODY = new Random();
 	
-	public static float SFX = 0.3f;
-	
 	private final AbstractGraphicsEngine graphics_engine;
 	
 	private float total_enemy_health = 10000.0f;

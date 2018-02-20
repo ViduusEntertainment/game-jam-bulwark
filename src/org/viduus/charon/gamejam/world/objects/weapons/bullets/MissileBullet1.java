@@ -30,6 +30,6 @@ public class MissileBullet1 extends Bullet {
 
 	@Override
 	public void onAttached(IdentifiedResource owner) {
-		getStereoTrack("missile").play();
+		getStereoTrack("missile").setVolume(0.3f).play();
 	}
 }

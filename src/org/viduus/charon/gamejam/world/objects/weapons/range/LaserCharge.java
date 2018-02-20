@@ -69,6 +69,6 @@ public class LaserCharge extends Gun {
 	
 	@Override 
 	public void onAttached(IdentifiedResource owner) {
-		getStereoTrack("charge_laser").play();
+		getStereoTrack("charge_laser").setVolume(0.3f).play();
 	}
 }

@@ -34,6 +34,6 @@ public class ScatterBullet extends Bullet{
 
 	@Override
 	public void onAttached(IdentifiedResource owner) {
-		getStereoTrack("scattershot").play();
+		getStereoTrack("scattershot").setVolume(0.3f).play();
 	}
 }

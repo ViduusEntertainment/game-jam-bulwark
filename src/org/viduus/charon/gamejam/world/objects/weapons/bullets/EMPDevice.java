@@ -59,7 +59,7 @@ public class EMPDevice extends Bullet{
 
 	@Override
 	public void onAttached(IdentifiedResource owner) {
-		getStereoTrack("EMP").play();
+		getStereoTrack("EMP").setVolume(0.3f).play();
 	}
 	
 	@Override
