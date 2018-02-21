@@ -48,7 +48,7 @@ public class Level1 extends AutoSideScrollingRegion {
 	private final AbstractGraphicsEngine graphics_engine;
 	
 	private float total_enemy_health = 10000.0f;
-	private float enemy_health = 10000.0f;
+	private float enemy_health = 100.0f;
 	private boolean is_battling_boss = false;
 	private BosserbossEnemy boss;
 	

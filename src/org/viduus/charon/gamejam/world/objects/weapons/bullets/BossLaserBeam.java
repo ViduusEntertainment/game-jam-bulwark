@@ -37,6 +37,6 @@ public class BossLaserBeam extends Bullet{
 
 	@Override
 	public void onAttached(IdentifiedResource owner) {
-		getStereoTrack("boss_laser").setVolume(0.3f).play();
+		getMonoTrack("boss_laser").setVolume(0.3f).play();
 	}
 }
