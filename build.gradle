@@ -148,7 +148,4 @@ dependencies {
 
 	// Bugsnag
 	compile group: 'com.bugsnag', name: 'bugsnag', version: '3.0.2'
-
-	// TinySound
-	compile fileTree(dir: 'files/libs/TinySound', include: '*.jar')
 }
